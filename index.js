@@ -1,10 +1,16 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const sequelize = require("./config/database/sequelize");
-const roleRoute = require("./routes/Admin/role");
-const adminRoute = require("./routes/Admin/admin");
-const yargs = require("yargs");
+const roleRoute = require("./routes/root/role");
+const adminRoute = require("./routes/root/admin");
 const command = require("./routes/commands/createRoot");
+const permissionRoute = require("./routes/root/permission");
+
+const Role = require("./models/Role");
+const Permission = require("./models/Permission");
+const rolePermission = require("./models/role-permission");
+const Admin = require("./models/Admin");
+
 dotenv.config();
 
 const app = express();
@@ -13,7 +19,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(command);
 app.use(roleRoute);
 app.use(adminRoute);
+app.use(permissionRoute);
+Admin.belongsTo(Role); // Will add rold_id to user
+Permission.belongsToMany(Role, { through: rolePermission });
+//Role.belongsToMany(Permission, { through: rolePermission });
 sequelize.sync({});
+
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
     console.log("app is running");

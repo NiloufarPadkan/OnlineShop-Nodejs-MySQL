@@ -11,7 +11,7 @@ yargs.command({
         username: { demandOption: true },
         password: { type: String, demandOption: true },
         email: { demandOption: true },
-        phone: {},
+        phone: { demandOption: true },
         avtivityStatus: {},
     },
 

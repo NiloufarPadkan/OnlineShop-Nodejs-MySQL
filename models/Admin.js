@@ -1,7 +1,6 @@
 const Sequelize = require("sequelize");
 
 const sequelize = require("../config/database/sequelize");
-const Role = require("./Role");
 
 const Admin = sequelize.define("admin", {
     id: {
@@ -34,6 +33,5 @@ const Admin = sequelize.define("admin", {
     hash: Sequelize.STRING,
     salt: Sequelize.STRING,
 });
-Admin.belongsTo(Role); // Will add company_uuid to user
 
 module.exports = Admin;
