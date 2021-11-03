@@ -1,9 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const rolePermissionService = require("../../services/role-permission");
-const rolePermissionController = require("../../controller/Admin/role-permission");
+const rolePermissionController = require("../../controller/root/role-permission");
 const roleService = require("../../services/role");
-const roleController = require("../../controller/Admin/role");
+const roleController = require("../../controller/root/role");
 
 router.post("/role", roleService.insertRole, roleController.store);
 

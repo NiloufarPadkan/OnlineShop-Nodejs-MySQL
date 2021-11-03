@@ -3,6 +3,7 @@ const dotenv = require("dotenv");
 const sequelize = require("./config/database/sequelize");
 const roleRoute = require("./routes/root/role");
 const adminRoute = require("./routes/root/admin");
+const adminLoginRoute = require("./routes/admin/login");
 const command = require("./routes/commands/createRoot");
 const permissionRoute = require("./routes/root/permission");
 
@@ -20,6 +21,7 @@ app.use(command);
 app.use(roleRoute);
 app.use(adminRoute);
 app.use(permissionRoute);
+app.use(adminLoginRoute);
 Admin.belongsTo(Role); // Will add rold_id to user
 Permission.belongsToMany(Role, { through: rolePermission });
 //Role.belongsToMany(Permission, { through: rolePermission });

@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const permissionService = require("../../services/permission");
-const permissionController = require("../../controller/Admin/permission");
+const permissionController = require("../../controller/root/permission");
 router.post(
     "/permission/add",
     permissionService.insertPermission,
