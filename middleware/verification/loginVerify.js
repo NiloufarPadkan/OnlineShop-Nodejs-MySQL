@@ -1,17 +1,21 @@
 const jwt = require("jsonwebtoken");
-const validToken = require("../../lib/jwtUtil").verifyToken;
 const dict = require("../../resources/dict");
-const verifyToken = (req, res, next) => {
+const Admin = require("../../models/Admin");
+const verifyToken = async (req, res, next) => {
     console.log(req.headers.token);
     if (!req.headers.token) {
         return res.status(500).send(dict.enterToken);
     }
-    console.log(validToken(req.headers.token));
-    if (validToken(req.headers.token)) {
+    const token = req.headers.token.split(" ")[1];
+
+    jwt.verify(token, process.env.JWT_KEY, async (err, admin) => {
+        if (err) res.status(403).json(dict.invalidToken);
+        const foundAdmin = await Admin.findByPk(admin.id);
+        req.admin = foundAdmin;
+        //  console.log(req.admin);
+
         next();
-    } else {
-        return res.status(401).json(dict.invalidToken);
-    }
+    });
 };
 module.exports = {
     verifyToken,

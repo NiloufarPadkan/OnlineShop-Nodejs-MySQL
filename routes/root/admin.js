@@ -7,8 +7,10 @@ const {
     validationForAdminRegister,
 } = require("../../middleware/validations/registerValidation");
 const { verifyToken } = require("../../middleware/verification/loginVerify");
+const { can } = require("../../middleware/can/can");
 router.post(
     "/admin/create",
+    verifyToken,
     validationForAdminRegister,
     adminService.insertAdmin,
     adminController.store

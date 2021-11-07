@@ -19,7 +19,8 @@ exports.loginAdmin = async (req, res, next) => {
         );
         if (!passwordValidation) return res.status(400).send(dict.loginError);
         const accessToken = tokenGenerator(admin.id);
-        req.admin = admin;
+        // req.admin = admin;
+        // console.log(req.admin);
         res.locals.accessToken = accessToken;
         next();
     } catch (e) {

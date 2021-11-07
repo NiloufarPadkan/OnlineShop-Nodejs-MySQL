@@ -1,10 +1,30 @@
 const Admin = require("../models/Admin");
 const Role = require("../models/Role");
+const Role_Permission = require("../models/role-permission");
 const Permission = require("../models/Permission");
 
 const genPassword = require("../lib//passwordUtil").genPassword;
 
 exports.insertAdmin = async (req, res, next) => {
+    //check permission of create admin
+    if (req.admin) console.log(req.admin.roleId + "role id ");
+    //hala bayad berim to jadval role-permission kolle permisison haye marboot be on role ro list konim
+
+    const permissionArray = await Role_Permission.findAll({
+        where: { roleId: req.admin.roleId },
+    });
+    var result = [];
+    var keys = Object.keys(permissionArray);
+
+    console.log(keys);
+    keys.forEach(function (key) {
+        result.push(permissionArray[key].permissionId);
+    });
+    const permission = await Permission.findOne({
+        where: { title: "add admin" },
+    });
+
+    if (result.includes(permission.id)) console.log("yes");
     try {
         const saltHash = genPassword(req.body.password);
         const salt = saltHash.salt;

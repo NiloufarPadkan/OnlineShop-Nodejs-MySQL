@@ -7,6 +7,7 @@ const adminLoginRoute = require("./routes/admin/login");
 const command = require("./routes/commands/createRoot");
 const permissionRoute = require("./routes/root/permission");
 
+
 const Role = require("./models/Role");
 const Permission = require("./models/Permission");
 const rolePermission = require("./models/role-permission");
