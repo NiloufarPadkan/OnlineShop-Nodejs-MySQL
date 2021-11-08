@@ -3,18 +3,21 @@ const Permission = require("../models/Permission");
 exports.insertPermission = async (req, res, next) => {
     try {
         const permission = req.body.permission;
-
+        const duplicatePermission = await Permission.findOne({
+            where: {
+                title: permission,
+            },
+        });
+        if (duplicatePermission) {
+            return "alreadyExists";
+        }
         const newPermission = new Permission({
             title: permission,
         });
-        try {
-            const savedPermission = await newPermission.save();
-            next();
-            //return res.status(200).send(savedAdmin);
-        } catch (e) {
-            return res.status(500).send(e);
-        }
+
+        const savedPermission = await newPermission.save();
+        return savedPermission;
     } catch (e) {
-        return res.status(500).send(e);
+        return "";
     }
 };

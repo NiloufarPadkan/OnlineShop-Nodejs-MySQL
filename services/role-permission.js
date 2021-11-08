@@ -4,21 +4,22 @@ exports.AssignPermission = async (req, res, next) => {
     try {
         const permissionId = req.body.permissionId;
         const roleId = req.body.roleId;
-
+        const duplicateRolePermission = await RolePermission.findOne({
+            where: {
+                roleId: roleId,
+                permissionId: permissionId,
+            },
+        });
+        if (duplicateRolePermission) {
+            return "alreadyExists";
+        }
         const newRolePermission = new RolePermission({
             roleId: roleId,
             permissionId: permissionId,
         });
-        try {
-            const savedRolePermission = await newRolePermission.save();
-            res.locals.permissionAssignResult = savedRolePermission;
-            // return res.status(200).send(savedRolePermission);
-            next();
-            //next();
-        } catch (e) {
-            return res.status(500).send(e);
-        }
+        const savedRolePermission = await newRolePermission.save();
+        return savedRolePermission;
     } catch (e) {
-        return res.status(500).send(e);
+        return e;
     }
 };

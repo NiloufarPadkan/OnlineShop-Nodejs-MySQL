@@ -1,12 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const permissionService = require("../../services/permission");
 const permissionController = require("../../controller/root/permission");
-router.post(
-    "/permission/add",
-    permissionService.insertPermission,
-    permissionController.store
-);
+router.post("/permission/add", permissionController.store);
 
 module.exports = router;
 // stor index update destory  show
