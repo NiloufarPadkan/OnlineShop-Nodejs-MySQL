@@ -1,25 +1,31 @@
+const rolePermission = require("../models/role-permission");
 const RolePermission = require("../models/role-permission");
 
 exports.AssignPermission = async (req, res, next) => {
     try {
-        const permissionId = req.body.permissionId;
         const roleId = req.body.roleId;
-        const duplicateRolePermission = await RolePermission.findOne({
+        await RolePermission.destroy({
             where: {
                 roleId: roleId,
-                permissionId: permissionId,
             },
         });
-        if (duplicateRolePermission) {
-            return "alreadyExists";
-        }
-        const newRolePermission = new RolePermission({
-            roleId: roleId,
-            permissionId: permissionId,
+        let result = [];
+        const permissionIds = req.body.permissionId;
+        var keys = Object.keys(permissionIds);
+        keys.forEach(function (key) {
+            result.push({
+                roleId: roleId,
+                permissionId: permissionIds[key],
+            });
         });
-        const savedRolePermission = await newRolePermission.save();
-        return savedRolePermission;
+        const AssignPermissionResult =
+            await RolePermission.bulkCreate(result);
+
+        return AssignPermissionResult;
+
+        // const savedRolePermission = await newRolePermission.save();
     } catch (e) {
-        return e;
+        console.log(e);
+        return "";
     }
 };

@@ -16,7 +16,8 @@ var dict = {
     phoneExistence: "این شماره قبلا ثبت شده است",
     successfulRemove: "با موفقیت حذف شد",
     invalidEmail: "ایمیل نامعتبر است",
-    AlphanumericError: "نام کاربری باید فقط شامل حروف الفبا و اعداد باشد",
+    AlphanumericError:
+        "نام کاربری باید فقط شامل حروف الفبا و اعداد باشد",
     weakPass:
         " its weak. required condition : minLength: 8, minLowercase: 1, minUppercase: 1, minNumbers: 1, minSymbols: 1",
     lengthError: "نام کاربری باید بین 6 تا 30 کارکتر باشد",

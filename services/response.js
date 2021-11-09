@@ -1,5 +1,5 @@
 class Response {
-    constructor(status, message, response) {
+    constructor(status = 200, message = "SUCCESS", response = {}) {
         this.setStatus(status);
 
         this.setMessage(message);
@@ -9,14 +9,19 @@ class Response {
 
     setStatus(status) {
         this.status = status;
+        console.log(this.status);
+        return this;
     }
 
     setMessage(message) {
         this.message = message;
+        console.log(this.message);
+        return this;
     }
 
     setRes(res) {
         this.response = res;
+        return this;
     }
 
     getStatus() {

@@ -8,14 +8,23 @@ exports.login = async (req, res, next) => {
         const loginResponse = await loginService.loginAdmin(req);
         if (loginResponse === "adminNotFound") {
             let response = new Response(400, "fail", "adminNotFound");
-            if (loginResponse != "") res.status(200).send(response.handler());
+            if (loginResponse != "")
+                return res.status(200).send(response.handler());
         }
+
         if (loginResponse === "invalidPassword") {
-            let response = new Response(200, "success", "invalidPassword");
-            if (loginResponse != "") res.status(200).send(response.handler());
+            let response = new Response(
+                400,
+                "fail",
+                "invalidPassword"
+            );
+            if (loginResponse != "")
+                return res.status(200).send(response.handler());
         }
-        let response = new Response(200, "success", loginResponse);
-        if (loginResponse != "") res.status(200).send(response.handler());
+
+        let response = new Response(400, "success", loginResponse);
+        if (loginResponse != "")
+            return res.status(200).send(response.handler());
         //res.status(200).send(res.locals.accessToken);
     } catch (e) {
         return res.status(500).send(e);

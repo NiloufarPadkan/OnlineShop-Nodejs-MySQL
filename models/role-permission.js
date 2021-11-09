@@ -1,4 +1,3 @@
-const { Permission } = require("accesscontrol");
 const Sequelize = require("sequelize");
 
 const sequelize = require("../config/database/sequelize");
