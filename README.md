@@ -1,8 +1,8 @@
-# To Do list
+# Online shop
 
 ## About This Project
 
-To do list with express,sequlize
+Online-Shop with express,sequlize
 
 ## RUN
 
