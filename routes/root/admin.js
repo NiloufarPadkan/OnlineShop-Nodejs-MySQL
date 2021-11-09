@@ -6,7 +6,6 @@ const {
     validationForAdminRegister,
 } = require("../../middleware/validations/registerValidation");
 const { verifyToken } = require("../../middleware/verification/loginVerify");
-const { can } = require("../../middleware/can/can");
 
 router.post(
     "/admin/create",
@@ -15,9 +14,9 @@ router.post(
     adminController.store
 );
 
-router.get("/admin/list", adminController.index);
+router.get("/admin/list", verifyToken, adminController.index);
 
-router.put("/admin/edit", adminController.update);
+router.put("/admin/edit", verifyToken, adminController.update);
 router.delete("/admin/delete", verifyToken, adminController.destroy);
 
 module.exports = router;

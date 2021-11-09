@@ -68,7 +68,9 @@ exports.destroyAdmin = async (req) => {
                 id: adminId,
             },
         });
-        return admin;
+        console.log(admin);
+        if (admin) return true;
+        else return false;
     } catch (e) {
         return false;
     }

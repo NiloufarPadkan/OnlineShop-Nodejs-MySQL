@@ -1,10 +1,18 @@
 const validator = require("validator");
 const dict = require("../../resources/dict");
+const Can = require("../../services/can/can");
+const AdminRes = require("../../services/responses/AdminCreated");
 
 const Admin = require("../../models/Admin");
 
 const validationForAdminRegister = async (req, res, next) => {
     try {
+        const can = await Can.can(req.admin.roleId, "add admin");
+        if (!can) {
+            let response = new AdminRes(403, "fail", "notAllowed");
+            return res.status(403).send(response.handler());
+        }
+
         const admin = await Admin.findOne({
             where: { email: req.body.email },
         });
