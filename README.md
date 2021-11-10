@@ -12,10 +12,28 @@ Online-Shop with express,sequlize
 
 -   port
 
-2-npm install
+-   JWT_KEY
 
-npx sequelize-cli db:seed --seed 20211109090157-admins.js
-4-node index.js
+-   EXPIRE_TIME
+
+## example :
+
+port =300
+JWT_KEY= "secretcode"
+EXPIRE_TIME= "1w
+
+3-in config/database/sequlize.js set your database name,user,password,host and port
+
+4-npm install
+
+5- run seeders:
+
+-   npx sequelize-cli db:seed --seed 20211109090157-admins.js
+-   npx sequelize-cli db:seed --seed 20211109082457-permission
+-   npx sequelize-cli db:seed --seed 20211109091139-roles
+-   npx sequelize-cli db:seed --seed 20211109091829-role-permission
+
+6-node index.js
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/12694267-7f41b6b8-ba4b-42c0-82df-14464445fa69?action=collection%2Ffork&collection-url=entityId%3D12694267-7f41b6b8-ba4b-42c0-82df-14464445fa69%26entityType%3Dcollection%26workspaceId%3Dbefe7c4b-c8d0-4fb8-b443-7e4deccd31ff)
 

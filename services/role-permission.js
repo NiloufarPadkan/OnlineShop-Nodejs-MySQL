@@ -1,4 +1,3 @@
-const rolePermission = require("../models/role-permission");
 const RolePermission = require("../models/role-permission");
 
 exports.AssignPermission = async (req, res, next) => {
@@ -23,7 +22,6 @@ exports.AssignPermission = async (req, res, next) => {
 
         return AssignPermissionResult;
 
-        // const savedRolePermission = await newRolePermission.save();
     } catch (e) {
         console.log(e);
         return "";

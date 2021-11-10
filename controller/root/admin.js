@@ -112,7 +112,7 @@ exports.index = async (req, res, next) => {
     let response = new AdminRes();
     const permissionResult = await this.canAdmin(
         req.admin.roleId,
-        "update admin"
+        "read admin"
     );
     if (!permissionResult) {
         response
