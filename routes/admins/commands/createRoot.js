@@ -1,8 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const yargs = require("yargs");
-const Admin = require("../../models/Admin");
-const genPassword = require("../../lib/passwordUtil").genPassword;
+const Admin = require("../../../models/Admin");
+const genPassword = require("../../../lib/passwordUtil").genPassword;
 
 yargs.command({
     command: "addRoot",

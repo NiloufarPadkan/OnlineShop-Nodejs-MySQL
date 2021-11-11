@@ -1,11 +1,11 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const sequelize = require("./config/database/sequelize");
-const roleRoute = require("./routes/root/role");
-const adminRoute = require("./routes/root/admin");
-const adminLoginRoute = require("./routes/admin/login");
-const command = require("./routes/commands/createRoot");
-const permissionRoute = require("./routes/root/permission");
+const roleRoute = require("./routes/admins/root/role");
+const adminRoute = require("./routes/admins/root/admin");
+const adminLoginRoute = require("./routes/admins/admin/login");
+const command = require("./routes/admins/commands/createRoot");
+const permissionRoute = require("./routes/admins/root/permission");
 
 const Role = require("./models/Role");
 const Permission = require("./models/Permission");

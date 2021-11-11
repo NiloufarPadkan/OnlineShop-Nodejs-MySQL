@@ -1,11 +1,11 @@
 const express = require("express");
 const router = express.Router();
-const adminController = require("../../controller/root/admin");
+const adminController = require("../../../controller/admins/root/admin");
 
 const {
     validationForAdminRegister,
-} = require("../../middleware/validations/registerValidation");
-const { verifyToken } = require("../../middleware/verification/loginVerify");
+} = require("../../../middleware/validations/registerValidation");
+const { verifyToken } = require("../../../middleware/verification/loginVerify");
 
 router.post(
     "/admin/create",

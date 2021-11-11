@@ -1,5 +1,5 @@
-const roleService = require("../../services/role");
-const Response = require("../../services/responses/general");
+const roleService = require("../../../services/role");
+const Response = require("../../../services/responses/general");
 exports.store = async (req, res, next) => {
     let response = new Response();
 
@@ -7,10 +7,7 @@ exports.store = async (req, res, next) => {
         const insertRoleResponse = await roleService.insertRole(req);
 
         if (insertRoleResponse === "alreadyExists") {
-            response
-                .setStatus(400)
-                .setMessage("fail")
-                .setRes("alreadyExists");
+            response.setStatus(400).setMessage("fail").setRes("alreadyExists");
 
             res.status(400).send(response.handler());
         } else {
