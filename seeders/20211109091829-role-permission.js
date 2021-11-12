@@ -32,6 +32,41 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
+                permissionId: "5",
+                roleId: "1",
+
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                permissionId: "6",
+                roleId: "1",
+
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                permissionId: "7",
+                roleId: "1",
+
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                permissionId: "8",
+                roleId: "1",
+
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                permissionId: "9",
+                roleId: "1",
+
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
                 permissionId: "3",
                 roleId: "2",
 

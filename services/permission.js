@@ -21,3 +21,17 @@ exports.insertPermission = async (req, res, next) => {
         return "";
     }
 };
+exports.getPermissions = async (req, res, next) => {
+    try {
+        const limit = req.body.size ? req.body.size : 3;
+        const offset = req.body.page ? req.body.page * limit : 0;
+        const permissions = await Permission.findAll({
+            limit: limit,
+            offset: offset,
+        });
+        return permissions;
+    } catch (e) {
+        console.log(e);
+        return "";
+    }
+};

@@ -12,7 +12,7 @@ const Admin = sequelize.define("admin", {
     username: {
         type: Sequelize.STRING,
         allowNull: false,
-        len: [6, 30],
+        len: [4, 30],
         trim: true,
         unique: true,
     },

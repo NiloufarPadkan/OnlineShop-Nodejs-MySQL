@@ -20,17 +20,11 @@ const validationForAdminRegister = async (req, res, next) => {
             where: { email: req.body.email },
         });
         if (admin) {
-            response
-                .setStatus(400)
-                .setMessage("fail")
-                .setRes(dict.emailExistence);
+            response.setStatus(400).setMessage("fail").setRes(dict.emailExistence);
             return res.status(400).send(response.handler());
         }
         if (!validator.isEmail(req.body.email)) {
-            response
-                .setStatus(422)
-                .setMessage("fail")
-                .setRes(dict.invalidEmail);
+            response.setStatus(422).setMessage("fail").setRes(dict.invalidEmail);
             return res.status(400).send(response.handler());
         }
 
@@ -38,10 +32,7 @@ const validationForAdminRegister = async (req, res, next) => {
             where: { username: req.body.username },
         });
         if (existingUser) {
-            response
-                .setStatus(500)
-                .setMessage("fail")
-                .setRes(dict.userExistence);
+            response.setStatus(500).setMessage("fail").setRes(dict.userExistence);
             return res.status(400).send(response.handler());
         }
 
@@ -49,37 +40,22 @@ const validationForAdminRegister = async (req, res, next) => {
             where: { phone: req.body.phone },
         });
         if (existingPhone) {
-            response
-                .setStatus(500)
-                .setMessage("fail")
-                .setRes(dict.phoneExistence);
+            response.setStatus(500).setMessage("fail").setRes(dict.phoneExistence);
             return res.status(400).send(response.handler());
         }
 
         if (!validator.isAlphanumeric(req.body.username)) {
-            response
-                .setStatus(422)
-                .setMessage("fail")
-                .setRes(dict.isAlphanumeric);
+            response.setStatus(422).setMessage("fail").setRes(dict.AlphanumericError);
             return res.status(422).send(response.handler());
         }
 
-        if (
-            req.body.username.length < 6 ||
-            req.body.username.length > 30
-        ) {
-            response
-                .setStatus(500)
-                .setMessage("fail")
-                .setRes(dict.isAlphanumeric);
+        if (req.body.username.length < 6 || req.body.username.length > 30) {
+            response.setStatus(500).setMessage("fail").setRes(dict.lengthError);
             return res.status(400).send(response.handler());
         }
         //strong pass
         if (!validator.isStrongPassword(req.body.password)) {
-            response
-                .setStatus(422)
-                .setMessage("fail")
-                .setRes(dict.weakPass);
+            response.setStatus(422).setMessage("fail").setRes(dict.weakPass);
             return res.status(400).send(response.handler());
         }
 

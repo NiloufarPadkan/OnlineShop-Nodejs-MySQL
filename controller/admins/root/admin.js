@@ -5,11 +5,13 @@ const Can = require("../../../services/can/can");
 
 exports.canAdmin = async (roleId, permissionTitle) => {
     const can = await Can.can(roleId, permissionTitle);
+
     if (!can) {
         return false;
     }
     return true;
 };
+
 exports.store = async (req, res, next) => {
     let response = new AdminRes();
 
@@ -87,8 +89,7 @@ exports.index = async (req, res, next) => {
     }
     try {
         const adminIndexResponse = await adminService.indexAdmins(req);
-        if (adminIndexResponse != "")
-            response.setStatus(200).setRes(adminIndexResponse);
+        if (adminIndexResponse != "") response.setStatus(200).setRes(adminIndexResponse);
         return res.status(200).send(response.handler());
     } catch (e) {
         response.setStatus(400).setMessage("fail").setRes(e);

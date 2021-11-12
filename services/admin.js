@@ -46,7 +46,9 @@ exports.updateAdmin = async (req) => {
         if (!foundAdmin) {
             return "adminNotFound";
         }
+
         const roleId = req.body.roleId ? req.body.roleId : foundAdmin.roleId;
+
         const activity = req.body.activity
             ? req.body.activity
             : foundAdmin.avtivityStatus;

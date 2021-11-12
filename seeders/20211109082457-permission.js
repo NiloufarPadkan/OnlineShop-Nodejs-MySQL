@@ -23,6 +23,31 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                title: "add permission",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                title: "read permission",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                title: "assign permission",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                title: "add role",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                title: "read role",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ]);
     },
 
