@@ -35,7 +35,7 @@ EXPIRE_TIME= "1w
 
 6-node index.js
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/12694267-7f41b6b8-ba4b-42c0-82df-14464445fa69?action=collection%2Ffork&collection-url=entityId%3D12694267-7f41b6b8-ba4b-42c0-82df-14464445fa69%26entityType%3Dcollection%26workspaceId%3Dbefe7c4b-c8d0-4fb8-b443-7e4deccd31ff)
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/12694267-d5765185-2f2d-47ac-bae4-0cf88f887b37?action=collection%2Ffork&collection-url=entityId%3D12694267-d5765185-2f2d-47ac-bae4-0cf88f887b37%26entityType%3Dcollection%26workspaceId%3Dbefe7c4b-c8d0-4fb8-b443-7e4deccd31ff)
 
 ## Node modules
 
