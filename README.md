@@ -27,7 +27,6 @@ EXPIRE_TIME= "1w
 4-npm install
 
 5-node index.js
-<<<<<<< HEAD
 
 6- run seeders:
 
