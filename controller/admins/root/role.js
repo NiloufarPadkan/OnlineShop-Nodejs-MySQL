@@ -20,7 +20,6 @@ exports.store = async (req, res, next) => {
             response.setStatus(403).setMessage("fail").setRes("notAllowed");
             return res.status(403).send(response.handler());
         }
-        console.log("sssssss");
         const insertRoleResponse = await roleService.insertRole(req);
 
         if (insertRoleResponse === "alreadyExists") {

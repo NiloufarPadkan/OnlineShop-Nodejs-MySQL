@@ -15,7 +15,7 @@ exports.login = async (req, res, next) => {
             if (loginResponse != "") return res.status(200).send(response.handler());
         }
 
-        let response = new Response(400, "success", loginResponse);
+        let response = new Response(200, "success", loginResponse);
         if (loginResponse != "") return res.status(200).send(response.handler());
         //res.status(200).send(res.locals.accessToken);
     } catch (e) {
