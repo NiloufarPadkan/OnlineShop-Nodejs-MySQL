@@ -48,6 +48,36 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                title: "add category",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                title: "delete category",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                title: "update category",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                title: "add brand",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                title: "delete brand",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                title: "update brand",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ]);
     },
 

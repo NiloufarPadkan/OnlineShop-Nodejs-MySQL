@@ -15,6 +15,9 @@ const Category = sequelize.define("category", {
         trim: true,
         unique: true,
     },
+    photo: {
+        type: Sequelize.BLOB,
+    },
 });
 
 module.exports = Category;

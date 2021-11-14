@@ -15,6 +15,9 @@ const Brand = sequelize.define("brand", {
         trim: true,
         unique: true,
     },
+    photo: {
+        type: Sequelize.BLOB,
+    },
 });
 
 module.exports = Brand;

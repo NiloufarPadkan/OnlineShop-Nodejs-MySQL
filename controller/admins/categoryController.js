@@ -13,6 +13,8 @@ exports.canAdmin = async (roleId, permissionTitle) => {
 
 exports.store = async (req, res, next) => {
     let response = new Response();
+    //to do : check permission
+
     try {
         const storedCategoryResponse = await categoryService.insertCategory(req);
 
@@ -30,11 +32,11 @@ exports.store = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
     let response = new Response();
-    // const permissionResult = await this.canAdmin(req.admin.roleId, "update admin");
-    // if (!permissionResult) {
-    //     response.setStatus(403).setMessage("fail").setRes("notAllowed");
-    //     return res.status(403).send(response.handler());
-    // }
+    const permissionResult = await this.canAdmin(req.admin.roleId, "update category");
+    if (!permissionResult) {
+        response.setStatus(403).setMessage("fail").setRes("notAllowed");
+        return res.status(403).send(response.handler());
+    }
     try {
         const updatedcategoryResponse = await categoryService.updatecategory(req);
         if (updatedcategoryResponse === "categoryNotFound") {
@@ -56,11 +58,11 @@ exports.update = async (req, res, next) => {
 };
 exports.destroy = async (req, res, next) => {
     let response = new Response();
-    // const permissionResult = await this.canAdmin(req.admin.roleId, "delete admin");
-    // if (!permissionResult) {
-    //     response.setStatus(403).setMessage("fail").setRes("notAllowed");
-    //     return res.status(403).send(response.handler());
-    // }
+    const permissionResult = await this.canAdmin(req.admin.roleId, "delete category");
+    if (!permissionResult) {
+        response.setStatus(403).setMessage("fail").setRes("notAllowed");
+        return res.status(403).send(response.handler());
+    }
     try {
         const destroyCategoryResult = await categoryService.destroyCategory(req);
         if (destroyCategoryResult === true) {
