@@ -26,14 +26,15 @@ EXPIRE_TIME= "1w
 
 4-npm install
 
-5- run seeders:
+5-node index.js
 
--   npx sequelize-cli db:seed --seed 20211109090157-admins.js
--   npx sequelize-cli db:seed --seed 20211109082457-permission
+6- run seeders:
 -   npx sequelize-cli db:seed --seed 20211109091139-roles
+-   npx sequelize-cli db:seed --seed 20211109082457-permission
+-   npx sequelize-cli db:seed --seed 20211109090157-admins.js
 -   npx sequelize-cli db:seed --seed 20211109091829-role-permission
 
-6-node index.js
+7-node index.js
 
 [![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/12694267-d5765185-2f2d-47ac-bae4-0cf88f887b37?action=collection%2Ffork&collection-url=entityId%3D12694267-d5765185-2f2d-47ac-bae4-0cf88f887b37%26entityType%3Dcollection%26workspaceId%3Dbefe7c4b-c8d0-4fb8-b443-7e4deccd31ff)
 
