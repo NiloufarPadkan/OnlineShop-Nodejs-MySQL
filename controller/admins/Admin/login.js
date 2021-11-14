@@ -5,13 +5,9 @@ const dict = require("../../../resources/dict");
 exports.login = async (req, res, next) => {
     try {
         const loginResponse = await loginService.loginAdmin(req);
-        if (loginResponse === "adminNotFound") {
-            let response = new Response(400, "fail", "adminNotFound");
-            if (loginResponse != "") return res.status(200).send(response.handler());
-        }
 
-        if (loginResponse === "invalidPassword") {
-            let response = new Response(400, "fail", "invalidPassword");
+        if (loginResponse === "invalidPassword" || loginResponse === "adminNotFound") {
+            let response = new Response(400, "fail", "wrongCredentials");
             if (loginResponse != "") return res.status(200).send(response.handler());
         }
 

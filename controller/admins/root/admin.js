@@ -5,7 +5,6 @@ const Can = require("../../../services/can/can");
 
 exports.canAdmin = async (roleId, permissionTitle) => {
     const can = await Can.can(roleId, permissionTitle);
-
     if (!can) {
         return false;
     }
@@ -67,7 +66,6 @@ exports.destroy = async (req, res, next) => {
     try {
         const destroyAdminResult = await adminService.destroyAdmin(req);
         if (destroyAdminResult === true) {
-            let response = new AdminRes(200, "success", dict.successfulRemove);
             response.setStatus(200).setRes(dict.successfulRemove);
             return res.status(200).send(response.handler());
         } else {
