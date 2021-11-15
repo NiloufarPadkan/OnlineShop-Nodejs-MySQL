@@ -2,6 +2,11 @@ const Admin = require("../models/Admin");
 const dict = require("../resources/dict");
 const validPassword = require("../lib/passwordUtil").validPassword;
 const tokenGenerator = require("../lib//jwtUtil").genToken;
+const redis = require("redis");
+const REDIS_PORT = process.env.REDIS_PORT || 6379;
+
+const client = redis.createClient(REDIS_PORT);
+
 exports.loginAdmin = async (req) => {
     try {
         const admin = await Admin.findOne({
@@ -20,6 +25,9 @@ exports.loginAdmin = async (req) => {
         const accessToken = tokenGenerator(admin.id);
         req.admin = admin;
         // console.log(req.admin);
+        client.flushdb(function (err, succeeded) {
+            console.log(succeeded); // will be true if successfull
+        });
         return accessToken;
     } catch (e) {
         return "";

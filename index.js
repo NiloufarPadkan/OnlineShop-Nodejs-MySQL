@@ -1,5 +1,7 @@
 const express = require("express");
 const dotenv = require("dotenv");
+const redis = require("redis");
+
 const sequelize = require("./config/database/sequelize");
 const roleRoute = require("./routes/admins/root/role");
 const adminRoute = require("./routes/admins/root/admin");
@@ -38,6 +40,9 @@ Admin.belongsTo(Role); // Will add rold_id to user
 Permission.belongsToMany(Role, { through: rolePermission });
 //Role.belongsToMany(Permission, { through: rolePermission });
 sequelize.sync({});
+const REDIS_PORT = process.env.REDIS_PORT || 6379;
+const client = redis.createClient(REDIS_PORT);
+client.setex("username", 3600, "123");
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
