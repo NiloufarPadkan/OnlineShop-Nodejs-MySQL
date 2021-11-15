@@ -1,4 +1,4 @@
-const permissionService = require("../../../services/permission");
+const permissionService = require("../../../services/rootService/permission");
 const Response = require("../../../services/responses/general");
 const Can = require("../../../services/can/can");
 
@@ -13,7 +13,6 @@ exports.canAdmin = async (roleId, permissionTitle) => {
 
 exports.store = async (req, res, next) => {
     let response = new Response();
-    //console.log(req.admin);
     const permissionResult = await this.canAdmin(req.admin.roleId, "add permission");
     if (!permissionResult) {
         response.setStatus(403).setMessage("fail").setRes("notAllowed");

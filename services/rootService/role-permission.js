@@ -1,4 +1,4 @@
-const RolePermission = require("../models/role-permission");
+const RolePermission = require("../../models/role-permission");
 
 exports.AssignPermission = async (req, res, next) => {
     try {
@@ -17,11 +17,9 @@ exports.AssignPermission = async (req, res, next) => {
                 permissionId: permissionIds[key],
             });
         });
-        const AssignPermissionResult =
-            await RolePermission.bulkCreate(result);
+        const AssignPermissionResult = await RolePermission.bulkCreate(result);
 
         return AssignPermissionResult;
-
     } catch (e) {
         console.log(e);
         return "";

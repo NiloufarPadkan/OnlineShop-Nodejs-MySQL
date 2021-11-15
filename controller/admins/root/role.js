@@ -1,4 +1,4 @@
-const roleService = require("../../../services/role");
+const roleService = require("../../../services/rootService/role");
 const Response = require("../../../services/responses/general");
 const Can = require("../../../services/can/can");
 

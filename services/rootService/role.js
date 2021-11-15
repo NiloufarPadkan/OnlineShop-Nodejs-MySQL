@@ -1,4 +1,4 @@
-const Role = require("../models/Role");
+const Role = require("../../models/Role");
 exports.insertRole = async (req) => {
     try {
         const roleTitle = req.body.role;

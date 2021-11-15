@@ -1,4 +1,4 @@
-const rolePermissionService = require("../../../services/role-permission");
+const rolePermissionService = require("../../../services/rootService/role-permission");
 const Response = require("../../../services/responses/general");
 const Can = require("../../../services/can/can");
 

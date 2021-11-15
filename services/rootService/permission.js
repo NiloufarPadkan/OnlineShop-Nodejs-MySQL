@@ -1,4 +1,4 @@
-const Permission = require("../models/Permission");
+const Permission = require("../../models/Permission");
 
 exports.insertPermission = async (req, res, next) => {
     try {

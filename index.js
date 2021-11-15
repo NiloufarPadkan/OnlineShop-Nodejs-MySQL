@@ -1,6 +1,5 @@
 const express = require("express");
 const dotenv = require("dotenv");
-const redis = require("redis");
 
 const sequelize = require("./config/database/sequelize");
 const roleRoute = require("./routes/admins/root/role");
@@ -14,6 +13,11 @@ const Role = require("./models/Role");
 const Permission = require("./models/Permission");
 const rolePermission = require("./models/role-permission");
 const Admin = require("./models/Admin");
+const TypePrice = require("./models/TypePrice");
+const UserType = require("./models/UserType");
+const Product = require("./models/Product");
+const Category = require("./models/Category");
+const Brand = require("./models/Brand");
 
 dotenv.config();
 
@@ -36,13 +40,15 @@ app.use(permissionRoute);
 app.use(adminLoginRoute);
 app.use(categoryRoute);
 app.use(brandRoute);
+
 Admin.belongsTo(Role); // Will add rold_id to user
+Product.belongsTo(Category);
+Product.belongsTo(Brand);
+
 Permission.belongsToMany(Role, { through: rolePermission });
+Product.belongsToMany(UserType, { through: TypePrice });
 //Role.belongsToMany(Permission, { through: rolePermission });
 sequelize.sync({});
-const REDIS_PORT = process.env.REDIS_PORT || 6379;
-const client = redis.createClient(REDIS_PORT);
-client.setex("username", 3600, "123");
 
 const port = process.env.PORT || 5000;
 app.listen(port, () => {

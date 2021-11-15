@@ -1,4 +1,4 @@
-const adminService = require("../../../services/admin");
+const adminService = require("../../../services/rootService/admin");
 const AdminRes = require("../../../services/responses/AdminCreated");
 const dict = require("../../../resources/dict");
 const Can = require("../../../services/can/can");

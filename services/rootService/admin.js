@@ -1,7 +1,7 @@
-const Admin = require("../models/Admin");
-const Role = require("../models/Role");
+const Admin = require("../../models/Admin");
+const Role = require("../../models/Role");
 
-const genPassword = require("../lib//passwordUtil").genPassword;
+const genPassword = require("../../lib/passwordUtil").genPassword;
 
 exports.insertAdmin = async (req) => {
     try {
@@ -76,7 +76,7 @@ exports.destroyAdmin = async (req) => {
                 id: adminId,
             },
         });
-        console.log(admin);
+        //console.log(admin);
         if (admin) return true;
         else return false;
     } catch (e) {
