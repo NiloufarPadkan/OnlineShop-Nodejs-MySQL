@@ -1,7 +1,6 @@
 const Role_Permission = require("../../models/role-permission");
 const Permission = require("../../models/Permission");
 const redis = require("redis");
-//const REDIS_PORT = process.env.REDIS_PORT || 6379;
 
 const client = redis.createClient(process.env.REDIS_PORT || 6379);
 const { promisifyAll } = require("bluebird");

@@ -9,6 +9,8 @@ const command = require("./routes/admins/commands/createRoot");
 const permissionRoute = require("./routes/admins/root/permission");
 const categoryRoute = require("./routes/admins/category");
 const brandRoute = require("./routes/admins/brand");
+const productRoute = require("./routes/product/sellerRoute");
+
 const Role = require("./models/Role");
 const Permission = require("./models/Permission");
 const rolePermission = require("./models/role-permission");
@@ -40,7 +42,7 @@ app.use(permissionRoute);
 app.use(adminLoginRoute);
 app.use(categoryRoute);
 app.use(brandRoute);
-
+app.use(productRoute);
 Admin.belongsTo(Role); // Will add rold_id to user
 Product.belongsTo(Category);
 Product.belongsTo(Brand);
@@ -54,3 +56,15 @@ const port = process.env.PORT || 5000;
 app.listen(port, () => {
     console.log("app is running");
 });
+
+// PRODUCT HAS MANY CATEGPRY/TAGS
+
+// CATEGPRY/TAGS HAS MANY PRODUCTS
+
+// USER HAS ONE TYPE
+// TYPE HAS MANY USER
+
+// todo :
+// magic of
+// array of obj
+// upload photo

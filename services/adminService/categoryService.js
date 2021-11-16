@@ -1,8 +1,10 @@
 const Category = require("../../models/Category");
-
+const { isString } = require("../../middleware/validations/registerValidation");
 exports.insertCategory = async (req, res, next) => {
     try {
         const category = req.body.title;
+        // console.log(typeof req.body.title);
+        const c = isString(req.body.title);
         const duplicateCategory = await Category.findOne({
             where: {
                 title: category,
@@ -16,7 +18,7 @@ exports.insertCategory = async (req, res, next) => {
         });
 
         const savedCategory = await newCategory.save();
-        console.log(savedCategory);
+        // console.log(savedCategory);
         return savedCategory;
     } catch (e) {
         console.log(e);

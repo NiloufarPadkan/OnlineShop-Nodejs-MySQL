@@ -26,11 +26,12 @@ exports.insertAdmin = async (req) => {
 
 exports.indexAdmins = async (req) => {
     try {
-        const limit = req.body.size ? req.body.size : 3;
-        const offset = req.body.page ? req.body.page * limit : 0;
+        const limit = req.params.size ? req.params.size : 3;
+        const offset = req.params.page ? req.params.page * limit : 0;
+        console.log(limit + " " + offset);
         const admins = await Admin.findAll({
-            limit: limit,
-            offset: offset,
+            limit: parseInt(limit),
+            offset: parseInt(offset),
         });
         return admins;
     } catch (e) {

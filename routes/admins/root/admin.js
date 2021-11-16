@@ -14,7 +14,7 @@ router.post(
     adminController.store
 );
 
-router.get("/admin/list", verifyToken, adminController.index);
+router.get("/admin/list/:size/:page", verifyToken, adminController.index);
 
 router.put("/admin/edit", verifyToken, adminController.update);
 router.delete("/admin/delete", verifyToken, adminController.destroy);

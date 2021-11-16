@@ -6,6 +6,26 @@ const Response = require("../../services/responses/general");
 
 const Admin = require("../../models/Admin");
 
+// const isString = (input) => {
+//     console.log(typeof input);
+//     if (typeof input === "string") {
+//         next();
+//     } else throw new Error(" input not String");
+// };
+
+const isString = (input) => {
+    console.log("check if string");
+
+    return function (req, res, next) {
+        console.log("ssds");
+        console.log(typeof input);
+
+        if (typeof input === "string") {
+            next();
+        } else res.status(400).send(dict.isNotString);
+    };
+};
+
 const validationForAdminRegister = async (req, res, next) => {
     let response = new Response();
 
@@ -68,4 +88,5 @@ const validationForAdminRegister = async (req, res, next) => {
 
 module.exports = {
     validationForAdminRegister,
+    isString,
 };
