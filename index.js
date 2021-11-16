@@ -53,9 +53,7 @@ Product.belongsToMany(UserType, { through: TypePrice });
 sequelize.sync({});
 
 const port = process.env.PORT || 5000;
-app.listen(port, () => {
-    console.log("app is running");
-});
+app.listen(port, "0.0.0.0");
 
 // PRODUCT HAS MANY CATEGPRY/TAGS
 

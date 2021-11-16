@@ -1,5 +1,5 @@
 const Category = require("../../models/Category");
-const { isString } = require("../../middleware/validations/registerValidation");
+const isString = require("../../middleware/validations/registerValidation").isString();
 exports.insertCategory = async (req, res, next) => {
     try {
         const category = req.body.title;

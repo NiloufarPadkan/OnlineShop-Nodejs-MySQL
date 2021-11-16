@@ -15,7 +15,6 @@ const Admin = require("../../models/Admin");
 
 const isString = (input) => {
     console.log("check if string");
-
     return function (req, res, next) {
         console.log("ssds");
         console.log(typeof input);
