@@ -1,4 +1,4 @@
-const brandService = require("../../services/adminService/brandService");
+const brandService = require("../../services/sellerService/brandService");
 const Response = require("../../services/responses/general");
 const dict = require("../../resources/dict");
 const Can = require("../../services/can/can");

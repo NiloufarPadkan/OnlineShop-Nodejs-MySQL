@@ -35,7 +35,6 @@ const Product = sequelize.define("product", {
         type: Sequelize.STRING,
         // allowNull: false,
         trim: true,
-        unique: true,
     },
     photo: {
         type: Sequelize.BLOB,

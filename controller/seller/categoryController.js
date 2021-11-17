@@ -1,4 +1,4 @@
-const categoryService = require("../../services/adminService/categoryService");
+const categoryService = require("../../services/sellerService/categoryService");
 const Response = require("../../services/responses/general");
 const dict = require("../../resources/dict");
 const Can = require("../../services/can/can");
@@ -13,11 +13,17 @@ exports.canAdmin = async (roleId, permissionTitle) => {
 
 exports.store = async (req, res, next) => {
     let response = new Response();
-    //to do : check permission
-
+    const permissionResult = await this.canAdmin(req.admin.roleId, "add category");
+    if (!permissionResult) {
+        response.setStatus(403).setMessage("fail").setRes("notAllowed");
+        return res.status(403).send(response.handler());
+    }
     try {
         const storedCategoryResponse = await categoryService.insertCategory(req);
-
+        if (storedCategoryResponse === "alreadyExists") {
+            response.setStatus(400).setMessage("fail").setRes("alreadyExists");
+            return res.status(400).send(response.handler());
+        }
         if (storedCategoryResponse != "") {
             response.setStatus(200).setRes(storedCategoryResponse);
             return res.status(200).send(response.handler());
@@ -70,7 +76,7 @@ exports.destroy = async (req, res, next) => {
             return res.status(200).send(response.handler());
         } else {
             response.setStatus(403).setMessage("fail").setRes("categoryNotFound");
-            res.status(404).send(response.handler());
+            return res.status(404).send(response.handler());
         }
     } catch (e) {
         response.setStatus(400).setMessage("fail").setRes(e);
@@ -83,9 +89,12 @@ exports.index = async (req, res, next) => {
 
     try {
         const catgeoryIndexResponse = await categoryService.getcategory(req);
-        if (catgeoryIndexResponse != "")
+        if (catgeoryIndexResponse != "") {
             response.setStatus(200).setRes(catgeoryIndexResponse);
-        return res.status(200).send(response.handler());
+            return res.status(200).send(response.handler());
+        }
+        response.setStatus(400).setMessage("fail").setRes("no categories found");
+        return res.status(400).send(response.handler());
     } catch (e) {
         response.setStatus(400).setMessage("fail").setRes(e);
         return res.status(400).send(response.handler());

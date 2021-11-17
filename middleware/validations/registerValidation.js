@@ -1,29 +1,12 @@
 const validator = require("validator");
+const persianize = require("persianize");
+
 const dict = require("../../resources/dict");
 const Can = require("../../services/can/can");
 const AdminRes = require("../../services/responses/AdminCreated");
 const Response = require("../../services/responses/general");
 
 const Admin = require("../../models/Admin");
-
-// const isString = (input) => {
-//     console.log(typeof input);
-//     if (typeof input === "string") {
-//         next();
-//     } else throw new Error(" input not String");
-// };
-
-const isString = (input) => {
-    console.log("check if string");
-    return function (req, res, next) {
-        console.log("ssds");
-        console.log(typeof input);
-
-        if (typeof input === "string") {
-            next();
-        } else res.status(400).send(dict.isNotString);
-    };
-};
 
 const validationForAdminRegister = async (req, res, next) => {
     let response = new Response();
@@ -54,7 +37,10 @@ const validationForAdminRegister = async (req, res, next) => {
             response.setStatus(500).setMessage("fail").setRes(dict.userExistence);
             return res.status(400).send(response.handler());
         }
-
+        if (!persianize.validator().mobile(req.body.phone)) {
+            response.setStatus(500).setMessage("fail").setRes(dict.notPhoneNumber);
+            return res.status(400).send(response.handler());
+        }
         const existingPhone = await Admin.findOne({
             where: { phone: req.body.phone },
         });
@@ -87,5 +73,4 @@ const validationForAdminRegister = async (req, res, next) => {
 
 module.exports = {
     validationForAdminRegister,
-    isString,
 };

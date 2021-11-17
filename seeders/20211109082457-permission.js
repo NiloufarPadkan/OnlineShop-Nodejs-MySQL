@@ -78,6 +78,36 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                title: "add product",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                title: "delete product",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                title: "update product",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                title: "add tag",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                title: "delete tag",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                title: "update tag",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ]);
     },
 
