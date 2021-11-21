@@ -22,7 +22,10 @@ exports.store = async (req, res, next) => {
     }
     try {
         const insertProductResponse = await sellerProductService.insertProduct(req);
-
+        if (insertProductResponse === "categoryOrBrandEmpty") {
+            response.setStatus(400).setMessage("fail").setRes("categoryOrBrandEmpty");
+            return res.status(400).send(response.handler());
+        }
         if (insertProductResponse != "") {
             response.setStatus(200).setRes(insertProductResponse);
             return res.status(200).send(response.handler());

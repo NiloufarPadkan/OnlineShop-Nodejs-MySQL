@@ -13,9 +13,7 @@ router.post(
     validationForAdminRegister,
     adminController.store
 );
-
 router.get("/admin/list/:size/:page", verifyToken, adminController.index);
-
 router.put("/admin/edit", verifyToken, adminController.update);
 router.delete("/admin/delete", verifyToken, adminController.destroy);
 router.put("/admin/update/credentials", verifyToken, credentialController.update);
