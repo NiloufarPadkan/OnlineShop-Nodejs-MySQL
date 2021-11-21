@@ -1,4 +1,4 @@
-const tagService = require("../services/sellerService/tagService");
+const tagService = require("../services/sellerService/TagService");
 const Response = require("../services/responses/general");
 const dict = require("../resources/dict");
 const Can = require("../services/can/can");
