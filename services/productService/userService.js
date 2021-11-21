@@ -36,6 +36,22 @@ exports.indexProducts = async (req) => {
         return "";
     }
 };
+exports.getOneProduct = async (req) => {
+    try {
+        const id = req.params.id;
+
+        const products = await Product.findOne({
+            include: [{ model: Category }, { model: Tag }, { model: Brand }],
+            where: {
+                id: id,
+            },
+        });
+        return products;
+    } catch (e) {
+        console.log(e);
+        return "";
+    }
+};
 
 exports.searchProducts = async (req) => {
     try {

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const categoryController = require("../controller/seller/categoryController");
+const categoryController = require("../controller/categoryController");
 const { verifyToken } = require("../middleware/verification/loginVerify");
 
 router.post("/category/add", verifyToken, categoryController.store);

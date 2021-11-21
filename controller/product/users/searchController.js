@@ -1,5 +1,5 @@
-const userProductService = require("../../services/productService/userService");
-const Response = require("../../services/responses/general");
+const userProductService = require("../../../services/productService/userService");
+const Response = require("../../../services/responses/general");
 
 exports.search = async (req, res, next) => {
     let response = new Response();

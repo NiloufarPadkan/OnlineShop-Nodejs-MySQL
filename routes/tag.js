@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const TagController = require("../controller/seller/TagController");
+const TagController = require("../controller/tagController");
 const { verifyToken } = require("../middleware/verification/loginVerify");
 
 router.post("/Tag/add", verifyToken, TagController.store);

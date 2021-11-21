@@ -1,7 +1,7 @@
-const brandService = require("../../services/sellerService/brandService");
-const Response = require("../../services/responses/general");
-const dict = require("../../resources/dict");
-const Can = require("../../services/can/can");
+const tagService = require("../services/sellerService/tagService");
+const Response = require("../services/responses/general");
+const dict = require("../resources/dict");
+const Can = require("../services/can/can");
 
 exports.canAdmin = async (roleId, permissionTitle) => {
     const can = await Can.can(roleId, permissionTitle);
@@ -16,13 +16,13 @@ exports.store = async (req, res, next) => {
     //to do : check permission
 
     try {
-        const storedBrandResponse = await brandService.insertBrand(req);
-        if (storedBrandResponse == "alreadyExists") {
-            response.setStatus(400).setRes("alreadyExists");
+        const storedTagResponse = await tagService.insertTag(req);
+        if (storedTagResponse === "alreadyExists") {
+            response.setStatus(400).setMessage("fail").setRes("alreadyExists");
             return res.status(400).send(response.handler());
         }
-        if (storedBrandResponse != "") {
-            response.setStatus(200).setRes(storedBrandResponse);
+        if (storedTagResponse != "") {
+            response.setStatus(200).setRes(storedTagResponse);
             return res.status(200).send(response.handler());
         }
 
@@ -35,23 +35,23 @@ exports.store = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
     let response = new Response();
-    const permissionResult = await this.canAdmin(req.admin.roleId, "update brand");
+    const permissionResult = await this.canAdmin(req.admin.roleId, "update tag");
     if (!permissionResult) {
         response.setStatus(403).setMessage("fail").setRes("notAllowed");
         return res.status(403).send(response.handler());
     }
     try {
-        const updatedbrandResponse = await brandService.updatebrand(req);
-        if (updatedbrandResponse === "brandNotFound") {
-            response.setStatus(403).setMessage("fail").setRes("brandNotFound");
+        const updatedtagResponse = await tagService.updatetag(req);
+        if (updatedtagResponse === "tagNotFound") {
+            response.setStatus(403).setMessage("fail").setRes("tagNotFound");
             return res.status(404).send(response.handler());
         }
-        if (updatedbrandResponse === "nameEmpty") {
-            response.setStatus(403).setMessage("fail").setRes("nameEmpty");
+        if (updatedtagResponse === "titleEmpty") {
+            response.setStatus(403).setMessage("fail").setRes("titleEmpty");
             return res.status(404).send(response.handler());
         }
-        if (updatedbrandResponse != "") {
-            response.setStatus(200).setRes(updatedbrandResponse);
+        if (updatedtagResponse != "") {
+            response.setStatus(200).setRes(updatedtagResponse);
             return res.status(200).send(response.handler());
         }
     } catch (e) {
@@ -61,19 +61,19 @@ exports.update = async (req, res, next) => {
 };
 exports.destroy = async (req, res, next) => {
     let response = new Response();
-    const permissionResult = await this.canAdmin(req.admin.roleId, "delete brand");
+    const permissionResult = await this.canAdmin(req.admin.roleId, "delete tag");
     if (!permissionResult) {
         response.setStatus(403).setMessage("fail").setRes("notAllowed");
         return res.status(403).send(response.handler());
     }
     try {
-        const destroyBrandResult = await brandService.destroyBrand(req);
-        if (destroyBrandResult === true) {
+        const destroyTagResult = await tagService.destroyTag(req);
+        if (destroyTagResult === true) {
             response.setStatus(200).setRes(dict.successfulRemove);
             return res.status(200).send(response.handler());
         } else {
-            response.setStatus(403).setMessage("fail").setRes("brandNotFound");
-            res.status(404).send(response.handler());
+            response.setStatus(403).setMessage("fail").setRes("tagNotFound");
+            return res.status(404).send(response.handler());
         }
     } catch (e) {
         response.setStatus(400).setMessage("fail").setRes(e);
@@ -83,11 +83,14 @@ exports.destroy = async (req, res, next) => {
 
 exports.index = async (req, res, next) => {
     let response = new Response();
-
     try {
-        const brandIndexResponse = await brandService.getbrand(req);
-        if (brandIndexResponse != "") response.setStatus(200).setRes(brandIndexResponse);
-        return res.status(200).send(response.handler());
+        const tagIndexResponse = await tagService.gettag(req);
+        if (tagIndexResponse != "") {
+            response.setStatus(200).setRes(tagIndexResponse);
+            return res.status(200).send(response.handler());
+        }
+        response.setStatus(400).setMessage("fail").setRes("no tags found");
+        return res.status(400).send(response.handler());
     } catch (e) {
         response.setStatus(400).setMessage("fail").setRes(e);
         return res.status(400).send(response.handler());
