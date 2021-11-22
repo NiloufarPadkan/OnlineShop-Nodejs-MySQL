@@ -40,20 +40,29 @@ exports.update = async (req, res, next) => {
         const updatedAdminResponse = await adminService.updateAdmin(req);
         if (updatedAdminResponse === "adminNotFound") {
             response.setStatus(403).setMessage("fail").setRes("adminNotFound");
-            res.status(404).send(response.handler());
+            return res.status(404).send(response.handler());
         }
 
         if (updatedAdminResponse === "roleNotfound") {
             response.setStatus(404).setMessage("fail").setRes("roleNotFound");
-            res.status(404).send(response.handler());
+            return res.status(404).send(response.handler());
+        }
+        if (
+            updatedAdminResponse === "duplicateUsername" ||
+            updatedAdminResponse === "duplicateEmail" ||
+            updatedAdminResponse === "duplicatePhone"
+        ) {
+            response.setStatus(404).setMessage("fail").setRes(updatedAdminResponse);
+            return res.status(404).send(response.handler());
         }
 
         if (updatedAdminResponse != "") {
             response.setStatus(200).setRes(updatedAdminResponse);
-            res.status(200).send(response.handler());
+            return res.status(200).send(response.handler());
         }
     } catch (e) {
-        console.log(e);
+        response.setStatus(400).setMessage("fail").setRes(e);
+        return res.status(400).send(response.handler());
     }
 };
 exports.destroy = async (req, res, next) => {
