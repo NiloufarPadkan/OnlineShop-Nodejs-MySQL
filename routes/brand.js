@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const brandController = require("../controller/brandController");
-const { verifyToken } = require("../middleware/verification/loginVerify");
+const { verifyToken } = require("../middleware/verification/adminLoginVerify");
 
 router.post("/brand/add", verifyToken, brandController.store);
 router.get("/brand", verifyToken, brandController.index);

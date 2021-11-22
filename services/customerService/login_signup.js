@@ -8,8 +8,7 @@ exports.login_signup = async (req) => {
                 phone: req.body.phone,
             },
         });
-
-        const accessToken = tokenGenerator(customer.id);
+        const accessToken = tokenGenerator(customer[0].id);
         req.customer = customer;
 
         return accessToken;

@@ -37,7 +37,7 @@ const Customer = sequelize.define("customer", {
         trim: true,
     },
 
-    avtivityStatus: { type: Sequelize.BOOLEAN, defaultValue: false },
+    avtivityStatus: { type: Sequelize.BOOLEAN, defaultValue: true },
 });
 
 module.exports = Customer;

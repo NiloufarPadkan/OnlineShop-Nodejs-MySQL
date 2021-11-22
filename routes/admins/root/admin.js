@@ -5,7 +5,7 @@ const credentialController = require("../../../controller/admins/root/updateCred
 const {
     validationForAdminRegister,
 } = require("../../../middleware/validations/adminRegisterValidation");
-const { verifyToken } = require("../../../middleware/verification/loginVerify");
+const { verifyToken } = require("../../../middleware/verification/adminLoginVerify");
 
 router.post(
     "/admin/create",
