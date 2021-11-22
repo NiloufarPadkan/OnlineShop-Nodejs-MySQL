@@ -13,8 +13,11 @@ exports.canAdmin = async (roleId, permissionTitle) => {
 
 exports.store = async (req, res, next) => {
     let response = new Response();
-    //to do : check permission
-
+    const permissionResult = await this.canAdmin(req.admin.roleId, "add tag");
+    if (!permissionResult) {
+        response.setStatus(403).setMessage("fail").setRes("notAllowed");
+        return res.status(403).send(response.handler());
+    }
     try {
         const storedTagResponse = await tagService.insertTag(req);
         if (storedTagResponse === "alreadyExists") {

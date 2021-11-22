@@ -1,7 +1,7 @@
-const Admin = require("../models/Admin");
-const dict = require("../resources/dict");
-const validPassword = require("../lib/passwordUtil").validPassword;
-const tokenGenerator = require("../lib//jwtUtil").genToken;
+const Admin = require("../../models/Admin");
+const dict = require("../../resources/dict");
+const validPassword = require("../../lib/passwordUtil").validPassword;
+const tokenGenerator = require("../../lib/jwtUtil").genToken;
 const redis = require("redis");
 const REDIS_PORT = process.env.REDIS_PORT || 6379;
 

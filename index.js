@@ -14,7 +14,7 @@ const brandRoute = require("./routes/brand");
 const TagRoute = require("./routes/tag");
 const sellerProductRoute = require("./routes/product/sellerRoute");
 const userProductRoute = require("./routes/product/userRoute");
-
+const customerRoute = require("./routes/customer/login_register");
 const Role = require("./models/Role");
 const Permission = require("./models/Permission");
 const rolePermission = require("./models/role-permission");
@@ -64,6 +64,7 @@ app.use(brandRoute);
 app.use(sellerProductRoute);
 app.use(userProductRoute);
 app.use(TagRoute);
+app.use(customerRoute);
 Admin.belongsTo(Role); // Will add rold_id to user
 Product.belongsTo(Category);
 Product.belongsTo(Brand);

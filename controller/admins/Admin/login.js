@@ -1,4 +1,4 @@
-const loginService = require("../../../services/login");
+const loginService = require("../../../services/rootService/login");
 const Response = require("../../../services/responses/general");
 
 const dict = require("../../../resources/dict");

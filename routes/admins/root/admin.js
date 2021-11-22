@@ -4,7 +4,7 @@ const adminController = require("../../../controller/admins/root/admin");
 const credentialController = require("../../../controller/admins/root/updateCredentials");
 const {
     validationForAdminRegister,
-} = require("../../../middleware/validations/registerValidation");
+} = require("../../../middleware/validations/adminRegisterValidation");
 const { verifyToken } = require("../../../middleware/verification/loginVerify");
 
 router.post(
