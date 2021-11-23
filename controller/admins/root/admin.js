@@ -31,26 +31,22 @@ exports.store = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
     let response = new AdminRes();
-    const permissionResult = await this.canAdmin(req.admin.roleId, "update admin");
+    let permissionResult = false;
+    if (req.admin)
+        permissionResult = await this.canAdmin(req.admin.roleId, "update admin");
     if (!permissionResult) {
         response.setStatus(403).setMessage("fail").setRes("notAllowed");
         return res.status(403).send(response.handler());
     }
     try {
         const updatedAdminResponse = await adminService.updateAdmin(req);
-        if (updatedAdminResponse === "adminNotFound") {
-            response.setStatus(403).setMessage("fail").setRes("adminNotFound");
-            return res.status(404).send(response.handler());
-        }
 
-        if (updatedAdminResponse === "roleNotfound") {
-            response.setStatus(404).setMessage("fail").setRes("roleNotFound");
-            return res.status(404).send(response.handler());
-        }
         if (
             updatedAdminResponse === "duplicateUsername" ||
             updatedAdminResponse === "duplicateEmail" ||
-            updatedAdminResponse === "duplicatePhone"
+            updatedAdminResponse === "duplicatePhone" ||
+            updatedAdminResponse === "adminNotFound" ||
+            updatedAdminResponse === "roleNotfound"
         ) {
             response.setStatus(404).setMessage("fail").setRes(updatedAdminResponse);
             return res.status(404).send(response.handler());
@@ -67,7 +63,9 @@ exports.update = async (req, res, next) => {
 };
 exports.destroy = async (req, res, next) => {
     let response = new AdminRes();
-    const permissionResult = await this.canAdmin(req.admin.roleId, "delete admin");
+    let permissionResult = false;
+    if (req.admin)
+        permissionResult = await this.canAdmin(req.admin.roleId, "delete admin");
     if (!permissionResult) {
         response.setStatus(403).setMessage("fail").setRes("notAllowed");
         return res.status(403).send(response.handler());
@@ -89,7 +87,8 @@ exports.destroy = async (req, res, next) => {
 
 exports.index = async (req, res, next) => {
     let response = new AdminRes();
-    const permissionResult = await this.canAdmin(req.admin.roleId, "read admin");
+    let permissionResult = false;
+    if (req.admin) permissionResult = await this.canAdmin(req.admin.roleId, "read admin");
     if (!permissionResult) {
         response.setStatus(403).setMessage("fail").setRes("notAllowed");
         return res.status(403).send(response.handler());

@@ -31,12 +31,16 @@ const Customer = sequelize.define("customer", {
         trim: true,
         unique: true,
     },
+
     address: {
         type: Sequelize.STRING,
-        // allowNull: false,
-        trim: true,
+        get: function () {
+            return JSON.parse(this.getDataValue("address"));
+        },
+        set: function (val) {
+            return this.setDataValue("address", JSON.stringify(val));
+        },
     },
-
     avtivityStatus: { type: Sequelize.BOOLEAN, defaultValue: true },
 });
 

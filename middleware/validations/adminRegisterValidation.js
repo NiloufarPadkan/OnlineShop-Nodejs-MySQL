@@ -12,7 +12,8 @@ const validationForAdminRegister = async (req, res, next) => {
     let response = new Response();
 
     try {
-        const can = await Can.can(req.admin.roleId, "add admin");
+        let can = false;
+        if (req.admin) can = await Can.can(req.admin.roleId, "add admin");
         if (!can) {
             let response = new AdminRes(403, "fail", "notAllowed");
             return res.status(403).send(response.handler());

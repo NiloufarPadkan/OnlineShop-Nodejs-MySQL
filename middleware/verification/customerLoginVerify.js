@@ -18,8 +18,9 @@ const verifyToken = async (req, res, next) => {
         const foundCustomer = await Customer.findByPk(customer.id);
         //console.log(foundCustomer);
         req.customer = foundCustomer;
+        console.log(foundCustomer);
         res.customer = foundCustomer;
-        //  console.log(req.admin);
+        //  console.log(req.user);
 
         next();
     });

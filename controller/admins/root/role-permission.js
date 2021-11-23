@@ -13,7 +13,9 @@ exports.canAdmin = async (roleId, permissionTitle) => {
 
 exports.store = async (req, res, next) => {
     let response = new Response();
-    const permissionResult = await this.canAdmin(req.admin.roleId, "add permission");
+    let permissionResult = false;
+    if (req.admin)
+        permissionResult = await this.canAdmin(req.admin.roleId, "add permission");
     if (!permissionResult) {
         response.setStatus(403).setMessage("fail").setRes("notAllowed");
         return res.status(403).send(response.handler());

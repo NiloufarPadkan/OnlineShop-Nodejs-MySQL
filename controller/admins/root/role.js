@@ -15,7 +15,9 @@ exports.store = async (req, res, next) => {
     let response = new Response();
 
     try {
-        const permissionResult = await this.canAdmin(req.admin.roleId, "add role");
+        let permissionResult = false;
+        if (req.admin)
+            permissionResult = await this.canAdmin(req.admin.roleId, "add role");
         if (!permissionResult) {
             response.setStatus(403).setMessage("fail").setRes("notAllowed");
             return res.status(403).send(response.handler());
@@ -36,7 +38,8 @@ exports.store = async (req, res, next) => {
 };
 exports.index = async (req, res, next) => {
     let response = new Response();
-    const permissionResult = await this.canAdmin(req.admin.roleId, "read role");
+    let permissionResult = false;
+    if (req.admin) permissionResult = await this.canAdmin(req.admin.roleId, "read role");
     if (!permissionResult) {
         response.setStatus(403).setMessage("fail").setRes("notAllowed");
         return res.status(403).send(response.handler());
