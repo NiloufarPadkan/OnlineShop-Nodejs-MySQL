@@ -12,7 +12,7 @@ exports.insertAdmin = async (req) => {
             username: req.body.username,
             email: req.body.email,
             phone: req.body.phone,
-            avtivityStatus: req.body.avtivityStatus,
+            activityStatus: req.body.avtivityStatus,
             hash: hash,
             salt: salt,
             roleId: req.body.roleId,
@@ -42,7 +42,7 @@ exports.indexAdmins = async (req) => {
 
 exports.updateAdmin = async (req) => {
     try {
-        const adminId = req.body.adminId;
+        const adminId = req.body.id;
 
         const foundAdmin = await Admin.findByPk(adminId);
         if (!foundAdmin) {
@@ -89,8 +89,8 @@ exports.updateAdmin = async (req) => {
             ? genPassword(req.body.password).salt
             : foundAdmin.salt;
 
-        const activity = req.body.activity
-            ? req.body.activity
+        const activity = req.body.activityStatus
+            ? req.body.activityStatus
             : foundAdmin.avtivityStatus;
 
         const foundRole = await Role.findByPk(roleId);
@@ -101,7 +101,7 @@ exports.updateAdmin = async (req) => {
         const upadmin = await Admin.findByPk(adminId).then((admin) => {
             admin.roleId = roleId;
 
-            admin.avtivityStatus = activity;
+            admin.activityStatus = activity;
 
             admin.username = username;
 
@@ -124,7 +124,7 @@ exports.updateAdmin = async (req) => {
     }
 };
 exports.destroyAdmin = async (req) => {
-    const adminId = req.body.adminId;
+    const adminId = req.body.id;
     try {
         const admin = await Admin.destroy({
             where: {

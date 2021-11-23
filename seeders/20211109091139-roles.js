@@ -13,6 +13,11 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                role: "user",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ]);
     },
 

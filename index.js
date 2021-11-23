@@ -15,6 +15,8 @@ const TagRoute = require("./routes/tag");
 const sellerProductRoute = require("./routes/product/sellerRoute");
 const userProductRoute = require("./routes/product/userRoute");
 const customerRoute = require("./routes/customer/login_register");
+const coustemerprofileRoute = require("./routes/customer/profile");
+
 const Role = require("./models/Role");
 const Permission = require("./models/Permission");
 const rolePermission = require("./models/role-permission");
@@ -25,7 +27,7 @@ const Product = require("./models/Product");
 const Category = require("./models/Category");
 const Brand = require("./models/Brand");
 const Tag = require("./models/Tag");
-
+const Customer = require("./models/Customer");
 dotenv.config();
 
 const app = express();
@@ -42,18 +44,19 @@ app.use((req, res, next) => {
     next();
 });
 
-const loginLimiter = rateLimit({
-    windowMs: 1 * 60 * 1000, // 15 minutes
-    max: 3,
-    // message: "Too many accounts created from this IP, please try again after 15 minutes",
-});
-const generalLimit = rateLimit({
-    windowMs: 1 * 60 * 1000, // 15 minutes
-    max: 10,
-    // message: "Too many accounts created from this IP, please try again after 15 minutes",
-});
-app.use("/admin/login/", loginLimiter);
-app.use(generalLimit);
+// const loginLimiter = rateLimit({
+//     windowMs: 1 * 60 * 1000, // 15 minutes
+//     max: 3,
+//     // message: "Too many accounts created from this IP, please try again after 15 minutes",
+// });
+// const generalLimit = rateLimit({
+//     windowMs: 1 * 60 * 1000, // 15 minutes
+//     max: 10,
+//     // message: "Too many accounts created from this IP, please try again after 15 minutes",
+// });
+// app.use("/admin/login/", loginLimiter);
+// app.use(generalLimit);
+
 app.use(command);
 app.use(roleRoute);
 app.use(adminRoute);
@@ -65,7 +68,11 @@ app.use(sellerProductRoute);
 app.use(userProductRoute);
 app.use(TagRoute);
 app.use(customerRoute);
+app.use(coustemerprofileRoute);
+
 Admin.belongsTo(Role); // Will add rold_id to user
+Customer.belongsTo(Role);
+
 Product.belongsTo(Category);
 Product.belongsTo(Brand);
 Product.belongsTo(Tag);

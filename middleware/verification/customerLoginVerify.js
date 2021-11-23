@@ -16,7 +16,7 @@ const verifyToken = async (req, res, next) => {
             return res.status(400).send(response.handler());
         }
         const foundCustomer = await Customer.findByPk(customer.id);
-        console.log(foundCustomer);
+        //console.log(foundCustomer);
         req.customer = foundCustomer;
         res.customer = foundCustomer;
         //  console.log(req.admin);

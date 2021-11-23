@@ -16,7 +16,12 @@ const verifyToken = async (req, res, next) => {
             response.setStatus(400).setMessage("fail").setRes(dict.invalidToken);
             return res.status(400).send(response.handler());
         }
-        const foundAdmin = await Admin.findByPk(admin.id);
+        const foundAdmin = await Admin.findOne({
+            where: {
+                id: admin.id,
+                roleId: admin.roleId,
+            },
+        });
         req.admin = foundAdmin;
         res.locals.Admin = foundAdmin;
         //  console.log(req.admin);

@@ -22,7 +22,7 @@ exports.loginAdmin = async (req) => {
             admin.salt
         );
         if (!passwordValidation) return "invalidPassword";
-        const accessToken = tokenGenerator(admin.id);
+        const accessToken = tokenGenerator(admin.id, admin.roleId);
         req.admin = admin;
         // console.log(req.admin);
         client.flushdb(function (err, succeeded) {
