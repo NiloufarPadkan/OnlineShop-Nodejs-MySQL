@@ -13,7 +13,8 @@ exports.canAdmin = async (roleId, permissionTitle) => {
 
 exports.store = async (req, res, next) => {
     let response = new Response();
-    const permissionResult = await this.canAdmin(req.admin.roleId, "add tag");
+    let permissionResult = false;
+    if (req.admin) permissionResult = await this.canAdmin(req.admin.roleId, "add tag");
     if (!permissionResult) {
         response.setStatus(403).setMessage("fail").setRes("notAllowed");
         return res.status(403).send(response.handler());
@@ -38,7 +39,8 @@ exports.store = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
     let response = new Response();
-    const permissionResult = await this.canAdmin(req.admin.roleId, "update tag");
+    let permissionResult = false;
+    if (req.admin) permissionResult = await this.canAdmin(req.admin.roleId, "update tag");
     if (!permissionResult) {
         response.setStatus(403).setMessage("fail").setRes("notAllowed");
         return res.status(403).send(response.handler());
@@ -64,7 +66,8 @@ exports.update = async (req, res, next) => {
 };
 exports.destroy = async (req, res, next) => {
     let response = new Response();
-    const permissionResult = await this.canAdmin(req.admin.roleId, "delete tag");
+    let permissionResult = false;
+    if (req.admin) permissionResult = await this.canAdmin(req.admin.roleId, "delete tag");
     if (!permissionResult) {
         response.setStatus(403).setMessage("fail").setRes("notAllowed");
         return res.status(403).send(response.handler());

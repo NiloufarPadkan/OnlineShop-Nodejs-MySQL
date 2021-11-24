@@ -5,22 +5,28 @@ exports.insertProduct = async (req) => {
         // if (!req.body.categoryId || !req.body.brandId) {
         //     return "categoryOrBrandEmpty";
         // }
+        let photoPath = req.files;
+        //console.log(Object.values(pathes));
+        let pathArray = Object.values(photoPath).map((a) => a.path);
+
         const newProduct = new Product({
             name: req.body.name,
             base_price: req.body.base_price,
             temp_price: req.body.temp_price,
             count: req.body.count,
             description: req.body.description,
-            photo: req.body.photo,
             avtivityStatus: req.body.avtivityStatus,
             categoryId: req.body.categoryId,
-            // tagId: req.body.tagId,
-            // brandId: req.body.brandId,
+            photo: pathArray,
+            tagId: req.body.tagId,
+            brandId: req.body.brandId,
         });
+        //console.log(req.files[1]);
 
         const savedProduct = await newProduct.save();
         return savedProduct;
     } catch (e) {
+        console.log(e);
         return "";
     }
 };

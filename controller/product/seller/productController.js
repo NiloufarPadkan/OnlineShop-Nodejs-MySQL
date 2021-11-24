@@ -15,7 +15,9 @@ exports.canAdmin = async (roleId, permissionTitle) => {
 exports.store = async (req, res, next) => {
     let response = new Response();
     //to do : check permission
-    const permissionResult = await this.canAdmin(req.admin.roleId, "add product");
+    let permissionResult = false;
+    if (req.admin)
+        permissionResult = await this.canAdmin(req.admin.roleId, "add product");
     if (!permissionResult) {
         response.setStatus(403).setMessage("fail").setRes("notAllowed");
         return res.status(403).send(response.handler());
@@ -68,7 +70,9 @@ exports.show = async (req, res, next) => {
 
 exports.update = async (req, res, next) => {
     let response = new Response();
-    const permissionResult = await this.canAdmin(req.admin.roleId, "update product");
+    let permissionResult = false;
+    if (req.admin)
+        permissionResult = await this.canAdmin(req.admin.roleId, "update product");
     if (!permissionResult) {
         response.setStatus(403).setMessage("fail").setRes("notAllowed");
         return res.status(403).send(response.handler());
@@ -90,7 +94,9 @@ exports.update = async (req, res, next) => {
 };
 exports.destroy = async (req, res, next) => {
     let response = new Response();
-    const permissionResult = await this.canAdmin(req.admin.roleId, "delete product");
+    let permissionResult = false;
+    if (req.admin)
+        permissionResult = await this.canAdmin(req.admin.roleId, "delete product");
     if (!permissionResult) {
         response.setStatus(403).setMessage("fail").setRes("notAllowed");
         return res.status(403).send(response.handler());

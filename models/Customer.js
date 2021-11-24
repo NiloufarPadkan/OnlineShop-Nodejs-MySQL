@@ -11,23 +11,20 @@ const Customer = sequelize.define("customer", {
     },
     email: {
         type: Sequelize.STRING,
-        //allowNull: false,
         trim: true,
         unique: true,
     },
     fname: {
         type: Sequelize.STRING,
-        //allowNull: false,
         trim: true,
     },
     lname: {
         type: Sequelize.STRING,
-        //allowNull: false,
         trim: true,
     },
     phone: {
         type: Sequelize.STRING,
-        // allowNull: false,
+        allowNull: false,
         trim: true,
         unique: true,
     },

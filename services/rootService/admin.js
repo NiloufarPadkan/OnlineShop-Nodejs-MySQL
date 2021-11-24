@@ -12,7 +12,7 @@ exports.insertAdmin = async (req) => {
             username: req.body.username,
             email: req.body.email,
             phone: req.body.phone,
-            activityStatus: req.body.avtivityStatus,
+            activityStatus: req.body.activityStatus,
             hash: hash,
             salt: salt,
             roleId: req.body.roleId,
@@ -113,8 +113,9 @@ exports.updateAdmin = async (req) => {
 
             admin.salt = salt;
 
-            return admin.save();
             admin.avtivityStatus = activity;
+
+            return admin.save();
         });
         //const adminrole = await upadmin.getRole(); /*get role of admin*/
         return upadmin;

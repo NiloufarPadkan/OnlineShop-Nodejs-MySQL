@@ -57,6 +57,8 @@ app.use((req, res, next) => {
 // app.use("/admin/login/", loginLimiter);
 // app.use(generalLimit);
 
+app.use("/uploads", express.static("uploads"));
+
 app.use(command);
 app.use(roleRoute);
 app.use(adminRoute);
