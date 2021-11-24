@@ -27,7 +27,9 @@ const Product = require("./models/Product");
 const Category = require("./models/Category");
 const Brand = require("./models/Brand");
 const Tag = require("./models/Tag");
+const Comment = require("./models/Comment");
 const Customer = require("./models/Customer");
+const Product_comment = require("./models/Product_comment");
 dotenv.config();
 
 const app = express();
@@ -74,6 +76,7 @@ app.use(coustemerprofileRoute);
 
 Admin.belongsTo(Role); // Will add rold_id to user
 Customer.belongsTo(Role);
+Comment.belongsTo(Customer);
 
 Product.belongsTo(Category);
 Product.belongsTo(Brand);
@@ -81,7 +84,7 @@ Product.belongsTo(Tag);
 
 Permission.belongsToMany(Role, { through: rolePermission });
 Product.belongsToMany(UserType, { through: TypePrice });
-//Role.belongsToMany(Permission, { through: rolePermission });
+Comment.belongsToMany(Product, { through: Product_comment });
 sequelize.sync({});
 
 const port = process.env.PORT || 5000;

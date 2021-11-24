@@ -4,9 +4,8 @@ const productController = require("../../controller/product/seller/productContro
 const { verifyToken } = require("../../middleware/verification/adminLoginVerify");
 const upload = require("../../middleware/upload").upload;
 
-router.post("/product/add", verifyToken, upload.any("pictures"), productController.store);
+router.post("/product/add", verifyToken, upload.any("photo"), productController.store);
 router.put("/product/update", verifyToken, productController.update);
 router.delete("/product/remove", verifyToken, productController.destroy);
 
 module.exports = router;
-// stor index update destory  show
