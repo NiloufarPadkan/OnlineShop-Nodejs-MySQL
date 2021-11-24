@@ -13,8 +13,9 @@ const Comment = sequelize.define("comment", {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    status: {
+    visible: {
         type: Sequelize.TINYINT,
+        default: false,
     },
 });
 

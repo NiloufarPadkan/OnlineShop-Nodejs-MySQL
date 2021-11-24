@@ -84,7 +84,7 @@ Product.belongsTo(Tag);
 
 Permission.belongsToMany(Role, { through: rolePermission });
 Product.belongsToMany(UserType, { through: TypePrice });
-Comment.belongsToMany(Product, { through: Product_comment });
+// Comment.belongsToMany(Product, { through: Product_comment });
 sequelize.sync({});
 
 const port = process.env.PORT || 5000;
