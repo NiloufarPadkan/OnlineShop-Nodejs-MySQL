@@ -29,7 +29,14 @@ const Admin = sequelize.define("admin", {
         unique: true,
     },
 
-    activityStatus: { type: Sequelize.BOOLEAN, defaultValue: false },
+    activityStatus: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+        set: function (val) {
+            if (val === 1) return this.setDataValue("activityStatus", true);
+            else return this.setDataValue("activityStatus", false);
+        },
+    },
     hash: Sequelize.STRING,
     salt: Sequelize.STRING,
 });

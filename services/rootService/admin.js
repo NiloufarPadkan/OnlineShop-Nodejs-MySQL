@@ -43,7 +43,7 @@ exports.indexAdmins = async (req) => {
 exports.updateAdmin = async (req) => {
     try {
         const adminId = req.body.id;
-
+        console.log(typeof req.body.activityStatus + "ghgkj");
         const foundAdmin = await Admin.findByPk(adminId);
         if (!foundAdmin) {
             return "adminNotFound";
@@ -72,7 +72,7 @@ exports.updateAdmin = async (req) => {
         if (duplicatephone && duplicatephone.id !== foundAdmin.id) {
             return "duplicatePhone";
         }
-        console.log(foundAdmin);
+        //        console.log(foundAdmin);
 
         const roleId = req.body.roleId ? req.body.roleId : foundAdmin.roleId;
 
