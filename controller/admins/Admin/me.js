@@ -5,7 +5,8 @@ exports.me = async (req, res, next) => {
 
     try {
         const admin = res.locals.Admin;
-        response.setStatus(200).setRes(admin);
+        let { hash, salt, ...me } = admin.toJSON();
+        response.setStatus(200).setRes(me);
         return res.status(200).send(response.handler());
     } catch (e) {
         return res.status(500).send(e);

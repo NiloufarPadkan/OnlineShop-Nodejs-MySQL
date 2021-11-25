@@ -40,7 +40,7 @@ exports.update = async (req, res, next) => {
     }
     try {
         const updatedAdminResponse = await adminService.updateAdmin(req);
-
+        console.log(updatedAdminResponse);
         if (
             updatedAdminResponse === "duplicateUsername" ||
             updatedAdminResponse === "duplicateEmail" ||

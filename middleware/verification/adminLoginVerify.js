@@ -22,6 +22,11 @@ const verifyToken = async (req, res, next) => {
                 roleId: admin.roleId,
             },
         });
+        if (foundAdmin.activityStatus === false) {
+            response.setStatus(400).setMessage("fail").setRes("yourAcoountIsNotActive");
+            return res.status(400).send(response.handler());
+        }
+
         req.admin = foundAdmin;
         res.locals.Admin = foundAdmin;
         //  console.log(req.admin);

@@ -16,10 +16,11 @@ const verifyToken = async (req, res, next) => {
             return res.status(400).send(response.handler());
         }
         const foundCustomer = await Customer.findByPk(customer.id);
-        //console.log(foundCustomer);
+        if (foundCustomer.activityStatus === false) {
+            response.setStatus(400).setMessage("fail").setRes("yourAcoountIsNotActive");
+            return res.status(400).send(response.handler());
+        }
         req.customer = foundCustomer;
-        console.log(foundCustomer);
-        res.customer = foundCustomer;
         //  console.log(req.user);
 
         next();

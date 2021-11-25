@@ -9,9 +9,10 @@ exports.login_signup = async (req) => {
                 roleId: 3,
             },
         });
-        // customer.roleId = 3;
-        // const x = await customer.save;
-        // console.log(x);
+
+        if (customer[0].activityStatus === false) {
+            return "yourAcoountIsNotActive";
+        }
         const accessToken = tokenGenerator(customer[0].id, customer[0].roleId);
         req.customer = customer;
 

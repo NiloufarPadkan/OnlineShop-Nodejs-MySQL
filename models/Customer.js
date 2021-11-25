@@ -38,7 +38,7 @@ const Customer = sequelize.define("customer", {
             return this.setDataValue("address", JSON.stringify(val));
         },
     },
-    avtivityStatus: { type: Sequelize.BOOLEAN, defaultValue: true },
+    activityStatus: { type: Sequelize.BOOLEAN, defaultValue: true },
 });
 
 module.exports = Customer;

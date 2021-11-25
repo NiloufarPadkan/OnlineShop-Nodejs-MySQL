@@ -6,20 +6,20 @@ const genPassword = require("../../lib/passwordUtil").genPassword;
 exports.insertAdmin = async (req) => {
     try {
         const saltHash = genPassword(req.body.password);
-        const salt = saltHash.salt;
-        const hash = saltHash.hash;
-        const newAdmin = new Admin({
+        let newAdmin = new Admin({
             username: req.body.username,
             email: req.body.email,
             phone: req.body.phone,
             activityStatus: req.body.activityStatus,
-            hash: hash,
-            salt: salt,
+            hash: saltHash.hash,
+            salt: saltHash.salt,
             roleId: req.body.roleId,
         });
-        const savedAdmin = await newAdmin.save();
+        await newAdmin.save({});
+        let { hash, salt, ...savedAdmin } = newAdmin.toJSON();
         return savedAdmin;
     } catch (e) {
+        console.log(e);
         return "";
     }
 };
@@ -48,7 +48,6 @@ exports.updateAdmin = async (req) => {
         if (!foundAdmin) {
             return "adminNotFound";
         }
-
         const duplicateUsername = await Admin.findOne({
             where: {
                 username: req.body.username,
@@ -73,6 +72,8 @@ exports.updateAdmin = async (req) => {
         if (duplicatephone && duplicatephone.id !== foundAdmin.id) {
             return "duplicatePhone";
         }
+        console.log(foundAdmin);
+
         const roleId = req.body.roleId ? req.body.roleId : foundAdmin.roleId;
 
         const username = req.body.username ? req.body.username : foundAdmin.username;
