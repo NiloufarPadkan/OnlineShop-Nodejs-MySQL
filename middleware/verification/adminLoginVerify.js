@@ -5,7 +5,7 @@ const Response = require("../../services/responses/general");
 
 const verifyToken = async (req, res, next) => {
     let response = new Response();
-    //console.log(req.headers["authorization"]);
+
     if (!req.headers.authorization) {
         response.setStatus(400).setMessage("fail").setRes(dict.enterToken);
         return res.status(400).send(response.handler());
@@ -22,6 +22,10 @@ const verifyToken = async (req, res, next) => {
                 roleId: admin.roleId,
             },
         });
+        if (!foundAdmin) {
+            response.setStatus(400).setMessage("fail").setRes(dict.invalidToken);
+            return res.status(400).send(response.handler());
+        }
         if (foundAdmin.activityStatus === false) {
             response.setStatus(400).setMessage("fail").setRes("yourAcoountIsNotActive");
             return res.status(400).send(response.handler());
@@ -29,7 +33,6 @@ const verifyToken = async (req, res, next) => {
 
         req.admin = foundAdmin;
         res.locals.Admin = foundAdmin;
-        //  console.log(req.admin);
 
         next();
     });

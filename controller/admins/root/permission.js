@@ -4,7 +4,6 @@ const Can = require("../../../services/can/can");
 
 exports.canAdmin = async (roleId, permissionTitle) => {
     const can = await Can.can(roleId, permissionTitle);
-
     if (!can) {
         return false;
     }
@@ -59,7 +58,3 @@ exports.index = async (req, res, next) => {
         return res.status(400).send(response.handler());
     }
 };
-
-// read permissions
-//read roles
-//read role permissions

@@ -14,8 +14,12 @@ const Comment = sequelize.define("comment", {
         allowNull: false,
     },
     visible: {
-        type: Sequelize.TINYINT,
-        default: false,
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+        set: function (val) {
+            if (val === 1) return this.setDataValue("visible", true);
+            else return this.setDataValue("visible", false);
+        },
     },
 });
 

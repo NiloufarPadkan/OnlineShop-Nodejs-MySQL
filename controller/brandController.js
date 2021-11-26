@@ -48,12 +48,12 @@ exports.update = async (req, res, next) => {
     }
     try {
         const updatedbrandResponse = await brandService.updatebrand(req);
-        if (updatedbrandResponse === "brandNotFound") {
-            response.setStatus(403).setMessage("fail").setRes("brandNotFound");
-            return res.status(404).send(response.handler());
-        }
-        if (updatedbrandResponse === "nameEmpty") {
-            response.setStatus(403).setMessage("fail").setRes("nameEmpty");
+
+        if (
+            updatedbrandResponse === "nameEmpty" ||
+            updatedbrandResponse === "brandNotFound"
+        ) {
+            response.setStatus(403).setMessage("fail").setRes(updatedbrandResponse);
             return res.status(404).send(response.handler());
         }
         if (updatedbrandResponse != "") {

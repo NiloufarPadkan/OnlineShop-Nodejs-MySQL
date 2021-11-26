@@ -1,5 +1,4 @@
-const sellerProductService = require("../../../services/productService/sellerService");
-const userProductService = require("../../../services/productService/userService");
+const sellerProductService = require("../../../services/productService/seller/sellerService");
 const dict = require("../../../resources/dict");
 const Response = require("../../../services/responses/general");
 const Can = require("../../../services/can/can");
@@ -37,34 +36,6 @@ exports.store = async (req, res, next) => {
         return res.status(404).send(response.handler());
     } catch (e) {
         return res.status(500).send(e);
-    }
-};
-
-exports.index = async (req, res, next) => {
-    let response = new Response();
-
-    try {
-        const productIndexResponse = await userProductService.indexProducts(req);
-        if (productIndexResponse != "")
-            response.setStatus(200).setRes(productIndexResponse);
-        return res.status(200).send(response.handler());
-    } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
-    }
-};
-
-exports.show = async (req, res, next) => {
-    let response = new Response();
-
-    try {
-        const productshowResponse = await userProductService.getOneProduct(req);
-        if (productshowResponse != "")
-            response.setStatus(200).setRes(productshowResponse);
-        return res.status(200).send(response.handler());
-    } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
     }
 };
 

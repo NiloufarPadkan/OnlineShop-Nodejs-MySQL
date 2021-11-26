@@ -40,13 +40,13 @@ exports.update = async (req, res, next) => {
     }
     try {
         const updatedAdminResponse = await adminService.updateAdmin(req);
-        console.log(updatedAdminResponse);
         if (
             updatedAdminResponse === "duplicateUsername" ||
             updatedAdminResponse === "duplicateEmail" ||
             updatedAdminResponse === "duplicatePhone" ||
             updatedAdminResponse === "adminNotFound" ||
-            updatedAdminResponse === "roleNotfound"
+            updatedAdminResponse === "roleNotfound" ||
+            updatedAdminResponse === "rootCantBeEdited"
         ) {
             response.setStatus(404).setMessage("fail").setRes(updatedAdminResponse);
             return res.status(404).send(response.handler());
@@ -66,6 +66,7 @@ exports.destroy = async (req, res, next) => {
     let permissionResult = false;
     if (req.admin)
         permissionResult = await this.canAdmin(req.admin.roleId, "delete admin");
+
     if (!permissionResult) {
         response.setStatus(403).setMessage("fail").setRes("notAllowed");
         return res.status(403).send(response.handler());

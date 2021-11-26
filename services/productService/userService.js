@@ -3,6 +3,8 @@ const Category = require("../../models/Category");
 const Tag = require("../../models/Tag");
 const Brand = require("../../models/Brand");
 const Sequelize = require("sequelize");
+const Comment = require("../../models/Comment");
+const Customer = require("../../models/Customer");
 const Op = Sequelize.Op;
 
 exports.indexProducts = async (req) => {
@@ -28,9 +30,26 @@ exports.indexProducts = async (req) => {
                 "$Tag.id$": {
                     [Op.or]: filter.tag,
                 },
+                avtivityStatus: 1,
             },
         });
         return products;
+    } catch (e) {
+        console.log(e);
+        return "";
+    }
+};
+exports.getProductComments = async (req) => {
+    try {
+        const id = req.params.id;
+        const comments = await Comment.findAll({
+            include: [{ model: Customer }],
+            where: {
+                productId: id,
+                //visible: 1,
+            },
+        });
+        return comments;
     } catch (e) {
         console.log(e);
         return "";
@@ -44,6 +63,7 @@ exports.getOneProduct = async (req) => {
             include: [{ model: Category }, { model: Tag }, { model: Brand }],
             where: {
                 id: id,
+                avtivityStatus: 1,
             },
         });
         return products;
@@ -92,6 +112,7 @@ exports.searchProducts = async (req) => {
                 "$Tag.id$": {
                     [Op.or]: filter.tag,
                 },
+                avtivityStatus: 1,
             },
         });
         if (!products) {
@@ -103,28 +124,3 @@ exports.searchProducts = async (req) => {
         return "";
     }
 };
-
-/*
-
-search query 
-
-    where: {
-                [Op.or]: [
-                    
-                    {
-                        $Category.title$: { [Op.like]: "%" + "salam" + "%" },
-                    },
-                     {
-                        $Brand.name.$: { [Op.like]: "%" + "salam" + "%" },
-                    },
-                     {
-                        $Tag.title$: { [Op.like]: "%" + "salam" + "%" },
-                    },
-                     {
-                        name: { [Op.like]: "%" + "salam" + "%" },
-                    },
-                ],
-            },
-        });
-
-        */

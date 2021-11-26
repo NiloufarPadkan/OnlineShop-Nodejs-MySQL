@@ -43,11 +43,12 @@ exports.indexAdmins = async (req) => {
 exports.updateAdmin = async (req) => {
     try {
         const adminId = req.body.id;
-        console.log(typeof req.body.activityStatus + "ghgkj");
         const foundAdmin = await Admin.findByPk(adminId);
         if (!foundAdmin) {
             return "adminNotFound";
         }
+        const role = (await foundAdmin.getRole()).role; /*get role of admin*/
+        if (role === "root") return "rootCantBeEdited";
         const duplicateUsername = await Admin.findOne({
             where: {
                 username: req.body.username,
@@ -93,7 +94,6 @@ exports.updateAdmin = async (req) => {
         const activity = req.body.activityStatus
             ? req.body.activityStatus
             : foundAdmin.avtivityStatus;
-
         const foundRole = await Role.findByPk(roleId);
         if (!foundRole) {
             return "roleNotfound";
@@ -118,7 +118,6 @@ exports.updateAdmin = async (req) => {
 
             return admin.save();
         });
-        //const adminrole = await upadmin.getRole(); /*get role of admin*/
         return upadmin;
     } catch (e) {
         console.log(e);

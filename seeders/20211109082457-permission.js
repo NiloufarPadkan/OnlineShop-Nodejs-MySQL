@@ -108,6 +108,16 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                title: "read comment",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                title: "update comment",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ]);
     },
 

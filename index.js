@@ -77,6 +77,7 @@ app.use(coustemerprofileRoute);
 Admin.belongsTo(Role); // Will add rold_id to user
 Customer.belongsTo(Role);
 Comment.belongsTo(Customer);
+Comment.belongsTo(Product);
 
 Product.belongsTo(Category);
 Product.belongsTo(Brand);
@@ -88,7 +89,9 @@ Product.belongsToMany(UserType, { through: TypePrice });
 sequelize.sync({});
 
 const port = process.env.PORT || 5000;
-app.listen(port, "0.0.0.0");
+app.listen(port, "0.0.0.0", () => {
+    console.log("server is running");
+});
 
 // USER HAS ONE TYPE
 // TYPE HAS MANY USER
