@@ -2,27 +2,25 @@ const Sequelize = require("sequelize");
 
 const sequelize = require("../config/database/sequelize");
 
-const Role = sequelize.define("role", {
+const Comment_report = sequelize.define("Comment_report", {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey: true,
     },
-    role: {
+    description: {
         type: Sequelize.STRING,
         allowNull: false,
-        trim: true,
-        unique: true,
     },
-    status: {
+    read_receipt: {
         type: Sequelize.BOOLEAN,
-        defaultValue: true,
+        defaultValue: false,
         set: function (val) {
-            if (val === 1) return this.setDataValue("status", true);
-            else return this.setDataValue("status", false);
+            if (val === 1) return this.setDataValue("read_receipt", true);
+            else return this.setDataValue("read_receipt", false);
         },
     },
 });
 
-module.exports = Role;
+module.exports = Comment_report;

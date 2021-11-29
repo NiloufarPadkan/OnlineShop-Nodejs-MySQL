@@ -29,7 +29,7 @@ const Brand = require("./models/Brand");
 const Tag = require("./models/Tag");
 const Comment = require("./models/Comment");
 const Customer = require("./models/Customer");
-const Product_comment = require("./models/Product_comment");
+const Comment_report = require("./models/Comment_report");
 dotenv.config();
 
 const app = express();
@@ -78,7 +78,8 @@ Admin.belongsTo(Role); // Will add rold_id to user
 Customer.belongsTo(Role);
 Comment.belongsTo(Customer);
 Comment.belongsTo(Product);
-
+Comment_report.belongsTo(Comment);
+Comment_report.belongsTo(Customer);
 Product.belongsTo(Category);
 Product.belongsTo(Brand);
 Product.belongsTo(Tag);

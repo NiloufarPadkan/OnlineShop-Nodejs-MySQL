@@ -4,13 +4,14 @@ const productController = require("../../controller/product/users/productControl
 const commentController = require("../../controller/product/users/commentController");
 const { verifyToken } = require("../../middleware/verification/customerLoginVerify");
 const addComment = require("../../controller/customer/addComment");
-router.post("/product/addComment", verifyToken, addComment.addComment);
+
+const reportComment = require("../../controller/customer/reportComment");
 
 router.get("/product/list/:size/:page", productController.index);
 router.get("/product/search/:size/:page", productController.search);
 router.get("/product/:id/comments", commentController.show);
-
-router.get("/product/get/:id", productController.show);
+router.post("/product/addComment", verifyToken, addComment.addComment);
+router.post("/report/comment/:id", verifyToken, reportComment.report);
 
 module.exports = router;
 // stor index update destory  show

@@ -59,3 +59,28 @@ exports.index = async (req, res, next) => {
         return res.status(400).send(response.handler());
     }
 };
+
+exports.update = async (req, res, next) => {
+    let response = new Response();
+    let permissionResult = false;
+    if (req.admin)
+        permissionResult = await this.canAdmin(req.admin.roleId, "update role");
+    if (!permissionResult) {
+        response.setStatus(403).setMessage("fail").setRes("notAllowed");
+        return res.status(403).send(response.handler());
+    }
+    try {
+        const updateRoleResponse = await roleService.setStatus(req);
+
+        if (updateRoleResponse === "") {
+            response.setStatus(400).setMessage("fail").setRes("failed");
+            res.status(400).send(response.handler());
+        } else {
+            response.setStatus(200).setRes(updateRoleResponse);
+            res.status(200).send(response.handler());
+        }
+    } catch (e) {
+        response.setStatus(400).setMessage("fail").setRes(e);
+        return res.status(400).send(response.handler());
+    }
+};

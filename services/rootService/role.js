@@ -33,3 +33,19 @@ exports.getRole = async (req) => {
         return "";
     }
 };
+exports.setStatus = async (req) => {
+    try {
+        const role = await Role.findByPk(req.params.id)
+            .then((role) => {
+                role.status = req.body.status;
+                return role.save();
+            })
+            .catch((e) => {
+                return "roleNotFound";
+            });
+        return role;
+    } catch (e) {
+        console.log(e);
+        return "";
+    }
+};
