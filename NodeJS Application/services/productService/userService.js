@@ -41,13 +41,20 @@ exports.indexProducts = async (req) => {
 };
 exports.getProductComments = async (req) => {
     try {
+        const limit = req.params.size ? req.params.size : 3;
+        const offset = req.params.page ? req.params.page * limit : 0;
+
         const id = req.params.id;
         const comments = await Comment.findAll({
             include: [{ model: Customer }],
             where: {
                 productId: id,
-                //visible: 1,
+                visible: 1,
             },
+            include: [{ model: Customer, attributes: ["fname", "lname"] }],
+
+            limit: parseInt(limit),
+            offset: parseInt(offset),
         });
         return comments;
     } catch (e) {
@@ -55,6 +62,7 @@ exports.getProductComments = async (req) => {
         return "";
     }
 };
+
 exports.getOneProduct = async (req) => {
     try {
         const id = req.params.id;

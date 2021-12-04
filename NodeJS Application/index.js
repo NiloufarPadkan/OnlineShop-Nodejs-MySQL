@@ -30,6 +30,7 @@ const Tag = require("./models/Tag");
 const Comment = require("./models/Comment");
 const Customer = require("./models/Customer");
 const Comment_report = require("./models/Comment_report");
+const Product_Rating = require("./models/Product_Rating");
 const { result } = require("persianize/validator");
 dotenv.config();
 
@@ -87,6 +88,7 @@ Product.belongsTo(Tag);
 
 Permission.belongsToMany(Role, { through: rolePermission });
 Role.belongsToMany(Permission, { through: rolePermission });
+Product.belongsToMany(Customer, { through: Product_Rating });
 
 Product.belongsToMany(UserType, { through: TypePrice });
 // Comment.belongsToMany(Product, { through: Product_comment });

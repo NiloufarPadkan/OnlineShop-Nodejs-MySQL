@@ -6,7 +6,6 @@ exports.show = async (req, res, next) => {
 
     try {
         const productCommentsResponse = await userProductService.getProductComments(req);
-        console.log(productCommentsResponse);
         if (productCommentsResponse != "")
             response.setStatus(200).setRes(productCommentsResponse);
         return res.status(200).send(response.handler());

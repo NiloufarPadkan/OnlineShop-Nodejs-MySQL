@@ -10,7 +10,7 @@ router.post("/product/add", verifyToken, upload.any("photo"), productController.
 router.put("/product/update", verifyToken, productController.update);
 router.delete("/product/remove", verifyToken, productController.destroy);
 
-router.get("/comments", verifyToken, commentController.index);
+router.get("/comments/:size/:page", verifyToken, commentController.index);
 router.get("/comment/:id", verifyToken, commentController.show);
 router.put("/comment/updateStatus/:id", verifyToken, commentController.update);
 
