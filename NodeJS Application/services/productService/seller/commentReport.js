@@ -1,7 +1,6 @@
 const Comment = require("../../../models/Comment");
 const Comment_report = require("../../../models/Comment_report");
 const Customer = require("../../../models/Customer");
-const Product = require("../../../models/Product");
 exports.readReports = async (req) => {
     try {
         const limit = req.params.size ? req.params.size : 3;
@@ -25,7 +24,6 @@ exports.showReport = async (req) => {
                 { model: Customer, attributes: ["id", "fname", "lname"] },
                 { model: Comment },
             ],
-
             where: {
                 id: req.params.id,
             },
@@ -41,7 +39,7 @@ exports.showReport = async (req) => {
 };
 exports.unreadReports = async (req) => {
     try {
-        const unreadReports = await Comment_report.count({
+        const unreadReports = await Comment_report.findAndCountAll({
             where: {
                 read_receipt: 0,
             },

@@ -14,13 +14,13 @@ exports.index = async (req, res, next) => {
     let response = new Response();
 
     try {
-        // let permissionResult = false;
-        // if (req.admin)
-        //     permissionResult = await this.canAdmin(req.admin.roleId, "read comment");
-        // if (!permissionResult) {
-        //     response.setStatus(403).setMessage("fail").setRes("notAllowed");
-        //     return res.status(403).send(response.handler());
-        // }
+        let permissionResult = false;
+        if (req.admin)
+            permissionResult = await this.canAdmin(req.admin.roleId, "read report");
+        if (!permissionResult) {
+            response.setStatus(403).setMessage("fail").setRes("notAllowed");
+            return res.status(403).send(response.handler());
+        }
         const reportIndexResponse = await commentService.readReports(req);
         if (reportIndexResponse != "") {
             response.setStatus(200).setRes(reportIndexResponse);
@@ -34,13 +34,13 @@ exports.index = async (req, res, next) => {
 
 exports.show = async (req, res, next) => {
     let response = new Response();
-    // let permissionResult = false;
-    // if (req.admin)
-    //     permissionResult = await this.canAdmin(req.admin.roleId, "read comment");
-    // if (!permissionResult) {
-    //     response.setStatus(403).setMessage("fail").setRes("notAllowed");
-    //     return res.status(403).send(response.handler());
-    // }
+    let permissionResult = false;
+    if (req.admin)
+        permissionResult = await this.canAdmin(req.admin.roleId, "read report");
+    if (!permissionResult) {
+        response.setStatus(403).setMessage("fail").setRes("notAllowed");
+        return res.status(403).send(response.handler());
+    }
     try {
         const countsReponse = await commentService.showReport(req);
         if (countsReponse != "") {
@@ -55,13 +55,13 @@ exports.show = async (req, res, next) => {
 
 exports.showUnreadReportCount = async (req, res, next) => {
     let response = new Response();
-    // let permissionResult = false;
-    // if (req.admin)
-    //     permissionResult = await this.canAdmin(req.admin.roleId, "read comment");
-    // if (!permissionResult) {
-    //     response.setStatus(403).setMessage("fail").setRes("notAllowed");
-    //     return res.status(403).send(response.handler());
-    // }
+    let permissionResult = false;
+    if (req.admin)
+        permissionResult = await this.canAdmin(req.admin.roleId, "read report");
+    if (!permissionResult) {
+        response.setStatus(403).setMessage("fail").setRes("notAllowed");
+        return res.status(403).send(response.handler());
+    }
     try {
         const showReportResponse = await commentService.unreadReports(req);
         if (showReportResponse != "") {

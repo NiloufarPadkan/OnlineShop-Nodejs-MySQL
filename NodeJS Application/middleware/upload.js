@@ -1,4 +1,7 @@
+const { response } = require("express");
 const multer = require("multer");
+const Response = require("../services/responses/general");
+
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, "./uploads/");
@@ -9,6 +12,7 @@ const storage = multer.diskStorage({
 });
 const fileFilter = (req, file, cb) => {
     // reject a file
+    let response = new Response();
     if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
         cb(null, true);
     } else {

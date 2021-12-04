@@ -39,6 +39,11 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
+                title: "read role-permission",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
                 title: "add role",
                 createdAt: new Date(),
                 updatedAt: new Date(),
@@ -115,6 +120,11 @@ module.exports = {
             },
             {
                 title: "update comment",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                title: "read report",
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },

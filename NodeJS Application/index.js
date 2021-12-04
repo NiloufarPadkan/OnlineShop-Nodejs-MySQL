@@ -30,6 +30,7 @@ const Tag = require("./models/Tag");
 const Comment = require("./models/Comment");
 const Customer = require("./models/Customer");
 const Comment_report = require("./models/Comment_report");
+const { result } = require("persianize/validator");
 dotenv.config();
 
 const app = express();
@@ -85,6 +86,8 @@ Product.belongsTo(Brand);
 Product.belongsTo(Tag);
 
 Permission.belongsToMany(Role, { through: rolePermission });
+Role.belongsToMany(Permission, { through: rolePermission });
+
 Product.belongsToMany(UserType, { through: TypePrice });
 // Comment.belongsToMany(Product, { through: Product_comment });
 sequelize.sync({});
@@ -93,11 +96,3 @@ const port = process.env.PORT || 5000;
 app.listen(port, "0.0.0.0", () => {
     console.log("server is running");
 });
-
-// USER HAS ONE TYPE
-// TYPE HAS MANY USER
-
-// todo :
-// magic of
-// array of obj
-// upload photo
