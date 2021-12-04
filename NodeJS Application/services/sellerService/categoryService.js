@@ -25,11 +25,11 @@ exports.insertCategory = async (req, res, next) => {
 };
 exports.getcategory = async (req, res, next) => {
     try {
-        const limit = req.body.size ? req.body.size : 3;
-        const offset = req.body.page ? req.body.page * limit : 0;
+        const limit = req.params.size ? req.params.size : 3;
+        const offset = req.params.page ? req.params.page * limit : 0;
         const categories = await Category.findAll({
-            limit: limit,
-            offset: offset,
+            limit: parseInt(limit),
+            offset: parseInt(offset),
         });
         return categories;
     } catch (e) {
