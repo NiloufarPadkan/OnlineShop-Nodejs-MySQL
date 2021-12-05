@@ -128,6 +128,11 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                title: "update customer",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ]);
     },
 

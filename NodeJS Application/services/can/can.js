@@ -23,6 +23,7 @@ async function cache(roleId) {
 }
 
 exports.can = async (roleId, permissionTitle) => {
+    console.log("hi");
     try {
         await cache(roleId);
         result = [];

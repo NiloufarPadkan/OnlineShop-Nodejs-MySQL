@@ -21,7 +21,6 @@ exports.insertProduct = async (req) => {
             tagId: req.body.tagId,
             brandId: req.body.brandId,
         });
-        //console.log(req.files[1]);
 
         const savedProduct = await newProduct.save();
         return savedProduct;
@@ -55,9 +54,9 @@ exports.updateProduct = async (req) => {
 
         const photo = req.body.photo ? req.body.photo : foundProduct.photo;
 
-        const avtivityStatus = req.body.avtivityStatus
-            ? req.body.avtivityStatus
-            : foundProduct.avtivityStatus;
+        const activityStatus = req.body.activityStatus
+            ? req.body.activityStatus
+            : foundProduct.activityStatus;
 
         const upproduct = await Product.findByPk(productId).then((product) => {
             product.name = name;
@@ -66,12 +65,12 @@ exports.updateProduct = async (req) => {
             product.count = count;
             product.description = description;
             product.photo = photo;
-            product.avtivityStatus = avtivityStatus;
+            product.activityStatus = activityStatus;
             return product.save();
         });
-        //const productrole = await upproduct.getRole(); /*get role of product*/
-        return upproduct.getCategory();
+        return upproduct;
     } catch (e) {
+        console.log(e);
         return "";
     }
 };

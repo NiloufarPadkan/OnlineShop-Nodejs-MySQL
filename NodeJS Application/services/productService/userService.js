@@ -30,7 +30,7 @@ exports.indexProducts = async (req) => {
                 "$Tag.id$": {
                     [Op.or]: filter.tag,
                 },
-                avtivityStatus: 1,
+                activityStatus: 1,
             },
         });
         return products;
