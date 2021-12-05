@@ -133,6 +133,11 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                title: "update role",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ]);
     },
 

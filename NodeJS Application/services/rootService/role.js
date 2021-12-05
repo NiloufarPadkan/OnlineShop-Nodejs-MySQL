@@ -37,6 +37,8 @@ exports.setStatus = async (req) => {
     try {
         const role = await Role.findByPk(req.params.id)
             .then((role) => {
+                if (role === "root") return "rootCantBeEdited";
+
                 role.status = req.body.status;
                 return role.save();
             })

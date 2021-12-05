@@ -13,7 +13,6 @@ router.get(
     rolePermissionController.readRolePermission
 );
 router.get("/roles/:size/:page", verifyToken, roleController.index);
-
 router.put("/role/:id", verifyToken, roleController.update);
 
 module.exports = router;
