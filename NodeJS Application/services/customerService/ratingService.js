@@ -1,4 +1,7 @@
 const Product_Rating = require("../../models/Product_Rating");
+const Sequelize = require("sequelize");
+const { result } = require("persianize/validator");
+
 exports.add = async (req, res, next) => {
     try {
         let rating;
@@ -32,14 +35,10 @@ exports.getProductRating = async (req) => {
             where: {
                 productId: id,
             },
-            attributes: ["rating"],
+            attributes: [[Sequelize.fn("AVG", Sequelize.col("rating")), "average"]],
         });
-        result = [];
-        var keys = Object.keys(rating);
-        keys.forEach(function (key) {
-            result.push(rating[key].rating);
-        });
-        return result;
+
+        return rating[0];
     } catch (e) {
         console.log(e);
         return "";
