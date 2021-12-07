@@ -41,9 +41,7 @@ exports.updateCustomer = async (req) => {
             customer.lname = lname;
             customer.address = addressArray;
             return customer.save();
-            //customer.avtivityStatus = activity;
         });
-        //const adminrole = await upadmin.getRole(); /*get role of admin*/
         return updatedCustomer;
     } catch (e) {
         console.log(e);

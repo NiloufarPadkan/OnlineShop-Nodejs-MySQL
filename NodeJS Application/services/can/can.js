@@ -23,7 +23,6 @@ async function cache(roleId) {
 }
 
 exports.can = async (roleId, permissionTitle) => {
-    console.log("hi");
     try {
         await cache(roleId);
         result = [];
@@ -31,8 +30,6 @@ exports.can = async (roleId, permissionTitle) => {
         keys.forEach(function (key) {
             result.push(permissionArray[key].permissionId);
         });
-        //console.log(result);
-
         const permission = await Permission.findOne({
             where: { title: permissionTitle },
         });

@@ -33,6 +33,10 @@ const Comment = require("./models/Comment");
 const Customer = require("./models/Customer");
 const Comment_report = require("./models/Comment_report");
 const Product_Rating = require("./models/Product_Rating");
+const Cart = require("./models/Cart");
+const CartItem = require("./models/CartItem");
+const Order = require("./models/Order");
+const OrderItem = require("./models/OrderItem");
 dotenv.config();
 
 const app = express();
@@ -87,6 +91,20 @@ Comment_report.belongsTo(Customer);
 Product.belongsTo(Category);
 Product.belongsTo(Brand);
 Product.belongsTo(Tag);
+
+Permission.belongsToMany(Role, { through: rolePermission });
+Role.belongsToMany(Permission, { through: rolePermission });
+Product.belongsToMany(Customer, { through: Product_Rating });
+Product.belongsToMany(UserType, { through: TypePrice });
+// Product.belongsTo(Brand);
+// Product.belongsTo(Tag);
+Customer.hasOne(Cart);
+Cart.belongsTo(Customer);
+Cart.belongsToMany(Product, { through: CartItem });
+Product.belongsToMany(Cart, { through: CartItem });
+Order.belongsTo(Customer);
+Customer.hasMany(Order);
+Order.belongsToMany(Product, { through: OrderItem });
 
 Permission.belongsToMany(Role, { through: rolePermission });
 Role.belongsToMany(Permission, { through: rolePermission });

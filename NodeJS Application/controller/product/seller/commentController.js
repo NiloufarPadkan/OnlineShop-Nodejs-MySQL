@@ -22,10 +22,8 @@ exports.index = async (req, res, next) => {
             return res.status(403).send(response.handler());
         }
         const commentIndexResponse = await commentService.indexComments(req);
-        if (commentIndexResponse != "") {
-            response.setStatus(200).setRes(commentIndexResponse);
-            return res.status(200).send(response.handler());
-        }
+        response.setStatus(200).setRes(commentIndexResponse);
+        return res.status(200).send(response.handler());
     } catch (e) {
         response.setStatus(400).setMessage("fail").setRes(e);
         return res.status(400).send(response.handler());

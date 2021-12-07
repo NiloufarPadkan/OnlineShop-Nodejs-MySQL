@@ -1,28 +1,27 @@
 const Product_Rating = require("../../models/Product_Rating");
 const Sequelize = require("sequelize");
-const { result } = require("persianize/validator");
 
 exports.add = async (req, res, next) => {
     try {
-        let rating;
-        rating = await Product_Rating.findOne({
+        let product_rating;
+        product_rating = await Product_Rating.findOne({
             where: {
                 customerId: req.customer.id,
                 productId: req.body.id,
             },
-        }).then((product_rating) => {
-            product_rating.rating = req.body.rating;
-            return product_rating.save();
         });
-        if (rating != "") {
-            return rating;
+        if (product_rating !== null) {
+            product_rating.rating = req.body.rating;
+            product_rating.save();
+            return product_rating;
         }
-        rating = new Product_Rating({
+
+        product_rating = new Product_Rating({
             rating: req.body.rating,
             customerId: req.customer.id,
             productId: req.body.id,
         });
-        const newRating = await rating.save();
+        const newRating = await product_rating.save();
         return newRating;
     } catch (e) {
         return "";

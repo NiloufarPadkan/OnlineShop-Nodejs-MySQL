@@ -8,8 +8,13 @@ exports.indexComments = async (req) => {
         const comments = await Comment.findAll({
             limit: parseInt(limit),
             offset: parseInt(offset),
-            include: [{ model: Customer, attributes: ["id", "fname", "lname"] }],
+            include: [
+                { model: Customer, attributes: ["id", "fname", "lname"] },
+                { model: Product, attributes: ["id", "name"] },
+            ],
+            order: [["createdAt", "DESC"]],
         });
+
         return comments;
     } catch (e) {
         console.log(e);

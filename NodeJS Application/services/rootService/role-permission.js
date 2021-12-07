@@ -1,6 +1,7 @@
 const RolePermission = require("../../models/role-permission");
 const Role = require("../../models/Role");
 const Permission = require("../../models/Permission");
+const rolePermission = require("../../models/role-permission");
 exports.AssignPermission = async (req, res, next) => {
     try {
         const roleId = req.body.roleId;
@@ -30,19 +31,41 @@ exports.AssignPermission = async (req, res, next) => {
 exports.AssignedPermission = async (req, res, next) => {
     try {
         const roleId = req.params.id;
-        console.log(roleId);
-        permissionArray = await Role.findAll({
-            where: { id: roleId },
+
+        let assignedPermission = await rolePermission.findAll({
             raw: true,
-            nest: true,
-            include: [{ model: Permission }],
+            attributes: ["permissionId"],
+            where: { roleId: roleId },
         });
-        var keys = Object.keys(permissionArray);
-        var result = [];
-        keys.forEach(function (key) {
-            result.push(permissionArray[key].permissions.title);
+
+        let result = [];
+        Object.keys(assignedPermission).map((key) => [
+            result.push(assignedPermission[key].permissionId),
+        ]);
+
+        permissionArray = await Permission.findAll({
+            raw: true,
+            attributes: ["title", "id"],
+            order: [["id", "ASC"]],
         });
-        return result;
+        Object.keys(permissionArray).map((key) => {
+            if (result.includes(permissionArray[key].id)) {
+                permissionArray[key].owns = true;
+            } else {
+                console.log("false");
+                permissionArray[key].owns = false;
+            }
+        });
+        // var keys = Object.keys(permissionArray);
+        // keys.forEach(function (key) {
+        //     if (result.includes(permissionArray[key].id)) {
+        //         permissionArray[key].owns = true;
+        //     } else {
+        //         permissionArray[key].owns = false;
+        //     }
+        // });
+
+        return permissionArray;
     } catch (e) {
         console.log(e);
     }
