@@ -71,7 +71,7 @@ exports.getOneProduct = async (req) => {
             include: [{ model: Category }, { model: Tag }, { model: Brand }],
             where: {
                 id: id,
-                avtivityStatus: 1,
+                activityStatus: 1,
             },
         });
         return products;

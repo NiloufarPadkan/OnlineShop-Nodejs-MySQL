@@ -41,7 +41,6 @@ exports.store = async (req, res, next) => {
     }
 };
 exports.readRolePermission = async (req, res, next) => {
-    console.log("helo");
     let response = new Response();
     let permissionResult = false;
     if (req.admin)

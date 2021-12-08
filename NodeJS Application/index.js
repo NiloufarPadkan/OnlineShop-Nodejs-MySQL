@@ -3,12 +3,12 @@ const dotenv = require("dotenv");
 const rateLimit = require("express-rate-limit");
 
 const sequelize = require("./config/database/sequelize");
-const roleRoute = require("./routes/admins/root/role");
-const adminRoute = require("./routes/admins/root/admin");
+const roleRoute = require("./routes/admins/manage/role");
+const adminRoute = require("./routes/admins/manage/admin");
 const adminLoginRoute = require("./routes/admins/admin/login");
 const adminProfileRoute = require("./routes/admins/admin/profile");
 const command = require("./routes/admins/commands/createRoot");
-const permissionRoute = require("./routes/admins/root/permission");
+const permissionRoute = require("./routes/admins/manage/permission");
 
 const categoryRoute = require("./routes/category");
 const brandRoute = require("./routes/brand");

@@ -2,6 +2,31 @@ const RolePermission = require("../../models/role-permission");
 const Role = require("../../models/Role");
 const Permission = require("../../models/Permission");
 const rolePermission = require("../../models/role-permission");
+
+const redis = require("redis");
+
+const client = redis.createClient(process.env.REDIS_PORT || 6379);
+const { promisifyAll } = require("bluebird");
+const { response } = require("express");
+promisifyAll(redis);
+
+permissionArray = [];
+
+async function cache(roleId) {
+    const data = await client.getAsync("permissions");
+    if (data !== null) {
+        permissionArray = JSON.parse(data);
+    } else {
+        console.log("Fetching Data...");
+        permissionArray = await Permission.findAll({
+            attributes: ["title", "id"],
+            order: [["id", "ASC"]],
+            raw: true,
+        });
+        client.setex("permissions", 3600, JSON.stringify(permissionArray));
+    }
+}
+
 exports.AssignPermission = async (req, res, next) => {
     try {
         const roleId = req.body.roleId;
@@ -43,27 +68,15 @@ exports.AssignedPermission = async (req, res, next) => {
             result.push(assignedPermission[key].permissionId),
         ]);
 
-        permissionArray = await Permission.findAll({
-            raw: true,
-            attributes: ["title", "id"],
-            order: [["id", "ASC"]],
-        });
+        await cache(roleId);
+
         Object.keys(permissionArray).map((key) => {
             if (result.includes(permissionArray[key].id)) {
                 permissionArray[key].owns = true;
             } else {
-                console.log("false");
                 permissionArray[key].owns = false;
             }
         });
-        // var keys = Object.keys(permissionArray);
-        // keys.forEach(function (key) {
-        //     if (result.includes(permissionArray[key].id)) {
-        //         permissionArray[key].owns = true;
-        //     } else {
-        //         permissionArray[key].owns = false;
-        //     }
-        // });
 
         return permissionArray;
     } catch (e) {

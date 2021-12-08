@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const adminController = require("../../../controller/admins/root/admin");
-const credentialController = require("../../../controller/admins/root/updateCredentials");
+const adminController = require("../../../controller/admins/manage/admin");
+const credentialController = require("../../../controller/admins/manage/updateCredentials");
 const {
     validationForAdminRegister,
 } = require("../../../middleware/validations/adminRegisterValidation");

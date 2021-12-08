@@ -44,7 +44,6 @@ exports.unreadReports = async (req) => {
                 read_receipt: 0,
             },
         }).then(function (result) {
-            console.log(result);
             return result;
         });
         return unreadReports;
