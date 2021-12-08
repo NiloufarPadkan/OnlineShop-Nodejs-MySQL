@@ -5,6 +5,7 @@ const Brand = require("../../models/Brand");
 const Sequelize = require("sequelize");
 const Comment = require("../../models/Comment");
 const Customer = require("../../models/Customer");
+const Product_views = require("../../models/Product_views");
 const Op = Sequelize.Op;
 
 exports.indexProducts = async (req) => {
@@ -64,8 +65,39 @@ exports.getProductComments = async (req) => {
 };
 
 exports.getOneProduct = async (req) => {
+    // console.log(req.socket.remoteAddress);
+
     try {
         const id = req.params.id;
+        const viewersIp = await Product_views.findOne({
+            where: {
+                productId: req.params.id,
+            },
+        }).then((viewers) => {
+            if (viewers) {
+                let list = viewers.dataValues.IpList;
+                list = list.split(",");
+                if (!list.includes(req.socket.remoteAddress)) {
+                    list.push(req.socket.remoteAddress);
+                }
+                viewers.IpList = list.toString();
+                return viewers.save();
+            } else {
+                let view = new Product_views({
+                    IpList: "1,2",
+                    productId: id,
+                });
+                return view.save({});
+            }
+        });
+        // if (!viewersIp) {
+        //     let view = new Product_views({
+        //         IpList: "1,2",
+        //         productId: id,
+        //     });
+        //     await view.save({});
+        // } else {
+        // }
 
         const products = await Product.findOne({
             include: [{ model: Category }, { model: Tag }, { model: Brand }],

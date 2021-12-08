@@ -11,15 +11,10 @@ const Product_views = sequelize.define("Product_views", {
     },
     IpList: {
         type: Sequelize.STRING,
-        get: function () {
-            return JSON.parse(this.getDataValue("IpList"));
-        },
-        set: function (val) {
-            return this.setDataValue("IpList", JSON.stringify(val));
-        },
     },
     viewCount: {
         type: Sequelize.INTEGER,
+        defaultValue: 0,
     },
 });
 
