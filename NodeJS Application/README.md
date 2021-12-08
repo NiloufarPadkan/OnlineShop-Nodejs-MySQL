@@ -16,7 +16,7 @@ Online-Shop with express,sequlize
 
 -   EXPIRE_TIME
 
--   REDIS_PORT=6379
+-   REDIS_PORT
 
 ## example :
 
