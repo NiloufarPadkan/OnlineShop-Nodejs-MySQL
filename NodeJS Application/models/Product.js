@@ -27,8 +27,6 @@ const Product = sequelize.define("product", {
     count: {
         type: Sequelize.INTEGER,
         allowNull: false,
-
-        // allowNull: false,
     },
 
     description: {

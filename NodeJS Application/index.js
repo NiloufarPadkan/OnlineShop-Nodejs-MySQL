@@ -37,6 +37,7 @@ const Cart = require("./models/Cart");
 const CartItem = require("./models/CartItem");
 const Order = require("./models/Order");
 const OrderItem = require("./models/OrderItem");
+const Product_views = require("./models/Product_views");
 dotenv.config();
 
 const app = express();
@@ -82,6 +83,7 @@ app.use(customerRoute);
 app.use(coustemerprofileRoute);
 app.use(editCustomerByADminRoute);
 app.use(adminProfileRoute);
+
 Admin.belongsTo(Role); // Will add rold_id to user
 Customer.belongsTo(Role);
 Comment.belongsTo(Customer);
@@ -91,6 +93,7 @@ Comment_report.belongsTo(Customer);
 Product.belongsTo(Category);
 Product.belongsTo(Brand);
 Product.belongsTo(Tag);
+Product_views.belongsTo(Product);
 
 Permission.belongsToMany(Role, { through: rolePermission });
 Role.belongsToMany(Permission, { through: rolePermission });

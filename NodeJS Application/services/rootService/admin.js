@@ -4,6 +4,7 @@ const Role = require("../../models/Role");
 const genPassword = require("../../lib/passwordUtil").genPassword;
 
 exports.insertAdmin = async (req) => {
+    console.log(req.socket.remoteAddress);
     try {
         const saltHash = genPassword(req.body.password);
         let newAdmin = new Admin({
