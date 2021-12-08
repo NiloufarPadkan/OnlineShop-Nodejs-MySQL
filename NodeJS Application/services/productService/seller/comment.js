@@ -20,7 +20,6 @@ exports.indexComments = async (req) => {
                 { model: Customer, attributes: ["id", "fname", "lname"] },
                 { model: Product, attributes: ["id", "name"] },
             ],
-
             order: [["createdAt", "DESC"]],
         });
 
