@@ -51,6 +51,11 @@ const Product = sequelize.define("product", {
             else return this.setDataValue("activityStatus", false);
         },
     },
+    AvgRating: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+    },
 });
 
 module.exports = Product;

@@ -6,6 +6,8 @@ const Sequelize = require("sequelize");
 const Comment = require("../../models/Comment");
 const Customer = require("../../models/Customer");
 const Product_views = require("../../models/Product_views");
+const Product_Rating = require("../../models/Customer_ProductRating");
+
 const Op = Sequelize.Op;
 
 exports.indexProducts = async (req) => {
@@ -20,7 +22,26 @@ exports.indexProducts = async (req) => {
         const products = await Product.findAll({
             limit: parseInt(limit),
             offset: parseInt(offset),
-            include: [{ model: Category }, { model: Tag }, { model: Brand }],
+            include: [
+                { model: Category },
+                { model: Tag },
+                { model: Brand },
+                {
+                    model: Product_Rating,
+                    required: false,
+                    attributes: ["rating"],
+                },
+                {
+                    model: Product_views,
+                    required: false,
+                    attributes: ["viewCount"],
+                    //  as: "views",
+                },
+            ],
+            //ordering by views
+            //to do : add other orders
+            // order: [[Product_views, "viewCount", "desc"]],
+            order: [["AvgRating", "DESC"]],
             where: {
                 "$Category.id$": {
                     [Op.or]: filter.category,
@@ -84,20 +105,12 @@ exports.getOneProduct = async (req) => {
                 return viewers.save();
             } else {
                 let view = new Product_views({
-                    IpList: "1,2",
+                    IpList: req.socket.remoteAddress,
                     productId: id,
                 });
                 return view.save({});
             }
         });
-        // if (!viewersIp) {
-        //     let view = new Product_views({
-        //         IpList: "1,2",
-        //         productId: id,
-        //     });
-        //     await view.save({});
-        // } else {
-        // }
 
         const products = await Product.findOne({
             include: [{ model: Category }, { model: Tag }, { model: Brand }],

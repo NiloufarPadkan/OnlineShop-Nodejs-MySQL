@@ -32,7 +32,7 @@ const Tag = require("./models/Tag");
 const Comment = require("./models/Comment");
 const Customer = require("./models/Customer");
 const Comment_report = require("./models/Comment_report");
-const Product_Rating = require("./models/Product_Rating");
+const Customer_ProductRating = require("./models/Customer_ProductRating");
 const Cart = require("./models/Cart");
 const CartItem = require("./models/CartItem");
 const Order = require("./models/Order");
@@ -94,13 +94,19 @@ Product.belongsTo(Category);
 Product.belongsTo(Brand);
 Product.belongsTo(Tag);
 Product_views.belongsTo(Product);
+Product.hasOne(Product_views);
+// Product.belongsToMany(Product_views, { through: Product_views });
 
 Permission.belongsToMany(Role, { through: rolePermission });
 Role.belongsToMany(Permission, { through: rolePermission });
-Product.belongsToMany(Customer, { through: Product_Rating });
+//Product.belongsToMany(Customer, { through: Product_Rating });
+Product.hasMany(Customer_ProductRating);
+
+Customer.belongsToMany(Product, { through: Customer_ProductRating });
+Product.belongsToMany(Customer, { through: Customer_ProductRating });
+
 Product.belongsToMany(UserType, { through: TypePrice });
-// Product.belongsTo(Brand);
-// Product.belongsTo(Tag);
+
 Customer.hasOne(Cart);
 Cart.belongsTo(Customer);
 Cart.belongsToMany(Product, { through: CartItem });
@@ -111,7 +117,7 @@ Order.belongsToMany(Product, { through: OrderItem });
 
 Permission.belongsToMany(Role, { through: rolePermission });
 Role.belongsToMany(Permission, { through: rolePermission });
-Product.belongsToMany(Customer, { through: Product_Rating });
+
 Product.belongsToMany(UserType, { through: TypePrice });
 // Comment.belongsToMany(Product, { through: Product_comment });
 sequelize.sync({});

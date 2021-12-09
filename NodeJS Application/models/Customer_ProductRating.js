@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 
 const sequelize = require("../config/database/sequelize");
 
-const Product_Rating = sequelize.define("Product_Rating", {
+const Customer_ProductRating = sequelize.define("Customer_ProductRating", {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -15,4 +15,4 @@ const Product_Rating = sequelize.define("Product_Rating", {
     },
 });
 
-module.exports = Product_Rating;
+module.exports = Customer_ProductRating;

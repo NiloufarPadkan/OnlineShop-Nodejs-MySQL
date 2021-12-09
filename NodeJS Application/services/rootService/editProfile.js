@@ -4,6 +4,7 @@ const genPassword = require("../../lib/passwordUtil").genPassword;
 
 exports.editProfile = async (req) => {
     try {
+        console.log("editing");
         const adminId = req.admin.id;
         const foundAdmin = await Admin.findByPk(adminId);
         if (!foundAdmin) {
