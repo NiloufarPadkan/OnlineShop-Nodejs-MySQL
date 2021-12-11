@@ -3,12 +3,12 @@ const dotenv = require("dotenv");
 const rateLimit = require("express-rate-limit");
 
 const sequelize = require("./config/database/sequelize");
-const roleRoute = require("./routes/admins/root/role");
-const adminRoute = require("./routes/admins/root/admin");
+const roleRoute = require("./routes/admins/manage/role");
+const adminRoute = require("./routes/admins/manage/admin");
 const adminLoginRoute = require("./routes/admins/admin/login");
 const adminProfileRoute = require("./routes/admins/admin/profile");
 const command = require("./routes/admins/commands/createRoot");
-const permissionRoute = require("./routes/admins/root/permission");
+const permissionRoute = require("./routes/admins/manage/permission");
 
 const categoryRoute = require("./routes/category");
 const brandRoute = require("./routes/brand");
@@ -32,7 +32,12 @@ const Tag = require("./models/Tag");
 const Comment = require("./models/Comment");
 const Customer = require("./models/Customer");
 const Comment_report = require("./models/Comment_report");
-const Product_Rating = require("./models/Product_Rating");
+const Customer_ProductRating = require("./models/Customer_ProductRating");
+const Cart = require("./models/Cart");
+const CartItem = require("./models/CartItem");
+const Order = require("./models/Order");
+const OrderItem = require("./models/OrderItem");
+const Product_views = require("./models/Product_views");
 dotenv.config();
 
 const app = express();
@@ -78,6 +83,7 @@ app.use(customerRoute);
 app.use(coustemerprofileRoute);
 app.use(editCustomerByADminRoute);
 app.use(adminProfileRoute);
+
 Admin.belongsTo(Role); // Will add rold_id to user
 Customer.belongsTo(Role);
 Comment.belongsTo(Customer);
@@ -87,10 +93,31 @@ Comment_report.belongsTo(Customer);
 Product.belongsTo(Category);
 Product.belongsTo(Brand);
 Product.belongsTo(Tag);
+Product_views.belongsTo(Product);
+Product.hasOne(Product_views);
+// Product.belongsToMany(Product_views, { through: Product_views });
 
 Permission.belongsToMany(Role, { through: rolePermission });
 Role.belongsToMany(Permission, { through: rolePermission });
-Product.belongsToMany(Customer, { through: Product_Rating });
+//Product.belongsToMany(Customer, { through: Product_Rating });
+Product.hasMany(Customer_ProductRating);
+
+Customer.belongsToMany(Product, { through: Customer_ProductRating });
+Product.belongsToMany(Customer, { through: Customer_ProductRating });
+
+Product.belongsToMany(UserType, { through: TypePrice });
+
+Customer.hasOne(Cart);
+Cart.belongsTo(Customer);
+Cart.belongsToMany(Product, { through: CartItem });
+Product.belongsToMany(Cart, { through: CartItem });
+Order.belongsTo(Customer);
+Customer.hasMany(Order);
+Order.belongsToMany(Product, { through: OrderItem });
+
+Permission.belongsToMany(Role, { through: rolePermission });
+Role.belongsToMany(Permission, { through: rolePermission });
+
 Product.belongsToMany(UserType, { through: TypePrice });
 // Comment.belongsToMany(Product, { through: Product_comment });
 sequelize.sync({});

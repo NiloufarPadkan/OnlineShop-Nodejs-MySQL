@@ -1,12 +1,12 @@
 const express = require("express");
 const router = express.Router();
-const rolePermissionController = require("../../../controller/admins/root/role-permission");
-const roleController = require("../../../controller/admins/root/role");
+const rolePermissionController = require("../../../controller/admins/manage/role-permission");
+const roleController = require("../../../controller/admins/manage/role");
 const { verifyToken } = require("../../../middleware/verification/adminLoginVerify");
 
 router.post("/role", verifyToken, roleController.store);
 
-router.post("/role/addPermissiion", verifyToken, rolePermissionController.store);
+router.post("/role/addpermission", verifyToken, rolePermissionController.store);
 router.get(
     "/role/:id/permissions",
     verifyToken,

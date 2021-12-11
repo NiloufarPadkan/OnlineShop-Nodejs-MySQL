@@ -30,7 +30,8 @@ exports.getPermissions = async (req, res, next) => {
             limit: parseInt(limit),
             offset: parseInt(offset),
         });
-
+        // permissions.active = 1;
+        // permissions.save;
         return permissions;
     } catch (e) {
         console.log(e);

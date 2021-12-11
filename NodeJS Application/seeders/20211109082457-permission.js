@@ -54,6 +54,11 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
+                title: "update role",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
                 title: "add category",
                 createdAt: new Date(),
                 updatedAt: new Date(),
@@ -130,11 +135,6 @@ module.exports = {
             },
             {
                 title: "update customer",
-                createdAt: new Date(),
-                updatedAt: new Date(),
-            },
-            {
-                title: "update role",
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },

@@ -28,7 +28,6 @@ exports.indexAdmins = async (req) => {
     try {
         const limit = req.params.size ? req.params.size : 3;
         const offset = req.params.page ? req.params.page * limit : 0;
-        console.log(limit + " " + offset);
         const admins = await Admin.findAll({
             limit: parseInt(limit),
             offset: parseInt(offset),
@@ -73,7 +72,6 @@ exports.updateAdmin = async (req) => {
         if (duplicatephone && duplicatephone.id !== foundAdmin.id) {
             return "duplicatePhone";
         }
-        //        console.log(foundAdmin);
 
         const roleId = req.body.roleId ? req.body.roleId : foundAdmin.roleId;
 
@@ -132,7 +130,6 @@ exports.destroyAdmin = async (req) => {
                 id: adminId,
             },
         });
-        //console.log(admin);
         if (admin) return true;
         else return false;
     } catch (e) {

@@ -10,7 +10,6 @@ exports.login_register = async (req, res, next) => {
         }
         let response = new Response(200, "success", loginResponse);
         if (loginResponse != "") return res.status(200).send(response.handler());
-        //res.status(200).send(res.locals.accessToken);
     } catch (e) {
         return res.status(500).send(e);
     }

@@ -29,7 +29,6 @@ exports.updateCustomer = async (req) => {
         const addressArray = req.body.address ? req.body.address : foundCustomer.address;
 
         const email = req.body.email ? req.body.email : foundCustomer.email;
-
         const phone = req.body.phone ? req.body.phone : foundCustomer.phone;
         const fname = req.body.fname ? req.body.fname : foundCustomer.fname;
         const lname = req.body.lname ? req.body.lname : foundCustomer.lname;
@@ -41,9 +40,7 @@ exports.updateCustomer = async (req) => {
             customer.lname = lname;
             customer.address = addressArray;
             return customer.save();
-            //customer.avtivityStatus = activity;
         });
-        //const adminrole = await upadmin.getRole(); /*get role of admin*/
         return updatedCustomer;
     } catch (e) {
         console.log(e);

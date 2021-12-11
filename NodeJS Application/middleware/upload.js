@@ -3,7 +3,7 @@ const multer = require("multer");
 const Response = require("../services/responses/general");
 
 const storage = multer.diskStorage({
-    destination: function (req, file, cb) {
+    destination: function (req, res, file, cb) {
         cb(null, "./uploads/");
     },
     filename: function (req, file, cb) {
@@ -16,7 +16,7 @@ const fileFilter = (req, file, cb) => {
     if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
         cb(null, true);
     } else {
-        cb(null, false);
+        cb(new Error("Not an image! Please upload an image.", 400), false);
     }
 };
 exports.upload = multer({

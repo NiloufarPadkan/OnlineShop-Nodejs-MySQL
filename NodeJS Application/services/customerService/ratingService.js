@@ -1,37 +1,54 @@
-const Product_Rating = require("../../models/Product_Rating");
+const Customer_ProductRating = require("../../models/Customer_ProductRating");
 const Sequelize = require("sequelize");
-const { result } = require("persianize/validator");
+const Product = require("../../models/Product");
 
 exports.add = async (req, res, next) => {
     try {
-        let rating;
-        rating = await Product_Rating.findOne({
+        let customer_ProductRating;
+        customer_ProductRating = await Customer_ProductRating.findOne({
             where: {
                 customerId: req.customer.id,
                 productId: req.body.id,
             },
-        }).then((product_rating) => {
-            product_rating.rating = req.body.rating;
-            return product_rating.save();
         });
-        if (rating != "") {
-            return rating;
+        if (customer_ProductRating !== null) {
+            customer_ProductRating.rating = req.body.rating;
+            await customer_ProductRating.save();
+            // return customer_ProductRating;
+        } else {
+            customer_ProductRating = new Customer_ProductRating({
+                rating: req.body.rating,
+                customerId: req.customer.id,
+                productId: req.body.id,
+            });
+            await customer_ProductRating.save();
         }
-        rating = new Product_Rating({
-            rating: req.body.rating,
-            customerId: req.customer.id,
-            productId: req.body.id,
+        let avgRating = await Customer_ProductRating.findAll({
+            where: {
+                productId: req.body.id,
+            },
+            raw: true,
+            attributes: [[Sequelize.fn("AVG", Sequelize.col("rating")), "average"]],
         });
-        const newRating = await rating.save();
-        return newRating;
+        const p = await Product.findOne({
+            where: {
+                id: req.body.id,
+            },
+        }).then((p) => {
+            p.AvgRating = Object.values(avgRating[0]);
+            return p.save();
+        });
+
+        return p;
     } catch (e) {
+        console.log(e);
         return "";
     }
 };
 exports.getProductRating = async (req) => {
     try {
         const id = req.params.id;
-        let rating = await Product_Rating.findAll({
+        let rating = await Customer_ProductRating.findAll({
             where: {
                 productId: id,
             },

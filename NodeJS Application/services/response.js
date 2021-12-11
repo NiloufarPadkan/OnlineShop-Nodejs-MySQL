@@ -9,13 +9,11 @@ class Response {
 
     setStatus(status) {
         this.status = status;
-        //console.log(this.status);
         return this;
     }
 
     setMessage(message) {
         this.message = message;
-        // console.log(this.message);
         return this;
     }
 

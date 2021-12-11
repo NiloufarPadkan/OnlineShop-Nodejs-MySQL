@@ -27,8 +27,6 @@ const Product = sequelize.define("product", {
     count: {
         type: Sequelize.INTEGER,
         allowNull: false,
-
-        // allowNull: false,
     },
 
     description: {
@@ -52,6 +50,11 @@ const Product = sequelize.define("product", {
             if (val === 1) return this.setDataValue("activityStatus", true);
             else return this.setDataValue("activityStatus", false);
         },
+    },
+    AvgRating: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
     },
 });
 

@@ -3,13 +3,26 @@ const Customer = require("../../../models/Customer");
 const Product = require("../../../models/Product");
 exports.indexComments = async (req) => {
     try {
+        let filter = {};
+        filter.visible = req.query.visible ? { visible: req.query.visible } : {};
+        filter.productId = req.query.productId ? { productId: req.query.productId } : {};
+
         const limit = req.params.size ? req.params.size : 3;
         const offset = req.params.page ? req.params.page * limit : 0;
         const comments = await Comment.findAll({
             limit: parseInt(limit),
             offset: parseInt(offset),
-            include: [{ model: Customer, attributes: ["id", "fname", "lname"] }],
+            where: {
+                ...filter.visible,
+                ...filter.productId,
+            },
+            include: [
+                { model: Customer, attributes: ["id", "fname", "lname"] },
+                { model: Product, attributes: ["id", "name"] },
+            ],
+            order: [["createdAt", "DESC"]],
         });
+
         return comments;
     } catch (e) {
         console.log(e);

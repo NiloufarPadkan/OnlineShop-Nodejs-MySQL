@@ -33,7 +33,6 @@ const verifyToken = async (req, res, next) => {
 
         req.admin = foundAdmin;
         res.locals.Admin = foundAdmin;
-        console.log("done");
         next();
     });
 };

@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const permissionController = require("../../../controller/admins/root/permission");
+const permissionController = require("../../../controller/admins/manage/permission");
 const { verifyToken } = require("../../../middleware/verification/adminLoginVerify");
 
 router.post("/permission/add", verifyToken, permissionController.store);

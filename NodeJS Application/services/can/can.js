@@ -11,28 +11,28 @@ let result = [];
 permissionArray = [];
 
 async function cache(roleId) {
-    const data = await client.getAsync("permissions");
-    if (data !== null) permissionArray = JSON.parse(data);
-    else {
+    const data = await client.getAsync("role-permissions");
+    if (data !== null) {
+        permissionArray = JSON.parse(data);
+    } else {
         console.log("Fetching Data...");
         permissionArray = await Role_Permission.findAll({
-            where: { roleId: roleId },
+            // where: { roleId: roleId },
+            raw: true,
         });
-        client.setex("permissions", 3600, JSON.stringify(permissionArray));
+        client.setex("role-permissions", 3600, JSON.stringify(permissionArray));
     }
 }
 
 exports.can = async (roleId, permissionTitle) => {
-    console.log("hi");
     try {
         await cache(roleId);
         result = [];
         var keys = Object.keys(permissionArray);
         keys.forEach(function (key) {
-            result.push(permissionArray[key].permissionId);
+            if (permissionArray[key].roleId === roleId)
+                result.push(permissionArray[key].permissionId);
         });
-        //console.log(result);
-
         const permission = await Permission.findOne({
             where: { title: permissionTitle },
         });

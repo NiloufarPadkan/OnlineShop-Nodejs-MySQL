@@ -16,6 +16,8 @@ Online-Shop with express,sequlize
 
 -   EXPIRE_TIME
 
+-   REDIS_PORT
+
 ## example :
 
 port =300
@@ -52,3 +54,7 @@ EXPIRE_TIME= "1w
 -   jsonwebtoken version 8.5.1
 -   nodemon version 2.0.14
 -   yargs version 17.2.1
+-   bluebird version 3.7.2
+-   express-rate-limit 5.5.1
+-   multer 1.4.3
+-   redis 3.1.2
