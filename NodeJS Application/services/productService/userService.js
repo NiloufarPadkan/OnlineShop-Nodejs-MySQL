@@ -99,6 +99,7 @@ exports.getOneProduct = async (req) => {
                 list = list.split(",");
                 if (!list.includes(req.socket.remoteAddress)) {
                     list.push(req.socket.remoteAddress);
+                    viewers.viewCount = viewers.viewCount + 1;
                 }
                 viewers.IpList = list.toString();
                 return viewers.save();
@@ -106,6 +107,7 @@ exports.getOneProduct = async (req) => {
                 let view = new Product_views({
                     IpList: req.socket.remoteAddress,
                     productId: id,
+                    viewCount: 1,
                 });
                 return view.save({});
             }

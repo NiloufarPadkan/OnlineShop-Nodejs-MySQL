@@ -12,12 +12,12 @@ yargs.command({
         password: { type: String, demandOption: true },
         email: { demandOption: true },
         phone: { demandOption: true },
-        avtivityStatus: {},
+        activityStatus: {},
     },
 
     handler: async function (argv) {
-        if (argv.avtivityStatus == "") {
-            argv.avtivityStatus = false;
+        if (argv.activityStatus == "") {
+            argv.activityStatus = false;
         }
         const saltHash = genPassword(toString(argv.password));
         const salt = saltHash.salt;
@@ -26,7 +26,7 @@ yargs.command({
             username: argv.username,
             email: argv.email,
             phone: argv.phone,
-            avtivityStatus: argv.avtivityStatus,
+            activityStatus: argv.activityStatus,
             hash: hash,
             salt: salt,
         });

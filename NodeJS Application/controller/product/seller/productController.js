@@ -89,7 +89,13 @@ exports.destroy = async (req, res, next) => {
 
 exports.search = async (req, res, next) => {
     let response = new Response();
-
+    let permissionResult = false;
+    if (req.admin)
+        permissionResult = await this.canAdmin(req.admin.roleId, "read product");
+    if (!permissionResult) {
+        response.setStatus(403).setMessage("fail").setRes("notAllowed");
+        return res.status(403).send(response.handler());
+    }
     try {
         const productSearchResponse = await sellerProductService.searchProducts(req);
         if (productSearchResponse != "")
@@ -102,8 +108,15 @@ exports.search = async (req, res, next) => {
 };
 
 exports.index = async (req, res, next) => {
+    console.log("indexing");
     let response = new Response();
-
+    let permissionResult = false;
+    if (req.admin)
+        permissionResult = await this.canAdmin(req.admin.roleId, "read product");
+    if (!permissionResult) {
+        response.setStatus(403).setMessage("fail").setRes("notAllowed");
+        return res.status(403).send(response.handler());
+    }
     try {
         const productIndexResponse = await sellerProductService.indexProducts(req);
         if (productIndexResponse != "")
@@ -117,7 +130,13 @@ exports.index = async (req, res, next) => {
 
 exports.show = async (req, res, next) => {
     let response = new Response();
-
+    let permissionResult = false;
+    if (req.admin)
+        permissionResult = await this.canAdmin(req.admin.roleId, "read product");
+    if (!permissionResult) {
+        response.setStatus(403).setMessage("fail").setRes("notAllowed");
+        return res.status(403).send(response.handler());
+    }
     try {
         const productshowResponse = await sellerProductService.getOneProduct(req);
         if (productshowResponse != "")

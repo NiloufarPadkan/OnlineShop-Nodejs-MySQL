@@ -9,11 +9,6 @@ module.exports = {
                 updatedAt: new Date(),
             },
             {
-                title: "delete admin",
-                createdAt: new Date(),
-                updatedAt: new Date(),
-            },
-            {
                 title: "read admin",
                 createdAt: new Date(),
                 updatedAt: new Date(),
@@ -23,6 +18,12 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                title: "delete admin",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+
             {
                 title: "add permission",
                 createdAt: new Date(),
@@ -90,6 +91,11 @@ module.exports = {
             },
             {
                 title: "add product",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                title: "read product",
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },

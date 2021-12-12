@@ -14,7 +14,6 @@ exports.add = async (req, res, next) => {
         if (customer_ProductRating !== null) {
             customer_ProductRating.rating = req.body.rating;
             await customer_ProductRating.save();
-            // return customer_ProductRating;
         } else {
             customer_ProductRating = new Customer_ProductRating({
                 rating: req.body.rating,
@@ -52,7 +51,6 @@ exports.getProductRating = async (req) => {
                 id: req.params.id,
             },
         });
-        console.log(p);
         return p.AvgRating;
     } catch (e) {
         console.log(e);

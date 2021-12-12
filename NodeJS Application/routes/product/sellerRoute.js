@@ -21,11 +21,15 @@ router.get("/reports", verifyToken, reportController.index);
 router.get("/reports/:id", verifyToken, reportController.show);
 router.get("/unreadreports/counts", verifyToken, reportController.showUnreadReportCount);
 
-router.get("/admin/product/list/:size/:page", productController.index);
-router.get("/admin/product/search/:size/:page", productController.search);
-router.get("/admin/product/:id/show", productController.show);
+router.get("/admin/product/list/:size/:page", verifyToken, productController.index);
+router.get("/admin/product/search/:size/:page", verifyToken, productController.search);
+router.get("/admin/product/:id/show", verifyToken, productController.show);
 
-router.get("/admin/product/:id/comments/:size/:page", productCommentController.show);
+router.get(
+    "/admin/product/:id/comments/:size/:page",
+    verifyToken,
+    productCommentController.show
+);
 // router.get("/product/:id/rating", ratingController.show);
 
 module.exports = router;
