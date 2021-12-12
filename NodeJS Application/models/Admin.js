@@ -24,7 +24,6 @@ const Admin = sequelize.define("admin", {
     },
     phone: {
         type: Sequelize.STRING,
-        // allowNull: false,
         trim: true,
         unique: true,
     },

@@ -91,7 +91,7 @@ exports.updateAdmin = async (req) => {
 
         const activity = req.body.activityStatus
             ? req.body.activityStatus
-            : foundAdmin.avtivityStatus;
+            : foundAdmin.activityStatus;
         const foundRole = await Role.findByPk(roleId);
         if (!foundRole) {
             return "roleNotfound";
@@ -112,7 +112,7 @@ exports.updateAdmin = async (req) => {
 
             admin.salt = salt;
 
-            admin.avtivityStatus = activity;
+            admin.activityStatus = activity;
 
             return admin.save();
         });

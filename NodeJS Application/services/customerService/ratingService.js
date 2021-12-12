@@ -47,15 +47,13 @@ exports.add = async (req, res, next) => {
 };
 exports.getProductRating = async (req) => {
     try {
-        const id = req.params.id;
-        let rating = await Customer_ProductRating.findAll({
+        const p = await Product.findOne({
             where: {
-                productId: id,
+                id: req.params.id,
             },
-            attributes: [[Sequelize.fn("AVG", Sequelize.col("rating")), "average"]],
         });
-
-        return rating[0];
+        console.log(p);
+        return p.AvgRating;
     } catch (e) {
         console.log(e);
         return "";

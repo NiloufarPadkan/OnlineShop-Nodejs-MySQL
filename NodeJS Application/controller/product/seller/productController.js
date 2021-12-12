@@ -86,3 +86,45 @@ exports.destroy = async (req, res, next) => {
         return res.status(400).send(response.handler());
     }
 };
+
+exports.search = async (req, res, next) => {
+    let response = new Response();
+
+    try {
+        const productSearchResponse = await sellerProductService.searchProducts(req);
+        if (productSearchResponse != "")
+            response.setStatus(200).setRes(productSearchResponse);
+        return res.status(200).send(response.handler());
+    } catch (e) {
+        response.setStatus(400).setMessage("fail").setRes(e);
+        return res.status(400).send(response.handler());
+    }
+};
+
+exports.index = async (req, res, next) => {
+    let response = new Response();
+
+    try {
+        const productIndexResponse = await sellerProductService.indexProducts(req);
+        if (productIndexResponse != "")
+            response.setStatus(200).setRes(productIndexResponse);
+        return res.status(200).send(response.handler());
+    } catch (e) {
+        response.setStatus(400).setMessage("fail").setRes(e);
+        return res.status(400).send(response.handler());
+    }
+};
+
+exports.show = async (req, res, next) => {
+    let response = new Response();
+
+    try {
+        const productshowResponse = await sellerProductService.getOneProduct(req);
+        if (productshowResponse != "")
+            response.setStatus(200).setRes(productshowResponse);
+        return res.status(200).send(response.handler());
+    } catch (e) {
+        response.setStatus(400).setMessage("fail").setRes(e);
+        return res.status(400).send(response.handler());
+    }
+};

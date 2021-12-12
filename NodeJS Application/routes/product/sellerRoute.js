@@ -1,6 +1,8 @@
 const express = require("express");
 const router = express.Router();
 const productController = require("../../controller/product/seller/productController");
+const productCommentController = require("../../controller/product/seller/product-commentController");
+
 const commentController = require("../../controller/product/seller/commentController");
 const reportController = require("../../controller/product/seller/reportsController");
 const { verifyToken } = require("../../middleware/verification/adminLoginVerify");
@@ -18,5 +20,12 @@ router.get("/reports", verifyToken, reportController.index);
 
 router.get("/reports/:id", verifyToken, reportController.show);
 router.get("/unreadreports/counts", verifyToken, reportController.showUnreadReportCount);
+
+router.get("/admin/product/list/:size/:page", productController.index);
+router.get("/admin/product/search/:size/:page", productController.search);
+router.get("/admin/product/:id/show", productController.show);
+
+router.get("/admin/product/:id/comments/:size/:page", productCommentController.show);
+// router.get("/product/:id/rating", ratingController.show);
 
 module.exports = router;

@@ -35,13 +35,12 @@ exports.indexProducts = async (req) => {
                     model: Product_views,
                     required: false,
                     attributes: ["viewCount"],
-                    //  as: "views",
                 },
             ],
             //ordering by views
             //to do : add other orders
             // order: [[Product_views, "viewCount", "desc"]],
-            order: [["AvgRating", "DESC"]],
+            // order: [["AvgRating", "DESC"]],
             where: {
                 "$Category.id$": {
                     [Op.or]: filter.category,
@@ -165,7 +164,7 @@ exports.searchProducts = async (req) => {
                 "$Tag.id$": {
                     [Op.or]: filter.tag,
                 },
-                avtivityStatus: 1,
+                activityStatus: 1,
             },
         });
         if (!products) {
