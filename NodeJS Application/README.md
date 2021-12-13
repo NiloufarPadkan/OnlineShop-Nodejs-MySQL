@@ -20,12 +20,15 @@ Online-Shop with express,sequlize
 
 -   SQL_PORT
 
+-   IMAGE_PREFIX
+
 ## example :
 
 port =300
 JWT_KEY= "secretcode"
 EXPIRE_TIME= "1w
 SQL_PORT="3306"
+IMAGE_PREFIX="http://localhost:3001/"
 
 3-in config/database/sequlize.js set your database name,user,password,host and port
 

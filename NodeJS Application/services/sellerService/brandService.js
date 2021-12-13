@@ -11,7 +11,7 @@ exports.insertBrand = async (req, res, next) => {
         if (duplicateBrand) {
             return "alreadyExists";
         }
-        let photoPath = req.file.path;
+        let photoPath = process.env.IMAGE_PREFIX + req.file.path;
 
         const newBrand = new Brand({
             name: brand,
