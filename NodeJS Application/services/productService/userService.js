@@ -16,10 +16,9 @@ exports.indexProducts = async (req) => {
         filter.category = req.query.category ? req.query.category.split(",") : {};
         filter.tag = req.query.tag ? req.query.tag.split(",") : {};
         filter.brand = req.query.brand ? req.query.brand.split(",") : {};
+        filter.price = req.query.price ? req.query.price.split(",") : [0, 99990000];
 
-        const prices = 1000.0;
-        const prices2 = 3000.0;
-        console.log(prices.toFixed(2));
+        console.log(filter);
         const limit = req.params.size ? req.params.size : 3;
         const offset = req.params.page ? req.params.page * limit : 0;
         const products = await Product.findAll({
@@ -54,7 +53,9 @@ exports.indexProducts = async (req) => {
                 "$Tag.id$": {
                     [Op.or]: filter.tag,
                 },
-                //  base_price: { [Op.between]: (prices, prices2) },
+                base_price: {
+                    [Op.between]: filter.price,
+                },
 
                 activityStatus: 1,
             },
