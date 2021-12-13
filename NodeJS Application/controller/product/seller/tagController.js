@@ -47,14 +47,11 @@ exports.update = async (req, res, next) => {
     }
     try {
         const updatedtagResponse = await tagService.updatetag(req);
-        if (updatedtagResponse === "tagNotFound") {
-            response.setStatus(403).setMessage("fail").setRes("tagNotFound");
+        if (updatedtagResponse === "tagNotFound" || updatedtagResponse === "titleEmpty") {
+            response.setStatus(403).setMessage("fail").setRes(updatedtagResponse);
             return res.status(404).send(response.handler());
         }
-        if (updatedtagResponse === "titleEmpty") {
-            response.setStatus(403).setMessage("fail").setRes("titleEmpty");
-            return res.status(404).send(response.handler());
-        }
+
         if (updatedtagResponse != "") {
             response.setStatus(200).setRes(updatedtagResponse);
             return res.status(200).send(response.handler());
