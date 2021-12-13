@@ -16,7 +16,13 @@ const Brand = sequelize.define("brand", {
         unique: true,
     },
     photo: {
-        type: Sequelize.BLOB,
+        type: Sequelize.STRING,
+        get: function () {
+            return JSON.parse(this.getDataValue("photo"));
+        },
+        set: function (val) {
+            return this.setDataValue("photo", JSON.stringify(val));
+        },
     },
 });
 
