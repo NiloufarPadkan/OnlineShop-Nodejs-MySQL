@@ -1,4 +1,7 @@
 const Category = require("../../models/Category");
+const Sequelize = require("sequelize");
+
+const Op = Sequelize.Op;
 exports.insertCategory = async (req, res, next) => {
     try {
         const category = req.body.title;
@@ -27,9 +30,14 @@ exports.getcategory = async (req, res, next) => {
     try {
         const limit = req.params.size ? req.params.size : 3;
         const offset = req.params.page ? req.params.page * limit : 0;
+        let searchString = req.query.search ? req.query.search : "";
+
         const categories = await Category.findAll({
             limit: parseInt(limit),
             offset: parseInt(offset),
+            where: {
+                title: { [Op.like]: "%" + searchString + "%" },
+            },
         });
         return categories;
     } catch (e) {

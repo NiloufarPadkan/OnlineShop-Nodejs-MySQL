@@ -1,5 +1,7 @@
 const Brand = require("../../models/Brand");
+const Sequelize = require("sequelize");
 
+const Op = Sequelize.Op;
 exports.insertBrand = async (req, res, next) => {
     try {
         const brand = req.body.name;
@@ -31,12 +33,18 @@ exports.getbrand = async (req, res, next) => {
     try {
         const limit = req.body.size ? req.body.size : 3;
         const offset = req.body.page ? req.body.page * limit : 0;
+        let searchString = req.query.search ? req.query.search : "";
+
         const brands = await Brand.findAll({
             limit: limit,
             offset: offset,
+            where: {
+                name: { [Op.like]: "%" + searchString + "%" },
+            },
         });
         return brands;
     } catch (e) {
+        console.log(e);
         return "";
     }
 };

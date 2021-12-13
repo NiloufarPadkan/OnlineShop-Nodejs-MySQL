@@ -1,5 +1,7 @@
 const Tag = require("../../models/Tag");
+const Sequelize = require("sequelize");
 
+const Op = Sequelize.Op;
 exports.insertTag = async (req, res, next) => {
     try {
         const tag = req.body.title;
@@ -29,9 +31,14 @@ exports.gettag = async (req, res, next) => {
     try {
         const limit = req.params.size ? req.params.size : 3;
         const offset = req.params.page ? req.params.page * limit : 0;
+        let searchString = req.query.search ? req.query.search : "";
+
         const tags = await Tag.findAll({
             limit: parseInt(limit),
             offset: parseInt(offset),
+            where: {
+                title: { [Op.like]: "%" + searchString + "%" },
+            },
         });
 
         return tags;
