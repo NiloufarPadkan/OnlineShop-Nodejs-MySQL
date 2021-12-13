@@ -25,6 +25,7 @@ exports.insertBrand = async (req, res, next) => {
         return "";
     }
 };
+
 exports.getbrand = async (req, res, next) => {
     try {
         const limit = req.body.size ? req.body.size : 3;
@@ -38,6 +39,7 @@ exports.getbrand = async (req, res, next) => {
         return "";
     }
 };
+
 exports.updatebrand = async (req) => {
     try {
         if (!req.body.name) {
@@ -57,6 +59,7 @@ exports.updatebrand = async (req) => {
         return "";
     }
 };
+
 exports.destroyBrand = async (req) => {
     const brandId = req.body.brandId;
     try {

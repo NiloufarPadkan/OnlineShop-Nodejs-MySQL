@@ -16,13 +16,13 @@ exports.insertCategory = async (req, res, next) => {
         });
 
         const savedCategory = await newCategory.save();
-        // console.log(savedCategory);
         return savedCategory;
     } catch (e) {
         console.log(e);
         return "";
     }
 };
+
 exports.getcategory = async (req, res, next) => {
     try {
         const limit = req.params.size ? req.params.size : 3;
@@ -36,6 +36,7 @@ exports.getcategory = async (req, res, next) => {
         return "";
     }
 };
+
 exports.updatecategory = async (req) => {
     try {
         if (!req.body.title) {
@@ -55,6 +56,7 @@ exports.updatecategory = async (req) => {
         return "";
     }
 };
+
 exports.destroyCategory = async (req) => {
     const categoryId = req.body.categoryId;
     try {

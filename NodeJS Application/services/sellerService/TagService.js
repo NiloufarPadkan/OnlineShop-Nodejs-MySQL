@@ -1,4 +1,5 @@
 const Tag = require("../../models/Tag");
+
 exports.insertTag = async (req, res, next) => {
     try {
         const tag = req.body.title;
@@ -23,6 +24,7 @@ exports.insertTag = async (req, res, next) => {
         return "";
     }
 };
+
 exports.gettag = async (req, res, next) => {
     try {
         const limit = req.params.size ? req.params.size : 3;
@@ -37,6 +39,7 @@ exports.gettag = async (req, res, next) => {
         return "";
     }
 };
+
 exports.updatetag = async (req) => {
     try {
         if (!req.body.title) {
@@ -56,6 +59,7 @@ exports.updatetag = async (req) => {
         return "";
     }
 };
+
 exports.destroyTag = async (req) => {
     const tagId = req.body.tagId;
     try {

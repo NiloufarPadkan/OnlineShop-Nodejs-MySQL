@@ -1,0 +1,2565 @@
+{
+	"info": {
+		"_postman_id": "50e3dcc9-820e-4eff-9007-062710355df0",
+		"name": "onlineshop",
+		"description": "- set variable named token and set its value \nand in Auth tab set api key named token and set value to token variable and add it to header",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "admin",
+			"item": [
+				{
+					"name": "Authentication",
+					"item": [
+						{
+							"name": "login REQ",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"const res = pm.response.json();\r",
+											"pm.collectionVariables.set('token', res.response.accessToken);"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"Amir\",\r\n    \"password\": \"12345678Amir#\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/login",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"login"
+									]
+								},
+								"description": "## Admin Login REQ\n- url : /admin/login\n\n\n- username\n-password"
+							},
+							"response": [
+								{
+									"name": "successful login",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"username\": \"NiloufarPadkan\",\r\n    \"email\": \"niloufarpadkan@gmail.com\",\r\n    \"phone\": \"09915106340\",\r\n    \"avtivityStatus\": true,\r\n    \"password\": \"5c4f4dfcxذcdccxfddcgddfxgfcvdvvnvvcxfffFxv#5accdsafsdc654ad\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:3000/admin/login",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"admin",
+												"login"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "invalid pass or username",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": " {\"username\":\"NiloufarPadkan\",\r\n            \"email\":\"niloufarpadkan@gmail.com\",\r\n            \"phone\":\"09915106340\",\r\n            \"avtivityStatus\": true,\r\n            \"password\":\"5c4f4dfcxذcdccxfddcgddfxgfcvdvvnvvcxfffFxv#5accdsafsdc654a\"\r\n           }",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:3000/admin/login",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"admin",
+												"login"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "me REQ",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/me",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"me"
+									]
+								},
+								"description": "## Admin me REQ\n- url : /admin/me\n\n- shows admin own profile \n-verifying by token"
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Admin",
+					"item": [
+						{
+							"name": "create admin REQ",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "token",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDUwNTg4LCJleHAiOjE2MzcwNTUzODh9.pqWCXulWKaDFtAISjUJJhZ2Hq--QteAqDSo6vlO2G6g",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"username\": \"fatemePaedkan\",\r\n    \"email\": \"nacxdzcxacceciscfcn@gmail.com\",\r\n    \"phone\": \"09385106040\",\r\n    \"activityStatus\": true,\r\n    \"password\": \"123456789Fateme##\",\r\n    \"roleId\":\"2\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/create",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"create"
+									],
+									"query": [
+										{
+											"key": "token ",
+											"value": "",
+											"disabled": true
+										}
+									]
+								},
+								"description": "##  Create Admin  REQ\n\n- admin with permission of creating users can userthis api and add new admin.\nif admin doesnt have this permission, will get \"not allowed\" error\n\n- root with role_id=1 has all permissions\n\n### required :\n    \"username\":\n    \"email\": \n    \"phone\":\n    \"activityStatus\":\n    \"password\":\n    \"roleId\":"
+							},
+							"response": [
+								{
+									"name": "successful create admin",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "token",
+												"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDUwNTg4LCJleHAiOjE2MzcwNTUzODh9.pqWCXulWKaDFtAISjUJJhZ2Hq--QteAqDSo6vlO2G6g",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"username\": \"fatemePadkan\",\r\n    \"email\": \"nacxdzcxacciscfcn@gmail.com\",\r\n    \"phone\": \"09ccdxf9ccg1cxc510csx6v340\",\r\n    \"avtivityStatus\": true,\r\n    \"password\": \"123456789Fateme##\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:3000/admin/create",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"admin",
+												"create"
+											],
+											"query": [
+												{
+													"key": "token ",
+													"value": "",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "invalid email",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "token",
+												"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDUwNTg4LCJleHAiOjE2MzcwNTUzODh9.pqWCXulWKaDFtAISjUJJhZ2Hq--QteAqDSo6vlO2G6g",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"username\": \"fatemePadkan\",\r\n    \"email\": \"nacxdzcxacciscfcnmail.com\",\r\n    \"phone\": \"09ccdxf9ccg1cxc510csx6v340\",\r\n    \"avtivityStatus\": true,\r\n    \"password\": \"123456789Fateme##\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:3000/admin/create",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"admin",
+												"create"
+											],
+											"query": [
+												{
+													"key": "token ",
+													"value": "",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "not alphanumeric error",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "token",
+												"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDUwNTg4LCJleHAiOjE2MzcwNTUzODh9.pqWCXulWKaDFtAISjUJJhZ2Hq--QteAqDSo6vlO2G6g",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"username\": \"fateme*Padkan\",\r\n    \"email\": \"nacxdzcxacciscfcn@gmail.com\",\r\n    \"phone\": \"09ccdxf9ccg1cxc510csx6v340\",\r\n    \"avtivityStatus\": true,\r\n    \"password\": \"123456789Fateme##\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:3000/admin/create",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"admin",
+												"create"
+											],
+											"query": [
+												{
+													"key": "token ",
+													"value": "",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "weak pass",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "token",
+												"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDUwNTg4LCJleHAiOjE2MzcwNTUzODh9.pqWCXulWKaDFtAISjUJJhZ2Hq--QteAqDSo6vlO2G6g",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"username\": \"fatemePadkan\",\r\n    \"email\": \"nacxdzcxacciscfcn@gmail.com\",\r\n    \"phone\": \"09ccdxf9ccg1cxc510csx6v340\",\r\n    \"avtivityStatus\": true,\r\n    \"password\": \"12345\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:3000/admin/create",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"admin",
+												"create"
+											],
+											"query": [
+												{
+													"key": "token ",
+													"value": "",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "existing mail / phone / username",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "token",
+												"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDUwNTg4LCJleHAiOjE2MzcwNTUzODh9.pqWCXulWKaDFtAISjUJJhZ2Hq--QteAqDSo6vlO2G6g",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"username\": \"fatemePadkan\",\r\n    \"email\": \"nacxdzcxacciscfcn@gmail.com\",\r\n    \"phone\": \"09ccdxf9ccg1cxc510csx6v340\",\r\n    \"avtivityStatus\": true,\r\n    \"password\": \"123456789Fateme##\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:3000/admin/create",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"admin",
+												"create"
+											],
+											"query": [
+												{
+													"key": "token ",
+													"value": "",
+													"disabled": true
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "edit admin",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDY5MDA4LCJleHAiOjE2MzcwNzM4MDh9.f-1H1Y0IEVFXO_aO5lLQlxjBUusxtJiQ5bnt4RL_6I4",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"id\":\"6\",\r\n\"username\":\"1234567890\",\r\n\"email\":\"niloufardpadkan@gmail.com\",\r\n\"roleId\":\"2\",\r\n\"activityStatus\":1,\r\n\"password\":\"12456985Fb#\"\r\n}   ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/edit",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"edit"
+									]
+								},
+								"description": "## Admin edit REQ\n\n- admin with permission of editing admins can use this api and edit admin.\nif admin doesnt have this permission, will get \"not allowed\" error\n\n- root with role_id=1 has all permissions\n\n### optional:\n    \"username\":\n    \"email\": \n    \"phone\":\n    \"activityStatus\":\n    \"password\":\n    \"roleId\":"
+							},
+							"response": [
+								{
+									"name": "edit admin",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "token",
+												"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDY5MDA4LCJleHAiOjE2MzcwNzM4MDh9.f-1H1Y0IEVFXO_aO5lLQlxjBUusxtJiQ5bnt4RL_6I4",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\"id\":\"2\",\r\n\"username\":\"1234567890\",\r\n\"email\":\"niloufardpadkan@gmail.com\",\r\n\"roleId\":\"2\",\r\n\"activityStatus\":1\r\n}   ",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/admin/edit",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"admin",
+												"edit"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "OPTIONS, GET, POST, PUT, PATCH, DELETE"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Content-Type, Authorization"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "461"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"1cd-tD+KOg4pU1RX5V2MOl/hfKGrzpg\""
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 08 Dec 2021 11:15:56 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": 200,\n    \"message\": \"SUCCESS\",\n    \"response\": {\n        \"id\": 2,\n        \"username\": \"1234567890\",\n        \"email\": \"niloufardpadkan@gmail.com\",\n        \"phone\": \"09116985490\",\n        \"activityStatus\": true,\n        \"hash\": \"0ca53992c04d39f0213db39a82ce3dc6b39ad0db2ba85950b0f994eedc359405fa4611c260cb86b058bc24a385b7ad47da7753db565a76da63ee25327cda86af\",\n        \"salt\": \"518d274ae92d9a00571f55406c774147cb5d10c6a24c50bf31e0ca39d5367821\",\n        \"createdAt\": \"2021-12-06T08:56:13.000Z\",\n        \"updatedAt\": \"2021-12-08T11:15:56.027Z\",\n        \"roleId\": \"2\"\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "edit me",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "token",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDY5MDA4LCJleHAiOjE2MzcwNzM4MDh9.f-1H1Y0IEVFXO_aO5lLQlxjBUusxtJiQ5bnt4RL_6I4",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"id\":\"3\",\r\n\"username\":\"ahmadisara\",\r\n\"email\":\"niloufardpadkan@gmail.com\"\r\n\r\n}   ",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/editprofile",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"editprofile"
+									]
+								},
+								"description": "## Admin edit own profile REQ\n\n- admin can edit their own profile\n\n\n### optional:\n    \"username\":\n    \"email\": \n    \"phone\":\n    \"password\":"
+							},
+							"response": [
+								{
+									"name": "edit me",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "token",
+												"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDY5MDA4LCJleHAiOjE2MzcwNzM4MDh9.f-1H1Y0IEVFXO_aO5lLQlxjBUusxtJiQ5bnt4RL_6I4",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\"id\":\"4\",\r\n\"username\":\"ahmadisara\"\r\n}   ",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/admin/editprofile",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"admin",
+												"editprofile"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "OPTIONS, GET, POST, PUT, PATCH, DELETE"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Content-Type, Authorization"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "461"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"1cd-g4Q9Bue3Zm2xngojpmYyyXuXVMQ\""
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 08 Dec 2021 11:16:42 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": 200,\n    \"message\": \"SUCCESS\",\n    \"response\": {\n        \"id\": 4,\n        \"username\": \"ahmadisara\",\n        \"email\": \"mehrshad.shafaghi@gmail.com\",\n        \"phone\": \"09391306878\",\n        \"activityStatus\": true,\n        \"hash\": \"e2128770750c5b6f2f22b000d993df605b88d18365e886ead59b4b9263089eb89f645e44b8a1a76d2e3b1acf811e2f38a8c13c10b8be33ce48a4fb4b6ec0a8f8\",\n        \"salt\": \"34af3365029c949e393e8ea76caff302d8313843f820f31ce16eb49d677af498\",\n        \"createdAt\": \"2021-12-06T08:56:13.000Z\",\n        \"updatedAt\": \"2021-12-08T11:16:42.737Z\",\n        \"roleId\": 1\n    }\n}"
+								}
+							]
+						},
+						{
+							"name": "delete admins",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "token",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDUxMTA5LCJleHAiOjE2MzcwNTU5MDl9.bg3JpKSH8uGxoIfdv7FTuuYvd8ygxEvVr6QgeIeaFGI",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"id\":\"5\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/delete",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"delete"
+									]
+								},
+								"description": "## Admin delete REQ\n\n- admin with permission of deleting admins can use this api and delete admin.\nif admin doesnt have this permission, will get \"not allowed\" error\n\n- root with role_id=1 has all permissions\n\n### requires:\n   id : admin id"
+							},
+							"response": [
+								{
+									"name": "not found admin error",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "token",
+												"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDUxMTA5LCJleHAiOjE2MzcwNTU5MDl9.bg3JpKSH8uGxoIfdv7FTuuYvd8ygxEvVr6QgeIeaFGI",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\"id\":\"5\"\r\n\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:3000/admin/delete",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"admin",
+												"delete"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "delete admins",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "token",
+												"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDUxMTA5LCJleHAiOjE2MzcwNTU5MDl9.bg3JpKSH8uGxoIfdv7FTuuYvd8ygxEvVr6QgeIeaFGI",
+												"type": "text"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n\"id\":\"5\"\r\n\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/admin/delete",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"admin",
+												"delete"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "OPTIONS, GET, POST, PUT, PATCH, DELETE"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Content-Type, Authorization"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "77"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"4d-MVlQrUFTPQsADxi7QmL29ROp0TI\""
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 08 Dec 2021 11:17:41 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": 200,\n    \"message\": \"SUCCESS\",\n    \"response\": \"با موفقیت حذف شد\"\n}"
+								}
+							]
+						},
+						{
+							"name": "list of admins",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "token",
+										"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDUxMTA5LCJleHAiOjE2MzcwNTU5MDl9.bg3JpKSH8uGxoIfdv7FTuuYvd8ygxEvVr6QgeIeaFGI",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/list/2/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"list",
+										"2",
+										"1"
+									]
+								},
+								"description": "## Admin list REQ\n\n- admin with permission of indexing admins can use this api and index admins.\nif admin doesnt have this permission, will get \"not allowed\" error\n\n- root with role_id=1 has all permissions\n\n### required:\n  -  size\n  -  page\n\nlist/:size/:page\n\n- size: number of indexes\n- page : number of page"
+							},
+							"response": [
+								{
+									"name": "list of admins",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "token",
+												"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiaWF0IjoxNjM2NDUxMTA5LCJleHAiOjE2MzcwNTU5MDl9.bg3JpKSH8uGxoIfdv7FTuuYvd8ygxEvVr6QgeIeaFGI",
+												"type": "text",
+												"disabled": true
+											}
+										],
+										"url": {
+											"raw": "{{url}}/admin/list/2/1",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"admin",
+												"list",
+												"2",
+												"1"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "X-Powered-By",
+											"value": "Express"
+										},
+										{
+											"key": "Access-Control-Allow-Origin",
+											"value": "*"
+										},
+										{
+											"key": "Access-Control-Allow-Methods",
+											"value": "OPTIONS, GET, POST, PUT, PATCH, DELETE"
+										},
+										{
+											"key": "Access-Control-Allow-Headers",
+											"value": "Content-Type, Authorization"
+										},
+										{
+											"key": "Content-Type",
+											"value": "application/json; charset=utf-8"
+										},
+										{
+											"key": "Content-Length",
+											"value": "854"
+										},
+										{
+											"key": "ETag",
+											"value": "W/\"356-kP+wi07Eb6QgUeuBgbJVyaCRE6Q\""
+										},
+										{
+											"key": "Date",
+											"value": "Wed, 08 Dec 2021 11:17:49 GMT"
+										},
+										{
+											"key": "Connection",
+											"value": "keep-alive"
+										},
+										{
+											"key": "Keep-Alive",
+											"value": "timeout=5"
+										}
+									],
+									"cookie": [],
+									"body": "{\n    \"status\": 200,\n    \"message\": \"SUCCESS\",\n    \"response\": [\n        {\n            \"id\": 3,\n            \"username\": \"Amir\",\n            \"email\": \"am@am.am\",\n            \"phone\": \"09356451477\",\n            \"activityStatus\": true,\n            \"hash\": \"0990f25504a32f3897f3effa1609aea440312d74687ee6faa4c1da50a6de28c31feeb40e2f5f367e7002f448460b70199acdeb8b2abbe4cae4a6cbbf27faca23\",\n            \"salt\": \"04588741b2174b2354aefa570b30c1acd15c3199ff6b8e73e8bfd7c148502a62\",\n            \"createdAt\": \"2021-12-06T08:56:13.000Z\",\n            \"updatedAt\": \"2021-12-06T08:56:13.000Z\",\n            \"roleId\": 1\n        },\n        {\n            \"id\": 4,\n            \"username\": \"ahmadisara\",\n            \"email\": \"mehrshad.shafaghi@gmail.com\",\n            \"phone\": \"09391306878\",\n            \"activityStatus\": true,\n            \"hash\": \"e2128770750c5b6f2f22b000d993df605b88d18365e886ead59b4b9263089eb89f645e44b8a1a76d2e3b1acf811e2f38a8c13c10b8be33ce48a4fb4b6ec0a8f8\",\n            \"salt\": \"34af3365029c949e393e8ea76caff302d8313843f820f31ce16eb49d677af498\",\n            \"createdAt\": \"2021-12-06T08:56:13.000Z\",\n            \"updatedAt\": \"2021-12-08T11:16:42.000Z\",\n            \"roleId\": 1\n        }\n    ]\n}"
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "role",
+			"item": [
+				{
+					"name": "admin",
+					"item": [
+						{
+							"name": "create role",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"role\": \"creavtor\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/role?token",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"role"
+									],
+									"query": [
+										{
+											"key": "token",
+											"value": ""
+										}
+									]
+								},
+								"description": "##  Create Role REQ\n\n- admin with permission of creating Role can use this api and add new Role .\nif admin doesnt have this permission, will get \"not allowed\" error\n\n- root with role_id=1 has all permissions\n\n### required :\n  \"role\":"
+							},
+							"response": [
+								{
+									"name": "create role",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{ \"role\":\"creator\"}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:3000/role?token",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"role"
+											],
+											"query": [
+												{
+													"key": "token",
+													"value": null
+												}
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "get role",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/roles/999/0",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"roles",
+										"999",
+										"0"
+									]
+								},
+								"description": "## Role list REQ\n\n- admin with permission of indexing admins can use this api and index roles.\nif admin doesnt have this permission, will get \"not allowed\" error\n\n- root with role_id=1 has all permissions\n\n### required:\n  -  size\n  -  page\n\nlist/:size/:page\n\n- size: number of indexes\n- page : number of page"
+							},
+							"response": [
+								{
+									"name": "get role",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{url}}/roles/999/0",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"roles",
+												"999",
+												"0"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "update role",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\":1\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/role/2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"role",
+										"2"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "update role",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"status\":1\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{url}}/role/2",
+											"host": [
+												"{{url}}"
+											],
+											"path": [
+												"role",
+												"2"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "permisssion",
+			"item": [
+				{
+					"name": "admin",
+					"item": [
+						{
+							"name": "get permission",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/permission/999/0",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"permission",
+										"999",
+										"0"
+									]
+								},
+								"description": "permissions/:size/:page/"
+							},
+							"response": []
+						},
+						{
+							"name": "read assigned permission",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/role/2/permissions",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"role",
+										"2",
+										"permissions"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "assign permission to role",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"permissionId\": [\r\n        \"3\",\r\n        \"2\",\r\n        \"1\"\r\n    ],\r\n    \"roleId\": \"3\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/role/addpermission",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"role",
+										"addpermission"
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "assign permission to role",
+									"originalRequest": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"permissionId\": [\r\n        \"3\",\r\n        \"2\",\r\n        \"1\"\r\n    ],\r\n    \"roleId\": \"8\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "localhost:3000/role/addPermissiion",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"role",
+												"addPermissiion"
+											]
+										}
+									},
+									"_postman_previewlanguage": "Text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "category",
+			"item": [
+				{
+					"name": "admin",
+					"item": [
+						{
+							"name": "add catgeory",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\":\"ketab\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/category/add",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"category",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete category",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"categoryId\":\"9\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/category/remove",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"category",
+										"remove"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update category",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"categoryId\":\"2\", \"title\":\"category 1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/category/edit",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"category",
+										"edit"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "get category",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/category/999/0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"category",
+								"999",
+								"0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "brand",
+			"item": [
+				{
+					"name": "admin",
+					"item": [
+						{
+							"name": "delete brand",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"brandId\":\"1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/brand/remove",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"brand",
+										"remove"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "add brand",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "kale",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": "/C:/Users/Niloufar/Desktop/photo_2021-11-18_15-14-49.jpg"
+										}
+									],
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/brand/add",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"brand",
+										"add"
+									]
+								},
+								"description": "##  Create brand REQ\n\n- admin with permission of creating brands can userthis api \nif admin doesnt have this permission, will get \"not allowed\" error\n\n- root with role_id=1 has all permissions\n\n### required :\n    \"name\":\n\n### optional:\n\n    \"photo\":"
+							},
+							"response": []
+						},
+						{
+							"name": "update brand",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"brandId\":\"10\",\"name\":\"ddd\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/brand/edit",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"brand",
+										"edit"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "get brands",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"title\": \"mobile\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/brand",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"brand"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tag",
+			"item": [
+				{
+					"name": "admin",
+					"item": [
+						{
+							"name": "add tag",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\": \"mobsxxile\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/tag/add",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"tag",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete tag",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"tagId\":\"1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/tag/remove",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"tag",
+										"remove"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update tag",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"tagId\":\"2\",\r\n    \"title\":\"lsksalk\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/tag/edit",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"tag",
+										"edit"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "get tag",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/Tag/999/0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"Tag",
+								"999",
+								"0"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "product",
+			"item": [
+				{
+					"name": "admin",
+					"item": [
+						{
+							"name": "post product",
+							"protocolProfileBehavior": {
+								"disabledSystemHeaders": {}
+							},
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "noshabe",
+											"type": "text"
+										},
+										{
+											"key": "base_price",
+											"value": "2000",
+											"type": "text"
+										},
+										{
+											"key": "temp_price",
+											"value": "2000",
+											"type": "text"
+										},
+										{
+											"key": "count",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "photo",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "tagId",
+											"value": "1",
+											"type": "text"
+										},
+										{
+											"key": "categoryId",
+											"value": "4",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/product/add",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"product",
+										"add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update product",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\"productId\":1,\r\n            \"name\":\"salam\",\r\n            \"base_price\":242565,\r\n            \"temp_price\": 452445,\r\n            \"count\": 5,\r\n            \"description\": \"skjhdakjhsdskیییjahsdkjasd\",\r\n            \"activityStatus\":0\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/product/update",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"product",
+										"update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete product",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n          \"productId\":\"1\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/product/remove",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"product",
+										"remove"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "read products",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/product/list/999/0/?category=4,5&&tag=3",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"product",
+										"list",
+										"999",
+										"0",
+										""
+									],
+									"query": [
+										{
+											"key": "category",
+											"value": "4,5"
+										},
+										{
+											"key": null,
+											"value": ""
+										},
+										{
+											"key": "tag",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get one product",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/product/2/show",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"product",
+										"2",
+										"show"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "search products",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n            \"name\":\"ddsgdfgdfgdgdfggdf\",\r\n            \"base_price\":22565,\r\n            \"temp_price\": 452445,\r\n            \"count\": 5,\r\n            \"description\": \"skjhdakjhsdkjahsdkjasd\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/product/search/3/0/?search=mobsxxile&&tag=1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"product",
+										"search",
+										"3",
+										"0",
+										""
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "mobsxxile"
+										},
+										{
+											"key": null,
+											"value": ""
+										},
+										{
+											"key": "tag",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get comments of a product Copy",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/admin/product/4/comments/999/0",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"admin",
+										"product",
+										"4",
+										"comments",
+										"999",
+										"0"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get rating of a product",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/product/4/rating",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"product",
+										"4",
+										"rating"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "user",
+					"item": [
+						{
+							"name": "read products",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/product/list/999/0/?category=4,5&&tag=3",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"product",
+										"list",
+										"999",
+										"0",
+										""
+									],
+									"query": [
+										{
+											"key": "category",
+											"value": "4,5"
+										},
+										{
+											"key": null,
+											"value": ""
+										},
+										{
+											"key": "tag",
+											"value": "3"
+										}
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get comments of a product",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/product/4/comments/999/0",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"product",
+										"4",
+										"comments",
+										"999",
+										"0"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get one product",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/product/2/show",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"product",
+										"2",
+										"show"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "get rating of a product",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/product/7/rating",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"product",
+										"7",
+										"rating"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "search products",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n\r\n            \"name\":\"ddsgdfgdfgdgdfggdf\",\r\n            \"base_price\":22565,\r\n            \"temp_price\": 452445,\r\n            \"count\": 5,\r\n            \"description\": \"skjhdakjhsdkjahsdkjasd\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/product/search/3/0/?search=mobsxxile&&tag=1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"product",
+										"search",
+										"3",
+										"0",
+										""
+									],
+									"query": [
+										{
+											"key": "search",
+											"value": "mobsxxile"
+										},
+										{
+											"key": null,
+											"value": ""
+										},
+										{
+											"key": "tag",
+											"value": "1"
+										}
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "customer",
+			"item": [
+				{
+					"name": "login_register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const res = pm.response.json();\r",
+									"pm.collectionVariables.set('token', res.response.accessToken);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"phone\":\"09116986490\",\r\n    \"code\":2564\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/customer/login-register",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customer",
+								"login-register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add comment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"2\",\r\n    \"content\": \" my comment\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/product/addComment",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product",
+								"addComment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "add  rating",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"2\",\r\n    \"rating\": \"4\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/product/addRating",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"product",
+								"addRating"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "report comment",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"description\": \" my report\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/report/comment/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"report",
+								"comment",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "me",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/customer/me",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customer",
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit my profile",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n\"customerId\" :\"1\",\r\n\"email\":\"niloufsar@gmail.com\",\r\n\"fname\":\"nisloo\",\r\n\"address\":[\"4\",\"4\",\"5\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/customer/edit",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"customer",
+								"edit"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "edit customer by admin",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n\"customerId\" :\"1\",\r\n\"email\":\"niloufsar@gmail.com\",\r\n\"fname\":\"nisloo\",\r\n\"address\":[\"4\",\"4\",\"5\"]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/admin/editcustomer",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"admin",
+								"editcustomer"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "comments",
+			"item": [
+				{
+					"name": "read comments(admin)",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/comments/999/0/?visible=0&&productId=9",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"comments",
+								"999",
+								"0",
+								""
+							],
+							"query": [
+								{
+									"key": "visible",
+									"value": "0"
+								},
+								{
+									"key": null,
+									"value": ""
+								},
+								{
+									"key": "productId",
+									"value": "9"
+								}
+							]
+						},
+						"description": "- 999: number of indexes in page\n- 0: page number\n\n### filter for indexing commments:optional\nvisible :1\nindex visible comments\nvisible:0\nindex invisible comments\n\nproductd: comments for specefic product"
+					},
+					"response": []
+				},
+				{
+					"name": "read comment",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/comment/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"comment",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "visible/invisible comment",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"visible\":1\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/comment/updateStatus/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"comment",
+								"updateStatus",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "read reports",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"visible\":1\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/reports",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"reports"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "read report",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"visible\":1\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/reports/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"reports",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "read  unread report counts",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n\"visible\":1\r\n\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/reports/1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"reports",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "token",
+			"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwiaWF0IjoxNjM3NTY0MjE3LCJleHAiOjE2MzgxNjkwMTd9.gv-xdapUh35TgjBmiSUEQmKJlfuLOG6VDKYR_N8SVfg"
+		},
+		{
+			"key": "url",
+			"value": "localhost:3001"
+		}
+	]
+}
