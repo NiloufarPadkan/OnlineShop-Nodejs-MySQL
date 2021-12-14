@@ -9,11 +9,15 @@ const Brand = sequelize.define("brand", {
         allowNull: false,
         primaryKey: true,
     },
-    name: {
+    PersianName: {
         type: Sequelize.STRING,
         allowNull: false,
         trim: true,
-        unique: true,
+    },
+    EnglishName: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        trim: true,
     },
     photo: {
         type: Sequelize.STRING,

@@ -4,20 +4,15 @@ const Sequelize = require("sequelize");
 const Op = Sequelize.Op;
 exports.insertBrand = async (req, res, next) => {
     try {
-        const brand = req.body.name;
-        const duplicateBrand = await Brand.findOne({
-            where: {
-                name: brand,
-            },
-        });
-        if (duplicateBrand) {
-            return "alreadyExists";
-        }
+        const persianName = req.body.PersianName;
+        const englishName = req.body.EnglishName ? req.body.EnglishName : "";
+        console.log(englishName);
         let photoPath;
         if (req.file) photoPath = process.env.IMAGE_PREFIX + req.file.path;
         else photoPath = "";
         const newBrand = new Brand({
-            name: brand,
+            PersianName: persianName,
+            EnglishName: englishName,
             photo: photoPath,
         });
 
@@ -31,7 +26,7 @@ exports.insertBrand = async (req, res, next) => {
 
 exports.getbrand = async (req, res, next) => {
     try {
-        const limit = req.body.size ? req.body.size : 3;
+        const limit = req.body.size ? req.body.size : 999;
         const offset = req.body.page ? req.body.page * limit : 0;
         let searchString = req.query.search ? req.query.search : "";
 
@@ -39,9 +34,17 @@ exports.getbrand = async (req, res, next) => {
             limit: limit,
             offset: offset,
             where: {
-                name: { [Op.like]: "%" + searchString + "%" },
+                [Op.or]: [
+                    {
+                        PersianName: { [Op.like]: "%" + searchString + "%" },
+                    },
+                    {
+                        EnglishName: { [Op.like]: "%" + searchString + "%" },
+                    },
+                ],
             },
         });
+        //console.log(brands);
         return brands;
     } catch (e) {
         console.log(e);
@@ -51,20 +54,32 @@ exports.getbrand = async (req, res, next) => {
 
 exports.updatebrand = async (req) => {
     try {
-        if (!req.body.name) {
+        if (!req.body.PersianName) {
             return "nameEmpty";
         }
+
+        const persianName = req.body.PersianName;
+        const englishName = req.body.EnglishName ? req.body.EnglishName : "";
+
         const brandId = req.body.brandId;
         const foundBrand = await Brand.findByPk(brandId);
         if (!foundBrand) {
             return "brandNotFound";
         }
         const editedBrand = await Brand.findByPk(brandId).then((brand) => {
-            brand.title = req.body.title;
+            let photoPath;
+
+            if (req.file) photoPath = process.env.IMAGE_PREFIX + req.file.path;
+            else photoPath = brand.photo;
+
+            brand.PersianName = persianName;
+            brand.EnglishName = englishName;
+            brand.photo = photoPath;
             return brand.save();
         });
         return editedBrand;
     } catch (e) {
+        console.log(e);
         return "";
     }
 };

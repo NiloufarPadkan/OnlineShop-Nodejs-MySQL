@@ -94,8 +94,10 @@ exports.index = async (req, res, next) => {
 
     try {
         const brandIndexResponse = await brandService.getbrand(req);
-        if (brandIndexResponse != "") response.setStatus(200).setRes(brandIndexResponse);
+        // if (brandIndexResponse != "") {
+        response.setStatus(200).setRes(brandIndexResponse);
         return res.status(200).send(response.handler());
+        //}
     } catch (e) {
         response.setStatus(400).setMessage("fail").setRes(e);
         return res.status(400).send(response.handler());
