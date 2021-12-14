@@ -10,7 +10,7 @@ Online-Shop with express,sequlize
 
 2-To run this app, set your variables in .env file at the root of the project
 
--   port
+-   PORT
 
 -   JWT_KEY
 
@@ -24,9 +24,9 @@ Online-Shop with express,sequlize
 
 ## example :
 
-port =300
-JWT_KEY= "secretcode"
-EXPIRE_TIME= "1w
+PORT=3001
+JWT_KEY="secretcode"
+EXPIRE_TIME="1w"
 SQL_PORT="3306"
 IMAGE_PREFIX="http://localhost:3001/"
 
@@ -40,7 +40,7 @@ IMAGE_PREFIX="http://localhost:3001/"
 
 7- run seeders:
 
--   npx sequelize-cli db:seed --seed 20211109091139-roles --seed 20211109082457-permission 20211109090157-admins.js
+-   npx sequelize-cli db:seed --seed 20211109091139-roles 20211109082457-permission 20211109090157-admins.js
 -   npx sequelize-cli db:seed --seed 20211109091829-role-permission
 -   npx sequelize-cli db:seed --seed 20211214072252-tags 20211214072241-categories 20211214072157-brands
 
