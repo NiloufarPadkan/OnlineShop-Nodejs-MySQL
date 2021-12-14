@@ -54,13 +54,6 @@ exports.getbrand = async (req, res, next) => {
 
 exports.updatebrand = async (req) => {
     try {
-        if (!req.body.PersianName) {
-            return "nameEmpty";
-        }
-
-        const persianName = req.body.PersianName;
-        const englishName = req.body.EnglishName ? req.body.EnglishName : "";
-
         const brandId = req.body.brandId;
         const foundBrand = await Brand.findByPk(brandId);
         if (!foundBrand) {
@@ -68,6 +61,12 @@ exports.updatebrand = async (req) => {
         }
         const editedBrand = await Brand.findByPk(brandId).then((brand) => {
             let photoPath;
+            const persianName = req.body.PersianName
+                ? req.body.PersianName
+                : brand.PersianName;
+            const englishName = req.body.EnglishName
+                ? req.body.EnglishName
+                : brand.EnglishName;
 
             if (req.file) photoPath = process.env.IMAGE_PREFIX + req.file.path;
             else photoPath = brand.photo;
