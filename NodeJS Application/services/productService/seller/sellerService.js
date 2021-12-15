@@ -47,25 +47,33 @@ exports.indexProducts = async (req) => {
         filter.category = req.query.category ? req.query.category.split(",") : {};
         filter.tag = req.query.tag ? req.query.tag.split(",") : {};
         filter.brand = req.query.brand ? req.query.brand.split(",") : {};
+        filter.price = req.query.price ? req.query.price.split(",") : [0, 99990000];
+
         console.log(filter);
         const limit = req.params.size ? req.params.size : 3;
         const offset = req.params.page ? req.params.page * limit : 0;
-
         const products = await Product.findAll({
             limit: parseInt(limit),
             offset: parseInt(offset),
             include: [
-                { model: Category },
-                { model: Tag },
-                { model: Brand },
-
+                { model: Category, attributes: ["title"] },
+                //    { model: Tag, attributes: ["title"] },
+                { model: Brand, attributes: ["PersianName", "EnglishName"] },
+                // {
+                //     model: Product_Rating,
+                //     required: false,
+                //     attributes: ["rating"],
+                // },
                 {
                     model: Product_views,
                     required: false,
                     attributes: ["viewCount"],
-                    //  as: "views",
                 },
             ],
+            //ordering by views
+            //to do : add other orders
+            // order: [[Product_views, "viewCount", "desc"]],
+            // order: [["AvgRating", "DESC"]],
             where: {
                 "$Category.id$": {
                     [Op.or]: filter.category,
@@ -75,6 +83,9 @@ exports.indexProducts = async (req) => {
                 },
                 "$Tag.id$": {
                     [Op.or]: filter.tag,
+                },
+                base_price: {
+                    [Op.between]: filter.price,
                 },
             },
         });
@@ -112,7 +123,18 @@ exports.getOneProduct = async (req) => {
         const id = req.params.id;
 
         const products = await Product.findOne({
-            include: [{ model: Category }, { model: Tag }, { model: Brand }],
+            include: [
+                { model: Category, attributes: ["title"] },
+                { model: Tag, attributes: ["title"] },
+                { model: Brand, attributes: ["PersianName", "EnglishName"] },
+
+                {
+                    model: Product_views,
+                    required: false,
+                    attributes: ["viewCount"],
+                    //  as: "views",
+                },
+            ],
             where: {
                 id: id,
             },
@@ -138,7 +160,18 @@ exports.searchProducts = async (req) => {
         const products = await Product.findAll({
             limit: parseInt(limit),
             offset: parseInt(offset),
-            include: [{ model: Category }, { model: Tag }, { model: Brand }],
+            include: [
+                { model: Category, attributes: ["title"] },
+                { model: Tag, attributes: ["title"] },
+                { model: Brand, attributes: ["PersianName", "EnglishName"] },
+
+                {
+                    model: Product_views,
+                    required: false,
+                    attributes: ["viewCount"],
+                    //  as: "views",
+                },
+            ],
             where: {
                 [Op.or]: [
                     {

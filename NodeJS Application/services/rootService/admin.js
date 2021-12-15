@@ -31,6 +31,7 @@ exports.indexAdmins = async (req) => {
         const admins = await Admin.findAll({
             limit: parseInt(limit),
             offset: parseInt(offset),
+            attributes: { exclude: ["hash", "salt"] },
         });
         return admins;
     } catch (e) {

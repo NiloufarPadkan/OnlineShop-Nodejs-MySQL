@@ -92,9 +92,9 @@ Comment_report.belongsTo(Comment);
 Comment_report.belongsTo(Customer);
 Product.belongsTo(Category);
 Product.belongsTo(Brand);
-Product.belongsTo(Tag);
 Product_views.belongsTo(Product);
 Product.hasOne(Product_views);
+
 // Product.belongsToMany(Product_views, { through: Product_views });
 
 Permission.belongsToMany(Role, { through: rolePermission });

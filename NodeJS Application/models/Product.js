@@ -24,7 +24,7 @@ const Product = sequelize.define("product", {
         allowNull: false,
         trim: true,
     },
-    count: {
+    quantity: {
         type: Sequelize.INTEGER,
         allowNull: false,
     },
