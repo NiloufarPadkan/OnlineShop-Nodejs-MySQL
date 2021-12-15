@@ -7,6 +7,7 @@ const Comment = require("../../models/Comment");
 const Customer = require("../../models/Customer");
 const Product_views = require("../../models/Product_views");
 const Product_Rating = require("../../models/Customer_ProductRating");
+const Product_Tag = require("../../models/Product_tag");
 
 const Op = Sequelize.Op;
 
@@ -25,8 +26,9 @@ exports.indexProducts = async (req) => {
             limit: parseInt(limit),
             offset: parseInt(offset),
             include: [
+                //{ model: Product_Tag },
+
                 { model: Category },
-                // { model: Tag },
                 { model: Brand },
 
                 {

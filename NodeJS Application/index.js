@@ -29,6 +29,7 @@ const Product = require("./models/Product");
 const Category = require("./models/Category");
 const Brand = require("./models/Brand");
 const Tag = require("./models/Tag");
+const Product_tag = require("./models/Product_tag");
 const Comment = require("./models/Comment");
 const Customer = require("./models/Customer");
 const Comment_report = require("./models/Comment_report");
@@ -94,6 +95,12 @@ Product.belongsTo(Category);
 Product.belongsTo(Brand);
 Product_views.belongsTo(Product);
 Product.hasOne(Product_views);
+// Product_tag.belongsTo(Product);
+// Product_tag.belongsTo(Tag);
+Product.hasMany(Product_tag);
+Tag.hasMany(Product_tag);
+// Product.hasMany(Product_tag);
+//Tag.hasMany(Product_tag);
 
 // Product.belongsToMany(Product_views, { through: Product_views });
 
