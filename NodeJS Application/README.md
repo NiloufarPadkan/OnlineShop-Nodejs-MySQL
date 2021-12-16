@@ -42,7 +42,7 @@ IMAGE_PREFIX="http://localhost:3001/"
 
 -   npx sequelize-cli db:seed --seed 20211109091139-roles 20211109082457-permission 20211109090157-admins.js
 -   npx sequelize-cli db:seed --seed 20211109091829-role-permission
--   npx sequelize-cli db:seed --seed 20211214072252-tags 20211214072241-categories 20211214072157-brands
+-   npx sequelize-cli db:seed --seed 20211214072252-tags 20211214072241-categories 20211214072157-brands 20211215101044-products
 
 8-node index.js
 

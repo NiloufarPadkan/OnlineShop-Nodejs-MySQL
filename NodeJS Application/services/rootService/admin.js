@@ -31,6 +31,7 @@ exports.indexAdmins = async (req) => {
         const admins = await Admin.findAll({
             limit: parseInt(limit),
             offset: parseInt(offset),
+            attributes: { exclude: ["hash", "salt"] },
         });
         return admins;
     } catch (e) {
@@ -41,7 +42,7 @@ exports.indexAdmins = async (req) => {
 
 exports.updateAdmin = async (req) => {
     try {
-        const adminId = req.body.id;
+        const adminId = req.params.id;
         const foundAdmin = await Admin.findByPk(adminId);
         if (!foundAdmin) {
             return "adminNotFound";
@@ -80,14 +81,7 @@ exports.updateAdmin = async (req) => {
         const email = req.body.email ? req.body.email : foundAdmin.email;
 
         const phone = req.body.phone ? req.body.phone : foundAdmin.phone;
-
-        const hash = req.body.password
-            ? genPassword(req.body.password).hash
-            : foundAdmin.hash;
-
-        const salt = req.body.password
-            ? genPassword(req.body.password).salt
-            : foundAdmin.salt;
+        const saltHash = genPassword(req.body.password);
 
         const activity = req.body.activityStatus
             ? req.body.activityStatus
@@ -108,15 +102,14 @@ exports.updateAdmin = async (req) => {
 
             admin.phone = phone;
 
-            admin.hash = hash;
-
-            admin.salt = salt;
-
-            admin.activityStatus = activity;
+            admin.hash = saltHash.hash;
+            admin.salt = saltHash.salt;
 
             return admin.save();
         });
-        return upadmin;
+        let { ...savedAdmin } = upadmin.toJSON();
+
+        return savedAdmin;
     } catch (e) {
         console.log(e);
         return "";

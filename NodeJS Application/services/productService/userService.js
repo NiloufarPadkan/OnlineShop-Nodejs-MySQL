@@ -7,6 +7,7 @@ const Comment = require("../../models/Comment");
 const Customer = require("../../models/Customer");
 const Product_views = require("../../models/Product_views");
 const Product_Rating = require("../../models/Customer_ProductRating");
+const Product_Tag = require("../../models/Product_tag");
 
 const Op = Sequelize.Op;
 
@@ -25,14 +26,11 @@ exports.indexProducts = async (req) => {
             limit: parseInt(limit),
             offset: parseInt(offset),
             include: [
+                //{ model: Product_Tag },
+
                 { model: Category },
-                { model: Tag },
                 { model: Brand },
-                {
-                    model: Product_Rating,
-                    required: false,
-                    attributes: ["rating"],
-                },
+
                 {
                     model: Product_views,
                     required: false,
@@ -50,9 +48,9 @@ exports.indexProducts = async (req) => {
                 "$Brand.id$": {
                     [Op.or]: filter.brand,
                 },
-                "$Tag.id$": {
-                    [Op.or]: filter.tag,
-                },
+                // "$Tag.id$": {
+                //     [Op.or]: filter.tag,
+                // },
                 base_price: {
                     [Op.between]: filter.price,
                 },
@@ -147,18 +145,18 @@ exports.searchProducts = async (req) => {
         const products = await Product.findAll({
             limit: parseInt(limit),
             offset: parseInt(offset),
-            include: [{ model: Category }, { model: Tag }, { model: Brand }],
+            include: [{ model: Category }, { model: Brand }],
             where: {
                 [Op.or]: [
                     {
                         "$Category.title$": { [Op.like]: "%" + searchString + "%" },
                     },
                     {
-                        "$Brand.name$": { [Op.like]: "%" + searchString + "%" },
+                        "$Brand.PersianName$": { [Op.like]: "%" + searchString + "%" },
                     },
-                    {
-                        "$Tag.title$": { [Op.like]: "%" + searchString + "%" },
-                    },
+                    // {
+                    //     "$Tag.title$": { [Op.like]: "%" + searchString + "%" },
+                    // },
                     {
                         name: { [Op.like]: "%" + searchString + "%" },
                     },
@@ -169,9 +167,9 @@ exports.searchProducts = async (req) => {
                 "$Brand.id$": {
                     [Op.or]: filter.brand,
                 },
-                "$Tag.id$": {
-                    [Op.or]: filter.tag,
-                },
+                // "$Tag.id$": {
+                //     [Op.or]: filter.tag,
+                // },
                 activityStatus: 1,
             },
         });

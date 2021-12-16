@@ -15,7 +15,8 @@ exports.loginAdmin = async (req) => {
             },
         });
         if (!admin) return "adminNotFound";
-        if (admin.activityStatus === false) {
+        console.log(admin);
+        if (admin.activityStatus === 0) {
             return "yourAcoountIsNotActive";
         }
         const passwordValidation = validPassword(
@@ -23,6 +24,7 @@ exports.loginAdmin = async (req) => {
             admin.hash,
             admin.salt
         );
+        console.log(passwordValidation);
         if (!passwordValidation) return "invalidPassword";
         const accessToken = tokenGenerator(admin.id, admin.roleId);
         req.admin = admin;

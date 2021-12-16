@@ -46,9 +46,7 @@ exports.editProfile = async (req) => {
             ? genPassword(req.body.password).hash
             : foundAdmin.hash;
 
-        const salt = req.body.password
-            ? genPassword(req.body.password).salt
-            : foundAdmin.salt;
+        const saltHash = genPassword(req.body.password);
 
         const upadmin = await Admin.findByPk(adminId).then((admin) => {
             admin.username = username;
@@ -57,9 +55,8 @@ exports.editProfile = async (req) => {
 
             admin.phone = phone;
 
-            admin.hash = hash;
-
-            admin.salt = salt;
+            admin.hash = saltHash.hash;
+            admin.salt = saltHash.salt;
 
             return admin.save();
         });
