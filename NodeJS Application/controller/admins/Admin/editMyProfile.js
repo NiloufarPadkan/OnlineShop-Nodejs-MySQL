@@ -4,12 +4,12 @@ const editProfileService = require("../../../services/rootService/editProfile");
 exports.edit = async (req, res, next) => {
     let response = new Response();
     let ownsProfile = false;
-    if (req.admin) if (req.body.id === req.admin.id.toString()) ownsProfile = true;
+    // if (req.admin) if (req.body.id === req.admin.id.toString()) ownsProfile = true;
 
-    if (!ownsProfile) {
-        response.setStatus(404).setMessage("fail").setRes("notallowed");
-        return res.status(404).send(response.handler());
-    }
+    // if (!ownsProfile) {
+    //     response.setStatus(404).setMessage("fail").setRes("notallowed");
+    //     return res.status(404).send(response.handler());
+    // }
 
     try {
         const updatedAdminResponse = await editProfileService.editProfile(req);

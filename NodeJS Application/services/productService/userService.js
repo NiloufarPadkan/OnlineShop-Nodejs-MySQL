@@ -26,11 +26,10 @@ exports.indexProducts = async (req) => {
             limit: parseInt(limit),
             offset: parseInt(offset),
             include: [
-                //{ model: Product_Tag },
-
-                { model: Category },
-                { model: Brand },
-
+                { model: Category, where: { id: { [Op.or]: filter.category } } },
+                { model: Brand, where: { id: { [Op.or]: filter.brand } } },
+                { model: Product_Tag, where: { tagId: { [Op.or]: filter.tag } } },
+                //  { model: Tag, where: { tagId: { [Op.or]: filter.tag } } },
                 {
                     model: Product_views,
                     required: false,
@@ -42,15 +41,6 @@ exports.indexProducts = async (req) => {
             // order: [[Product_views, "viewCount", "desc"]],
             // order: [["AvgRating", "DESC"]],
             where: {
-                "$Category.id$": {
-                    [Op.or]: filter.category,
-                },
-                "$Brand.id$": {
-                    [Op.or]: filter.brand,
-                },
-                // "$Tag.id$": {
-                //     [Op.or]: filter.tag,
-                // },
                 base_price: {
                     [Op.between]: filter.price,
                 },
@@ -137,6 +127,7 @@ exports.searchProducts = async (req) => {
         filter.category = req.query.category ? req.query.category.split(",") : {};
         filter.tag = req.query.tag ? req.query.tag.split(",") : {};
         filter.brand = req.query.brand ? req.query.brand.split(",") : {};
+        filter.price = req.query.price ? req.query.price.split(",") : [0, 99990000];
 
         let searchString = req.query.search;
 
@@ -145,31 +136,39 @@ exports.searchProducts = async (req) => {
         const products = await Product.findAll({
             limit: parseInt(limit),
             offset: parseInt(offset),
-            include: [{ model: Category }, { model: Brand }],
+
+            include: [
+                {
+                    model: Category,
+                    where: {
+                        id: { [Op.or]: filter.category },
+                    },
+                },
+                { model: Brand, where: { id: { [Op.or]: filter.brand } } },
+                { model: Product_Tag, where: { tagId: { [Op.or]: filter.tag } } },
+                {
+                    model: Product_views,
+                    required: false,
+                    attributes: ["viewCount"],
+                },
+            ],
+            //ordering by views
+            //to do : add other orders
+            // order: [[Product_views, "viewCount", "desc"]],
+            // order: [["AvgRating", "DESC"]],
             where: {
+                base_price: {
+                    [Op.between]: filter.price,
+                },
                 [Op.or]: [
                     {
                         "$Category.title$": { [Op.like]: "%" + searchString + "%" },
                     },
-                    {
-                        "$Brand.PersianName$": { [Op.like]: "%" + searchString + "%" },
-                    },
-                    // {
-                    //     "$Tag.title$": { [Op.like]: "%" + searchString + "%" },
-                    // },
+
                     {
                         name: { [Op.like]: "%" + searchString + "%" },
                     },
                 ],
-                "$Category.id$": {
-                    [Op.or]: filter.category,
-                },
-                "$Brand.id$": {
-                    [Op.or]: filter.brand,
-                },
-                // "$Tag.id$": {
-                //     [Op.or]: filter.tag,
-                // },
                 activityStatus: 1,
             },
         });

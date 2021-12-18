@@ -1,10 +1,9 @@
 const Admin = require("../../models/Admin");
-
+const Role = require("../../models/Role");
 const genPassword = require("../../lib/passwordUtil").genPassword;
 
 exports.editProfile = async (req) => {
     try {
-        console.log("editing");
         const adminId = req.admin.id;
         const foundAdmin = await Admin.findByPk(adminId);
         if (!foundAdmin) {
@@ -36,31 +35,34 @@ exports.editProfile = async (req) => {
             return "duplicatePhone";
         }
 
-        const username = req.body.username ? req.body.username : foundAdmin.username;
-
-        const email = req.body.email ? req.body.email : foundAdmin.email;
-
-        const phone = req.body.phone ? req.body.phone : foundAdmin.phone;
-
-        const hash = req.body.password
-            ? genPassword(req.body.password).hash
-            : foundAdmin.hash;
-
         const saltHash = genPassword(req.body.password);
 
+        const foundRole = await Role.findByPk(req.body.roleId);
+        if (!foundRole) {
+            return "roleNotfound";
+        }
+
         const upadmin = await Admin.findByPk(adminId).then((admin) => {
-            admin.username = username;
+            admin.roleId = req.body.roleId ? req.body.roleId : admin.roleId;
 
-            admin.email = email;
+            admin.activityStatus = req.body.activityStatus
+                ? req.body.activityStatus
+                : foundAdmin.activityStatus;
 
-            admin.phone = phone;
+            admin.username = req.body.username ? req.body.username : admin.username;
+
+            admin.email = req.body.email ? req.body.email : admin.email;
+
+            admin.phone = req.body.phone ? req.body.phone : admin.email;
 
             admin.hash = saltHash.hash;
             admin.salt = saltHash.salt;
 
             return admin.save();
         });
-        return upadmin;
+        let { salt, hash, ...savedAdmin } = upadmin.toJSON();
+
+        return savedAdmin;
     } catch (e) {
         console.log(e);
         return "";

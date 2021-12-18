@@ -74,40 +74,32 @@ exports.updateAdmin = async (req) => {
             return "duplicatePhone";
         }
 
-        const roleId = req.body.roleId ? req.body.roleId : foundAdmin.roleId;
-
-        const username = req.body.username ? req.body.username : foundAdmin.username;
-
-        const email = req.body.email ? req.body.email : foundAdmin.email;
-
-        const phone = req.body.phone ? req.body.phone : foundAdmin.phone;
         const saltHash = genPassword(req.body.password);
 
-        const activity = req.body.activityStatus
-            ? req.body.activityStatus
-            : foundAdmin.activityStatus;
-        const foundRole = await Role.findByPk(roleId);
+        const foundRole = await Role.findByPk(req.body.roleId);
         if (!foundRole) {
             return "roleNotfound";
         }
 
         const upadmin = await Admin.findByPk(adminId).then((admin) => {
-            admin.roleId = roleId;
+            admin.roleId = req.body.roleId ? req.body.roleId : admin.roleId;
 
-            admin.activityStatus = activity;
+            admin.activityStatus = req.body.activityStatus
+                ? req.body.activityStatus
+                : foundAdmin.activityStatus;
 
-            admin.username = username;
+            admin.username = req.body.username ? req.body.username : admin.username;
 
-            admin.email = email;
+            admin.email = req.body.email ? req.body.email : admin.email;
 
-            admin.phone = phone;
+            admin.phone = req.body.phone ? req.body.phone : admin.email;
 
             admin.hash = saltHash.hash;
             admin.salt = saltHash.salt;
 
             return admin.save();
         });
-        let { ...savedAdmin } = upadmin.toJSON();
+        let { salt, hash, ...savedAdmin } = upadmin.toJSON();
 
         return savedAdmin;
     } catch (e) {
@@ -116,7 +108,7 @@ exports.updateAdmin = async (req) => {
     }
 };
 exports.destroyAdmin = async (req) => {
-    const adminId = req.body.id;
+    const adminId = req.params.id;
     try {
         const admin = await Admin.destroy({
             where: {
