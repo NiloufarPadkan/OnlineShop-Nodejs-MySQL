@@ -8,7 +8,7 @@ exports.add = async (req, res, next) => {
         customer_ProductRating = await Customer_ProductRating.findOne({
             where: {
                 customerId: req.customer.id,
-                productId: req.body.id,
+                productId: req.params.id,
             },
         });
         if (customer_ProductRating !== null) {
@@ -18,20 +18,20 @@ exports.add = async (req, res, next) => {
             customer_ProductRating = new Customer_ProductRating({
                 rating: req.body.rating,
                 customerId: req.customer.id,
-                productId: req.body.id,
+                productId: req.params.id,
             });
             await customer_ProductRating.save();
         }
         let avgRating = await Customer_ProductRating.findAll({
             where: {
-                productId: req.body.id,
+                productId: req.params.id,
             },
             raw: true,
             attributes: [[Sequelize.fn("AVG", Sequelize.col("rating")), "average"]],
         });
         const p = await Product.findOne({
             where: {
-                id: req.body.id,
+                id: req.params.id,
             },
         }).then((p) => {
             p.AvgRating = Object.values(avgRating[0]);

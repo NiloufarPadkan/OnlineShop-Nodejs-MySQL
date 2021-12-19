@@ -108,7 +108,7 @@ exports.getOneProduct = async (req) => {
         });
 
         const products = await Product.findOne({
-            include: [{ model: Category }, { model: Tag }, { model: Brand }],
+            include: [{ model: Category }, { model: Brand }],
             where: {
                 id: id,
                 activityStatus: 1,
@@ -144,6 +144,12 @@ exports.searchProducts = async (req) => {
                         id: { [Op.or]: filter.category },
                     },
                 },
+                // {
+                //     model: Tag,
+                //     // where: {
+                //     //     id: { [Op.or]: filter.category },
+                //     // },
+                // },
                 { model: Brand, where: { id: { [Op.or]: filter.brand } } },
                 { model: Product_Tag, where: { tagId: { [Op.or]: filter.tag } } },
                 {

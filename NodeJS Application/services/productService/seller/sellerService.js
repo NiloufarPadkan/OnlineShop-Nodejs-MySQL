@@ -111,7 +111,7 @@ exports.getOneProduct = async (req) => {
         const products = await Product.findOne({
             include: [
                 { model: Category, attributes: ["title"] },
-                { model: Tag, attributes: ["title"] },
+                //  { model: Tag, attributes: ["title"] },
                 { model: Brand, attributes: ["PersianName", "EnglishName"] },
 
                 {
@@ -194,7 +194,7 @@ exports.searchProducts = async (req) => {
 
 exports.updateProduct = async (req) => {
     try {
-        const productId = req.body.productId;
+        const productId = req.params.id;
         const foundProduct = await Product.findByPk(productId);
         if (!foundProduct) {
             return "productNotFound";
