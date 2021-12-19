@@ -8,6 +8,7 @@ const Customer = require("../../models/Customer");
 const Product_views = require("../../models/Product_views");
 const Product_Rating = require("../../models/Customer_ProductRating");
 const Product_Tag = require("../../models/Product_tag");
+const Product_tag = require("../../models/Product_tag");
 
 const Op = Sequelize.Op;
 
@@ -25,11 +26,22 @@ exports.indexProducts = async (req) => {
         const products = await Product.findAll({
             limit: parseInt(limit),
             offset: parseInt(offset),
+            nested: false,
             include: [
                 { model: Category, where: { id: { [Op.or]: filter.category } } },
                 { model: Brand, where: { id: { [Op.or]: filter.brand } } },
-                { model: Product_Tag, where: { tagId: { [Op.or]: filter.tag } } },
-                //  { model: Tag, where: { tagId: { [Op.or]: filter.tag } } },
+
+                {
+                    model: Tag,
+                    required: false,
+                    // exclude: [{ model: Product_tag }],
+                    where: { id: { [Op.or]: filter.tag } },
+                },
+                // {
+                //     model: Product_tag,
+                //     required: false,
+                //     where: { tagId: { [Op.or]: filter.tag } },
+                // },
                 {
                     model: Product_views,
                     required: false,
@@ -136,7 +148,7 @@ exports.searchProducts = async (req) => {
         const products = await Product.findAll({
             limit: parseInt(limit),
             offset: parseInt(offset),
-
+            subQuery: false,
             include: [
                 {
                     model: Category,
@@ -144,12 +156,10 @@ exports.searchProducts = async (req) => {
                         id: { [Op.or]: filter.category },
                     },
                 },
-                // {
-                //     model: Tag,
-                //     // where: {
-                //     //     id: { [Op.or]: filter.category },
-                //     // },
-                // },
+                {
+                    model: Tag,
+                    required: true,
+                },
                 { model: Brand, where: { id: { [Op.or]: filter.brand } } },
                 { model: Product_Tag, where: { tagId: { [Op.or]: filter.tag } } },
                 {
@@ -166,16 +176,13 @@ exports.searchProducts = async (req) => {
                 base_price: {
                     [Op.between]: filter.price,
                 },
-                [Op.or]: [
-                    {
-                        "$Category.title$": { [Op.like]: "%" + searchString + "%" },
-                    },
-
-                    {
-                        name: { [Op.like]: "%" + searchString + "%" },
-                    },
-                ],
                 activityStatus: 1,
+
+                [Op.or]: [
+                    { name: { [Op.like]: "%" + searchString + "%" } },
+
+                    { "$Tags.title$": { [Op.like]: "%" + searchString + "%" } },
+                ],
             },
         });
         if (!products) {
