@@ -49,12 +49,12 @@ exports.updateAdmin = async (req) => {
         }
         const role = (await foundAdmin.getRole()).role; /*get role of admin*/
         if (role === "root") return "rootCantBeEdited";
+
         const username = req.body.username ? req.body.username : foundAdmin.username;
-
         const email = req.body.email ? req.body.email : foundAdmin.email;
-
         const phone = req.body.phone ? req.body.phone : foundAdmin.phone;
         const roleId = req.body.roleId ? req.body.roleId : foundAdmin.roleId;
+
         const duplicateUsername = await Admin.findOne({
             where: {
                 username: username,

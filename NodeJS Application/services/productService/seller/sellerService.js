@@ -16,15 +16,15 @@ exports.insertProduct = async (req) => {
         // if (!req.body.categoryId || !req.body.brandId) {
         //     return "categoryOrBrandEmpty";
         // }
+
         let photoPath = req.files;
         //console.log(Object.values(pathes));
         let pathArray = Object.values(photoPath).map((a) => a.path);
-
         const newProduct = new Product({
             name: req.body.name,
             base_price: req.body.base_price,
             temp_price: req.body.temp_price,
-            count: req.body.count,
+            quantity: parseInt(req.body.quantity),
             description: req.body.description,
             activityStatus: req.body.activityStatus,
             categoryId: req.body.categoryId,
