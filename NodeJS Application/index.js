@@ -97,15 +97,15 @@ Product_views.belongsTo(Product);
 Product.hasOne(Product_views);
 // Product_tag.belongsTo(Product);
 // Product_tag.belongsTo(Tag);
-Product.hasMany(Product_tag);
-Tag.hasMany(Product_tag);
+
 // Product.hasMany(Product_tag);
-//Tag.hasMany(Product_tag);
+// Tag.hasMany(Product_tag);
+Product.belongsToMany(Tag, { through: Product_tag });
+Tag.belongsToMany(Product, { through: Product_tag });
+Product.hasMany(Product_tag);
 
 // Product.belongsToMany(Product_views, { through: Product_views });
 
-Permission.belongsToMany(Role, { through: rolePermission });
-Role.belongsToMany(Permission, { through: rolePermission });
 //Product.belongsToMany(Customer, { through: Product_Rating });
 Product.hasMany(Customer_ProductRating);
 
@@ -121,7 +121,6 @@ Product.belongsToMany(Cart, { through: CartItem });
 Order.belongsTo(Customer);
 Customer.hasMany(Order);
 Order.belongsToMany(Product, { through: OrderItem });
-
 Permission.belongsToMany(Role, { through: rolePermission });
 Role.belongsToMany(Permission, { through: rolePermission });
 

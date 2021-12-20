@@ -15,7 +15,7 @@ router.post(
 );
 router.get("/admin/list/:size/:page", verifyToken, adminController.index);
 router.put("/admin/:id/edit", verifyToken, adminController.update);
-router.delete("/admin/delete", verifyToken, adminController.destroy);
+router.delete("/admin/:id/delete", verifyToken, adminController.destroy);
 router.put("/admin/update/credentials", verifyToken, credentialController.update);
 
 module.exports = router;

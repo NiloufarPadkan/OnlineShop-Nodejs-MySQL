@@ -15,8 +15,8 @@ router.get("/product/:id/show", productController.show);
 router.get("/product/:id/comments/:size/:page", commentController.show);
 router.get("/product/:id/rating", ratingController.show);
 
-router.post("/product/addComment", verifyToken, addComment.addComment);
-router.post("/product/addRating", verifyToken, ratingController.addRating);
+router.post("/product/:id/addComment", verifyToken, addComment.addComment);
+router.post("/product/:id/addRating", verifyToken, ratingController.addRating);
 router.post("/report/comment/:id", verifyToken, reportComment.report);
 
 module.exports = router;

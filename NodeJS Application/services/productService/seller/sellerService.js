@@ -16,15 +16,15 @@ exports.insertProduct = async (req) => {
         // if (!req.body.categoryId || !req.body.brandId) {
         //     return "categoryOrBrandEmpty";
         // }
+
         let photoPath = req.files;
         //console.log(Object.values(pathes));
         let pathArray = Object.values(photoPath).map((a) => a.path);
-
         const newProduct = new Product({
             name: req.body.name,
             base_price: req.body.base_price,
             temp_price: req.body.temp_price,
-            count: req.body.count,
+            quantity: parseInt(req.body.quantity),
             description: req.body.description,
             activityStatus: req.body.activityStatus,
             categoryId: req.body.categoryId,
@@ -40,7 +40,6 @@ exports.insertProduct = async (req) => {
         return "";
     }
 };
-
 exports.indexProducts = async (req) => {
     try {
         let filter = {};
@@ -56,14 +55,10 @@ exports.indexProducts = async (req) => {
             limit: parseInt(limit),
             offset: parseInt(offset),
             include: [
-                { model: Category, attributes: ["title"] },
-                //    { model: Tag, attributes: ["title"] },
-                { model: Brand, attributes: ["PersianName", "EnglishName"] },
-                // {
-                //     model: Product_Rating,
-                //     required: false,
-                //     attributes: ["rating"],
-                // },
+                { model: Category, where: { id: { [Op.or]: filter.category } } },
+                { model: Brand, where: { id: { [Op.or]: filter.brand } } },
+                { model: Product_Tag, where: { tagId: { [Op.or]: filter.tag } } },
+                //  { model: Tag, where: { tagId: { [Op.or]: filter.tag } } },
                 {
                     model: Product_views,
                     required: false,
@@ -75,15 +70,6 @@ exports.indexProducts = async (req) => {
             // order: [[Product_views, "viewCount", "desc"]],
             // order: [["AvgRating", "DESC"]],
             where: {
-                "$Category.id$": {
-                    [Op.or]: filter.category,
-                },
-                "$Brand.id$": {
-                    [Op.or]: filter.brand,
-                },
-                "$Tag.id$": {
-                    [Op.or]: filter.tag,
-                },
                 base_price: {
                     [Op.between]: filter.price,
                 },
@@ -125,7 +111,7 @@ exports.getOneProduct = async (req) => {
         const products = await Product.findOne({
             include: [
                 { model: Category, attributes: ["title"] },
-                { model: Tag, attributes: ["title"] },
+                //  { model: Tag, attributes: ["title"] },
                 { model: Brand, attributes: ["PersianName", "EnglishName"] },
 
                 {
@@ -152,6 +138,7 @@ exports.searchProducts = async (req) => {
         filter.category = req.query.category ? req.query.category.split(",") : {};
         filter.tag = req.query.tag ? req.query.tag.split(",") : {};
         filter.brand = req.query.brand ? req.query.brand.split(",") : {};
+        filter.price = req.query.price ? req.query.price.split(",") : [0, 99990000];
 
         let searchString = req.query.search;
 
@@ -160,42 +147,39 @@ exports.searchProducts = async (req) => {
         const products = await Product.findAll({
             limit: parseInt(limit),
             offset: parseInt(offset),
-            include: [
-                { model: Category, attributes: ["title"] },
-                { model: Tag, attributes: ["title"] },
-                { model: Brand, attributes: ["PersianName", "EnglishName"] },
 
+            include: [
+                {
+                    model: Category,
+                    where: {
+                        id: { [Op.or]: filter.category },
+                    },
+                },
+                { model: Brand, where: { id: { [Op.or]: filter.brand } } },
+                { model: Product_Tag, where: { tagId: { [Op.or]: filter.tag } } },
                 {
                     model: Product_views,
                     required: false,
                     attributes: ["viewCount"],
-                    //  as: "views",
                 },
             ],
+            //ordering by views
+            //to do : add other orders
+            // order: [[Product_views, "viewCount", "desc"]],
+            // order: [["AvgRating", "DESC"]],
             where: {
+                base_price: {
+                    [Op.between]: filter.price,
+                },
                 [Op.or]: [
                     {
                         "$Category.title$": { [Op.like]: "%" + searchString + "%" },
                     },
-                    {
-                        "$Brand.name$": { [Op.like]: "%" + searchString + "%" },
-                    },
-                    {
-                        "$Tag.title$": { [Op.like]: "%" + searchString + "%" },
-                    },
+
                     {
                         name: { [Op.like]: "%" + searchString + "%" },
                     },
                 ],
-                "$Category.id$": {
-                    [Op.or]: filter.category,
-                },
-                "$Brand.id$": {
-                    [Op.or]: filter.brand,
-                },
-                "$Tag.id$": {
-                    [Op.or]: filter.tag,
-                },
             },
         });
         if (!products) {
@@ -210,7 +194,7 @@ exports.searchProducts = async (req) => {
 
 exports.updateProduct = async (req) => {
     try {
-        const productId = req.body.productId;
+        const productId = req.params.id;
         const foundProduct = await Product.findByPk(productId);
         if (!foundProduct) {
             return "productNotFound";

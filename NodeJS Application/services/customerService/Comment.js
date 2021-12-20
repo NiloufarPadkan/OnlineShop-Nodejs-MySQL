@@ -5,7 +5,7 @@ exports.add = async (req, res, next) => {
         const comment = new Comment({
             content: req.body.content,
             customerId: req.customer.id,
-            productId: req.body.id,
+            productId: req.params.id,
         });
         const newComment = await comment.save();
 
@@ -19,15 +19,18 @@ exports.report = async (req, res, next) => {
     try {
         const description = req.body.description;
         const commentId = req.params.id;
+        const comment = await Comment.findOne({ where: { id: commentId } });
+        if (!comment) return "comentNotFound";
+        else {
+            const comment_report = new Comment_report({
+                description: description,
+                commentId: commentId,
+                customerId: req.customer.id,
+            });
+            const newReport = await comment_report.save();
 
-        const comment_report = new Comment_report({
-            description: description,
-            commentId: commentId,
-            customerId: req.customer.id,
-        });
-        const newReport = await comment_report.save();
-
-        return newReport;
+            return newReport;
+        }
     } catch (e) {
         console.log(e);
         return "";

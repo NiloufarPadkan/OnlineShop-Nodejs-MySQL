@@ -9,7 +9,7 @@ const { verifyToken } = require("../../middleware/verification/adminLoginVerify"
 const upload = require("../../middleware/upload").upload;
 
 router.post("/product/add", verifyToken, upload.any("photo"), productController.store);
-router.put("/product/update", verifyToken, productController.update);
+router.put("/product/:id/update", verifyToken, productController.update);
 router.delete("/product/remove", verifyToken, productController.destroy);
 
 router.get("/comments/:size/:page", verifyToken, commentController.index);
