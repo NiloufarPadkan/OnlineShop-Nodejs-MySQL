@@ -1,8 +1,6 @@
 package io.github.shuoros.iec.service;
 
-import io.github.shuoros.iec.model.Admin;
 import io.github.shuoros.iec.model.Chat;
-import io.github.shuoros.iec.repository.AdminRepository;
 import io.github.shuoros.iec.repository.ChatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
