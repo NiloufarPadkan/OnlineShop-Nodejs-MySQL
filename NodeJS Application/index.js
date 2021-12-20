@@ -109,22 +109,38 @@ Product.hasMany(Product_tag);
 //Product.belongsToMany(Customer, { through: Product_Rating });
 Product.hasMany(Customer_ProductRating);
 
-Customer.belongsToMany(Product, { through: Customer_ProductRating });
-Product.belongsToMany(Customer, { through: Customer_ProductRating });
+Customer.belongsToMany(Product, {
+    through: Customer_ProductRating,
+});
+Product.belongsToMany(Customer, {
+    through: Customer_ProductRating,
+});
 
-Product.belongsToMany(UserType, { through: TypePrice });
+Product.belongsToMany(UserType, {
+    through: TypePrice,
+});
 
 Customer.hasOne(Cart);
 Cart.belongsTo(Customer);
-Cart.belongsToMany(Product, { through: CartItem });
-Product.belongsToMany(Cart, { through: CartItem });
+Cart.belongsToMany(Product, {
+    through: CartItem,
+});
+Product.belongsToMany(Cart, {
+    through: CartItem,
+});
 Order.belongsTo(Customer);
 Customer.hasMany(Order);
-Order.belongsToMany(Product, { through: OrderItem });
-Permission.belongsToMany(Role, { through: rolePermission });
+Order.belongsToMany(Product, {
+    through: OrderItem,
+});
+Permission.belongsToMany(Role, {
+    through: rolePermission,
+});
 Role.belongsToMany(Permission, { through: rolePermission });
 
-Product.belongsToMany(UserType, { through: TypePrice });
+Product.belongsToMany(UserType, {
+    through: TypePrice,
+});
 // Comment.belongsToMany(Product, { through: Product_comment });
 sequelize.sync({});
 

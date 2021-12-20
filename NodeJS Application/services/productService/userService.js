@@ -26,22 +26,16 @@ exports.indexProducts = async (req) => {
         const products = await Product.findAll({
             limit: parseInt(limit),
             offset: parseInt(offset),
-            nested: false,
+            subQuery: false,
+
             include: [
                 { model: Category, where: { id: { [Op.or]: filter.category } } },
                 { model: Brand, where: { id: { [Op.or]: filter.brand } } },
-
                 {
                     model: Tag,
                     required: false,
-                    // exclude: [{ model: Product_tag }],
-                    where: { id: { [Op.or]: filter.tag } },
+                    exclude: [{ model: Product_tag }],
                 },
-                // {
-                //     model: Product_tag,
-                //     required: false,
-                //     where: { tagId: { [Op.or]: filter.tag } },
-                // },
                 {
                     model: Product_views,
                     required: false,
@@ -50,12 +44,13 @@ exports.indexProducts = async (req) => {
             ],
             //ordering by views
             //to do : add other orders
-            // order: [[Product_views, "viewCount", "desc"]],
+            //  order: [[Product_views, "viewCount", "desc"]],
             // order: [["AvgRating", "DESC"]],
             where: {
                 base_price: {
                     [Op.between]: filter.price,
                 },
+                "$Tags.id$": { [Op.or]: filter.tag },
 
                 activityStatus: 1,
             },
@@ -91,8 +86,6 @@ exports.getProductComments = async (req) => {
 };
 
 exports.getOneProduct = async (req) => {
-    // console.log(req.socket.remoteAddress);
-
     try {
         const id = req.params.id;
         const viewersIp = await Product_views.findOne({
@@ -158,10 +151,11 @@ exports.searchProducts = async (req) => {
                 },
                 {
                     model: Tag,
+                    exclude: [{ model: Product_tag }],
+
                     required: true,
                 },
                 { model: Brand, where: { id: { [Op.or]: filter.brand } } },
-                { model: Product_Tag, where: { tagId: { [Op.or]: filter.tag } } },
                 {
                     model: Product_views,
                     required: false,

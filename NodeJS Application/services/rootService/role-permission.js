@@ -29,7 +29,7 @@ async function cache(roleId) {
 
 exports.AssignPermission = async (req, res, next) => {
     try {
-        const roleId = req.body.roleId;
+        const roleId = req.params.id;
         await RolePermission.destroy({
             where: {
                 roleId: roleId,

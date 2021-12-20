@@ -6,7 +6,7 @@ const { verifyToken } = require("../../../middleware/verification/adminLoginVeri
 
 router.post("/role", verifyToken, roleController.store);
 
-router.post("/role/addpermission", verifyToken, rolePermissionController.store);
+router.post("/role/:id/addpermission", verifyToken, rolePermissionController.store);
 router.get(
     "/role/:id/permissions",
     verifyToken,
