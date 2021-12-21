@@ -48,9 +48,9 @@ exports.indexProducts = async (req) => {
         filter.brand = req.query.brand ? req.query.brand.split(",") : {};
         filter.price = req.query.price ? req.query.price.split(",") : [0, 99990000];
 
-        console.log(filter);
-        const limit = req.params.size ? req.params.size : 3;
-        const offset = req.params.page ? req.params.page * limit : 0;
+        const limit = req.query.size ? req.query.size : 3;
+        const offset = req.query.page ? req.query.page * limit : 0;
+
         const products = await Product.findAll({
             limit: parseInt(limit),
             offset: parseInt(offset),
@@ -83,8 +83,8 @@ exports.indexProducts = async (req) => {
 };
 exports.getProductComments = async (req) => {
     try {
-        const limit = req.params.size ? req.params.size : 3;
-        const offset = req.params.page ? req.params.page * limit : 0;
+        const limit = req.query.size ? req.query.size : 3;
+        const offset = req.query.page ? req.query.page * limit : 0;
 
         const id = req.params.id;
         const comments = await Comment.findAll({
@@ -142,8 +142,8 @@ exports.searchProducts = async (req) => {
 
         let searchString = req.query.search;
 
-        const limit = req.params.size ? req.params.size : 3;
-        const offset = req.params.page ? req.params.page * limit : 0;
+        const limit = req.query.size ? req.query.size : 3;
+        const offset = req.query.page ? req.query.page * limit : 0;
         const products = await Product.findAll({
             limit: parseInt(limit),
             offset: parseInt(offset),

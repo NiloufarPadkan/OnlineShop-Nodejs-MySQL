@@ -28,8 +28,8 @@ exports.insertCategory = async (req, res, next) => {
 
 exports.getcategory = async (req, res, next) => {
     try {
-        const limit = req.params.size ? req.params.size : 3;
-        const offset = req.params.page ? req.params.page * limit : 0;
+        const limit = req.query.size ? req.query.size : 3;
+        const offset = req.query.page ? req.query.page * limit : 0;
         let searchString = req.query.search ? req.query.search : "";
 
         const categories = await Category.findAll({

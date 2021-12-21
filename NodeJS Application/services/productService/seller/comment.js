@@ -7,8 +7,8 @@ exports.indexComments = async (req) => {
         filter.visible = req.query.visible ? { visible: req.query.visible } : {};
         filter.productId = req.query.productId ? { productId: req.query.productId } : {};
 
-        const limit = req.params.size ? req.params.size : 3;
-        const offset = req.params.page ? req.params.page * limit : 0;
+        const limit = req.query.size ? req.query.size : 3;
+        const offset = req.query.page ? req.query.page * limit : 0;
         const comments = await Comment.findAll({
             limit: parseInt(limit),
             offset: parseInt(offset),

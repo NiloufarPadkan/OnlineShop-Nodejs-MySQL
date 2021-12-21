@@ -21,8 +21,8 @@ exports.insertRole = async (req) => {
 };
 exports.getRole = async (req) => {
     try {
-        const limit = req.params.size ? req.params.size : 3;
-        const offset = req.params.page ? req.params.page * limit : 0;
+        const limit = req.query.size ? req.query.size : 3;
+        const offset = req.query.page ? req.query.page * limit : 0;
         const roles = await Role.findAll({
             limit: parseInt(limit),
             offset: parseInt(offset),

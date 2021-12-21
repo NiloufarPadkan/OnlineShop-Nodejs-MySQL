@@ -8,11 +8,11 @@ const addComment = require("../../controller/customer/addComment");
 
 const reportComment = require("../../controller/customer/reportComment");
 
-router.get("/product/list/:size/:page", productController.index);
-router.get("/product/search/:size/:page", productController.search);
+router.get("/product/list", productController.index);
+router.get("/product/search", productController.search);
 router.get("/product/:id/show", productController.show);
 
-router.get("/product/:id/comments/:size/:page", commentController.show);
+router.get("/product/:id/comments", commentController.show);
 router.get("/product/:id/rating", ratingController.show);
 
 router.post("/product/:id/addComment", verifyToken, addComment.addComment);

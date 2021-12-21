@@ -26,13 +26,13 @@ exports.insertBrand = async (req, res, next) => {
 
 exports.getbrand = async (req, res, next) => {
     try {
-        const limit = req.body.size ? req.body.size : 999;
-        const offset = req.body.page ? req.body.page * limit : 0;
+        const limit = req.query.size ? req.query.size : 999;
+        const offset = req.query.page ? req.query.page * limit : 0;
         let searchString = req.query.search ? req.query.search : "";
 
         const brands = await Brand.findAll({
-            limit: limit,
-            offset: offset,
+            limit: parseInt(limit),
+            offset: parseInt(offset),
             where: {
                 [Op.or]: [
                     {
