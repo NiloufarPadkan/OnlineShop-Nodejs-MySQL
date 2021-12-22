@@ -43,6 +43,9 @@ const Product = sequelize.define("product", {
             return this.setDataValue("photo", JSON.stringify(val));
         },
     },
+    coverThumb: {
+        type: Sequelize.STRING,
+    },
     activityStatus: {
         type: Sequelize.BOOLEAN,
         defaultValue: false,

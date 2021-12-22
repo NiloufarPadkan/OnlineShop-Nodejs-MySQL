@@ -6,6 +6,7 @@ const Comment = require("../../../models/Comment");
 const Customer = require("../../../models/Customer");
 const Product_views = require("../../../models/Product_views");
 const Sequelize = require("sequelize");
+const sharp = require("sharp");
 
 const Op = Sequelize.Op;
 
@@ -18,8 +19,29 @@ exports.insertProduct = async (req) => {
         // }
 
         let photoPath = req.files;
-        //console.log(Object.values(pathes));
-        let pathArray = Object.values(photoPath).map((a) => a.path);
+        let pathArray = Object.values(photoPath).map(
+            (a) => process.env.IMAGE_PREFIX + a.path
+        );
+        let coverThumb = "";
+        sharp(req.files[0].path)
+            .resize(60, 60, { fit: "contain" })
+            .toFile(
+                "uploads/" + "thumbnail-" + req.files[0].originalname,
+                (err, sharp) => {
+                    if (err) {
+                        console.error(err);
+                        return err;
+                    } else {
+                        console.log(sharp);
+                    }
+                }
+            );
+        coverThumb =
+            process.env.IMAGE_PREFIX +
+            "uploads/" +
+            "thumbnail-" +
+            req.files[0].originalname;
+
         const newProduct = new Product({
             name: req.body.name,
             base_price: req.body.base_price,
@@ -29,6 +51,7 @@ exports.insertProduct = async (req) => {
             activityStatus: req.body.activityStatus,
             categoryId: req.body.categoryId,
             photo: pathArray,
+            coverThumb: coverThumb,
             tagId: req.body.tagId,
             brandId: req.body.brandId,
         });

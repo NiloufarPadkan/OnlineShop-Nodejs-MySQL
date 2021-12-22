@@ -1,13 +1,14 @@
 const { response } = require("express");
 const multer = require("multer");
 const Response = require("../services/responses/general");
+const sharp = require("sharp");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
         cb(null, "./uploads/");
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + file.originalname);
+        cb(null, file.originalname);
     },
 });
 const fileFilter = (req, file, cb) => {
