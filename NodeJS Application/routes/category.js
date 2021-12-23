@@ -2,12 +2,23 @@ const express = require("express");
 const router = express.Router();
 const categoryController = require("../controller/product/seller/categoryController");
 const { verifyToken } = require("../middleware/verification/adminLoginVerify");
+const upload = require("../middleware/upload").upload;
 
-router.post("/category/add", verifyToken, categoryController.store);
+router.post(
+    "/category/add",
+    verifyToken,
+    upload.single("photo"),
+    categoryController.store
+);
 
 router.get("/category", categoryController.index);
 router.put("/category/edit", verifyToken, categoryController.update);
-router.delete("/category/remove", verifyToken, categoryController.destroy);
+router.delete(
+    "/category/remove",
+    verifyToken,
+    upload.single("photo"),
+    categoryController.destroy
+);
 
 module.exports = router;
 // stor index update destory  show
