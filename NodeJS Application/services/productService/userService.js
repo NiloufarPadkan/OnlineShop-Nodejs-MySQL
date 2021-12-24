@@ -65,7 +65,7 @@ exports.getProductComments = async (req) => {
         const limit = req.query.size ? req.query.size : 3;
         const offset = req.query.page ? req.query.page * limit : 0;
 
-        const id = req.query.id;
+        const id = req.params.id;
         const comments = await Comment.findAll({
             include: [{ model: Customer }],
             where: {
@@ -73,7 +73,7 @@ exports.getProductComments = async (req) => {
                 visible: 1,
             },
             include: [{ model: Customer, attributes: ["fname", "lname"] }],
-
+            raw: true,
             limit: parseInt(limit),
             offset: parseInt(offset),
         });
@@ -86,7 +86,7 @@ exports.getProductComments = async (req) => {
 
 exports.getOneProduct = async (req) => {
     try {
-        const id = req.params.id;
+        const comments = await this.getProductComments(req);
         const viewersIp = await Product_views.findOne({
             where: {
                 productId: req.params.id,
@@ -104,7 +104,7 @@ exports.getOneProduct = async (req) => {
             } else {
                 let view = new Product_views({
                     IpList: req.socket.remoteAddress,
-                    productId: id,
+                    productId: req.params.id,
                     viewCount: 1,
                 });
                 return view.save({});
@@ -114,11 +114,14 @@ exports.getOneProduct = async (req) => {
         const products = await Product.findOne({
             include: [{ model: Category }, { model: Brand }],
             where: {
-                id: id,
+                id: req.params.id,
                 activityStatus: 1,
             },
+            raw: true,
         });
-        return products;
+
+        let result = { products, comments };
+        return result;
     } catch (e) {
         console.log(e);
         return "";

@@ -1,7 +1,6 @@
 const { response } = require("express");
 const multer = require("multer");
 const Response = require("../services/responses/general");
-const sharp = require("sharp");
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
