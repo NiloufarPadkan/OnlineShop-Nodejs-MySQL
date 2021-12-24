@@ -12,12 +12,6 @@ const Op = Sequelize.Op;
 
 exports.insertProduct = async (req) => {
     try {
-        //to do : uncomment this
-
-        // if (!req.body.categoryId || !req.body.brandId) {
-        //     return "categoryOrBrandEmpty";
-        // }
-
         let photoPath = req.files;
         let pathArray = Object.values(photoPath).map(
             (a) => process.env.IMAGE_PREFIX + a.path

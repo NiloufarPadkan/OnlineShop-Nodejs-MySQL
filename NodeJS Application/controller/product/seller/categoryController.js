@@ -22,7 +22,10 @@ exports.store = async (req, res, next) => {
     }
     try {
         const storedCategoryResponse = await categoryService.insertCategory(req);
-        if (storedCategoryResponse === "alreadyExists") {
+        if (
+            storedCategoryResponse === "alreadyExists" ||
+            storedCategoryResponse === "parentNotFound"
+        ) {
             response.setStatus(400).setMessage("fail").setRes("alreadyExists");
             return res.status(400).send(response.handler());
         }
@@ -95,6 +98,7 @@ exports.index = async (req, res, next) => {
 
     try {
         const catgeoryIndexResponse = await categoryService.getcategory(req);
+
         if (catgeoryIndexResponse != "") {
             response.setStatus(200).setRes(catgeoryIndexResponse);
             return res.status(200).send(response.handler());
