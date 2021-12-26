@@ -45,7 +45,7 @@ IMAGE_PREFIX="http://localhost:3001/"
 -   npx sequelize-cli db:seed --seed 20211214072252-tags 20211214072241-categories 20211214072157-brands 20211215101044-products
     8-node index.js
 
-[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/12694267-d5765185-2f2d-47ac-bae4-0cf88f887b37?action=collection%2Ffork&collection-url=entityId%3D12694267-d5765185-2f2d-47ac-bae4-0cf88f887b37%26entityType%3Dcollection%26workspaceId%3Dbefe7c4b-c8d0-4fb8-b443-7e4deccd31ff)
+
 
 ## Node modules
 
