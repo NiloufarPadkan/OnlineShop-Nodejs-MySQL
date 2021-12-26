@@ -15,6 +15,9 @@ const Category = sequelize.define("category", {
         trim: true,
         unique: true,
     },
+    name_slug: {
+        type: Sequelize.STRING,
+    },
     photo: {
         type: Sequelize.STRING,
         get: function () {
@@ -37,5 +40,20 @@ const Category = sequelize.define("category", {
         },
     },
 });
+function slug(titleStr) {
+    titleStr = titleStr.replace(/^\s+|\s+$/g, "");
+    titleStr = titleStr.toLowerCase();
+    //persian support
+    titleStr = titleStr
+        .replace(/[^a-z0-9_\s-ءاأإآؤئبتثجحخدذرزسشصضطظعغفقكلمنهويةى]#u/, "")
+        // Collapse whitespace and replace by -
+        .replace(/\s+/g, "-")
+        // Collapse dashes
+        .replace(/-+/g, "-");
+    return titleStr;
+}
 
+Category.beforeCreate(async (category, options) => {
+    category.name_slug = slug(category.name);
+});
 module.exports = Category;

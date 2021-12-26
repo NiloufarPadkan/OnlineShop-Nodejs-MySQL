@@ -153,29 +153,6 @@ exports.getProductComments = async (req) => {
 exports.getOneProduct = async (req) => {
     try {
         const comments = await this.getProductComments(req);
-        const viewersIp = await Product_views.findOne({
-            where: {
-                productId: req.params.id,
-            },
-        }).then((viewers) => {
-            if (viewers) {
-                let list = viewers.dataValues.IpList;
-                list = list.split(",");
-                if (!list.includes(req.socket.remoteAddress)) {
-                    list.push(req.socket.remoteAddress);
-                    viewers.viewCount = viewers.viewCount + 1;
-                }
-                viewers.IpList = list.toString();
-                return viewers.save();
-            } else {
-                let view = new Product_views({
-                    IpList: req.socket.remoteAddress,
-                    productId: req.params.id,
-                    viewCount: 1,
-                });
-                return view.save({});
-            }
-        });
 
         const products = await Product.findOne({
             include: [{ model: Category }, { model: Brand }],

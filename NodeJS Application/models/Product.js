@@ -14,6 +14,9 @@ const Product = sequelize.define("product", {
         allowNull: false,
         len: [4, 30],
     },
+    name_slug: {
+        type: Sequelize.STRING,
+    },
     base_price: {
         type: Sequelize.DECIMAL(20, 2),
         allowNull: false,
@@ -61,4 +64,20 @@ const Product = sequelize.define("product", {
     },
 });
 
+function slug(titleStr) {
+    titleStr = titleStr.replace(/^\s+|\s+$/g, "");
+    titleStr = titleStr.toLowerCase();
+    //persian support
+    titleStr = titleStr
+        .replace(/[^a-z0-9_\s-ءاأإآؤئبتثجحخدذرزسشصضطظعغفقكلمنهويةى]#u/, "")
+        // Collapse whitespace and replace by -
+        .replace(/\s+/g, "-")
+        // Collapse dashes
+        .replace(/-+/g, "-");
+    return titleStr;
+}
+
+Product.beforeCreate(async (product, options) => {
+    product.name_slug = slug(product.name);
+});
 module.exports = Product;

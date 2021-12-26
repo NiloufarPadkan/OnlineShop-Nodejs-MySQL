@@ -7,6 +7,7 @@ module.exports = {
                 activityStatus: true,
                 AvgRating: 0,
                 name: "دوچرخه المپیا مدل سامر Summer سایز 24",
+
                 base_price: "11000000",
                 temp_price: "10000000",
                 quantity: "2",
@@ -21,6 +22,8 @@ module.exports = {
                 activityStatus: true,
                 AvgRating: 0,
                 name: "دوچرخه جاینت سایز 26",
+                name_slug: "دوچرخه-جاینت-سایز-26",
+
                 base_price: "12000000",
                 temp_price: "12000000",
                 quantity: "3",
