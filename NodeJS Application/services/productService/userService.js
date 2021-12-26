@@ -20,6 +20,26 @@ exports.indexProducts = async (req) => {
         filter.brand = req.query.brand ? req.query.brand.split(",") : {};
         filter.price = req.query.price ? req.query.price.split(",") : [0, 99990000];
 
+        // let order = req.query.sortBy ? req.query.sortBy : "";
+        let sortBy = [];
+        switch (req.query.sortBy) {
+            case "mostViewd":
+                sortBy = [[Product_views, "viewCount", "desc"]];
+                break;
+            case "mostPopuler":
+                sortBy = [["AvgRating", "DESC"]];
+                break;
+            case "mostExpensive":
+                sortBy = [["base_price", "DESC"]];
+                break;
+            case "cheapest":
+                sortBy = [["base_price", "ASC"]];
+                break;
+            default:
+                sortBy = [[Product_views, "viewCount", "desc"]];
+        }
+
+        console.log(sortBy);
         const limit = req.query.size ? req.query.size : 3;
         const offset = req.query.page ? req.query.page * limit : 0;
         const products = await Product.findAll({
@@ -41,10 +61,9 @@ exports.indexProducts = async (req) => {
                     attributes: ["viewCount"],
                 },
             ],
-            //ordering by views
-            //to do : add other orders
-            //  order: [[Product_views, "viewCount", "desc"]],
-            // order: [["AvgRating", "DESC"]],
+
+            order: sortBy,
+
             where: {
                 base_price: {
                     [Op.between]: filter.price,
@@ -135,7 +154,24 @@ exports.searchProducts = async (req) => {
         filter.tag = req.query.tag ? req.query.tag.split(",") : {};
         filter.brand = req.query.brand ? req.query.brand.split(",") : {};
         filter.price = req.query.price ? req.query.price.split(",") : [0, 99990000];
-
+        // let order = req.query.sortBy ? req.query.sortBy : "";
+        let sortBy = [];
+        switch (req.query.sortBy) {
+            case "mostViewd":
+                sortBy = [[Product_views, "viewCount", "desc"]];
+                break;
+            case "mostPopuler":
+                sortBy = [["AvgRating", "DESC"]];
+                break;
+            case "mostExpensive":
+                sortBy = [["base_price", "DESC"]];
+                break;
+            case "cheapest":
+                sortBy = [["base_price", "ASC"]];
+                break;
+            default:
+                sortBy = [[Product_views, "viewCount", "desc"]];
+        }
         let searchString = req.query.search;
 
         const limit = req.query.size ? req.query.size : 3;
@@ -164,10 +200,8 @@ exports.searchProducts = async (req) => {
                     attributes: ["viewCount"],
                 },
             ],
-            //ordering by views
-            //to do : add other orders
-            // order: [[Product_views, "viewCount", "desc"]],
-            // order: [["AvgRating", "DESC"]],
+            order: sortBy,
+
             where: {
                 base_price: {
                     [Op.between]: filter.price,

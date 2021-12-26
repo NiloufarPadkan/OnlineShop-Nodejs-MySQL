@@ -2,10 +2,14 @@ const Product = require("../../../models/Product");
 const Category = require("../../../models/Category");
 const Tag = require("../../../models/Tag");
 const Brand = require("../../../models/Brand");
+const Sequelize = require("sequelize");
 const Comment = require("../../../models/Comment");
 const Customer = require("../../../models/Customer");
 const Product_views = require("../../../models/Product_views");
-const Sequelize = require("sequelize");
+const Product_Rating = require("../../../models/Customer_ProductRating");
+const Product_Tag = require("../../../models/Product_tag");
+const Product_tag = require("../../../models/Product_tag");
+
 const sharp = require("sharp");
 
 const Op = Sequelize.Op;
@@ -57,6 +61,7 @@ exports.insertProduct = async (req) => {
         return "";
     }
 };
+
 exports.indexProducts = async (req) => {
     try {
         let filter = {};
@@ -65,31 +70,55 @@ exports.indexProducts = async (req) => {
         filter.brand = req.query.brand ? req.query.brand.split(",") : {};
         filter.price = req.query.price ? req.query.price.split(",") : [0, 99990000];
 
+        // let order = req.query.sortBy ? req.query.sortBy : "";
+        let sortBy = [];
+        switch (req.query.sortBy) {
+            case "mostViewd":
+                sortBy = [[Product_views, "viewCount", "desc"]];
+                break;
+            case "mostPopuler":
+                sortBy = [["AvgRating", "DESC"]];
+                break;
+            case "mostExpensive":
+                sortBy = [["base_price", "DESC"]];
+                break;
+            case "cheapest":
+                sortBy = [["base_price", "ASC"]];
+                break;
+            default:
+                sortBy = [[Product_views, "viewCount", "desc"]];
+        }
+
+        console.log(sortBy);
         const limit = req.query.size ? req.query.size : 3;
         const offset = req.query.page ? req.query.page * limit : 0;
-
         const products = await Product.findAll({
             limit: parseInt(limit),
             offset: parseInt(offset),
+            subQuery: false,
+
             include: [
                 { model: Category, where: { id: { [Op.or]: filter.category } } },
                 { model: Brand, where: { id: { [Op.or]: filter.brand } } },
-                { model: Product_Tag, where: { tagId: { [Op.or]: filter.tag } } },
-                //  { model: Tag, where: { tagId: { [Op.or]: filter.tag } } },
+                {
+                    model: Tag,
+                    required: false,
+                    exclude: [{ model: Product_tag }],
+                },
                 {
                     model: Product_views,
                     required: false,
                     attributes: ["viewCount"],
                 },
             ],
-            //ordering by views
-            //to do : add other orders
-            // order: [[Product_views, "viewCount", "desc"]],
-            // order: [["AvgRating", "DESC"]],
+
+            order: sortBy,
+
             where: {
                 base_price: {
                     [Op.between]: filter.price,
                 },
+                "$Tags.id$": { [Op.or]: filter.tag },
             },
         });
         return products;
@@ -110,7 +139,7 @@ exports.getProductComments = async (req) => {
                 productId: id,
             },
             include: [{ model: Customer, attributes: ["fname", "lname"] }],
-
+            raw: true,
             limit: parseInt(limit),
             offset: parseInt(offset),
         });
@@ -123,26 +152,41 @@ exports.getProductComments = async (req) => {
 
 exports.getOneProduct = async (req) => {
     try {
-        const id = req.params.id;
+        const comments = await this.getProductComments(req);
+        const viewersIp = await Product_views.findOne({
+            where: {
+                productId: req.params.id,
+            },
+        }).then((viewers) => {
+            if (viewers) {
+                let list = viewers.dataValues.IpList;
+                list = list.split(",");
+                if (!list.includes(req.socket.remoteAddress)) {
+                    list.push(req.socket.remoteAddress);
+                    viewers.viewCount = viewers.viewCount + 1;
+                }
+                viewers.IpList = list.toString();
+                return viewers.save();
+            } else {
+                let view = new Product_views({
+                    IpList: req.socket.remoteAddress,
+                    productId: req.params.id,
+                    viewCount: 1,
+                });
+                return view.save({});
+            }
+        });
 
         const products = await Product.findOne({
-            include: [
-                { model: Category, attributes: ["title"] },
-                //  { model: Tag, attributes: ["title"] },
-                { model: Brand, attributes: ["PersianName", "EnglishName"] },
-
-                {
-                    model: Product_views,
-                    required: false,
-                    attributes: ["viewCount"],
-                    //  as: "views",
-                },
-            ],
+            include: [{ model: Category }, { model: Brand }],
             where: {
-                id: id,
+                id: req.params.id,
             },
+            raw: true,
         });
-        return products;
+
+        let result = { products, comments };
+        return result;
     } catch (e) {
         console.log(e);
         return "";
@@ -156,7 +200,24 @@ exports.searchProducts = async (req) => {
         filter.tag = req.query.tag ? req.query.tag.split(",") : {};
         filter.brand = req.query.brand ? req.query.brand.split(",") : {};
         filter.price = req.query.price ? req.query.price.split(",") : [0, 99990000];
-
+        // let order = req.query.sortBy ? req.query.sortBy : "";
+        let sortBy = [];
+        switch (req.query.sortBy) {
+            case "mostViewd":
+                sortBy = [[Product_views, "viewCount", "desc"]];
+                break;
+            case "mostPopuler":
+                sortBy = [["AvgRating", "DESC"]];
+                break;
+            case "mostExpensive":
+                sortBy = [["base_price", "DESC"]];
+                break;
+            case "cheapest":
+                sortBy = [["base_price", "ASC"]];
+                break;
+            default:
+                sortBy = [[Product_views, "viewCount", "desc"]];
+        }
         let searchString = req.query.search;
 
         const limit = req.query.size ? req.query.size : 3;
@@ -164,7 +225,7 @@ exports.searchProducts = async (req) => {
         const products = await Product.findAll({
             limit: parseInt(limit),
             offset: parseInt(offset),
-
+            subQuery: false,
             include: [
                 {
                     model: Category,
@@ -172,30 +233,31 @@ exports.searchProducts = async (req) => {
                         id: { [Op.or]: filter.category },
                     },
                 },
+                {
+                    model: Tag,
+                    exclude: [{ model: Product_tag }],
+
+                    required: true,
+                },
                 { model: Brand, where: { id: { [Op.or]: filter.brand } } },
-                { model: Product_Tag, where: { tagId: { [Op.or]: filter.tag } } },
                 {
                     model: Product_views,
                     required: false,
                     attributes: ["viewCount"],
                 },
             ],
-            //ordering by views
-            //to do : add other orders
-            // order: [[Product_views, "viewCount", "desc"]],
-            // order: [["AvgRating", "DESC"]],
+            order: sortBy,
+
             where: {
                 base_price: {
                     [Op.between]: filter.price,
                 },
-                [Op.or]: [
-                    {
-                        "$Category.title$": { [Op.like]: "%" + searchString + "%" },
-                    },
+                activityStatus: 1,
 
-                    {
-                        name: { [Op.like]: "%" + searchString + "%" },
-                    },
+                [Op.or]: [
+                    { name: { [Op.like]: "%" + searchString + "%" } },
+
+                    { "$Tags.title$": { [Op.like]: "%" + searchString + "%" } },
                 ],
             },
         });

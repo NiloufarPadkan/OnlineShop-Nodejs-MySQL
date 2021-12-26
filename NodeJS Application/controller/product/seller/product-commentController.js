@@ -1,6 +1,14 @@
 const sellerProductService = require("../../../services/productService/seller/sellerService");
 const Response = require("../../../services/responses/general");
+const Can = require("../../../services/can/can");
 
+exports.canAdmin = async (roleId, permissionTitle) => {
+    const can = await Can.can(roleId, permissionTitle);
+    if (!can) {
+        return false;
+    }
+    return true;
+};
 exports.show = async (req, res, next) => {
     let response = new Response();
     let permissionResult = false;
