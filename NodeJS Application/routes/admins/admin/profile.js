@@ -8,4 +8,3 @@ router.put("/admin/editprofile", verifyToken, editProfileController.edit);
 router.get("/admin/me", verifyToken, meController.me);
 
 module.exports = router;
-// stor index update destory  show
