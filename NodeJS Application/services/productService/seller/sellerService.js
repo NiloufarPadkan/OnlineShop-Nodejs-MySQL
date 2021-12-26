@@ -235,9 +235,8 @@ exports.searchProducts = async (req) => {
                 },
                 {
                     model: Tag,
+                    required: false,
                     exclude: [{ model: Product_tag }],
-
-                    required: true,
                 },
                 { model: Brand, where: { id: { [Op.or]: filter.brand } } },
                 {

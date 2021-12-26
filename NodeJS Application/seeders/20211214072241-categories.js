@@ -5,16 +5,30 @@ module.exports = {
         return queryInterface.bulkInsert("categories", [
             {
                 title: "دوچرخه",
+                activityStatus: 1,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
             {
                 title: "لوازم دوچرخه",
+                parentId: 1,
+                activityStatus: 1,
+
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                title: "زین",
+                parentId: 2,
+                activityStatus: 1,
+
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
             {
                 title: "قطعات دوچرخه",
+                parentId: 1,
+                activityStatus: 1,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
