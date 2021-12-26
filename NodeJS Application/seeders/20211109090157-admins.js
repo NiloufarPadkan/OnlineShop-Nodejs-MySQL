@@ -21,7 +21,7 @@ module.exports = {
                 activityStatus: 1,
                 hash: "cc2d46f55e6e2364d84761cd3bd238136cf8803ef5c98f2125e09991f660020913cd11d44d207c51d18307a26f016413d082db05ef57122da38ae2a6875306d6",
                 salt: "cef89a8ea6f6445b8e824a399200be501d1034cf35c19913075336692bbb9ae9",
-                roleId: 2,
+                roleId: 1,
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
