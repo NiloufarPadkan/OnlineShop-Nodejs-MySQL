@@ -9,8 +9,8 @@ const CartItem = sequelize.define("cartItem", {
         allowNull: false,
         primaryKey: true,
     },
-    quantity: Sequelize.INTEGER,
-    price: {
+    quantity: { type: Sequelize.INTEGER, defaultValue: 0 },
+    unit_price: {
         type: Sequelize.DECIMAL(20, 2),
         allowNull: false,
         trim: true,
