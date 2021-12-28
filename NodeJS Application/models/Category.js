@@ -15,7 +15,7 @@ const Category = sequelize.define("category", {
         trim: true,
         unique: true,
     },
-    name_slug: {
+    title_slug: {
         type: Sequelize.STRING,
     },
     photo: {
@@ -54,6 +54,6 @@ function slug(titleStr) {
 }
 
 Category.beforeCreate(async (category, options) => {
-    category.name_slug = slug(category.name);
+    category.title_slug = slug(category.title);
 });
 module.exports = Category;
