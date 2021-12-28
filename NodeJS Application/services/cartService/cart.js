@@ -6,9 +6,9 @@ exports.add = async (req, res, next) => {
         let fetchedCart;
         let product = await Product.findByPk(req.params.id);
         //todo :add middleware to check product quantity
-        if (product.quantity < 1 || parseInt(req.body.quantity) > product.quantity) {
-            return "outOfStock";
-        }
+        // if (product.quantity < 1 || parseInt(req.body.quantity) > product.quantity) {
+        //     return "outOfStock";
+        // }
 
         let customerId = req.customer.id;
         let cartId;
@@ -63,6 +63,7 @@ exports.add = async (req, res, next) => {
         await fetchedCart.save();
         return fetchedCart;
     } catch (e) {
+        console.log(e);
         return "";
     }
 };

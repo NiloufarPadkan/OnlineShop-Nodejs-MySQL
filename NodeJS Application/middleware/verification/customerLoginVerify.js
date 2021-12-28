@@ -24,6 +24,11 @@ const verifyToken = async (req, res, next) => {
                     .setRes("yourAcoountIsNotActive");
                 return res.status(400).send(response.handler());
             }
+        if (!foundCustomer) {
+            response.setStatus(400).setMessage("fail").setRes(dict.invalidToken);
+            return res.status(400).send(response.handler());
+        }
+
         req.customer = foundCustomer;
 
         next();

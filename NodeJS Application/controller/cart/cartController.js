@@ -5,10 +5,7 @@ exports.store = async (req, res, next) => {
     let response = new Response();
     try {
         const addToCartResponse = await cartService.add(req);
-        if (addToCartResponse === "outOfStock") {
-            response.setStatus(400).setMessage("fail").setRes(addToCartResponse);
-            return res.status(400).send(response.handler());
-        }
+
         if (addToCartResponse !== "") {
             response.setStatus(200).setRes(addToCartResponse);
             return res.status(200).send(response.handler());
