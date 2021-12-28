@@ -25,7 +25,7 @@ exports.update = async (req, res, next) => {
     try {
         const updatedCustomerRes = await editProfileService.updateCustomer(req);
         if (updatedCustomerRes === "customerNotFound") {
-            response.setStatus(403).setMessage("fail").setRes("customerNotFound");
+            response.setStatus(404).setMessage("fail").setRes("customerNotFound");
             return res.status(404).send(response.handler());
         }
 

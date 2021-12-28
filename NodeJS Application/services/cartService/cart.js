@@ -1,46 +1,87 @@
 const Cart = require("../../models/Cart");
 const CartItem = require("../../models/CartItem");
 const Product = require("../../models/Product");
-const { productExistence } = require("../../resources/dict");
 exports.add = async (req, res, next) => {
     try {
         let fetchedCart;
-        // const x = await req.customer.getCart();
-        // const y = await x.getProducts();
-        // return res.send(y);
-        let product;
-        product = await Product.findByPk(req.params.id);
+        let product = await Product.findByPk(req.params.id);
+        //todo :add middleware to check product quantity
+        if (product.quantity < 1 || parseInt(req.body.quantity) > product.quantity) {
+            return "outOfStock";
+        }
+
+        let customerId = req.customer.id;
+        let cartId;
+        let item;
         fetchedCart = await Cart.findOne({
+            where: {
+                customerId: customerId,
+            },
+        });
+
+        if (fetchedCart === null) {
+            fetchedCart = new Cart({
+                customerId: customerId,
+            });
+            await fetchedCart.save();
+        }
+        cartId = fetchedCart.id;
+
+        item = await CartItem.findOne({
+            where: {
+                cartId: cartId,
+                productId: product.id,
+            },
+        });
+        if (item === null) {
+            item = new CartItem({
+                cartId: cartId,
+                unit_price: product.base_price,
+                quantity: parseInt(req.body.quantity),
+                productId: product.id,
+            });
+        }
+        item.quantity = parseInt(req.body.quantity);
+        await item.save();
+        let cartItems = await CartItem.findAll({
+            where: {
+                cartId: cartId,
+            },
+            raw: true,
+        });
+
+        let totalQuantity = 0;
+        let totalPrice = 0;
+        cartItems.forEach(myFunction);
+
+        function myFunction(x) {
+            totalPrice += parseInt(x.quantity) * parseFloat(x.unit_price);
+            totalQuantity += parseInt(x.quantity);
+        }
+        fetchedCart.totalPrice = totalPrice;
+        fetchedCart.totalQuantity = totalQuantity;
+        await fetchedCart.save();
+        return fetchedCart;
+    } catch (e) {
+        return "";
+    }
+};
+exports.showCart = async (req, res, next) => {
+    //quantity ro midam ke front moghe namayesh cart age quantity kafi nabood bege out of stock shode
+    try {
+        let cart = await Cart.findOne({
             where: {
                 customerId: req.customer.id,
             },
-        }).then((fetchedCart) => {
-            CartItem.findOne({
-                where: {
-                    cartId: fetchedCart.id,
-                    productId: req.params.id,
+            include: [
+                {
+                    model: Product,
+                    attributes: ["id", "name", "quantity", "base_price", "temp_price"],
                 },
-            }).then((item) => {
-                if (item === null) {
-                    const cartItem = new CartItem({
-                        cartId: fetchedCart[0].id,
-                        quantity: 1,
-                        unit_price: product.base_price,
-                        productId: req.params.id,
-                    });
-                    return cartItem.save();
-                }
-                item.quantity = item.quantity + 1;
-
-                item.save();
-                fetchedCart.totalPrice =
-                    parseFloat(fetchedCart.totalPrice) + parseFloat(product.base_price);
-                fetchedCart.totalQuantity = fetchedCart.totalQuantity + 1;
-                fetchedCart.save();
-            });
-
-            res.send(fetchedCart);
+            ],
         });
+
+        return cart;
     } catch (e) {
         console.log(e);
         return "";
