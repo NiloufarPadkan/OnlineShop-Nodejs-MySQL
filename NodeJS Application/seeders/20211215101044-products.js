@@ -7,7 +7,6 @@ module.exports = {
                 activityStatus: true,
                 AvgRating: 0,
                 name: "دوچرخه المپیا مدل سامر Summer سایز 24",
-
                 base_price: "11000000",
                 temp_price: "10000000",
                 quantity: "2",

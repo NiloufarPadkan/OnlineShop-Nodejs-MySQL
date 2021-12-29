@@ -15,6 +15,7 @@ const Op = Sequelize.Op;
 exports.indexProducts = async (req) => {
     try {
         let filter = {};
+
         filter.category = req.query.category ? req.query.category.split(",") : {};
         filter.tag = req.query.tag ? req.query.tag.split(",") : {};
         filter.brand = req.query.brand ? req.query.brand.split(",") : {};

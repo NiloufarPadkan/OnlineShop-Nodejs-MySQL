@@ -5,6 +5,16 @@ const tokenGenerator = require("../../lib/jwtUtil").genToken;
 const redis = require("redis");
 const REDIS_PORT = process.env.REDIS_PORT || 6379;
 
+// app.use(
+//     session({
+//         secret: "ssshhhhh",
+//         saveUninitialized: false,
+//         resave: false,
+//         store: new SequelizeStore({
+//             db: sequelize,
+//         }),
+//     })
+// );
 const client = redis.createClient(REDIS_PORT);
 
 exports.loginAdmin = async (req) => {
@@ -15,7 +25,6 @@ exports.loginAdmin = async (req) => {
             },
         });
         if (!admin) return "adminNotFound";
-        console.log(admin);
         if (admin.activityStatus === 0) {
             return "yourAcoountIsNotActive";
         }
