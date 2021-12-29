@@ -25,7 +25,6 @@ exports.loginAdmin = async (req) => {
             },
         });
         if (!admin) return "adminNotFound";
-        console.log(admin);
         if (admin.activityStatus === 0) {
             return "yourAcoountIsNotActive";
         }

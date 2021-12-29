@@ -10,7 +10,6 @@ const quantityValidator = async (req, res, next) => {
             response.setStatus(400).setMessage("fail").setRes("outOfStock");
             return res.status(400).send(response.handler());
         }
-        console.log("ddddddd");
 
         next();
     } catch (e) {

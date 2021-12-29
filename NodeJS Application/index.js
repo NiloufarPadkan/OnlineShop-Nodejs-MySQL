@@ -2,14 +2,13 @@ const express = require("express");
 const dotenv = require("dotenv");
 const rateLimit = require("express-rate-limit");
 
-const session = require("express-session");
-const SequelizeStore = require("connect-session-sequelize")(session.Store);
-
 const sequelize = require("./config/database/sequelize");
 const roleRoute = require("./routes/admins/manage/role");
 const adminRoute = require("./routes/admins/manage/admin");
 const adminLoginRoute = require("./routes/admins/admin/login");
 const adminProfileRoute = require("./routes/admins/admin/profile");
+const adminCartRouter = require("./routes/cart/admin/cartRouter");
+
 const command = require("./routes/admins/commands/createRoot");
 const permissionRoute = require("./routes/admins/manage/permission");
 
@@ -22,6 +21,7 @@ const customerRoute = require("./routes/customer/login_register");
 const coustemerprofileRoute = require("./routes/customer/profile");
 const editCustomerByADminRoute = require("./routes/customer/admin/editCustomerProfile");
 const cartRoute = require("./routes/cart/cartRouter");
+const checkCartRouter = require("./routes/cart/admin/checkCart");
 const Role = require("./models/Role");
 const Permission = require("./models/Permission");
 const rolePermission = require("./models/role-permission");
@@ -88,7 +88,8 @@ app.use(coustemerprofileRoute);
 app.use(editCustomerByADminRoute);
 app.use(adminProfileRoute);
 app.use(cartRoute);
-
+app.use(checkCartRouter);
+app.use(adminCartRouter);
 Admin.belongsTo(Role); // Will add rold_id to user
 Customer.belongsTo(Role);
 Comment.belongsTo(Customer);

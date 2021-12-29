@@ -1,12 +1,13 @@
-const Cart = require("../../models/Cart");
-const CartItem = require("../../models/CartItem");
-const Product = require("../../models/Product");
+const Cart = require("../../../models/Cart");
+const CartItem = require("../../../models/CartItem");
+const Product = require("../../../models/Product");
 exports.add = async (req, res, next) => {
+    console.log("adding");
     try {
         let fetchedCart;
         let product = await Product.findByPk(req.params.id);
 
-        let customerId = req.customer.id;
+        let customerId = req.body.customerId;
         let cartId;
         let item;
         fetchedCart = await Cart.findOne({
@@ -68,7 +69,7 @@ exports.showCart = async (req, res, next) => {
     try {
         let cart = await Cart.findOne({
             where: {
-                customerId: req.customer.id,
+                customerId: req.params.id,
             },
             include: [
                 {
