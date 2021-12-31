@@ -5,7 +5,7 @@ const { verifyToken } = require("../../../middleware/verification/adminLoginVeri
 const upload = require("../../../middleware/upload").upload;
 
 router.post("/brand/add", verifyToken, upload.single("photo"), brandController.store);
-router.get("/brand", verifyToken, brandController.index);
+router.get("/brand", brandController.index);
 router.put("/brand/edit", verifyToken, upload.single("photo"), brandController.update);
 
 router.delete("/brand/remove", verifyToken, brandController.destroy);

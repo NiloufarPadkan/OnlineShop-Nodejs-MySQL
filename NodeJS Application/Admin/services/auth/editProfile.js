@@ -10,9 +10,14 @@ exports.editProfile = async (req) => {
             return "adminNotFound";
         }
 
+        const username = req.body.username ? req.body.username : foundAdmin.username;
+        const email = req.body.email ? req.body.email : foundAdmin.email;
+        const phone = req.body.phone ? req.body.phone : foundAdmin.phone;
+        const roleId = req.body.roleId ? req.body.roleId : foundAdmin.roleId;
+
         const duplicateUsername = await Admin.findOne({
             where: {
-                username: req.body.username,
+                username: username,
             },
         });
         if (duplicateUsername && duplicateUsername.id !== foundAdmin.id) {
@@ -20,7 +25,7 @@ exports.editProfile = async (req) => {
         }
         const duplicateEmail = await Admin.findOne({
             where: {
-                email: req.body.email ? req.body.email : "",
+                email: email,
             },
         });
         if (duplicateEmail && duplicateEmail.id !== foundAdmin.id) {
@@ -28,7 +33,7 @@ exports.editProfile = async (req) => {
         }
         const duplicatephone = await Admin.findOne({
             where: {
-                phone: req.body.phone ? req.body.phone : "",
+                phone: phone,
             },
         });
         if (duplicatephone && duplicatephone.id !== foundAdmin.id) {
@@ -37,16 +42,19 @@ exports.editProfile = async (req) => {
         let saltHash;
         if (req.body.password) saltHash = genPassword(req.body.password);
 
+        const foundRole = await Role.findByPk(roleId);
+        if (!foundRole) {
+            return "roleNotfound";
+        }
+
         const upadmin = await Admin.findByPk(adminId).then((admin) => {
-            admin.activityStatus = req.body.activityStatus
-                ? req.body.activityStatus
-                : foundAdmin.activityStatus;
+            admin.roleId = roleId;
 
-            admin.username = req.body.username ? req.body.username : admin.username;
+            admin.username = username;
 
-            admin.email = req.body.email ? req.body.email : admin.email;
+            admin.email = email;
 
-            admin.phone = req.body.phone ? req.body.phone : admin.email;
+            admin.phone = phone;
 
             admin.hash = req.body.password ? saltHash.hash : admin.hash;
 

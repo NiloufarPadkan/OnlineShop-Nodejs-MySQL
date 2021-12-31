@@ -96,12 +96,16 @@ exports.updatecategory = async (req) => {
         let photoPath;
         if (req.file) photoPath = process.env.IMAGE_PREFIX + req.file.path;
         else photoPath = foundCategory.photo;
+
+        let activityStatus = req.body.activityStatus
+            ? +req.body.activityStatus
+            : +foundCategory.activityStatus;
+
         const editedCategory = await Category.findByPk(categoryId).then((category) => {
             category.title = req.body.title;
             category.photo = photoPath;
             if (req.body.parentId) category.parentId = parseInt(req.body.parentId);
-            if (req.body.activityStatus)
-                category.activityStatus = req.body.activityStatus;
+            category.activityStatus = activityStatus;
 
             return category.save();
         });

@@ -87,13 +87,15 @@ exports.updateAdmin = async (req) => {
             return "roleNotfound";
         }
 
+        let status = req.body.activityStatus
+            ? +req.body.activityStatus
+            : +foundAdmin.activityStatus;
+
         const upadmin = await Admin.findByPk(adminId).then((admin) => {
             admin.roleId = roleId;
-
-            admin.activityStatus = req.body.activityStatus
-                ? req.body.activityStatus
-                : foundAdmin.activityStatus;
-
+            admin.activityStatus = status;
+            // ? req.body.activityStatus
+            // : +admin.activityStatus;
             admin.username = username;
 
             admin.email = email;

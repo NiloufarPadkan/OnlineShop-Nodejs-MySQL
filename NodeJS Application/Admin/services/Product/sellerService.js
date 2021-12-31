@@ -271,10 +271,9 @@ exports.updateProduct = async (req) => {
 
         const photo = req.body.photo ? req.body.photo : foundProduct.photo;
 
-        const activityStatus = req.body.activityStatus
-            ? req.body.activityStatus
-            : foundProduct.activityStatus;
-
+        let activityStatus = req.body.activityStatus
+            ? +req.body.activityStatus
+            : +foundProduct.activityStatus;
         const upproduct = await Product.findByPk(productId).then((product) => {
             product.name = name;
             product.base_price = base_price;
