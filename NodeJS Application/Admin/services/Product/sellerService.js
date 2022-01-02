@@ -58,7 +58,7 @@ exports.insertProduct = async (req) => {
         return savedProduct;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };
 
@@ -124,7 +124,7 @@ exports.indexProducts = async (req) => {
         return products;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };
 exports.getProductComments = async (req) => {
@@ -146,7 +146,7 @@ exports.getProductComments = async (req) => {
         return comments;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };
 
@@ -166,7 +166,7 @@ exports.getOneProduct = async (req) => {
         return result;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };
 
@@ -243,7 +243,7 @@ exports.searchProducts = async (req) => {
         return products;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };
 
@@ -287,7 +287,7 @@ exports.updateProduct = async (req) => {
         return upproduct;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };
 exports.destroyProduct = async (req) => {

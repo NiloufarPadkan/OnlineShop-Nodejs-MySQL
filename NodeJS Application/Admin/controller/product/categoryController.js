@@ -29,15 +29,14 @@ exports.store = async (req, res, next) => {
             response.setStatus(400).setMessage("fail").setRes(storedCategoryResponse);
             return res.status(400).send(response.handler());
         }
-        if (storedCategoryResponse != "") {
-            response.setStatus(200).setRes(storedCategoryResponse);
-            return res.status(200).send(response.handler());
-        }
 
-        response.setStatus(404).setMessage("fail").setRes("failed");
-        return res.status(404).send(response.handler());
+        response.setStatus(200).setRes(storedCategoryResponse);
+        return res.status(200).send(response.handler());
     } catch (e) {
-        return res.status(500).send(e);
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };
 
@@ -60,13 +59,14 @@ exports.update = async (req, res, next) => {
             response.setStatus(403).setMessage("fail").setRes("titleEmpty");
             return res.status(404).send(response.handler());
         }
-        if (updatedcategoryResponse != "") {
-            response.setStatus(200).setRes(updatedcategoryResponse);
-            return res.status(200).send(response.handler());
-        }
+
+        response.setStatus(200).setRes(updatedcategoryResponse);
+        return res.status(200).send(response.handler());
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };
 exports.destroy = async (req, res, next) => {
@@ -88,8 +88,10 @@ exports.destroy = async (req, res, next) => {
             return res.status(404).send(response.handler());
         }
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };
 
@@ -99,14 +101,12 @@ exports.index = async (req, res, next) => {
     try {
         const catgeoryIndexResponse = await categoryService.getcategory(req);
 
-        if (catgeoryIndexResponse != "") {
-            response.setStatus(200).setRes(catgeoryIndexResponse);
-            return res.status(200).send(response.handler());
-        }
-        response.setStatus(400).setMessage("fail").setRes("no categories found");
-        return res.status(400).send(response.handler());
+        response.setStatus(200).setRes(catgeoryIndexResponse);
+        return res.status(200).send(response.handler());
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };

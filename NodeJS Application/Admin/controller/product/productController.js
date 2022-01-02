@@ -27,15 +27,14 @@ exports.store = async (req, res, next) => {
             response.setStatus(400).setMessage("fail").setRes("categoryOrBrandEmpty");
             return res.status(400).send(response.handler());
         }
-        if (insertProductResponse != "") {
-            response.setStatus(200).setRes(insertProductResponse);
-            return res.status(200).send(response.handler());
-        }
 
-        response.setStatus(404).setMessage("fail").setRes("failed");
-        return res.status(404).send(response.handler());
+        response.setStatus(200).setRes(insertProductResponse);
+        return res.status(200).send(response.handler());
     } catch (e) {
-        return res.status(500).send(e);
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };
 
@@ -55,12 +54,13 @@ exports.update = async (req, res, next) => {
             res.status(404).send(response.handler());
         }
 
-        if (updatedProductResponse != "") {
-            response.setStatus(200).setRes(updatedProductResponse);
-            res.status(200).send(response.handler());
-        }
+        response.setStatus(200).setRes(updatedProductResponse);
+        return res.status(200).send(response.handler());
     } catch (e) {
-        return res.status(500).send(e);
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };
 exports.destroy = async (req, res, next) => {
@@ -79,11 +79,13 @@ exports.destroy = async (req, res, next) => {
             return res.status(200).send(response.handler());
         } else {
             response.setStatus(403).setMessage("fail").setRes("productNotFound");
-            res.status(404).send(response.handler());
+            return res.status(404).send(response.handler());
         }
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };
 
@@ -98,12 +100,14 @@ exports.search = async (req, res, next) => {
     }
     try {
         const productSearchResponse = await sellerProductService.searchProducts(req);
-        if (productSearchResponse != "")
-            response.setStatus(200).setRes(productSearchResponse);
+
+        response.setStatus(200).setRes(productSearchResponse);
         return res.status(200).send(response.handler());
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };
 
@@ -119,12 +123,14 @@ exports.index = async (req, res, next) => {
     }
     try {
         const productIndexResponse = await sellerProductService.indexProducts(req);
-        if (productIndexResponse != "")
-            response.setStatus(200).setRes(productIndexResponse);
+
+        response.setStatus(200).setRes(productIndexResponse);
         return res.status(200).send(response.handler());
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };
 
@@ -139,11 +145,13 @@ exports.show = async (req, res, next) => {
     }
     try {
         const productshowResponse = await sellerProductService.getOneProduct(req);
-        if (productshowResponse != "")
-            response.setStatus(200).setRes(productshowResponse);
+
+        response.setStatus(200).setRes(productshowResponse);
         return res.status(200).send(response.handler());
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };

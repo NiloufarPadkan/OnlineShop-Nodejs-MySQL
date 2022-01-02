@@ -12,7 +12,7 @@ exports.add = async (req, res, next) => {
         return newComment;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };
 exports.report = async (req, res, next) => {
@@ -33,6 +33,6 @@ exports.report = async (req, res, next) => {
         }
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };

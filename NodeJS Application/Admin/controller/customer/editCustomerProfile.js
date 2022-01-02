@@ -22,6 +22,7 @@ exports.update = async (req, res, next) => {
 
     try {
         const updatedCustomerRes = await editProfileService.updateCustomer(req);
+
         if (updatedCustomerRes === "customerNotFound") {
             response.setStatus(403).setMessage("fail").setRes("customerNotFound");
             return res.status(404).send(response.handler());
@@ -35,12 +36,12 @@ exports.update = async (req, res, next) => {
             return res.status(404).send(response.handler());
         }
 
-        if (updatedCustomerRes != "") {
-            response.setStatus(200).setRes(updatedCustomerRes);
-            return res.status(200).send(response.handler());
-        }
+        response.setStatus(200).setRes(updatedCustomerRes);
+        return res.status(200).send(response.handler());
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };

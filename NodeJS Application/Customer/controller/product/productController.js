@@ -6,12 +6,14 @@ exports.search = async (req, res, next) => {
 
     try {
         const productSearchResponse = await userProductService.searchProducts(req);
-        if (productSearchResponse != "")
-            response.setStatus(200).setRes(productSearchResponse);
+
+        response.setStatus(200).setRes(productSearchResponse);
         return res.status(200).send(response.handler());
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };
 
@@ -20,12 +22,14 @@ exports.index = async (req, res, next) => {
 
     try {
         const productIndexResponse = await userProductService.indexProducts(req);
-        if (productIndexResponse != "")
-            response.setStatus(200).setRes(productIndexResponse);
+
+        response.setStatus(200).setRes(productIndexResponse);
         return res.status(200).send(response.handler());
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };
 
@@ -34,11 +38,12 @@ exports.show = async (req, res, next) => {
 
     try {
         const productshowResponse = await userProductService.getOneProduct(req);
-        if (productshowResponse != "")
-            response.setStatus(200).setRes(productshowResponse);
+        response.setStatus(200).setRes(productshowResponse);
         return res.status(200).send(response.handler());
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };

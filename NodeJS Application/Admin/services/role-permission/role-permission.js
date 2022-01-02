@@ -17,7 +17,6 @@ async function cache(roleId) {
     if (data !== null) {
         permissionArray = JSON.parse(data);
     } else {
-        console.log("Fetching Data...");
         permissionArray = await Permission.findAll({
             attributes: ["title", "id"],
             order: [["id", "ASC"]],
@@ -49,7 +48,7 @@ exports.AssignPermission = async (req, res, next) => {
         return AssignPermissionResult;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };
 
@@ -80,6 +79,6 @@ exports.AssignedPermission = async (req, res, next) => {
 
         return permissionArray;
     } catch (e) {
-        console.log(e);
+        throw new Error("something failed");
     }
 };

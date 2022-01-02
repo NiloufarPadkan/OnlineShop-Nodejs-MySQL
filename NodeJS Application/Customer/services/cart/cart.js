@@ -60,7 +60,7 @@ exports.add = async (req, res, next) => {
         return fetchedCart;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };
 exports.showCart = async (req, res, next) => {
@@ -81,6 +81,6 @@ exports.showCart = async (req, res, next) => {
         return cart;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };

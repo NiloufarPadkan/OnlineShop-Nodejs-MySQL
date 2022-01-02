@@ -41,7 +41,7 @@ exports.add = async (req, res, next) => {
         return p;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };
 exports.getProductRating = async (req) => {
@@ -54,6 +54,6 @@ exports.getProductRating = async (req) => {
         return p.AvgRating;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };

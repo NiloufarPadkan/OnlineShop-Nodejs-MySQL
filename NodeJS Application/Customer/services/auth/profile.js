@@ -44,6 +44,6 @@ exports.updateCustomer = async (req) => {
         return updatedCustomer;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };

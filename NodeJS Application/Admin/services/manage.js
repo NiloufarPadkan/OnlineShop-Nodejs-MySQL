@@ -20,7 +20,7 @@ exports.insertAdmin = async (req) => {
         return savedAdmin;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };
 
@@ -36,7 +36,7 @@ exports.indexAdmins = async (req) => {
         return admins;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };
 
@@ -113,7 +113,7 @@ exports.updateAdmin = async (req) => {
         return savedAdmin;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };
 exports.destroyAdmin = async (req) => {
@@ -127,6 +127,6 @@ exports.destroyAdmin = async (req) => {
         if (admin) return true;
         else return false;
     } catch (e) {
-        return false;
+        throw new Error("something failed");
     }
 };

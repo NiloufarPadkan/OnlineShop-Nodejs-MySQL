@@ -27,16 +27,14 @@ exports.store = async (req, res, next) => {
         if (assignPermissionResponse === "alreadyExists") {
             response.setStatus(400).setMessage("fail").setRes("alreadyExists");
             return res.status(400).send(response.handler());
-        } else if (assignPermissionResponse != "") {
-            let response = new Response(200, "success", assignPermissionResponse);
-            res.status(200).send(response.handler());
-        } else {
-            response.setStatus(400).setMessage("fail").setRes("failed");
-            res.status(400).send(response.handler());
         }
+        response.setStatus(400).setMessage("fail").setRes("failed");
+        res.status(400).send(response.handler());
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };
 exports.readRolePermission = async (req, res, next) => {
@@ -51,9 +49,11 @@ exports.readRolePermission = async (req, res, next) => {
     try {
         const RolePermissionList = await rolePermissionService.AssignedPermission(req);
         let response = new Response(200, "success", RolePermissionList);
-        res.status(200).send(response.handler());
+        return res.status(200).send(response.handler());
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };

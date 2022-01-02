@@ -16,16 +16,17 @@ exports.store = async (req, res, next) => {
 
     try {
         const storedAdminResponse = await adminService.insertAdmin(req);
-
-        if (storedAdminResponse != "") {
-            response.setStatus(200).setRes(storedAdminResponse);
-            return res.status(200).send(response.handler());
+        if (storedAdminResponse === "") {
+            throw new Error("something failed");
         }
 
-        response.setStatus(404).setMessage("fail").setRes("failed");
-        return res.status(404).send(response.handler());
+        response.setStatus(200).setRes(storedAdminResponse);
+        return res.status(200).send(response.handler());
     } catch (e) {
-        return res.status(500).send(e);
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };
 
@@ -40,6 +41,7 @@ exports.update = async (req, res, next) => {
     }
     try {
         const updatedAdminResponse = await adminService.updateAdmin(req);
+
         if (
             updatedAdminResponse === "duplicateUsername" ||
             updatedAdminResponse === "duplicateEmail" ||
@@ -52,13 +54,13 @@ exports.update = async (req, res, next) => {
             return res.status(404).send(response.handler());
         }
 
-        if (updatedAdminResponse != "") {
-            response.setStatus(200).setRes(updatedAdminResponse);
-            return res.status(200).send(response.handler());
-        }
+        response.setStatus(200).setRes(updatedAdminResponse);
+        return res.status(200).send(response.handler());
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };
 exports.destroy = async (req, res, next) => {
@@ -81,8 +83,10 @@ exports.destroy = async (req, res, next) => {
             res.status(404).send(response.handler());
         }
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };
 
@@ -99,7 +103,9 @@ exports.index = async (req, res, next) => {
         if (adminIndexResponse != "") response.setStatus(200).setRes(adminIndexResponse);
         return res.status(200).send(response.handler());
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };

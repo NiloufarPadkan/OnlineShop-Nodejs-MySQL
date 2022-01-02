@@ -38,7 +38,7 @@ exports.insertCategory = async (req, res, next) => {
         return savedCategory;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };
 
@@ -62,6 +62,7 @@ function list_to_tree(list) {
     }
     return roots;
 }
+
 exports.getcategory = async (req, res, next) => {
     try {
         const limit = req.query.size ? req.query.size : 3;
@@ -79,7 +80,7 @@ exports.getcategory = async (req, res, next) => {
         return list_to_tree(categories);
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };
 
@@ -111,8 +112,7 @@ exports.updatecategory = async (req) => {
         });
         return editedCategory;
     } catch (e) {
-        console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };
 

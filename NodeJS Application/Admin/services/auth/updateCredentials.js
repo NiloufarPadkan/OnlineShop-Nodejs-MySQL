@@ -31,6 +31,6 @@ exports.updateCredential = async (req) => {
         });
         return upadmin;
     } catch (e) {
-        return "";
+        throw new Error("something failed");
     }
 };

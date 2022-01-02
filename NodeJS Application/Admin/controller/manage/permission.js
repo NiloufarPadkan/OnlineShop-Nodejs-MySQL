@@ -30,8 +30,10 @@ exports.store = async (req, res, next) => {
             res.status(200).send(response.handler());
         }
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };
 exports.index = async (req, res, next) => {
@@ -46,15 +48,12 @@ exports.index = async (req, res, next) => {
     try {
         const indexPermissionResponse = await permissionService.getPermissions(req);
 
-        if (indexPermissionResponse === "") {
-            response.setStatus(400).setMessage("fail").setRes("failed");
-            res.status(400).send(response.handler());
-        } else {
-            response.setStatus(200).setRes(indexPermissionResponse);
-            res.status(200).send(response.handler());
-        }
+        response.setStatus(200).setRes(indexPermissionResponse);
+        res.status(200).send(response.handler());
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };

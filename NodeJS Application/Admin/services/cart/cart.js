@@ -2,7 +2,6 @@ const Cart = require("../../../models/Cart");
 const CartItem = require("../../../models/CartItem");
 const Product = require("../../../models/Product");
 exports.add = async (req, res, next) => {
-    console.log("adding");
     try {
         let fetchedCart;
         let product = await Product.findByPk(req.params.id);
@@ -60,8 +59,7 @@ exports.add = async (req, res, next) => {
         await fetchedCart.save();
         return fetchedCart;
     } catch (e) {
-        console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };
 exports.showCart = async (req, res, next) => {
@@ -81,7 +79,6 @@ exports.showCart = async (req, res, next) => {
 
         return cart;
     } catch (e) {
-        console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };

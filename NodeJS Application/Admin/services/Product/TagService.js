@@ -23,7 +23,7 @@ exports.insertTag = async (req, res, next) => {
         return savedTag;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };
 
@@ -43,7 +43,7 @@ exports.gettag = async (req, res, next) => {
 
         return tags;
     } catch (e) {
-        return "";
+        throw new Error("something failed");
     }
 };
 
@@ -63,7 +63,7 @@ exports.updatetag = async (req) => {
         });
         return editedTag;
     } catch (e) {
-        return "";
+        throw new Error("something failed");
     }
 };
 

@@ -25,15 +25,14 @@ exports.store = async (req, res, next) => {
             response.setStatus(400).setMessage("fail").setRes("alreadyExists");
             return res.status(400).send(response.handler());
         }
-        if (storedTagResponse != "") {
-            response.setStatus(200).setRes(storedTagResponse);
-            return res.status(200).send(response.handler());
-        }
 
-        response.setStatus(404).setMessage("fail").setRes("failed");
-        return res.status(404).send(response.handler());
+        response.setStatus(200).setRes(storedTagResponse);
+        return res.status(200).send(response.handler());
     } catch (e) {
-        return res.status(500).send(e);
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };
 
@@ -52,13 +51,13 @@ exports.update = async (req, res, next) => {
             return res.status(404).send(response.handler());
         }
 
-        if (updatedtagResponse != "") {
-            response.setStatus(200).setRes(updatedtagResponse);
-            return res.status(200).send(response.handler());
-        }
+        response.setStatus(200).setRes(updatedtagResponse);
+        return res.status(200).send(response.handler());
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };
 exports.destroy = async (req, res, next) => {
@@ -79,8 +78,10 @@ exports.destroy = async (req, res, next) => {
             return res.status(404).send(response.handler());
         }
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };
 
@@ -88,14 +89,13 @@ exports.index = async (req, res, next) => {
     let response = new Response();
     try {
         const tagIndexResponse = await tagService.gettag(req);
-        if (tagIndexResponse != "") {
-            response.setStatus(200).setRes(tagIndexResponse);
-            return res.status(200).send(response.handler());
-        }
-        response.setStatus(400).setMessage("fail").setRes("no tags found");
-        return res.status(400).send(response.handler());
+
+        response.setStatus(200).setRes(tagIndexResponse);
+        return res.status(200).send(response.handler());
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };

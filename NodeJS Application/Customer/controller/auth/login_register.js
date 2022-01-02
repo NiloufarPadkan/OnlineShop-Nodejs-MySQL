@@ -6,11 +6,14 @@ exports.login_register = async (req, res, next) => {
         const loginResponse = await loginService.login_signup(req);
         if (loginResponse === "yourAcoountIsNotActive") {
             let response = new Response(400, "fail", loginResponse);
-            if (loginResponse != "") return res.status(400).send(response.handler());
+            return res.status(400).send(response.handler());
         }
         let response = new Response(200, "success", loginResponse);
-        if (loginResponse != "") return res.status(200).send(response.handler());
+        return res.status(200).send(response.handler());
     } catch (e) {
-        return res.status(500).send(e);
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };

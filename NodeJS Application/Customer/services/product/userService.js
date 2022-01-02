@@ -40,7 +40,6 @@ exports.indexProducts = async (req) => {
                 sortBy = [[Product_views, "viewCount", "desc"]];
         }
 
-        console.log(sortBy);
         const limit = req.query.size ? req.query.size : 3;
         const offset = req.query.page ? req.query.page * limit : 0;
         const products = await Product.findAll({
@@ -77,7 +76,7 @@ exports.indexProducts = async (req) => {
         return products;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };
 exports.getProductComments = async (req) => {
@@ -100,7 +99,7 @@ exports.getProductComments = async (req) => {
         return comments;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };
 
@@ -144,7 +143,7 @@ exports.getOneProduct = async (req) => {
         return result;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };
 
@@ -221,6 +220,6 @@ exports.searchProducts = async (req) => {
         return products;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };

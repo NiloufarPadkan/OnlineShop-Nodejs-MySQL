@@ -18,7 +18,7 @@ exports.insertPermission = async (req, res, next) => {
         const savedPermission = await newPermission.save();
         return savedPermission;
     } catch (e) {
-        return "";
+        throw new Error("something failed");
     }
 };
 exports.getPermissions = async (req, res, next) => {
@@ -35,6 +35,6 @@ exports.getPermissions = async (req, res, next) => {
         return permissions;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };

@@ -9,6 +9,9 @@ exports.me = async (req, res, next) => {
         response.setStatus(200).setRes(me);
         return res.status(200).send(response.handler());
     } catch (e) {
-        return res.status(500).send(e);
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };

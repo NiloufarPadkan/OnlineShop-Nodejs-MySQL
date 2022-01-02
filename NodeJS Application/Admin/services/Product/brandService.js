@@ -20,7 +20,7 @@ exports.insertBrand = async (req, res, next) => {
         return savedBrand;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };
 
@@ -48,7 +48,7 @@ exports.getbrand = async (req, res, next) => {
         return brands;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };
 
@@ -79,7 +79,7 @@ exports.updatebrand = async (req) => {
         return editedBrand;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };
 

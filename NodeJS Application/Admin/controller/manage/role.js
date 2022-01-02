@@ -27,13 +27,14 @@ exports.store = async (req, res, next) => {
         if (insertRoleResponse === "alreadyExists") {
             response.setStatus(400).setMessage("fail").setRes("alreadyExists");
             res.status(400).send(response.handler());
-        } else {
-            response.setStatus(200).setRes(insertRoleResponse);
-            res.status(200).send(response.handler());
         }
+        response.setStatus(200).setRes(insertRoleResponse);
+        res.status(200).send(response.handler());
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };
 exports.index = async (req, res, next) => {
@@ -47,16 +48,13 @@ exports.index = async (req, res, next) => {
     try {
         const indexRoleResponse = await roleService.getRole(req);
 
-        if (indexRoleResponse === "") {
-            response.setStatus(400).setMessage("fail").setRes("failed");
-            res.status(400).send(response.handler());
-        } else {
-            response.setStatus(200).setRes(indexRoleResponse);
-            res.status(200).send(response.handler());
-        }
+        response.setStatus(200).setRes(indexRoleResponse);
+        return res.status(200).send(response.handler());
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };
 
@@ -72,15 +70,12 @@ exports.update = async (req, res, next) => {
     try {
         const updateRoleResponse = await roleService.setStatus(req);
 
-        if (updateRoleResponse === "") {
-            response.setStatus(400).setMessage("fail").setRes("failed");
-            res.status(400).send(response.handler());
-        } else {
-            response.setStatus(200).setRes(updateRoleResponse);
-            res.status(200).send(response.handler());
-        }
+        response.setStatus(200).setRes(updateRoleResponse);
+        return res.status(200).send(response.handler());
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };

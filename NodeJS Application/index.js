@@ -92,6 +92,13 @@ app.use(cartRoute);
 app.use(checkCartRouter);
 app.use(adminCartRouter);
 
+app.use((error, req, res, next) => {
+    const status = error.statusCode || 500;
+    const message = "something failed";
+    const data = error.data;
+    res.status(status).json({ message: message, data: data });
+});
+
 Admin.belongsTo(Role); // Will add rold_id to user
 Customer.belongsTo(Role);
 Comment.belongsTo(Customer);

@@ -12,6 +12,6 @@ exports.check = async (req, res, next) => {
         return product;
     } catch (e) {
         console.log(e);
-        return "";
+        throw new Error("something failed");
     }
 };

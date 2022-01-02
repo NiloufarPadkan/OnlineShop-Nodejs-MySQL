@@ -25,8 +25,10 @@ exports.index = async (req, res, next) => {
         response.setStatus(200).setRes(commentIndexResponse);
         return res.status(200).send(response.handler());
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };
 
@@ -41,13 +43,14 @@ exports.show = async (req, res, next) => {
     }
     try {
         const showCommentResponse = await commentService.showComment(req);
-        if (showCommentResponse != "") {
-            response.setStatus(200).setRes(showCommentResponse);
-            return res.status(200).send(response.handler());
-        }
+
+        response.setStatus(200).setRes(showCommentResponse);
+        return res.status(200).send(response.handler());
     } catch (e) {
-        response.setStatus(400).setMessage("fail").setRes(e);
-        return res.status(400).send(response.handler());
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };
 
@@ -67,12 +70,13 @@ exports.update = async (req, res, next) => {
             res.status(404).send(response.handler());
         }
 
-        if (commentStatusResponse != "") {
-            response.setStatus(200).setRes(commentStatusResponse);
-            res.status(200).send(response.handler());
-        }
+        response.setStatus(200).setRes(commentStatusResponse);
+        return res.status(200).send(response.handler());
     } catch (e) {
-        return res.status(500).send(e);
+        if (e.statusCode) {
+            err.statusCode = 500;
+        }
+        next(e);
     }
 };
 
