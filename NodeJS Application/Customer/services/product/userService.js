@@ -106,6 +106,9 @@ exports.getProductComments = async (req) => {
 exports.getOneProduct = async (req) => {
     try {
         const comments = await this.getProductComments(req);
+        const ratingCount = await Product_Rating.count({
+            where: { productId: req.params.id },
+        });
         const viewersIp = await Product_views.findOne({
             where: {
                 productId: req.params.id,
@@ -130,7 +133,7 @@ exports.getOneProduct = async (req) => {
             }
         });
 
-        const products = await Product.findOne({
+        let products = await Product.findOne({
             include: [
                 { model: Category },
                 { model: Brand },
@@ -145,6 +148,8 @@ exports.getOneProduct = async (req) => {
                 activityStatus: 1,
             },
         });
+        products = products.toJSON();
+        products.ratingCount = ratingCount;
 
         let result = { products, comments };
         return result;
