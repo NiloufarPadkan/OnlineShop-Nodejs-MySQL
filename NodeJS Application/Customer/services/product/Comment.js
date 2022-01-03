@@ -21,7 +21,15 @@ exports.report = async (req, res, next) => {
         const commentId = req.params.id;
         const comment = await Comment.findOne({ where: { id: commentId } });
         if (!comment) return "comentNotFound";
+        if (comment.customerId === req.customer.id) return "youCantReportYourself";
         else {
+            let existingReport = await Comment_report.findOne({
+                where: {
+                    commentId: commentId,
+                    customerId: req.customer.id,
+                },
+            });
+            if (existingReport) return "youHaveReportedBefore";
             const comment_report = new Comment_report({
                 description: description,
                 commentId: commentId,

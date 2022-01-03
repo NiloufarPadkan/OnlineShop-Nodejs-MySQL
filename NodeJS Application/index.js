@@ -101,10 +101,10 @@ app.use((error, req, res, next) => {
 
 Admin.belongsTo(Role); // Will add rold_id to user
 Customer.belongsTo(Role);
+
 Comment.belongsTo(Customer);
 Comment.belongsTo(Product);
-Comment_report.belongsTo(Comment);
-Comment_report.belongsTo(Customer);
+
 Product.belongsTo(Category);
 Product.belongsTo(Brand);
 Product_views.belongsTo(Product);
@@ -140,11 +140,15 @@ Customer.hasMany(Order);
 Order.belongsToMany(Product, {
     through: OrderItem,
 });
+
 Permission.belongsToMany(Role, {
     through: rolePermission,
 });
+
 Role.belongsToMany(Permission, { through: rolePermission });
 
+Comment_report.belongsTo(Comment);
+Comment_report.belongsTo(Customer);
 Product.belongsToMany(UserType, {
     through: TypePrice,
 });

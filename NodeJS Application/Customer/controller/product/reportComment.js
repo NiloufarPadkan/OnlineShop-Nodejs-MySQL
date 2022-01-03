@@ -5,7 +5,12 @@ exports.report = async (req, res, next) => {
     try {
         let response;
         const reportingCommentRespnse = await commentService.report(req);
-        if (reportingCommentRespnse === "comentNotFound") {
+
+        if (
+            reportingCommentRespnse === "comentNotFound" ||
+            "youHaveReportedBefore" ||
+            "youCantReportYourself"
+        ) {
             response = new Response(400, "fail", reportingCommentRespnse);
             return res.status(400).send(response.handler());
         } else {
