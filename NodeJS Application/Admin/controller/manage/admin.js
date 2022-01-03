@@ -16,9 +16,6 @@ exports.store = async (req, res, next) => {
 
     try {
         const storedAdminResponse = await adminService.insertAdmin(req);
-        if (storedAdminResponse === "") {
-            throw new Error("something failed");
-        }
 
         response.setStatus(200).setRes(storedAdminResponse);
         return res.status(200).send(response.handler());

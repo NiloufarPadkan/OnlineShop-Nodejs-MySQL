@@ -1,0 +1,81 @@
+{
+  level: 'error',
+  message: Error: SequelizeDatabaseError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''999'' at line 1
+      at Object.exports.getbrand (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\brandService.js:50:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:98:36),
+  label: 'right meow!',
+  timestamp: '2022-01-03T09:43:44.756Z'
+}
+{
+  level: 'error',
+  message: Error: SequelizeDatabaseError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''999'' at line 1
+      at Object.exports.getbrand (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\brandService.js:50:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:98:36),
+  label: 'right meow!',
+  timestamp: '2022-01-03T09:44:08.041Z'
+}
+{
+  level: 'error',
+  message: Error: SequelizeDatabaseError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''999'' at line 1
+      at Object.exports.getbrand (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\brandService.js:50:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:98:36),
+  label: 'ssss',
+  timestamp: '2022-01-03T09:44:40.404Z'
+}
+{
+  level: 'error',
+  message: Error: SequelizeDatabaseError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''999'' at line 1
+      at Object.exports.getbrand (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\brandService.js:50:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:98:36),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-03T09:45:57.251Z'
+}
+{
+  level: 'error',
+  message: Error: SequelizeDatabaseError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''999'' at line 1
+      at Object.exports.getbrand (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\brandService.js:50:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:98:36),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-03T09:47:42.121Z'
+}
+[31m{[39m
+[31m  level: 'error',[39m
+[31m  message: Error: SequelizeDatabaseError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''999'' at line 1[39m
+[31m      at Object.exports.getbrand (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\brandService.js:50:15)[39m
+[31m      at processTicksAndRejections (internal/process/task_queues.js:95:5)[39m
+[31m      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:98:36),[39m
+[31m  label: '  label: `Label🏷️`',[39m
+[31m  timestamp: '2022-01-03T09:48:38.822Z'[39m
+[31m}[39m
+[31m{[39m
+[31m  level: 'error',[39m
+[31m  message: Error: SequelizeDatabaseError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''999'' at line 1[39m
+[31m      at Object.exports.getbrand (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\brandService.js:50:15)[39m
+[31m      at processTicksAndRejections (internal/process/task_queues.js:95:5)[39m
+[31m      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:98:36),[39m
+[31m  label: '  label: `Label🏷️`',[39m
+[31m  timestamp: '2022-01-03T09:48:52.961Z'[39m
+[31m}[39m
+[31m{[39m
+[31m  level: 'error',[39m
+[31m  message: Error: SequelizeDatabaseError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''999'' at line 1[39m
+[31m      at Object.exports.getbrand (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\brandService.js:50:15)[39m
+[31m      at processTicksAndRejections (internal/process/task_queues.js:95:5)[39m
+[31m      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:98:36),[39m
+[31m  label: '  label: `Label🏷️`',[39m
+[31m  timestamp: '2022-01-03T09:52:09.592Z'[39m
+[31m}[39m
+[31m{[39m
+[31m  level: 'error',[39m
+[31m  message: Error: SequelizeDatabaseError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''999'' at line 1[39m
+[31m      at Object.exports.getbrand (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\brandService.js:50:15)[39m
+[31m      at processTicksAndRejections (internal/process/task_queues.js:95:5)[39m
+[31m      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:98:36),[39m
+[31m  label: '  label: `Label🏷️`',[39m
+[31m  timestamp: '2022-01-03T09:52:40.839Z'[39m
+[31m}[39m

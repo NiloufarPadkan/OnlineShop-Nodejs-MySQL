@@ -12,7 +12,7 @@ exports.add = async (req, res, next) => {
         return newComment;
     } catch (e) {
         console.log(e);
-        throw new Error("something failed");
+        throw new Error(e);
     }
 };
 exports.report = async (req, res, next) => {
@@ -41,6 +41,6 @@ exports.report = async (req, res, next) => {
         }
     } catch (e) {
         console.log(e);
-        throw new Error("something failed");
+        throw new Error(e);
     }
 };

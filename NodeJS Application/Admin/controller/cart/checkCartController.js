@@ -5,9 +5,6 @@ exports.show = async (req, res, next) => {
     let response = new Response();
     try {
         const checkCartResponse = await checkCartService.check(req);
-        if (checkCartResponse === "") {
-            throw new Error("something failed");
-        }
 
         response.setStatus(200).setRes(checkCartResponse);
         return res.status(200).send(response.handler());

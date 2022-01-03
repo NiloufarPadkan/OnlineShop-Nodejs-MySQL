@@ -2,6 +2,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 const rateLimit = require("express-rate-limit");
 
+const logger = require("./logger/logger");
 const sequelize = require("./config/database/sequelize");
 const roleRoute = require("./Admin/routes/manage/role");
 const adminRoute = require("./Admin/routes/manage/admin");
@@ -93,6 +94,12 @@ app.use(checkCartRouter);
 app.use(adminCartRouter);
 
 app.use((error, req, res, next) => {
+    logger.error({
+        level: "error",
+        message: error,
+        //   label: "ssss",
+    });
+
     const status = error.statusCode || 500;
     const message = "something failed";
     const data = error.data;

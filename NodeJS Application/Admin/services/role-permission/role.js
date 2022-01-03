@@ -16,7 +16,7 @@ exports.insertRole = async (req) => {
         return savedRole;
     } catch (e) {
         console.log(e);
-        throw new Error("something failed");
+        throw new Error(e);
     }
 };
 exports.getRole = async (req) => {
@@ -30,7 +30,7 @@ exports.getRole = async (req) => {
         return roles;
     } catch (e) {
         console.log(e);
-        throw new Error("something failed");
+        throw new Error(e);
     }
 };
 exports.setStatus = async (req) => {
@@ -48,6 +48,6 @@ exports.setStatus = async (req) => {
         return role;
     } catch (e) {
         console.log(e);
-        throw new Error("something failed");
+        throw new Error(e);
     }
 };

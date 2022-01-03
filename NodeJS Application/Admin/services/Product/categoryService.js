@@ -38,7 +38,7 @@ exports.insertCategory = async (req, res, next) => {
         return savedCategory;
     } catch (e) {
         console.log(e);
-        throw new Error("something failed");
+        throw new Error(e);
     }
 };
 
@@ -80,7 +80,7 @@ exports.getcategory = async (req, res, next) => {
         return list_to_tree(categories);
     } catch (e) {
         console.log(e);
-        throw new Error("something failed");
+        throw new Error(e);
     }
 };
 
@@ -112,7 +112,7 @@ exports.updatecategory = async (req) => {
         });
         return editedCategory;
     } catch (e) {
-        throw new Error("something failed");
+        throw new Error(e);
     }
 };
 

@@ -76,7 +76,7 @@ exports.indexProducts = async (req) => {
         return products;
     } catch (e) {
         console.log(e);
-        throw new Error("something failed");
+        throw new Error(e);
     }
 };
 exports.getProductComments = async (req) => {
@@ -99,7 +99,7 @@ exports.getProductComments = async (req) => {
         return comments;
     } catch (e) {
         console.log(e);
-        throw new Error("something failed");
+        throw new Error(e);
     }
 };
 
@@ -150,7 +150,7 @@ exports.getOneProduct = async (req) => {
         return result;
     } catch (e) {
         console.log(e);
-        throw new Error("something failed");
+        throw new Error(e);
     }
 };
 
@@ -227,6 +227,6 @@ exports.searchProducts = async (req) => {
         return products;
     } catch (e) {
         console.log(e);
-        throw new Error("something failed");
+        throw new Error(e);
     }
 };

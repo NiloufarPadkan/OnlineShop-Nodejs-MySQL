@@ -48,7 +48,7 @@ exports.AssignPermission = async (req, res, next) => {
         return AssignPermissionResult;
     } catch (e) {
         console.log(e);
-        throw new Error("something failed");
+        throw new Error(e);
     }
 };
 
@@ -79,6 +79,6 @@ exports.AssignedPermission = async (req, res, next) => {
 
         return permissionArray;
     } catch (e) {
-        throw new Error("something failed");
+        throw new Error(e);
     }
 };

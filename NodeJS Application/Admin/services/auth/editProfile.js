@@ -66,6 +66,6 @@ exports.editProfile = async (req) => {
 
         return savedAdmin;
     } catch (e) {
-        throw new Error("something failed");
+        throw new Error(e);
     }
 };

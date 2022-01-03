@@ -13,7 +13,7 @@ exports.readReports = async (req) => {
         return reports;
     } catch (e) {
         console.log(e);
-        throw new Error("something failed");
+        throw new Error(e);
     }
 };
 
@@ -34,7 +34,7 @@ exports.showReport = async (req) => {
         return report;
     } catch (e) {
         console.log(e);
-        throw new Error("something failed");
+        throw new Error(e);
     }
 };
 exports.unreadReports = async (req) => {
@@ -49,6 +49,6 @@ exports.unreadReports = async (req) => {
         return unreadReports;
     } catch (e) {
         console.log(e);
-        throw new Error("something failed");
+        throw new Error(e);
     }
 };

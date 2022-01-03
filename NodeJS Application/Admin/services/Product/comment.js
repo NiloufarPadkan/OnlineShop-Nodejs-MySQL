@@ -26,7 +26,7 @@ exports.indexComments = async (req) => {
         return comments;
     } catch (e) {
         console.log(e);
-        throw new Error("something failed");
+        throw new Error(e);
     }
 };
 
@@ -45,7 +45,7 @@ exports.showComment = async (req) => {
         return comment;
     } catch (e) {
         console.log(e);
-        throw new Error("something failed");
+        throw new Error(e);
     }
 };
 exports.setCommentStatus = async (req) => {
@@ -61,6 +61,6 @@ exports.setCommentStatus = async (req) => {
         return comment;
     } catch (e) {
         console.log(e);
-        throw new Error("something failed");
+        throw new Error(e);
     }
 };

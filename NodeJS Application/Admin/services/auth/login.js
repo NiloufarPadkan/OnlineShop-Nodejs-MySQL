@@ -31,6 +31,6 @@ exports.loginAdmin = async (req) => {
         // });
         return accessToken;
     } catch (e) {
-        throw new Error("something failed");
+        throw new Error(e);
     }
 };
