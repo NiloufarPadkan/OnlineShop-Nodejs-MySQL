@@ -1,4 +1,4 @@
-const editProfileService = require("../../services/auth/editProfile");
+const editProfileService = require("../../services/customer/profile");
 const Response = require("../../../services/response");
 const Can = require("../../../services/can/can");
 

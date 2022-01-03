@@ -131,12 +131,19 @@ exports.getOneProduct = async (req) => {
         });
 
         const products = await Product.findOne({
-            include: [{ model: Category }, { model: Brand }],
+            include: [
+                { model: Category },
+                { model: Brand },
+                {
+                    model: Tag,
+                    required: false,
+                    exclude: [{ model: Product_tag }],
+                },
+            ],
             where: {
                 id: req.params.id,
                 activityStatus: 1,
             },
-            raw: true,
         });
 
         let result = { products, comments };

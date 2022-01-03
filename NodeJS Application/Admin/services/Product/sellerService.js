@@ -89,7 +89,6 @@ exports.indexProducts = async (req) => {
                 sortBy = [[Product_views, "viewCount", "desc"]];
         }
 
-        console.log(sortBy);
         const limit = req.query.size ? req.query.size : 3;
         const offset = req.query.page ? req.query.page * limit : 0;
         const products = await Product.findAll({
@@ -155,11 +154,18 @@ exports.getOneProduct = async (req) => {
         const comments = await this.getProductComments(req);
 
         const products = await Product.findOne({
-            include: [{ model: Category }, { model: Brand }],
+            include: [
+                { model: Category },
+                { model: Brand },
+                {
+                    model: Tag,
+                    required: false,
+                    exclude: [{ model: Product_tag }],
+                },
+            ],
             where: {
                 id: req.params.id,
             },
-            raw: true,
         });
 
         let result = { products, comments };
@@ -228,7 +234,6 @@ exports.searchProducts = async (req) => {
                 base_price: {
                     [Op.between]: filter.price,
                 },
-                activityStatus: 1,
 
                 [Op.or]: [
                     { name: { [Op.like]: "%" + searchString + "%" } },

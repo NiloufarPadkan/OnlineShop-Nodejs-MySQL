@@ -4,7 +4,7 @@ const Customer = require("../../../models/Customer");
 exports.updateCustomer = async (req) => {
     try {
         //index 0 of address is main address
-        const customerId = req.customer.id;
+        const customerId = req.params.id;
 
         const foundCustomer = await Customer.findByPk(customerId);
         if (!foundCustomer) {

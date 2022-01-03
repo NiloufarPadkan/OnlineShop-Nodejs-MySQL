@@ -12,15 +12,6 @@ exports.canAdmin = async (roleId, permissionTitle) => {
 
 exports.update = async (req, res, next) => {
     let response = new Response();
-    let ownsProfile = false;
-
-    if (req.customer)
-        if (req.body.customerId === req.customer.id.toString()) ownsProfile = true;
-
-    if (!ownsProfile) {
-        response.setStatus(404).setMessage("fail").setRes("notallowed");
-        return res.status(404).send(response.handler());
-    }
 
     try {
         const updatedCustomerRes = await editProfileService.updateCustomer(req);
