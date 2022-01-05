@@ -14,7 +14,10 @@ module.exports = {
                 quantity: "2",
                 categoryId: "1",
                 brandId: "1",
-                photo: '["http://localhost:3001/uploads/olympia1.jpg","http://localhost:3001/uploads/olympia1.jpg"]',
+                photo: JSON.stringify([
+                    "http://localhost:3001/uploads\\olympia1.jpg",
+                    "http://localhost:3001/uploads\\olympia1.jpg",
+                ]),
 
                 smallCover: "http://localhost:3001/uploads/small-olympia1.jpg",
                 coverThumb: "http://localhost:3001/uploads/thumbnail-olympia1.jpg",
@@ -35,7 +38,7 @@ module.exports = {
                 categoryId: "1",
                 brandId: "2",
                 brandId: "1",
-                photo: ["http://localhost:3001/uploads/cross-bike.jpg"],
+                photo: JSON.stringify(["http://localhost:3001/uploads\\cross-bike.jpg"]),
                 smallCover: "http://localhost:3001/uploads/small-cross-bike.jpg",
                 coverThumb: "http://localhost:3001/uploads/thumbnail-cross-bike.jpg",
                 description:

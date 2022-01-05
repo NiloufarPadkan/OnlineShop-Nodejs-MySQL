@@ -40,9 +40,9 @@ const Product = sequelize.define("product", {
     },
     photo: {
         type: Sequelize.STRING,
-        // get: function () {
-        //     return JSON.parse(this.getDataValue("photo"));
-        // },
+        get: function () {
+            return JSON.parse(this.getDataValue("photo"));
+        },
         set: function (val) {
             return this.setDataValue("photo", JSON.stringify(val));
         },

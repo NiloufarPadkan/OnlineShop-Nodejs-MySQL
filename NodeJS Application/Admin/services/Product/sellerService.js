@@ -23,7 +23,7 @@ exports.insertProduct = async (req) => {
             pathArray = Object.values(photoPath).map(
                 (a) => process.env.IMAGE_PREFIX + a.path
             );
-
+            console.log(JSON.stringify(pathArray));
             generateThumb(req.files[0].path, req.files[0].originalname);
             generateSmalller(req.files[0].path, req.files[0].originalname, 600);
 
