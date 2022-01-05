@@ -6,32 +6,35 @@ const Sequelize = require("sequelize");
 const Comment = require("../../../models/Comment");
 const Customer = require("../../../models/Customer");
 const Product_views = require("../../../models/Product_views");
-const Product_Rating = require("../../../models/Customer_ProductRating");
-const Product_Tag = require("../../../models/Product_tag");
-const Product_tag = require("../../../models/Product_tag");
 
-const sharp = require("sharp");
+const Product_tag = require("../../../models/Product_tag");
 const generateThumb = require("../../../lib/sharp").generateThumb;
 const generateSmalller = require("../../../lib/sharp").generateSmalller;
+const { request } = require("express");
 const Op = Sequelize.Op;
 
 exports.insertProduct = async (req) => {
     try {
-        let photoPath = req.files;
-        let pathArray = Object.values(photoPath).map(
-            (a) => process.env.IMAGE_PREFIX + a.path
-        );
-
         let coverThumb,
-            smallCover = "";
+            smallCover,
+            pathArray = "";
+        if (req.files[0]) {
+            let photoPath = req.files;
+            pathArray = Object.values(photoPath).map(
+                (a) => process.env.IMAGE_PREFIX + a.path
+            );
 
-        generateThumb(req.files[0].path, req.files[0].originalname);
-        generateSmalller(req.files[0].path, req.files[0].originalname, 600);
+            generateThumb(req.files[0].path, req.files[0].originalname);
+            generateSmalller(req.files[0].path, req.files[0].originalname, 600);
 
-        coverThumb =
-            process.env.IMAGE_PREFIX + "uploads/thumbnail-" + req.files[0].originalname;
-        smallCover =
-            process.env.IMAGE_PREFIX + "uploads/small-" + req.files[0].originalname;
+            coverThumb =
+                process.env.IMAGE_PREFIX +
+                "uploads/thumbnail-" +
+                req.files[0].originalname;
+
+            smallCover =
+                process.env.IMAGE_PREFIX + "uploads/small-" + req.files[0].originalname;
+        }
 
         const newProduct = new Product({
             name: req.body.name,
@@ -115,6 +118,7 @@ exports.indexProducts = async (req) => {
         });
         return products;
     } catch (e) {
+        console.log(e);
         throw new Error(e);
     }
 };
@@ -243,12 +247,32 @@ exports.searchProducts = async (req) => {
 
 exports.updateProduct = async (req) => {
     try {
+        let coverThumb,
+            smallCover,
+            pathArray = "";
+        if (req.files[0]) {
+            let photoPath = req.files;
+            pathArray = Object.values(photoPath).map(
+                (a) => process.env.IMAGE_PREFIX + a.path
+            );
+
+            generateThumb(req.files[0].path, req.files[0].originalname);
+            generateSmalller(req.files[0].path, req.files[0].originalname, 600);
+
+            coverThumb =
+                process.env.IMAGE_PREFIX +
+                "uploads/thumbnail-" +
+                req.files[0].originalname;
+
+            smallCover =
+                process.env.IMAGE_PREFIX + "uploads/small-" + req.files[0].originalname;
+        }
         const productId = req.params.id;
         const foundProduct = await Product.findByPk(productId);
         if (!foundProduct) {
             return "productNotFound";
         }
-        const name = req.body.name ? req.body.name : foundProduct.name;
+        const name = req.body.name;
 
         const base_price = req.body.base_price
             ? req.body.base_price
@@ -256,12 +280,12 @@ exports.updateProduct = async (req) => {
 
         const temp_price = req.body.temp_price
             ? req.body.temp_price
-            : foundProduct.roleId;
+            : foundProduct.temp_price;
 
         const count = req.body.count ? req.body.count : foundProduct.count;
         const description = req.body.description
             ? req.body.description
-            : foundProduct.roleId;
+            : foundProduct.description;
 
         const photo = req.body.photo ? req.body.photo : foundProduct.photo;
 
@@ -274,7 +298,9 @@ exports.updateProduct = async (req) => {
             product.temp_price = temp_price;
             product.count = count;
             product.description = description;
-            product.photo = photo;
+            product.photo = pathArray;
+            product.coverThumb = coverThumb;
+            product.smallCover = smallCover;
             product.activityStatus = activityStatus;
             return product.save();
         });

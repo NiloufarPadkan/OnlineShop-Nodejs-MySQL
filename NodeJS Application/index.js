@@ -44,11 +44,16 @@ const CartItem = require("./models/CartItem");
 const Order = require("./models/Order");
 const OrderItem = require("./models/OrderItem");
 const Product_views = require("./models/Product_views");
+// const bodyparser = require("body-parser");
+
 dotenv.config();
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// app.use(bodyparser.json({}));
+// app.use(bodyparser.urlencoded({ extended: true }));
 
 app.use((req, res, next) => {
     res.setHeader("Access-Control-Allow-Origin", "*");

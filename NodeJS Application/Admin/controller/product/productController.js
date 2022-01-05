@@ -126,6 +126,7 @@ exports.index = async (req, res, next) => {
         response.setStatus(200).setRes(productIndexResponse);
         return res.status(200).send(response.handler());
     } catch (e) {
+        console.log(e);
         if (e.statusCode) {
             err.statusCode = 500;
         }
