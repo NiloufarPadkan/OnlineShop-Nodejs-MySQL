@@ -11,7 +11,8 @@ const Product_Tag = require("../../../models/Product_tag");
 const Product_tag = require("../../../models/Product_tag");
 
 const sharp = require("sharp");
-
+const generateThumb = require("../../../lib/sharp").generateThumb;
+const generateSmalller = require("../../../lib/sharp").generateSmalller;
 const Op = Sequelize.Op;
 
 exports.insertProduct = async (req) => {
@@ -20,25 +21,17 @@ exports.insertProduct = async (req) => {
         let pathArray = Object.values(photoPath).map(
             (a) => process.env.IMAGE_PREFIX + a.path
         );
-        let coverThumb = "";
-        sharp(req.files[0].path)
-            .resize(60, 60, { fit: "contain" })
-            .toFile(
-                "uploads/" + "thumbnail-" + req.files[0].originalname,
-                (err, sharp) => {
-                    if (err) {
-                        console.error(err);
-                        return err;
-                    } else {
-                        console.log(sharp);
-                    }
-                }
-            );
+
+        let coverThumb,
+            smallCover = "";
+
+        generateThumb(req.files[0].path, req.files[0].originalname);
+        generateSmalller(req.files[0].path, req.files[0].originalname, 600);
+
         coverThumb =
-            process.env.IMAGE_PREFIX +
-            "uploads/" +
-            "thumbnail-" +
-            req.files[0].originalname;
+            process.env.IMAGE_PREFIX + "uploads/thumbnail-" + req.files[0].originalname;
+        smallCover =
+            process.env.IMAGE_PREFIX + "uploads/small-" + req.files[0].originalname;
 
         const newProduct = new Product({
             name: req.body.name,
@@ -50,6 +43,7 @@ exports.insertProduct = async (req) => {
             categoryId: req.body.categoryId,
             photo: pathArray,
             coverThumb: coverThumb,
+            smallCover: smallCover,
             tagId: req.body.tagId,
             brandId: req.body.brandId,
         });
@@ -57,7 +51,6 @@ exports.insertProduct = async (req) => {
         const savedProduct = await newProduct.save();
         return savedProduct;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };
@@ -122,7 +115,6 @@ exports.indexProducts = async (req) => {
         });
         return products;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };
@@ -144,7 +136,6 @@ exports.getProductComments = async (req) => {
         });
         return comments;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };
@@ -171,7 +162,6 @@ exports.getOneProduct = async (req) => {
         let result = { products, comments };
         return result;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };
@@ -247,7 +237,6 @@ exports.searchProducts = async (req) => {
         }
         return products;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };
@@ -291,7 +280,6 @@ exports.updateProduct = async (req) => {
         });
         return upproduct;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };
@@ -307,7 +295,6 @@ exports.destroyProduct = async (req) => {
         if (product) return true;
         else return false;
     } catch (e) {
-        console.log(e);
         return false;
     }
 };

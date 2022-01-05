@@ -34,7 +34,6 @@ exports.getPermissions = async (req, res, next) => {
         // permissions.save;
         return permissions;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };

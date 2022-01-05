@@ -75,7 +75,6 @@ exports.indexProducts = async (req) => {
         });
         return products;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };
@@ -98,7 +97,6 @@ exports.getProductComments = async (req) => {
         });
         return comments;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };
@@ -154,7 +152,6 @@ exports.getOneProduct = async (req) => {
         let result = { products, comments };
         return result;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };
@@ -231,7 +228,6 @@ exports.searchProducts = async (req) => {
         }
         return products;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };

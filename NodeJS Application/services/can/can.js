@@ -17,7 +17,6 @@ async function cache(roleId) {
     } else {
         console.log("Fetching Data...");
         permissionArray = await Role_Permission.findAll({
-            // where: { roleId: roleId },
             raw: true,
         });
         client.setex("role-permissions", 3600, JSON.stringify(permissionArray));
@@ -42,6 +41,6 @@ exports.can = async (roleId, permissionTitle) => {
             return false;
         }
     } catch (e) {
-        console.log(e);
+        throw new Error(e);
     }
 };

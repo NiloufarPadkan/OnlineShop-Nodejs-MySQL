@@ -6,7 +6,6 @@ exports.insertBrand = async (req, res, next) => {
     try {
         const persianName = req.body.PersianName;
         const englishName = req.body.EnglishName ? req.body.EnglishName : "";
-        console.log(englishName);
         let photoPath;
         if (req.file) photoPath = process.env.IMAGE_PREFIX + req.file.path;
         else photoPath = "";
@@ -19,7 +18,6 @@ exports.insertBrand = async (req, res, next) => {
         const savedBrand = await newBrand.save();
         return savedBrand;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };
@@ -44,7 +42,6 @@ exports.getbrand = async (req, res, next) => {
                 ],
             },
         });
-        //console.log(brands);
         return brands;
     } catch (e) {
         throw new Error(e);
@@ -77,7 +74,6 @@ exports.updatebrand = async (req) => {
         });
         return editedBrand;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };
@@ -93,7 +89,6 @@ exports.destroyBrand = async (req) => {
         if (brand) return true;
         else return false;
     } catch (e) {
-        console.log(e);
         return false;
     }
 };

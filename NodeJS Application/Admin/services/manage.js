@@ -19,7 +19,6 @@ exports.insertAdmin = async (req) => {
         let { hash, salt, ...savedAdmin } = newAdmin.toJSON();
         return savedAdmin;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };
@@ -35,7 +34,6 @@ exports.indexAdmins = async (req) => {
         });
         return admins;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };
@@ -112,7 +110,6 @@ exports.updateAdmin = async (req) => {
 
         return savedAdmin;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };

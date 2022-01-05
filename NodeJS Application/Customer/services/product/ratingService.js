@@ -40,7 +40,6 @@ exports.add = async (req, res, next) => {
 
         return p;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };
@@ -53,7 +52,6 @@ exports.getProductRating = async (req) => {
         });
         return p.AvgRating;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };

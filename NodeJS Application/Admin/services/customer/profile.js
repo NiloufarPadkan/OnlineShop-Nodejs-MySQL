@@ -43,7 +43,6 @@ exports.updateCustomer = async (req) => {
         });
         return updatedCustomer;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };

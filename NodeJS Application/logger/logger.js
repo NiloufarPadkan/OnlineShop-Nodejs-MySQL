@@ -3,14 +3,7 @@ const { combine, timestamp, label, prettyPrint, colorize } = format;
 
 const logger = createLogger({
     //  level: "info",
-    format: combine(
-        label({ label: "  label: `Label🏷️`" }),
-        timestamp(),
-        prettyPrint(),
-        colorize({
-            all: true,
-        })
-    ),
+    format: combine(label({ label: "  label: `Label🏷️`" }), timestamp(), prettyPrint()),
     colorize: true,
     //  defaultMeta: { service: "user-service" },
     transports: [

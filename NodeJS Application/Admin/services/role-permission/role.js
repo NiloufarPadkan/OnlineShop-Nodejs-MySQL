@@ -12,10 +12,8 @@ exports.insertRole = async (req) => {
         }
         const newRole = new Role({ role: roleTitle });
         const savedRole = await newRole.save();
-        console.log(savedRole);
         return savedRole;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };
@@ -29,7 +27,6 @@ exports.getRole = async (req) => {
         });
         return roles;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };
@@ -47,7 +44,6 @@ exports.setStatus = async (req) => {
             });
         return role;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };

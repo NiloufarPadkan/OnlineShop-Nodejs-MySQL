@@ -18,7 +18,6 @@ exports.login_signup = async (req) => {
 
         return accessToken;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };

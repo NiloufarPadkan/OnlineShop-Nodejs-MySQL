@@ -47,7 +47,6 @@ exports.AssignPermission = async (req, res, next) => {
 
         return AssignPermissionResult;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };

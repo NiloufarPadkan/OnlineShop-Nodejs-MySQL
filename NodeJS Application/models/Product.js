@@ -1,3 +1,4 @@
+const { INTEGER } = require("sequelize");
 const Sequelize = require("sequelize");
 
 const sequelize = require("../config/database/sequelize");
@@ -18,12 +19,12 @@ const Product = sequelize.define("product", {
         type: Sequelize.STRING,
     },
     base_price: {
-        type: Sequelize.DECIMAL(20, 2),
+        type: INTEGER,
         allowNull: false,
         trim: true,
     },
     temp_price: {
-        type: Sequelize.DECIMAL(20, 2),
+        type: INTEGER,
         allowNull: false,
         trim: true,
     },
@@ -47,6 +48,9 @@ const Product = sequelize.define("product", {
         },
     },
     coverThumb: {
+        type: Sequelize.STRING,
+    },
+    smallCover: {
         type: Sequelize.STRING,
     },
     activityStatus: {

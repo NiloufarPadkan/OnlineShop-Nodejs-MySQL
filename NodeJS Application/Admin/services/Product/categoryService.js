@@ -20,7 +20,6 @@ exports.insertCategory = async (req, res, next) => {
                 title: category,
             },
         });
-        console.log(duplicateCategory + "ssssssss");
         if (duplicateCategory) {
             return "alreadyExists";
         }
@@ -37,7 +36,6 @@ exports.insertCategory = async (req, res, next) => {
         const savedCategory = await newCategory.save();
         return savedCategory;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };
@@ -79,7 +77,6 @@ exports.getcategory = async (req, res, next) => {
         });
         return list_to_tree(categories);
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };
@@ -127,7 +124,6 @@ exports.destroyCategory = async (req) => {
         if (category) return true;
         else return false;
     } catch (e) {
-        console.log(e);
         return false;
     }
 };

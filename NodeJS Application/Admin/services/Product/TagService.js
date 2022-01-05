@@ -19,10 +19,8 @@ exports.insertTag = async (req, res, next) => {
         });
 
         const savedTag = await newTag.save();
-        // console.log(savedTag);
         return savedTag;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };
@@ -78,7 +76,6 @@ exports.destroyTag = async (req) => {
         if (tag) return true;
         else return false;
     } catch (e) {
-        console.log(e);
         return false;
     }
 };

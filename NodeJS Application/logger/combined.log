@@ -1,137 +1,45 @@
 {
   level: 'error',
-  message: Error: SequelizeDatabaseError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''999'' at line 1
-      at Object.exports.getbrand (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\brandService.js:50:15)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5)
-      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:98:36),
-  label: 'right meow!',
-  timestamp: '2022-01-03T09:39:44.922Z'
-}
-{
-  level: 'error',
-  message: Error: SequelizeDatabaseError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''999'' at line 1
-      at Object.exports.getbrand (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\brandService.js:50:15)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5)
-      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:98:36),
-  label: 'right meow!',
-  timestamp: '2022-01-03T09:40:06.755Z'
-}
-{
-  level: 'error',
-  message: Error: SequelizeDatabaseError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''999'' at line 1
-      at Object.exports.getbrand (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\brandService.js:50:15)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5)
-      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:98:36),
-  label: 'right meow!',
-  timestamp: '2022-01-03T09:40:46.663Z'
-}
-{
-  level: 'error',
-  message: Error: SequelizeDatabaseError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''999'' at line 1
-      at Object.exports.getbrand (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\brandService.js:50:15)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5)
-      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:98:36),
-  labels: { label2: 'label2' },
-  label: 'right meow!',
-  timestamp: '2022-01-03T09:42:24.279Z'
-}
-{
-  level: 'error',
-  message: Error: SequelizeDatabaseError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''999'' at line 1
-      at Object.exports.getbrand (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\brandService.js:50:15)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5)
-      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:98:36),
-  labels: { label: 'label2' },
-  label: 'right meow!',
-  timestamp: '2022-01-03T09:43:13.176Z'
-}
-{
-  level: 'error',
-  message: Error: SequelizeDatabaseError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''999'' at line 1
-      at Object.exports.getbrand (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\brandService.js:50:15)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5)
-      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:98:36),
-  label: 'right meow!',
-  timestamp: '2022-01-03T09:43:44.756Z'
-}
-{
-  level: 'error',
-  message: Error: SequelizeDatabaseError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''999'' at line 1
-      at Object.exports.getbrand (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\brandService.js:50:15)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5)
-      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:98:36),
-  label: 'right meow!',
-  timestamp: '2022-01-03T09:44:08.041Z'
-}
-{
-  level: 'error',
-  message: Error: SequelizeDatabaseError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''999'' at line 1
-      at Object.exports.getbrand (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\brandService.js:50:15)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5)
-      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:98:36),
-  label: 'ssss',
-  timestamp: '2022-01-03T09:44:40.404Z'
-}
-{
-  level: 'error',
-  message: Error: SequelizeDatabaseError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''999'' at line 1
-      at Object.exports.getbrand (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\brandService.js:50:15)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5)
-      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:98:36),
+  message: Error: TypeError: Cannot read property 'then' of undefined
+      at Object.exports.insertProduct (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\sellerService.js:51:15)
+      at exports.store (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\productController.js:25:66)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5),
   label: '  label: `Label🏷️`',
-  timestamp: '2022-01-03T09:45:57.251Z'
+  timestamp: '2022-01-05T08:29:21.285Z'
 }
 {
   level: 'error',
-  message: Error: SequelizeDatabaseError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''999'' at line 1
-      at Object.exports.getbrand (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\brandService.js:50:15)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5)
-      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:98:36),
+  message: [Error: ENOENT: no such file or directory, open 'C:\Users\Niloufar\Documents\shop-project\NodeJS Application\uploads\pishi.png'] {
+    errno: -4058,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: 'C:\\Users\\Niloufar\\Documents\\shop-project\\NodeJS Application\\uploads\\pishi.png',
+    storageErrors: []
+  },
   label: '  label: `Label🏷️`',
-  timestamp: '2022-01-03T09:47:42.121Z'
+  timestamp: '2022-01-05T08:35:15.998Z'
 }
-[31m{[39m
-[31m  level: 'error',[39m
-[31m  message: Error: SequelizeDatabaseError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''999'' at line 1[39m
-[31m      at Object.exports.getbrand (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\brandService.js:50:15)[39m
-[31m      at processTicksAndRejections (internal/process/task_queues.js:95:5)[39m
-[31m      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:98:36),[39m
-[31m  label: '  label: `Label🏷️`',[39m
-[31m  timestamp: '2022-01-03T09:48:38.822Z'[39m
-[31m}[39m
-[31m{[39m
-[31m  level: 'error',[39m
-[31m  message: Error: SequelizeDatabaseError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''999'' at line 1[39m
-[31m      at Object.exports.getbrand (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\brandService.js:50:15)[39m
-[31m      at processTicksAndRejections (internal/process/task_queues.js:95:5)[39m
-[31m      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:98:36),[39m
-[31m  label: '  label: `Label🏷️`',[39m
-[31m  timestamp: '2022-01-03T09:48:52.961Z'[39m
-[31m}[39m
-[31m{[39m
-[31m  level: 'error',[39m
-[31m  message: Error: SequelizeDatabaseError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''999'' at line 1[39m
-[31m      at Object.exports.getbrand (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\brandService.js:50:15)[39m
-[31m      at processTicksAndRejections (internal/process/task_queues.js:95:5)[39m
-[31m      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:98:36),[39m
-[31m  label: '  label: `Label🏷️`',[39m
-[31m  timestamp: '2022-01-03T09:52:09.592Z'[39m
-[31m}[39m
-[31m{[39m
-[31m  level: 'error',[39m
-[31m  message: Error: SequelizeDatabaseError: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ''999'' at line 1[39m
-[31m      at Object.exports.getbrand (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\brandService.js:50:15)[39m
-[31m      at processTicksAndRejections (internal/process/task_queues.js:95:5)[39m
-[31m      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:98:36),[39m
-[31m  label: '  label: `Label🏷️`',[39m
-[31m  timestamp: '2022-01-03T09:52:40.839Z'[39m
-[31m}[39m
-[31m{[39m
-[31m  level: 'error',[39m
-[31m  message: Error: TypeError: Assignment to constant variable.[39m
-[31m      at Object.exports.getOneProduct (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\product\userService.js:158:15)[39m
-[31m      at processTicksAndRejections (internal/process/task_queues.js:95:5)[39m
-[31m      at async exports.show (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\product\productController.js:40:37),[39m
-[31m  label: '  label: `Label🏷️`',[39m
-[31m  timestamp: '2022-01-03T11:46:18.467Z'[39m
-[31m}[39m
+{
+  level: 'error',
+  message: [Error: ENOENT: no such file or directory, open 'C:\Users\Niloufar\Documents\shop-project\NodeJS Application\uploads\pishi.png'] {
+    errno: -4058,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: 'C:\\Users\\Niloufar\\Documents\\shop-project\\NodeJS Application\\uploads\\pishi.png',
+    storageErrors: []
+  },
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-05T08:35:32.977Z'
+}
+{
+  level: 'error',
+  message: [Error: ENOENT: no such file or directory, open 'C:\Users\Niloufar\Documents\shop-project\NodeJS Application\uploads\photo_2021-02-13_15-52-53.jpg'] {
+    errno: -4058,
+    code: 'ENOENT',
+    syscall: 'open',
+    path: 'C:\\Users\\Niloufar\\Documents\\shop-project\\NodeJS Application\\uploads\\photo_2021-02-13_15-52-53.jpg',
+    storageErrors: []
+  },
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-05T08:35:42.134Z'
+}

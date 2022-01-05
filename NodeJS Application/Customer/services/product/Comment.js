@@ -11,7 +11,6 @@ exports.add = async (req, res, next) => {
 
         return newComment;
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };
@@ -40,7 +39,6 @@ exports.report = async (req, res, next) => {
             return newReport;
         }
     } catch (e) {
-        console.log(e);
         throw new Error(e);
     }
 };

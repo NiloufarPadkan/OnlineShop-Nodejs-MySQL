@@ -112,7 +112,6 @@ exports.search = async (req, res, next) => {
 };
 
 exports.index = async (req, res, next) => {
-    console.log("indexing");
     let response = new Response();
     let permissionResult = false;
     if (req.admin)
