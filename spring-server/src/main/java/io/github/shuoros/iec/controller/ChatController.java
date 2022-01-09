@@ -1,5 +1,7 @@
 package io.github.shuoros.iec.controller;
 
+import io.github.shuoros.iec.util.Constants;
+import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,8 +26,10 @@ public class ChatController {
         this.messagingTemplate = messagingTemplate;
     }
 
-    @MessageMapping()
+    @MessageMapping(Constants.ENDPOINT_USER + "/chat")
     public void chat(Message<Object> message, @Payload String payload, Principal principal) throws Exception {
-
+        String session = principal.getName();
+        log.info("<=== handleLogInCheckEvent: session=" + session + ", payload=" + payload);
+        JSONObject data = new JSONObject(payload);
     }
 }
