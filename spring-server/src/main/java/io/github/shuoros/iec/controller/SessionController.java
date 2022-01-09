@@ -26,4 +26,12 @@ public class SessionController {
         this.messagingTemplate = messagingTemplate;
     }
 
+    @MessageMapping(Constants.ENDPOINT_USER + "/init")
+    public void init(Message<Object> message, @Payload String payload, Principal principal) throws Exception {
+        String session = principal.getName();
+        log.info("<=== handleLogInCheckEvent: session=" + session + ", payload=" + payload);
+        JSONObject data = new JSONObject(payload);
+
+    }
+
 }
