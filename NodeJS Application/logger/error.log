@@ -345,3 +345,30 @@
   label: '  label: `Label🏷️`',
   timestamp: '2022-01-05T12:06:44.314Z'
 }
+{
+  level: 'error',
+  message: Error: SequelizeDatabaseError: Unknown column 'product.categoryId' in 'field list'
+      at Object.exports.indexProducts (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\product\userService.js:78:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\product\productController.js:24:38),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-08T13:33:46.420Z'
+}
+{
+  level: 'error',
+  message: Error: SequelizeDatabaseError: Unknown column 'totalQuantity' in 'field list'
+      at Object.exports.add (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\cart\cart.js:84:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.store (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\cart\cartController.js:7:35),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-10T14:52:26.970Z'
+}
+{
+  level: 'error',
+  message: Error: SequelizeValidationError: notNull Violation: orderItem.unit_price cannot be null
+      at Object.exports.add (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\cart\cart.js:84:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.store (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\cart\cartController.js:7:35),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-10T14:54:51.817Z'
+}

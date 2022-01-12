@@ -10,7 +10,7 @@ const UserType = sequelize.define("UserType", {
         primaryKey: true,
     },
     name: {
-        type: Sequelize.DECIMAL(20, 2),
+        type: Sequelize.STRING,
         allowNull: false,
         trim: true,
         unique: true,

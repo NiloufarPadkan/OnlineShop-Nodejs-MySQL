@@ -1,6 +1,7 @@
 const Cart = require("../../../models/Cart");
 const CartItem = require("../../../models/CartItem");
 const Product = require("../../../models/Product");
+
 exports.add = async (req, res, next) => {
     try {
         let fetchedCart;
@@ -54,8 +55,10 @@ exports.add = async (req, res, next) => {
             totalPrice += parseInt(x.quantity) * parseFloat(x.unit_price);
             totalQuantity += parseInt(x.quantity);
         }
+
         fetchedCart.totalPrice = totalPrice;
         fetchedCart.totalQuantity = totalQuantity;
+
         await fetchedCart.save();
         return fetchedCart;
     } catch (e) {
