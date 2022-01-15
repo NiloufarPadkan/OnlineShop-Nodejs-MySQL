@@ -9,9 +9,9 @@ const OrderItem = sequelize.define("orderItem", {
         allowNull: false,
         primaryKey: true,
     },
-    quantity: Sequelize.INTEGER,
-    price: {
-        type: Sequelize.DECIMAL(20, 2),
+    quantity: { type: Sequelize.INTEGER, defaultValue: 0 },
+    unit_price: {
+        type: Sequelize.INTEGER,
         allowNull: false,
         trim: true,
     },

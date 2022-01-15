@@ -6,12 +6,15 @@ module.exports = {
             {
                 PersianName: "المپیا",
                 EnglishName: "Olympia",
+                photo: "http://localhost:3001/uploads/olympia.jpg",
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
             {
                 PersianName: "کراس",
                 EnglishName: "Cross",
+                photo: "http://localhost:3001/uploads/cross.png",
+
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
@@ -25,18 +28,24 @@ module.exports = {
             {
                 PersianName: "جاینت",
                 EnglishName: "giant ",
+                photo: "http://localhost:3001/uploads/giant.jpg",
+
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
             {
                 PersianName: "اورلورد",
                 EnglishName: "overlord ",
+                photo: "http://localhost:3001/uploads/overload.jpg",
+
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
             {
                 PersianName: "اینتس",
                 EnglishName: "intense",
+                photo: "http://localhost:3001/uploads/intense.jpg",
+
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
