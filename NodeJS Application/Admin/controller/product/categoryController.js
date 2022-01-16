@@ -55,10 +55,7 @@ exports.update = async (req, res, next) => {
             response.setStatus(403).setMessage("fail").setRes("categoryNotFound");
             return res.status(404).send(response.handler());
         }
-        if (updatedcategoryResponse === "titleEmpty") {
-            response.setStatus(403).setMessage("fail").setRes("titleEmpty");
-            return res.status(404).send(response.handler());
-        }
+     
 
         response.setStatus(200).setRes(updatedcategoryResponse);
         return res.status(200).send(response.handler());
