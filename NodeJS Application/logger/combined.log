@@ -372,3 +372,30 @@
   label: '  label: `Label🏷️`',
   timestamp: '2022-01-10T14:54:51.817Z'
 }
+{
+  level: 'error',
+  message: Error: ReferenceError: editedCategory is not defined
+      at Object.exports.updatecategory (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\categoryService.js:112:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.update (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\categoryController.js:53:41),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-16T15:31:01.397Z'
+}
+{
+  level: 'error',
+  message: Error: SequelizeUniqueConstraintError: Validation error
+      at Object.exports.updatecategory (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\categoryService.js:115:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.update (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\categoryController.js:53:41),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-16T15:43:32.112Z'
+}
+{
+  level: 'error',
+  message: Error: TypeError: Cannot read property 'children' of undefined
+      at Object.exports.getcategory (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\categoryService.js:81:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\categoryController.js:99:39),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-16T15:48:18.226Z'
+}

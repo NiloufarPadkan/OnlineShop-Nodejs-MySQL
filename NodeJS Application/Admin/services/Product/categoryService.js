@@ -99,15 +99,18 @@ exports.updatecategory = async (req) => {
             ? +req.body.activityStatus
             : +foundCategory.activityStatus;
 
-        const editedCategory = await Category.findByPk(categoryId).then((category) => {
-            category.title = req.body.title;
-            category.photo = photoPath;
-            if (req.body.parentId) category.parentId = parseInt(req.body.parentId);
-            category.activityStatus = activityStatus;
+        foundCategory.title = req.body.title;
+        foundCategory.photo = photoPath;
+        if (req.body.parentId) foundCategory.parentId = parseInt(req.body.parentId);
+        foundCategory.activityStatus = activityStatus;
 
-            return category.save();
-        });
-        return editedCategory;
+        await foundCategory.save();
+        Category.update(
+            { activityStatus: activityStatus },
+            { where: { parentId: categoryId } }
+        );
+
+        return foundCategory;
     } catch (e) {
         throw new Error(e);
     }
