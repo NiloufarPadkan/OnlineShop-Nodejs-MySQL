@@ -26,6 +26,15 @@ public class UserService {
         return repo.existsById(id);
     }
 
+    public boolean existByUserName(int username) {
+        return getByUsername(username).isPresent();
+    }
+
+    public Optional<User> getByUsername(int username) {
+        List<User> temp = repo.findByUsername(username);
+        return temp.isEmpty() ? Optional.empty() : Optional.of(repo.findByUsername(username).get(0));
+    }
+
     public List<User> all() {
         return repo.findAll();
     }
