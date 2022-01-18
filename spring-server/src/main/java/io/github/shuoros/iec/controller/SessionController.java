@@ -59,12 +59,18 @@ public class SessionController {
                 .body("", String.class)
                 .retrieve().bodyToMono(String.class).block());
         if (callback.has("id")) {
-            User user = User.builder()//
-                    .username(callback.getInt("id"))//
-                    .jwt(data.getString("jwt"))//
-                    .session(session)//
-                    .online(new Date())//
-                    .build();
+            User user;
+            if (userService.existByUserName(callback.getInt("id"))) {
+                user = userService.getByUsername(callback.getInt("id")).get();
+                user.setOnline(new Date());
+            } else {
+                user = User.builder()//
+                        .username(callback.getInt("id"))//
+                        .jwt(data.getString("jwt"))//
+                        .session(session)//
+                        .online(new Date())//
+                        .build();
+            }
             userService.save(user);
             response.put("status", 200);
         } else {
@@ -91,7 +97,12 @@ public class SessionController {
                 .body("", String.class)
                 .retrieve().bodyToMono(String.class).block());
         if (callback.has("id")) {
-            Admin admin = Admin.builder()//
+            Admin admin;
+            if (adminService.existByUserName(callback.getInt("id"))) {
+                admin = adminService.getByUsername(callback.getInt("id")).get();
+                admin.setOnline(new Date());
+            }
+            admin = Admin.builder()//
                     .username(callback.getInt("id"))//
                     .jwt(data.getString("jwt"))//
                     .session(session)//
