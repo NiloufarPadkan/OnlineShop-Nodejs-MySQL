@@ -1,6 +1,7 @@
 package io.github.shuoros.iec.service;
 
 import io.github.shuoros.iec.model.Admin;
+import io.github.shuoros.iec.model.User;
 import io.github.shuoros.iec.repository.AdminRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,6 +25,15 @@ public class AdminService {
 
     public boolean exist(String id) {
         return repo.existsById(id);
+    }
+
+    public boolean existByUserName(int username) {
+        return getByUsername(username).isPresent();
+    }
+
+    public Optional<Admin> getByUsername(int username) {
+        List<Admin> temp = repo.findByUsername(username);
+        return temp.isEmpty() ? Optional.empty() : Optional.of(repo.findByUsername(username).get(0));
     }
 
     public List<Admin> all() {
