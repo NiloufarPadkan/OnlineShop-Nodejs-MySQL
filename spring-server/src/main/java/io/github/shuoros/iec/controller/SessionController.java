@@ -1,5 +1,6 @@
 package io.github.shuoros.iec.controller;
 
+import io.github.shuoros.iec.model.User;
 import io.github.shuoros.iec.util.Constants;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -17,6 +18,7 @@ import reactor.core.publisher.Mono;
 
 import java.lang.invoke.MethodHandles;
 import java.security.Principal;
+import java.util.Date;
 
 @Controller
 public class SessionController {
@@ -41,14 +43,34 @@ public class SessionController {
         String session = principal.getName();
         log.info("<=== handleLogInCheckEvent: session=" + session + ", payload=" + payload);
         JSONObject data = new JSONObject(payload);
+        JSONObject response = new JSONObject();
         JSONObject callback = new JSONObject(webClientBuilder.build()//
                 .post() //
-                .uri(nodeServer + "/admin/me")//
+                .uri(nodeServer + "/customer/me")//
                 .header("authorization", data.getString("jwt"))//
                 .contentType(MediaType.APPLICATION_JSON)
                 .accept(MediaType.APPLICATION_JSON)//
                 .body("", String.class)
                 .retrieve().bodyToMono(String.class).block());
+        if (callback.has("id")) {
+            User.builder()//
+                    .username(callback.getInt("id"))//
+                    .jwt(data.getString("jwt"))//
+                    .session(session)//
+                    .online(new Date())//
+                    .build();
+            response.put("status", 200);
+            response.put("destination", "init");
+            messagingTemplate.convertAndSendToUser(session,//
+                    Constants.SUBSCRIBE_USER_REPLY,//
+                    response.toString());
+        }else{
+            response.put("status", 403);
+            response.put("destination", "init");
+            messagingTemplate.convertAndSendToUser(session,//
+                    Constants.SUBSCRIBE_USER_REPLY,//
+                    response.toString());
+        }
     }
 
 }
