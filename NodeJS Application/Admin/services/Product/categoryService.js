@@ -53,11 +53,37 @@ function list_to_tree(list) {
         node = list[i];
         if (node.parentId !== null) {
             // if you have dangling branches check that map[node.parentId] exists
+
             list[map[node.parentId]].children.push(node);
         } else {
             roots.push(node);
         }
     }
+    return roots;
+}
+function updateList(list, parentId) {
+    var map = {},
+        node,
+        roots = [];
+    let i;
+    for (i = 0; i < list.length; i += 1) {
+        map[list[i].id] = i; // initialize the map
+        list[i].children = []; // initialize the children
+    }
+    for (i = 0; i < list.length; i += 1) {
+        node = list[i];
+        if (node.parentId !== null) {
+            // if you have dangling branches check that map[node.parentId] exists
+            console.log(map[node.parentId]);
+            list[map[node.parentId]].children.push(node);
+        } else {
+            roots.push(node);
+        }
+    }
+    console.log(list[0].length);
+    //    let i;
+    //    for(i=0;i<list[parentId].length)
+
     return roots;
 }
 

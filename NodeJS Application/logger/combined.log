@@ -399,3 +399,94 @@
   label: '  label: `Label🏷️`',
   timestamp: '2022-01-16T15:48:18.226Z'
 }
+{
+  level: 'error',
+  message: Error: TypeError: Cannot read property 'children' of undefined
+      at Object.exports.getcategory (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\categoryService.js:80:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\categoryController.js:99:39),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-16T16:08:55.947Z'
+}
+{
+  level: 'error',
+  message: Error: TypeError: Cannot read property 'children' of undefined
+      at Object.exports.getcategory (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\categoryService.js:80:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\categoryController.js:99:39),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-18T17:59:26.965Z'
+}
+{
+  level: 'error',
+  message: Error: TypeError: Cannot read property 'children' of undefined
+      at Object.exports.getcategory (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\categoryService.js:80:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\categoryController.js:99:39),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-18T18:01:53.624Z'
+}
+{
+  level: 'error',
+  message: Error: TypeError: Cannot read property 'children' of undefined
+      at Object.exports.getcategory (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\categoryService.js:81:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\categoryController.js:99:39),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-18T18:03:27.356Z'
+}
+{
+  level: 'error',
+  message: Error: TypeError: Cannot read property 'children' of undefined
+      at Object.exports.getcategory (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\categoryService.js:81:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\categoryController.js:99:39),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-18T18:03:53.818Z'
+}
+{
+  level: 'error',
+  message: Error: ReferenceError: prob is not defined
+      at Object.exports.getcategory (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\categoryService.js:114:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\categoryController.js:99:39),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-19T07:57:13.836Z'
+}
+{
+  level: 'error',
+  message: TypeError: logIndexResponse.json is not a function
+      at exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\log\logController.js:25:38)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-19T09:18:33.691Z'
+}
+{
+  level: 'error',
+  message: SyntaxError: Unexpected token l in JSON at position 4
+      at JSON.parse (<anonymous>)
+      at exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\log\logController.js:25:22)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-19T09:21:43.253Z'
+}
+{"level":"error","message":{}}
+{"level":"error","message":{}}
+{"label":"  label: `Label🏷️`","level":"error","message":{},"timestamp":"2022-01-19T09:30:02.605Z"}
+{"label":"  label: `Label🏷️`","level":"error","message":{},"timestamp":"2022-01-19T09:30:15.884Z"}
+{"label":"  label: `Label🏷️`","level":"error","message":{},"timestamp":"2022-01-19T09:32:09.129Z"}
+{"label":"  label: `Label🏷️`","level":"error","message":{},"timestamp":"2022-01-19T09:33:00.033Z"}
+{"label":"  label: `Label🏷️`","level":"error","message":{},"timestamp":"2022-01-19T09:33:10.093Z"}
+{"label":"  label: `Label🏷️`","level":"error","message":{},"timestamp":"2022-01-19T09:33:49.657Z"}
+{"label":"  label: `Label🏷️`","level":"error","message":{},"timestamp":"2022-01-19T09:35:23.055Z"}
+{"label":"  label: `Label🏷️`","level":"error","message":{},"timestamp":"2022-01-19T09:37:43.094Z"}
+{
+  level: 'error',
+  message: ReferenceError: x is not defined
+      at exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\log\logController.js:25:21)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-19T09:38:47.770Z'
+}
+{"label":"category one","level":"error","message":{"body":"{\r\n    \"permissionId\": [\r\n        \"5\",\r\n     \r\n    ]\r\n}","expose":true,"status":400,"statusCode":400,"type":"entity.parse.failed"}}
+{"label":"category one","level":"error","message":{}}
