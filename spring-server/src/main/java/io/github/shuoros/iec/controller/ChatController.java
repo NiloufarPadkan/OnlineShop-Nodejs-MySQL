@@ -1,5 +1,10 @@
 package io.github.shuoros.iec.controller;
 
+import io.github.shuoros.iec.model.Chat;
+import io.github.shuoros.iec.model.User;
+import io.github.shuoros.iec.service.AdminService;
+import io.github.shuoros.iec.service.ChatService;
+import io.github.shuoros.iec.service.UserService;
 import io.github.shuoros.iec.util.Constants;
 import org.json.JSONObject;
 import org.slf4j.Logger;
@@ -13,6 +18,7 @@ import org.springframework.stereotype.Controller;
 
 import java.lang.invoke.MethodHandles;
 import java.security.Principal;
+import java.util.Date;
 
 @Controller
 public class ChatController {
@@ -20,6 +26,13 @@ public class ChatController {
     private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     private SimpMessagingTemplate messagingTemplate;
+
+    @Autowired
+    public UserService userService;
+    @Autowired
+    public AdminService adminService;
+    @Autowired
+    public ChatService chatService;
 
     @Autowired
     public ChatController(SimpMessagingTemplate messagingTemplate) {
@@ -31,5 +44,30 @@ public class ChatController {
         String session = principal.getName();
         log.info("<=== handleLogInCheckEvent: session=" + session + ", payload=" + payload);
         JSONObject data = new JSONObject(payload);
+        JSONObject response = new JSONObject();
+        if (userService.existByJwt(data.getString("jwt"))) {
+            User user = userService.getByJwt(data.getString("jwt")).get();
+            adminService.all().forEach(admin -> {
+                response.put("status", 200);
+                response.put("destination", "notif");
+                response.put("data", new JSONObject()//
+                        .put("user", user.getUsername())//
+                        .put("message", data.getString("message")));
+                messagingTemplate.convertAndSendToUser(admin.getSession(),//
+                        Constants.SUBSCRIBE_USER_REPLY,//
+                        response.toString());
+                chatService.save(Chat.builder()//
+                        .message(data.getString("message"))//
+                        .user(user.getUsername())//
+                        .date(new Date())//
+                        .build());
+            });
+        } else {
+            response.put("status", 403);
+            response.put("destination", "error");
+            messagingTemplate.convertAndSendToUser(session,//
+                    Constants.SUBSCRIBE_USER_REPLY,//
+                    response.toString());
+        }
     }
 }
