@@ -55,10 +55,9 @@ exports.updatetag = async (req) => {
         if (!foundTag) {
             return "tagNotFound";
         }
-        const editedTag = await Tag.findByPk(tagId).then((tag) => {
-            tag.title = req.body.title;
-            return tag.save();
-        });
+        foundTag.title = req.body.title;
+        await foundTag.save();
+
         return editedTag;
     } catch (e) {
         throw new Error(e);

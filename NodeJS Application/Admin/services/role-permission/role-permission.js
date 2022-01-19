@@ -1,5 +1,4 @@
 const RolePermission = require("../../../models/role-permission");
-const Role = require("../../../models/Role");
 const Permission = require("../../../models/Permission");
 const rolePermission = require("../../../models/role-permission");
 
