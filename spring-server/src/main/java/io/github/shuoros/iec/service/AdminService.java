@@ -35,11 +35,11 @@ public class AdminService {
         return temp.isEmpty() ? Optional.empty() : Optional.of(temp.get(0));
     }
 
-    public boolean existByJwt(int jwt) {
+    public boolean existByJwt(String jwt) {
         return getByJwt(jwt).isPresent();
     }
 
-    public Optional<Admin> getByJwt(int jwt) {
+    public Optional<Admin> getByJwt(String jwt) {
         List<Admin> temp = repo.findByJwt(jwt);
         return temp.isEmpty() ? Optional.empty() : Optional.of(temp.get(0));
     }
