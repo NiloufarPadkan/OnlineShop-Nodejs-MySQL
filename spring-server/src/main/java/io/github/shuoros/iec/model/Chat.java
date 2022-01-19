@@ -16,6 +16,7 @@ public class Chat {
 
     @Id
     private String id;
+    private boolean admin;
     private int user;
     private String message;
     private Date date;
