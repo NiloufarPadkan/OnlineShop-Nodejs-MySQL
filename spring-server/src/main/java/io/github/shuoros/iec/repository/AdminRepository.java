@@ -12,4 +12,8 @@ public interface AdminRepository extends MongoRepository<Admin, String> {
 
     @Query("{'username' : ?0}")
     List<Admin> findByUsername(int username);
+
+    @Query("{'jwt' : ?0}")
+    List<Admin> findByJwt(int jwt);
+
 }
