@@ -35,11 +35,11 @@ public class UserService {
         return temp.isEmpty() ? Optional.empty() : Optional.of(temp.get(0));
     }
 
-    public boolean existByJwt(int jwt) {
+    public boolean existByJwt(String jwt) {
         return getByJwt(jwt).isPresent();
     }
 
-    public Optional<User> getByJwt(int jwt) {
+    public Optional<User> getByJwt(String jwt) {
         List<User> temp = repo.findByJwt(jwt);
         return temp.isEmpty() ? Optional.empty() : Optional.of(temp.get(0));
     }
