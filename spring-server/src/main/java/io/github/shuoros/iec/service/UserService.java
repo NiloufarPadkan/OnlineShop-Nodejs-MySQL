@@ -32,7 +32,16 @@ public class UserService {
 
     public Optional<User> getByUsername(int username) {
         List<User> temp = repo.findByUsername(username);
-        return temp.isEmpty() ? Optional.empty() : Optional.of(repo.findByUsername(username).get(0));
+        return temp.isEmpty() ? Optional.empty() : Optional.of(temp.get(0));
+    }
+
+    public boolean existByJwt(int jwt) {
+        return getByJwt(jwt).isPresent();
+    }
+
+    public Optional<User> getByJwt(int jwt) {
+        List<User> temp = repo.findByJwt(jwt);
+        return temp.isEmpty() ? Optional.empty() : Optional.of(temp.get(0));
     }
 
     public List<User> all() {
