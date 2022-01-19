@@ -12,4 +12,8 @@ public interface UserRepository extends MongoRepository<User, String> {
 
     @Query("{'username' : ?0}")
     List<User> findByUsername(int username);
+
+    @Query("{'jwt' : ?0}")
+    List<User> findByJwt(int jwt);
+
 }
