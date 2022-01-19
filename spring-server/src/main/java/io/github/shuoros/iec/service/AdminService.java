@@ -32,7 +32,16 @@ public class AdminService {
 
     public Optional<Admin> getByUsername(int username) {
         List<Admin> temp = repo.findByUsername(username);
-        return temp.isEmpty() ? Optional.empty() : Optional.of(repo.findByUsername(username).get(0));
+        return temp.isEmpty() ? Optional.empty() : Optional.of(temp.get(0));
+    }
+
+    public boolean existByJwt(int jwt) {
+        return getByJwt(jwt).isPresent();
+    }
+
+    public Optional<Admin> getByJwt(int jwt) {
+        List<Admin> temp = repo.findByJwt(jwt);
+        return temp.isEmpty() ? Optional.empty() : Optional.of(temp.get(0));
     }
 
     public List<Admin> all() {
