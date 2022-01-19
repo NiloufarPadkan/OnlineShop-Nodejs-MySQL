@@ -26,6 +26,24 @@ public class AdminService {
         return repo.existsById(id);
     }
 
+    public boolean existByUserName(int username) {
+        return getByUsername(username).isPresent();
+    }
+
+    public Optional<Admin> getByUsername(int username) {
+        List<Admin> temp = repo.findByUsername(username);
+        return temp.isEmpty() ? Optional.empty() : Optional.of(temp.get(0));
+    }
+
+    public boolean existByJwt(String jwt) {
+        return getByJwt(jwt).isPresent();
+    }
+
+    public Optional<Admin> getByJwt(String jwt) {
+        List<Admin> temp = repo.findByJwt(jwt);
+        return temp.isEmpty() ? Optional.empty() : Optional.of(temp.get(0));
+    }
+
     public List<Admin> all() {
         return repo.findAll();
     }

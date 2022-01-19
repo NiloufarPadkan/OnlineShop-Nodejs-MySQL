@@ -17,7 +17,8 @@ public class User {
     @Id
     private String id;
     private String session;
-    private String username;
+    private String jwt;
+    private int username;
     private Date online;
 
 }
