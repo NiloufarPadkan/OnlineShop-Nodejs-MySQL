@@ -40,7 +40,7 @@ public class ChatController {
     }
 
     @MessageMapping(Constants.ENDPOINT_USER + "/chat")
-    public void chat(Message<Object> message, @Payload String payload, Principal principal) throws Exception {
+    public void userChat(Message<Object> message, @Payload String payload, Principal principal) throws Exception {
         String session = principal.getName();
         log.info("<=== handleLogInCheckEvent: session=" + session + ", payload=" + payload);
         JSONObject data = new JSONObject(payload);
@@ -56,12 +56,45 @@ public class ChatController {
                 messagingTemplate.convertAndSendToUser(admin.getSession(),//
                         Constants.SUBSCRIBE_USER_REPLY,//
                         response.toString());
-                chatService.save(Chat.builder()//
-                        .message(data.getString("message"))//
-                        .user(user.getUsername())//
-                        .date(new Date())//
-                        .build());
             });
+            chatService.save(Chat.builder()//
+                    .message(data.getString("message"))//
+                    .admin(false)//
+                    .user(user.getUsername())//
+                    .date(new Date())//
+                    .build());
+        } else {
+            response.put("status", 403);
+            response.put("destination", "error");
+            messagingTemplate.convertAndSendToUser(session,//
+                    Constants.SUBSCRIBE_USER_REPLY,//
+                    response.toString());
+        }
+    }
+
+    @MessageMapping(Constants.ENDPOINT_ADMIN + "/chat")
+    public void adminChat(Message<Object> message, @Payload String payload, Principal principal) throws Exception {
+        String session = principal.getName();
+        log.info("<=== handleLogInCheckEvent: session=" + session + ", payload=" + payload);
+        JSONObject data = new JSONObject(payload);
+        JSONObject response = new JSONObject();
+        if (adminService.existByJwt(data.getString("jwt"))) {
+            if (userService.existByUserName(data.getInt("user"))) {
+                User user = userService.getByUsername(data.getInt("user")).get();
+                response.put("status", 200);
+                response.put("destination", "notif");
+                response.put("data", new JSONObject()//
+                        .put("message", data.getString("message")));
+                messagingTemplate.convertAndSendToUser(user.getSession(),//
+                        Constants.SUBSCRIBE_USER_REPLY,//
+                        response.toString());
+            }
+            chatService.save(Chat.builder()//
+                    .message(data.getString("message"))//
+                    .admin(true)//
+                    .user(data.getInt("user"))//
+                    .date(new Date())//
+                    .build());
         } else {
             response.put("status", 403);
             response.put("destination", "error");
