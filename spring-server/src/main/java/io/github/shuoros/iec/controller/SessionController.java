@@ -62,6 +62,7 @@ public class SessionController {
             User user;
             if (userService.existByUserName(callback.getInt("id"))) {
                 user = userService.getByUsername(callback.getInt("id")).get();
+                user.setJwt(data.getString("jwt"));
                 user.setOnline(new Date());
             } else {
                 user = User.builder()//
@@ -100,6 +101,7 @@ public class SessionController {
             Admin admin;
             if (adminService.existByUserName(callback.getInt("id"))) {
                 admin = adminService.getByUsername(callback.getInt("id")).get();
+                admin.setJwt(data.getString("jwt"));
                 admin.setOnline(new Date());
             }
             admin = Admin.builder()//
