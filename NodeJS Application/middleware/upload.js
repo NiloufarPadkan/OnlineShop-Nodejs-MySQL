@@ -7,12 +7,11 @@ const storage = multer.diskStorage({
         cb(null, "./uploads/");
     },
     filename: function (req, file, cb) {
-        cb(null, file.originalname);
+        cb(null, file.originalname.replace(/\s+/g, ""));
     },
 });
 const fileFilter = (req, file, cb) => {
-    // reject a file
-    let response = new Response();
+    //let response = new Response();
     if (file.mimetype === "image/jpeg" || file.mimetype === "image/png") {
         cb(null, true);
     } else {

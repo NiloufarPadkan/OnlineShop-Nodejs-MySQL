@@ -1,5 +1,4 @@
 //const Category = require("../../models/Category");
-const { where } = require("sequelize");
 const Sequelize = require("sequelize");
 const Category = require("../../../models/Category");
 const Op = Sequelize.Op;
@@ -102,7 +101,6 @@ async function updateList(list, parentId, status) {
                 where: { id: { [Op.in]: childrens } },
             }
         );
-        console.log(y);
     } catch (e) {
         console.log(e);
     }
@@ -131,9 +129,6 @@ exports.getcategory = async (req, res, next) => {
 
 exports.updatecategory = async (req) => {
     try {
-        if (!req.body.title) {
-            return "titleEmpty";
-        }
         const categoryId = req.body.categoryId;
         const foundCategory = await Category.findByPk(categoryId);
         if (!foundCategory) {
