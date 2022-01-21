@@ -1,4 +1,5 @@
 //const Category = require("../../models/Category");
+const { where } = require("sequelize");
 const Sequelize = require("sequelize");
 const Category = require("../../../models/Category");
 const Op = Sequelize.Op;
@@ -59,31 +60,52 @@ function list_to_tree(list) {
             roots.push(node);
         }
     }
+
     return roots;
 }
-function updateList(list, parentId) {
+
+async function updateList(list, parentId, status) {
     var map = {},
         node,
         roots = [];
     let i;
     for (i = 0; i < list.length; i += 1) {
-        map[list[i].id] = i; // initialize the map
-        list[i].children = []; // initialize the children
+        map[list[i].id] = i;
+        list[i].children = [];
     }
     for (i = 0; i < list.length; i += 1) {
         node = list[i];
         if (node.parentId !== null) {
-            // if you have dangling branches check that map[node.parentId] exists
-            console.log(map[node.parentId]);
             list[map[node.parentId]].children.push(node);
         } else {
             roots.push(node);
         }
     }
-    console.log(list[0].length);
-    //    let i;
-    //    for(i=0;i<list[parentId].length)
-
+    let childrens = [];
+    if (list[parentId - 1].children) {
+        x(list[parentId - 1].children);
+    }
+    function x(list) {
+        list.forEach((element) => {
+            childrens.push(element.id);
+            if (element.children) {
+                x(element.children);
+            }
+        });
+    }
+    try {
+        let y = await Category.update(
+            {
+                activityStatus: +status,
+            },
+            {
+                where: { id: { [Op.in]: childrens } },
+            }
+        );
+        console.log(y);
+    } catch (e) {
+        console.log(e);
+    }
     return roots;
 }
 
@@ -127,15 +149,14 @@ exports.updatecategory = async (req) => {
 
         foundCategory.title = req.body.title;
         foundCategory.photo = photoPath;
-        if (req.body.parentId) foundCategory.parentId = parseInt(req.body.parentId);
         foundCategory.activityStatus = activityStatus;
 
-        await foundCategory.save();
-        Category.update(
-            { activityStatus: activityStatus },
-            { where: { parentId: categoryId } }
-        );
+        if (req.body.parentId) foundCategory.parentId = parseInt(req.body.parentId);
 
+        await foundCategory.save();
+
+        const categories = await Category.findAll({ raw: true });
+        updateList(categories, categoryId, activityStatus);
         return foundCategory;
     } catch (e) {
         throw new Error(e);
