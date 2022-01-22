@@ -16,7 +16,7 @@ public class ThymleafController {
     private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     @RequestMapping("/")
-    public String index(@RequestParam String id String jwt,
+    public String index(@RequestParam String jwt,
                         HttpServletRequest request, Model model) {
         return "index";
     }
