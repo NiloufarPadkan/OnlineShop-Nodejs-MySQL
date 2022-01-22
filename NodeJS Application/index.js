@@ -10,7 +10,8 @@ const adminLoginRoute = require("./Admin/routes/auth/login");
 const adminProfileRoute = require("./Admin/routes/auth/profile");
 const adminCartRouter = require("./Admin/routes/cart/cartRouter");
 const logRouter = require("./Admin/routes/log.js/logRoute");
-//const command = require("./routes/admins/commands/createRoot");
+const adminChatRouter = require("./Admin/routes/chat/chatRouter");
+const customerChatRouter = require("./Customer/routes/chat/chatRouter");
 const permissionRoute = require("./Admin/routes/manage/permission");
 
 const categoryRoute = require("./Admin/routes/product/category");
@@ -98,7 +99,8 @@ app.use(adminProfileRoute);
 app.use(cartRoute);
 app.use(checkCartRouter);
 app.use(adminCartRouter);
-
+app.use(adminChatRouter);
+app.use(customerChatRouter);
 app.use((error, req, res, next) => {
     logger.error({
         level: "error",

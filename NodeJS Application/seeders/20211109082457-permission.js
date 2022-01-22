@@ -149,6 +149,11 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                title: "chat with Customer",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ]);
     },
 
