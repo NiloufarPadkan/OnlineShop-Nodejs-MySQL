@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <title>chat</title>
+
+    <script src="/lib/sockjs/sockjs.min.js"></script>
+    <script src="/lib/stomp/lib/stomp.min.js"></script>
+    <script>
+        window.onload = function() {
+            var socket = new SockJS(location.protocol + "//" + location.host
+                + "/connect");
+            stompClient = Stomp.over(socket);
+            stompClient.debug = null;
+            stompClient.connect({}, function(frame) {
+                stompClient.subscribe('/private/reply', function(notification) {
+                    responseHandler(notification.body);
+                });
+                stompClient.subscribe('/queue/public', function(notification) {
+                    responseHandler(notification.body);
+                });
+            });
+        }
+
+        function responseHandler(data) {
+            console.log(data);
+            var obj = JSON.parse(data);
+            if (obj.status == 200) {
+                if (obj.destination == "timer") {
+                    document.getElementById("timer").innerHTML = obj.data.time;
+                } else if(obj.destination == "chat"){
+                    document.getElementById("chatbox").innerHTML = document.getElementById("chatbox").innerHTML + "<li>" + obj.data.from + ": " + obj.data.message + "</li>"
+                }
+            }
+        }
+    </script>
+</head>
+<body>
+</body>
+</html>
