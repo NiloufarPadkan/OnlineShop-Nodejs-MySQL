@@ -33,15 +33,14 @@ exports.updateCustomer = async (req) => {
         const fname = req.body.fname ? req.body.fname : foundCustomer.fname;
         const lname = req.body.lname ? req.body.lname : foundCustomer.lname;
 
-        const updatedCustomer = await Customer.findByPk(customerId).then((customer) => {
-            customer.email = email;
-            customer.phone = phone;
-            customer.fname = fname;
-            customer.lname = lname;
-            customer.address = addressArray;
-            return customer.save();
-        });
-        return updatedCustomer;
+        foundCustomer.email = email;
+        foundCustomer.phone = phone;
+        foundCustomer.fname = fname;
+        foundCustomer.lname = lname;
+        foundCustomer.address = addressArray;
+        await foundCustomer.save();
+
+        return foundCustomer;
     } catch (e) {
         throw new Error(e);
     }

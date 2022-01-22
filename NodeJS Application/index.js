@@ -9,7 +9,7 @@ const adminRoute = require("./Admin/routes/manage/admin");
 const adminLoginRoute = require("./Admin/routes/auth/login");
 const adminProfileRoute = require("./Admin/routes/auth/profile");
 const adminCartRouter = require("./Admin/routes/cart/cartRouter");
-
+const logRouter = require("./Admin/routes/log.js/logRoute");
 //const command = require("./routes/admins/commands/createRoot");
 const permissionRoute = require("./Admin/routes/manage/permission");
 
@@ -81,6 +81,7 @@ app.use((req, res, next) => {
 app.use("/uploads", express.static("uploads"));
 
 // app.use(command);
+app.use(logRouter);
 app.use(roleRoute);
 app.use(adminRoute);
 app.use(permissionRoute);

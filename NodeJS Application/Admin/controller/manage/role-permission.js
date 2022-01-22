@@ -28,8 +28,8 @@ exports.store = async (req, res, next) => {
             response.setStatus(400).setMessage("fail").setRes("alreadyExists");
             return res.status(400).send(response.handler());
         }
-        response.setStatus(400).setMessage("fail").setRes("failed");
-        res.status(400).send(response.handler());
+        let response = new Response(200, "success", assignPermissionResponse);
+        return res.status(200).send(response.handler());
     } catch (e) {
         if (e.statusCode) {
             err.statusCode = 500;

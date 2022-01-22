@@ -6,6 +6,9 @@ module.exports = {
             {
                 email: "niloufarpadkan@gmail.com",
                 phone: "09915106340",
+                fname: "niloo",
+                lname: "padkan",
+                address: '["RASHT-GUILAN", "ANZALI-RAMEZANI", "ANZALI-GHAZIAN"]',
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },

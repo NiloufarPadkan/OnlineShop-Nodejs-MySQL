@@ -89,26 +89,24 @@ exports.updateAdmin = async (req) => {
             ? +req.body.activityStatus
             : +foundAdmin.activityStatus;
 
-        const upadmin = await Admin.findByPk(adminId).then((admin) => {
-            admin.roleId = roleId;
-            admin.activityStatus = status;
-            // ? req.body.activityStatus
-            // : +admin.activityStatus;
-            admin.username = username;
+        foundAdmin.roleId = roleId;
+        foundAdmin.activityStatus = status;
+        // ? req.body.activityStatus
+        // : +admin.activityStatus;
+        foundAdmin.username = username;
 
-            admin.email = email;
+        foundAdmin.email = email;
 
-            admin.phone = phone;
+        foundAdmin.phone = phone;
 
-            admin.hash = req.body.password ? saltHash.hash : admin.hash;
+        foundAdmin.hash = req.body.password ? saltHash.hash : admin.hash;
 
-            admin.salt = req.body.password ? saltHash.salt : admin.salt;
+        foundAdmin.salt = req.body.password ? saltHash.salt : admin.salt;
 
-            return admin.save();
-        });
-        let { salt, hash, ...savedAdmin } = upadmin.toJSON();
+        await foundAdmin.save();
+        let { salt, hash, ...savedAdmin } = foundAdmin.toJSON();
 
-        return savedAdmin;
+        return foundAdmin;
     } catch (e) {
         throw new Error(e);
     }

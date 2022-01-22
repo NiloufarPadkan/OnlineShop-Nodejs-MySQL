@@ -144,6 +144,11 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                title: "read log",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ]);
     },
 

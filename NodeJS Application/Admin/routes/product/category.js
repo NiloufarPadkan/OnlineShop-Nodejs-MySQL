@@ -12,13 +12,13 @@ router.post(
 );
 
 router.get("/category", categoryController.index);
-router.put("/category/edit", verifyToken, categoryController.update);
-router.delete(
-    "/category/remove",
+router.put(
+    "/category/edit",
     verifyToken,
     upload.single("photo"),
-    categoryController.destroy
+    categoryController.update
 );
+router.delete("/category/remove", verifyToken, categoryController.destroy);
 
 module.exports = router;
 // stor index update destory  show

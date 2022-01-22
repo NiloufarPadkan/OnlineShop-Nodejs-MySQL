@@ -1,401 +1,101 @@
+
 {
   level: 'error',
-  message: SyntaxError: Unexpected token h in JSON at position 0
-      at JSON.parse (<anonymous>)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\models\Brand.js:25:25)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3498:41)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3532:33)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3506:39)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3542:31)
-      at model.toJSON (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:4401:12)
-      at JSON.stringify (<anonymous>)
-      at stringify (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:1128:12)
-      at ServerResponse.json (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:260:14)
-      at ServerResponse.send (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:158:21)
-      at exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\productController.js:127:32)
+  message: ReferenceError: x is not defined
+      at exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\log\logController.js:25:21)
       at processTicksAndRejections (internal/process/task_queues.js:95:5),
   label: '  label: `Label🏷️`',
-  timestamp: '2022-01-05T10:48:38.737Z'
+  timestamp: '2022-01-19T09:38:47.770Z'
 }
+{"label":"category one","level":"error","message":{}}
+{"label":"category one","level":"error","message":{}}
 {
   level: 'error',
-  message: SyntaxError: Unexpected token h in JSON at position 0
-      at JSON.parse (<anonymous>)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\models\Brand.js:25:25)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3498:41)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3532:33)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3506:39)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3542:31)
-      at model.toJSON (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:4401:12)
-      at JSON.stringify (<anonymous>)
-      at stringify (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:1128:12)
-      at ServerResponse.json (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:260:14)
-      at ServerResponse.send (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:158:21)
-      at exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\productController.js:127:32)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5),
-  label: '  label: `Label🏷️`',
-  timestamp: '2022-01-05T10:48:59.688Z'
-}
-{
-  level: 'error',
-  message: SyntaxError: Unexpected token h in JSON at position 0
-      at JSON.parse (<anonymous>)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\models\Brand.js:25:25)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3498:41)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3532:33)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3506:39)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3542:31)
-      at model.toJSON (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:4401:12)
-      at JSON.stringify (<anonymous>)
-      at stringify (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:1128:12)
-      at ServerResponse.json (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:260:14)
-      at ServerResponse.send (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:158:21)
-      at exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\productController.js:127:32)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5),
-  label: '  label: `Label🏷️`',
-  timestamp: '2022-01-05T10:52:33.643Z'
-}
-{
-  level: 'error',
-  message: SyntaxError: Unexpected token h in JSON at position 0
-      at JSON.parse (<anonymous>)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\models\Brand.js:25:25)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3498:41)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3532:33)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3506:39)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3542:31)
-      at model.toJSON (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:4401:12)
-      at JSON.stringify (<anonymous>)
-      at stringify (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:1128:12)
-      at ServerResponse.json (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:260:14)
-      at ServerResponse.send (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:158:21)
-      at exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\productController.js:127:32)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5),
-  label: '  label: `Label🏷️`',
-  timestamp: '2022-01-05T10:55:21.903Z'
-}
-{
-  level: 'error',
-  message: SyntaxError: Unexpected token h in JSON at position 0
-      at JSON.parse (<anonymous>)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\models\Brand.js:25:25)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3498:41)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3532:33)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3506:39)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3542:31)
-      at model.toJSON (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:4401:12)
-      at JSON.stringify (<anonymous>)
-      at stringify (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:1128:12)
-      at ServerResponse.json (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:260:14)
-      at ServerResponse.send (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:158:21)
-      at exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\productController.js:127:32)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5),
-  label: '  label: `Label🏷️`',
-  timestamp: '2022-01-05T10:55:35.919Z'
-}
-{
-  level: 'error',
-  message: SyntaxError: Unexpected token h in JSON at position 0
-      at JSON.parse (<anonymous>)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\models\Brand.js:25:25)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3498:41)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3532:33)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3506:39)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3542:31)
-      at model.toJSON (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:4401:12)
-      at JSON.stringify (<anonymous>)
-      at stringify (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:1128:12)
-      at ServerResponse.json (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:260:14)
-      at ServerResponse.send (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:158:21)
-      at exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\productController.js:127:32)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5),
-  label: '  label: `Label🏷️`',
-  timestamp: '2022-01-05T10:56:17.288Z'
-}
-{
-  level: 'error',
-  message: SyntaxError: Unexpected token h in JSON at position 0
-      at JSON.parse (<anonymous>)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\models\Brand.js:25:25)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3498:41)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3532:33)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3506:39)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3542:31)
-      at model.toJSON (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:4401:12)
-      at JSON.stringify (<anonymous>)
-      at stringify (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:1128:12)
-      at ServerResponse.json (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:260:14)
-      at ServerResponse.send (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:158:21)
-      at exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\product\productController.js:27:32)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5),
-  label: '  label: `Label🏷️`',
-  timestamp: '2022-01-05T10:56:56.592Z'
-}
-{
-  level: 'error',
-  message: SyntaxError: Unexpected token h in JSON at position 0
-      at JSON.parse (<anonymous>)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\models\Brand.js:25:25)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3498:41)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3532:33)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3506:39)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3542:31)
-      at model.toJSON (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:4401:12)
-      at JSON.stringify (<anonymous>)
-      at stringify (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:1128:12)
-      at ServerResponse.json (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:260:14)
-      at ServerResponse.send (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:158:21)
-      at exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\product\productController.js:27:32)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5),
-  label: '  label: `Label🏷️`',
-  timestamp: '2022-01-05T11:00:33.281Z'
-}
-{
-  level: 'error',
-  message: SyntaxError: Unexpected token h in JSON at position 0
-      at JSON.parse (<anonymous>)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\models\Brand.js:25:25)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3498:41)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3532:33)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3506:39)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3542:31)
-      at model.toJSON (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:4401:12)
-      at JSON.stringify (<anonymous>)
-      at stringify (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:1128:12)
-      at ServerResponse.json (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:260:14)
-      at ServerResponse.send (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:158:21)
-      at exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\product\productController.js:27:32)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5),
-  label: '  label: `Label🏷️`',
-  timestamp: '2022-01-05T11:00:36.271Z'
-}
-{
-  level: 'error',
-  message: SyntaxError: Unexpected token h in JSON at position 0
-      at JSON.parse (<anonymous>)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\models\Brand.js:25:25)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3498:41)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3532:33)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3506:39)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3542:31)
-      at model.toJSON (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:4401:12)
-      at JSON.stringify (<anonymous>)
-      at stringify (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:1128:12)
-      at ServerResponse.json (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:260:14)
-      at ServerResponse.send (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:158:21)
-      at exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\productController.js:127:32)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5),
-  label: '  label: `Label🏷️`',
-  timestamp: '2022-01-05T11:45:08.177Z'
-}
-{
-  level: 'error',
-  message: SyntaxError: Unexpected token h in JSON at position 0
-      at JSON.parse (<anonymous>)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\models\Brand.js:25:25)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3498:41)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3532:33)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3506:39)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3542:31)
-      at model.toJSON (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:4401:12)
-      at JSON.stringify (<anonymous>)
-      at stringify (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:1128:12)
-      at ServerResponse.json (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:260:14)
-      at ServerResponse.send (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:158:21)
-      at exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\productController.js:127:32)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5),
-  label: '  label: `Label🏷️`',
-  timestamp: '2022-01-05T11:48:03.960Z'
-}
-{
-  level: 'error',
-  message: SyntaxError: Unexpected token h in JSON at position 0
-      at JSON.parse (<anonymous>)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\models\Brand.js:25:25)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3498:41)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3532:33)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3506:39)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3542:31)
-      at model.toJSON (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:4401:12)
-      at JSON.stringify (<anonymous>)
-      at stringify (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:1128:12)
-      at ServerResponse.json (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:260:14)
-      at ServerResponse.send (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:158:21)
-      at exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\productController.js:127:32)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5),
-  label: '  label: `Label🏷️`',
-  timestamp: '2022-01-05T11:51:23.343Z'
-}
-{
-  level: 'error',
-  message: SyntaxError: Unexpected token h in JSON at position 0
-      at JSON.parse (<anonymous>)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\models\Brand.js:25:25)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3498:41)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3532:33)
-      at model.toJSON (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:4401:12)
-      at JSON.stringify (<anonymous>)
-      at stringify (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:1128:12)
-      at ServerResponse.json (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:260:14)
-      at ServerResponse.send (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:158:21)
-      at exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:100:32)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5),
-  label: '  label: `Label🏷️`',
-  timestamp: '2022-01-05T11:51:42.878Z'
-}
-{
-  level: 'error',
-  message: SyntaxError: Unexpected token h in JSON at position 0
-      at JSON.parse (<anonymous>)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\models\Brand.js:25:25)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3498:41)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3532:33)
-      at model.toJSON (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:4401:12)
-      at JSON.stringify (<anonymous>)
-      at stringify (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:1128:12)
-      at ServerResponse.json (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:260:14)
-      at ServerResponse.send (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:158:21)
-      at exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:100:32)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5),
-  label: '  label: `Label🏷️`',
-  timestamp: '2022-01-05T11:53:03.639Z'
-}
-{
-  level: 'error',
-  message: SyntaxError: Unexpected token h in JSON at position 0
-      at JSON.parse (<anonymous>)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\models\Brand.js:25:25)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3498:41)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3532:33)
-      at model.toJSON (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:4401:12)
-      at JSON.stringify (<anonymous>)
-      at stringify (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:1128:12)
-      at ServerResponse.json (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:260:14)
-      at ServerResponse.send (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:158:21)
-      at exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:100:32)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5),
-  label: '  label: `Label🏷️`',
-  timestamp: '2022-01-05T11:53:36.516Z'
-}
-{
-  level: 'error',
-  message: SyntaxError: Unexpected token h in JSON at position 0
-      at JSON.parse (<anonymous>)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\models\Brand.js:25:25)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3498:41)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3532:33)
-      at model.toJSON (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:4401:12)
-      at JSON.stringify (<anonymous>)
-      at stringify (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:1128:12)
-      at ServerResponse.json (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:260:14)
-      at ServerResponse.send (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:158:21)
-      at exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\brandController.js:100:32)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5),
-  label: '  label: `Label🏷️`',
-  timestamp: '2022-01-05T11:53:38.280Z'
-}
-{
-  level: 'error',
-  message: SyntaxError: Unexpected token h in JSON at position 0
-      at JSON.parse (<anonymous>)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\models\Product.js:44:25)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3498:41)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3532:33)
-      at model.toJSON (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:4401:12)
-      at JSON.stringify (<anonymous>)
-      at stringify (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:1128:12)
-      at ServerResponse.json (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:260:14)
-      at ServerResponse.send (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:158:21)
-      at exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\productController.js:127:32)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5),
-  label: '  label: `Label🏷️`',
-  timestamp: '2022-01-05T12:05:09.974Z'
-}
-{
-  level: 'error',
-  message: SyntaxError: Unexpected token h in JSON at position 0
-      at JSON.parse (<anonymous>)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\models\Product.js:44:25)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3498:41)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3532:33)
-      at model.toJSON (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:4401:12)
-      at JSON.stringify (<anonymous>)
-      at stringify (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:1128:12)
-      at ServerResponse.json (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:260:14)
-      at ServerResponse.send (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:158:21)
-      at exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\productController.js:127:32)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5),
-  label: '  label: `Label🏷️`',
-  timestamp: '2022-01-05T12:05:11.728Z'
-}
-{
-  level: 'error',
-  message: SyntaxError: Unexpected token h in JSON at position 0
-      at JSON.parse (<anonymous>)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\models\Product.js:44:25)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3498:41)
-      at model.get (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:3532:33)
-      at model.toJSON (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\sequelize\lib\model.js:4401:12)
-      at JSON.stringify (<anonymous>)
-      at stringify (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:1128:12)
-      at ServerResponse.json (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:260:14)
-      at ServerResponse.send (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:158:21)
-      at exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\productController.js:127:32)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5),
-  label: '  label: `Label🏷️`',
-  timestamp: '2022-01-05T12:06:44.314Z'
-}
-{
-  level: 'error',
-  message: Error: SequelizeDatabaseError: Unknown column 'product.categoryId' in 'field list'
-      at Object.exports.indexProducts (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\product\userService.js:78:15)
+  message: Error: TypeError: Cannot read property 'length' of undefined
+      at Object.exports.getcategory (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\categoryService.js:107:15)
       at processTicksAndRejections (internal/process/task_queues.js:95:5)
-      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\product\productController.js:24:38),
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\categoryController.js:99:39),
   label: '  label: `Label🏷️`',
-  timestamp: '2022-01-08T13:33:46.420Z'
+  timestamp: '2022-01-20T09:57:17.199Z'
 }
 {
   level: 'error',
-  message: Error: SequelizeDatabaseError: Unknown column 'totalQuantity' in 'field list'
-      at Object.exports.add (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\cart\cart.js:84:15)
+  message: Error: TypeError: list.forEach is not a function
+      at Object.exports.getcategory (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\categoryService.js:115:15)
       at processTicksAndRejections (internal/process/task_queues.js:95:5)
-      at async exports.store (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\cart\cartController.js:7:35),
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\categoryController.js:99:39),
   label: '  label: `Label🏷️`',
-  timestamp: '2022-01-10T14:52:26.970Z'
+  timestamp: '2022-01-20T11:06:29.113Z'
 }
 {
   level: 'error',
-  message: Error: SequelizeValidationError: notNull Violation: orderItem.unit_price cannot be null
-      at Object.exports.add (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\cart\cart.js:84:15)
+  message: Error: TypeError: list.forEach is not a function
+      at Object.exports.getcategory (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\categoryService.js:115:15)
       at processTicksAndRejections (internal/process/task_queues.js:95:5)
-      at async exports.store (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\cart\cartController.js:7:35),
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\categoryController.js:99:39),
   label: '  label: `Label🏷️`',
-  timestamp: '2022-01-10T14:54:51.817Z'
-}
-{
-  level: 'error',
-  message: Error: ReferenceError: editedCategory is not defined
-      at Object.exports.updatecategory (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\categoryService.js:112:15)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5)
-      at async exports.update (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\categoryController.js:53:41),
-  label: '  label: `Label🏷️`',
-  timestamp: '2022-01-16T15:31:01.397Z'
-}
-{
-  level: 'error',
-  message: Error: SequelizeUniqueConstraintError: Validation error
-      at Object.exports.updatecategory (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\categoryService.js:115:15)
-      at processTicksAndRejections (internal/process/task_queues.js:95:5)
-      at async exports.update (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\categoryController.js:53:41),
-  label: '  label: `Label🏷️`',
-  timestamp: '2022-01-16T15:43:32.112Z'
+  timestamp: '2022-01-20T11:06:51.428Z'
 }
 {
   level: 'error',
   message: Error: TypeError: Cannot read property 'children' of undefined
-      at Object.exports.getcategory (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\categoryService.js:81:15)
+      at Object.exports.getcategory (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\categoryService.js:115:15)
       at processTicksAndRejections (internal/process/task_queues.js:95:5)
       at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\categoryController.js:99:39),
   label: '  label: `Label🏷️`',
-  timestamp: '2022-01-16T15:48:18.226Z'
+  timestamp: '2022-01-21T08:30:51.997Z'
+}
+{
+  level: 'error',
+  message: Error: TypeError: Cannot read property 'children' of undefined
+      at Object.exports.getcategory (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\categoryService.js:115:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\categoryController.js:99:39),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-21T08:31:30.543Z'
+}
+{
+  level: 'error',
+  message: Error: TypeError: list.forEach is not a function
+      at Object.exports.getcategory (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\categoryService.js:115:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\categoryController.js:99:39),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-21T08:52:41.138Z'
+}
+{
+  level: 'error',
+  message: Error: ReferenceError: x is not defined
+      at Object.exports.getcategory (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\categoryService.js:123:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\categoryController.js:99:39),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-21T09:39:18.265Z'
+}
+{
+  level: 'error',
+  message: Error: ReferenceError: x is not defined
+      at Object.exports.updatecategory (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\categoryService.js:153:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.update (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\categoryController.js:53:41),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-21T10:05:21.617Z'
+}
+{
+  level: 'error',
+  message: Error: SequelizeUniqueConstraintError: Validation error
+      at Object.exports.updatecategory (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\categoryService.js:158:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.update (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\categoryController.js:53:41),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-21T11:02:02.449Z'
+}
+{
+  level: 'error',
+  message: Error: SequelizeUniqueConstraintError: Validation error
+      at Object.exports.updatecategory (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\categoryService.js:158:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.update (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\categoryController.js:53:41),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-21T11:02:08.563Z'
 }

@@ -292,19 +292,19 @@ exports.updateProduct = async (req) => {
         let activityStatus = req.body.activityStatus
             ? +req.body.activityStatus
             : +foundProduct.activityStatus;
-        const upproduct = await Product.findByPk(productId).then((product) => {
-            product.name = name;
-            product.base_price = base_price;
-            product.temp_price = temp_price;
-            product.count = count;
-            product.description = description;
-            product.photo = pathArray;
-            product.coverThumb = coverThumb;
-            product.smallCover = smallCover;
-            product.activityStatus = activityStatus;
-            return product.save();
-        });
-        return upproduct;
+
+        foundProduct.name = name;
+        foundProduct.base_price = base_price;
+        foundProduct.temp_price = temp_price;
+        foundProduct.count = count;
+        foundProduct.description = description;
+        foundProduct.photo = pathArray;
+        foundProduct.coverThumb = coverThumb;
+        foundProduct.smallCover = smallCover;
+        foundProduct.activityStatus = activityStatus;
+        await foundProduct.save();
+
+        return foundProduct;
     } catch (e) {
         throw new Error(e);
     }
