@@ -19,7 +19,7 @@ const TagRoute = require("./Admin/routes/product/tag");
 const sellerProductRoute = require("./Admin/routes/product/sellerRoute");
 const userProductRoute = require("./Customer/routes/product/userRoute");
 const customerRoute = require("./Customer/routes/auth/login_register");
-
+const orderRoute = require("./Customer/routes/order/orderRouter");
 const coustemerprofileRoute = require("./Customer/routes/auth/profile");
 const editCustomerByAdminRoute = require("./Admin/routes/customer/editCustomerProfile");
 const cartRoute = require("./Customer/routes/cart/cartRouter");
@@ -98,7 +98,7 @@ app.use(adminProfileRoute);
 app.use(cartRoute);
 app.use(checkCartRouter);
 app.use(adminCartRouter);
-
+app.use(orderRoute);
 app.use((error, req, res, next) => {
     logger.error({
         level: "error",

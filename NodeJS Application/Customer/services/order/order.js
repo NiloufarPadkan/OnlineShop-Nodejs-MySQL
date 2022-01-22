@@ -1,6 +1,5 @@
 const Cart = require("../../../models/Cart");
 const CartItem = require("../../../models/CartItem");
-const Product = require("../../../models/Product");
 
 const OrderItem = require("../../../models/OrderItem");
 const Order = require("../../../models/Order");
@@ -21,9 +20,12 @@ exports.store = async (req, res, next) => {
         },
         raw: true,
     });
-
     const order = new Order({
         customerId: customerId,
+        status: "Pending",
+        address: req.body.address,
+        totalPrice: fetchedCart.totalPrice,
+        totalQuantity: fetchedCart.totalQuantity,
     });
     await order.save();
     const orderItemsIds = Promise.all(
@@ -40,6 +42,29 @@ exports.store = async (req, res, next) => {
             return newOrderItem;
         })
     );
+    Cart.destroy({ where: { id: cartId } });
     const orderItemsResolved = await orderItemsIds;
     return orderItemsResolved;
+};
+
+exports.AddPaymentId = async (req, res, next) => {
+    let id = req.params.id;
+    let paymentId = req.body.paymentId;
+    let order = await Order.findOne({
+        where: {
+            id: id,
+        },
+    });
+    order.paymentId = paymentId;
+    order.status = "Processing";
+    await order.save();
+};
+exports.cancel = async (req, res, next) => {
+    let id = req.params.id;
+    let order = await Order.findOne({
+        where: {
+            id: id,
+        },
+    });
+    order.status = "Canceled";
 };
