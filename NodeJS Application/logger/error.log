@@ -180,3 +180,27 @@
   label: '  label: `Label🏷️`',
   timestamp: '2022-01-23T08:20:20.601Z'
 }
+{
+  level: 'error',
+  message: ReferenceError: e is not defined
+      at Object.exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\order\order.js:152:25)
+      at exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\order\showOrder.js:20:55)
+      at Layer.handle [as handle_request] (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\router\layer.js:95:5)
+      at next (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\router\route.js:137:13)
+      at C:\Users\Niloufar\Documents\shop-project\NodeJS Application\middleware\verification\customerLoginVerify.js:34:9
+      at processTicksAndRejections (internal/process/task_queues.js:95:5),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-23T10:26:05.455Z'
+}
+{
+  level: 'error',
+  message: Error: ReferenceError: Customer is not defined
+      at Object.exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\order\order.js:152:15)
+      at exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\order\showOrder.js:20:55)
+      at Layer.handle [as handle_request] (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\router\layer.js:95:5)
+      at next (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\router\route.js:137:13)
+      at C:\Users\Niloufar\Documents\shop-project\NodeJS Application\middleware\verification\customerLoginVerify.js:34:9
+      at processTicksAndRejections (internal/process/task_queues.js:95:5),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-23T10:26:28.513Z'
+}
