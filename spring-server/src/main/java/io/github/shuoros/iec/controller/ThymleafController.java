@@ -16,8 +16,15 @@ public class ThymleafController {
     private static final Logger log = LoggerFactory.getLogger(MethodHandles.lookup().lookupClass());
 
     @RequestMapping("/")
-    public String index(@RequestParam String jwt,
+    public String index(@RequestParam(defaultValue = "null") String jwt, @RequestParam(defaultValue = "null") String who,
                         HttpServletRequest request, Model model) {
+        log.info("<=== handleIndexResource: session=" + jwt + ", ip=" + request.getRemoteAddr() + ", user-agent="
+                + request.getHeader("User-Agent"));
+        if ("admin".equals(who)) {
+            model.addAttribute("who", "admin");
+        } else if ("user".equals(who)) {
+            model.addAttribute("who", "user");
+        }
         return "index";
     }
 
