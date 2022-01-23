@@ -4,6 +4,14 @@ const Product = require("../../../models/Product");
 const OrderItem = require("../../../models/OrderItem");
 const Order = require("../../../models/Order");
 
+//todo
+// kam shodan quantity
+// check kardan quantity before order
+// agar status proceesing bud dige payment id nemikhaim
+// add try catch
+// add error handling
+// ghable pardakht bayad quantity check she
+
 exports.store = async (req, res, next) => {
     let customerId = req.customer.id;
 
@@ -75,6 +83,21 @@ exports.show = async (req, res, next) => {
     let order = await Order.findOne({
         where: {
             id: id,
+        },
+        include: [
+            {
+                model: Product,
+                attributes: ["id", "name", "quantity", "base_price", "temp_price"],
+            },
+        ],
+    });
+    return order;
+};
+
+exports.index = async (req, res, next) => {
+    let order = await Order.findAll({
+        where: {
+            customerId: req.customer.id,
         },
         include: [
             {

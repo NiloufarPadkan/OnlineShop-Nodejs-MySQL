@@ -11,6 +11,7 @@ const {
 
 router.post("/checkout", verifyToken, checkOutOrder.store);
 router.get("/order/:id/show", verifyToken, showOrder.show);
+router.get("/myOrders", verifyToken, showOrder.index);
 router.put("/order/:id/addPayment", verifyToken, addPayment.addPayment);
 router.put("/order/:id/cancel", verifyToken, cancelOrder.cancel);
 module.exports = router;
