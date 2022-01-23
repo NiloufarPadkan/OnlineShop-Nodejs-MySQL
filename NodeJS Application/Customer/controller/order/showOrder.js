@@ -1,12 +1,11 @@
 const orderService = require("../../services/order/order");
 const Response = require("../../../services/response");
 
-exports.store = async (req, res, next) => {
+exports.show = async (req, res, next) => {
     let response = new Response();
     try {
-        const checkOutResponse = await orderService.store(req);
-
-        response.setStatus(200).setRes(checkOutResponse);
+        const showOrderResponse = await orderService.show(req);
+        response.setStatus(200).setRes(showOrderResponse);
         return res.status(200).send(response.handler());
     } catch (e) {
         if (e.statusCode) {

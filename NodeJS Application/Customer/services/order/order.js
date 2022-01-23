@@ -1,6 +1,6 @@
 const Cart = require("../../../models/Cart");
 const CartItem = require("../../../models/CartItem");
-
+const Product = require("../../../models/Product");
 const OrderItem = require("../../../models/OrderItem");
 const Order = require("../../../models/Order");
 
@@ -34,7 +34,7 @@ exports.store = async (req, res, next) => {
                 orderId: order.id,
                 unit_price: item.unit_price,
                 quantity: item.quantity,
-                productId: item.product,
+                productId: item.productId,
             });
 
             newOrderItem = await newOrderItem.save();
@@ -46,7 +46,6 @@ exports.store = async (req, res, next) => {
     const orderItemsResolved = await orderItemsIds;
     return orderItemsResolved;
 };
-
 exports.AddPaymentId = async (req, res, next) => {
     let id = req.params.id;
     let paymentId = req.body.paymentId;
@@ -58,6 +57,7 @@ exports.AddPaymentId = async (req, res, next) => {
     order.paymentId = paymentId;
     order.status = "Processing";
     await order.save();
+    return order;
 };
 exports.cancel = async (req, res, next) => {
     let id = req.params.id;
@@ -67,4 +67,21 @@ exports.cancel = async (req, res, next) => {
         },
     });
     order.status = "Canceled";
+    await order.save();
+    return order;
+};
+exports.show = async (req, res, next) => {
+    const id = req.params.id;
+    let order = await Order.findOne({
+        where: {
+            id: id,
+        },
+        include: [
+            {
+                model: Product,
+                attributes: ["id", "name", "quantity", "base_price", "temp_price"],
+            },
+        ],
+    });
+    return order;
 };

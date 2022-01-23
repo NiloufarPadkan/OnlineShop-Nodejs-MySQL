@@ -145,14 +145,21 @@ Cart.belongsTo(Customer);
 Cart.belongsToMany(Product, {
     through: CartItem,
 });
+
 Product.belongsToMany(Cart, {
     through: CartItem,
 });
+
 Order.belongsTo(Customer);
 Customer.hasMany(Order);
-Order.belongsToMany(Product, {
-    through: OrderItem,
-});
+
+Order.belongsToMany(
+    Product,
+    {
+        through: OrderItem,
+    },
+    { onDelete: "NO ACTION", hooks: true }
+);
 
 Permission.belongsToMany(Role, {
     through: rolePermission,

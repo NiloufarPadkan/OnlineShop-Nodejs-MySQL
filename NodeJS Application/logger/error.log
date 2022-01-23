@@ -150,3 +150,21 @@
   label: '  label: `Label🏷️`',
   timestamp: '2022-01-22T12:09:16.411Z'
 }
+{
+  level: 'error',
+  message: TypeError: Cannot read property 'id' of null
+      at Object.exports.store (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\order\order.js:15:30)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.store (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\order\checkout.js:7:34),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-23T07:41:50.400Z'
+}
+{
+  level: 'error',
+  message: TypeError: Cannot read property 'id' of null
+      at Object.exports.store (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\order\order.js:15:30)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.store (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\order\checkout.js:7:34),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-23T07:57:19.195Z'
+}
