@@ -36,5 +36,21 @@
 </head>
 <body>
 <h1>Hey <span id="name" th:text="${who}">Stranger</span></h1>
+<div th:if="${who} == 'user'">
+    <ul id="chatbox" style="border: solid 1px black; margin: 0 100px 15px;">
+
+    </ul>
+    <label for="message"></label>
+    <input id="message" placeholder="Type to send message...">
+    <button onclick="sendMessage()">send</button>
+</div>
+<script>
+    function sendMessage(){
+        var obj = new Object();
+        obj.from = document.getElementById("name").innerHTML;
+        obj.message = document.getElementById("message").value;
+        stompClient.send("/user/chat", {}, JSON.stringify(obj));
+    }
+</script>
 </body>
 </html>
