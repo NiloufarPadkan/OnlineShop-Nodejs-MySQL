@@ -1,17 +1,12 @@
 const Cart = require("../../../models/Cart");
-const CartItem = require("../../../models/CartItem");
 const Product = require("../../../models/Product");
 const OrderItem = require("../../../models/OrderItem");
 const Order = require("../../../models/Order");
-const Customer = require("../../../models/Customer");
 const Sequelize = require("sequelize");
-
-const Op = Sequelize.Op;
 
 exports.store = async (req, res, next) => {
     try {
         let customerId = req.customer.id;
-
         let fetchedCart = await Cart.findOne({
             where: {
                 customerId: customerId,
@@ -22,11 +17,13 @@ exports.store = async (req, res, next) => {
             },
         });
 
-        const order = new Order({
+        let order = new Order({
             customerId: customerId,
             status: "Pending",
             address: req.body.address,
         });
+        order = await order.save();
+
         let cartItems = fetchedCart.toJSON().products;
         let totalQuantity = 0;
         let totalPrice = 0;

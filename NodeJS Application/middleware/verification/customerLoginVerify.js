@@ -15,7 +15,12 @@ const verifyToken = async (req, res, next) => {
             response.setStatus(400).setMessage("fail").setRes(dict.invalidToken);
             return res.status(400).send(response.handler());
         }
-        const foundCustomer = await Customer.findByPk(customer.id);
+        const foundCustomer = await Customer.findOne({
+            where: {
+                id: customer.id,
+                roleId: customer.roleId,
+            },
+        });
         if (foundCustomer)
             if (foundCustomer.activityStatus === false) {
                 response
