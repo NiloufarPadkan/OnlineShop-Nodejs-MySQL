@@ -20,7 +20,8 @@ const TagRoute = require("./Admin/routes/product/tag");
 const sellerProductRoute = require("./Admin/routes/product/sellerRoute");
 const userProductRoute = require("./Customer/routes/product/userRoute");
 const customerRoute = require("./Customer/routes/auth/login_register");
-
+const customerOrderRoute = require("./Customer/routes/order/orderRouter");
+const adminOrderRoute = require("./Admin/routes/order/orderRouter");
 const coustemerprofileRoute = require("./Customer/routes/auth/profile");
 const editCustomerByAdminRoute = require("./Admin/routes/customer/editCustomerProfile");
 const cartRoute = require("./Customer/routes/cart/cartRouter");
@@ -99,8 +100,13 @@ app.use(adminProfileRoute);
 app.use(cartRoute);
 app.use(checkCartRouter);
 app.use(adminCartRouter);
+
+app.use(customerOrderRoute);
+app.use(adminOrderRoute);
+
 app.use(adminChatRouter);
 app.use(customerChatRouter);
+
 app.use((error, req, res, next) => {
     logger.error({
         level: "error",
@@ -147,14 +153,21 @@ Cart.belongsTo(Customer);
 Cart.belongsToMany(Product, {
     through: CartItem,
 });
+
 Product.belongsToMany(Cart, {
     through: CartItem,
 });
+
 Order.belongsTo(Customer);
 Customer.hasMany(Order);
-Order.belongsToMany(Product, {
-    through: OrderItem,
-});
+
+Order.belongsToMany(
+    Product,
+    {
+        through: OrderItem,
+    },
+    { onDelete: "NO ACTION", hooks: true }
+);
 
 Permission.belongsToMany(Role, {
     through: rolePermission,

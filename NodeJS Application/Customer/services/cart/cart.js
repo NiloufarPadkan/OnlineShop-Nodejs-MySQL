@@ -6,7 +6,6 @@ exports.add = async (req, res, next) => {
     try {
         let fetchedCart;
         let product = await Product.findByPk(req.params.id);
-
         let customerId = req.customer.id;
         let cartId;
         let item;
