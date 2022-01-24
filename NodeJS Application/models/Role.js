@@ -1,7 +1,8 @@
 const Sequelize = require("sequelize");
 
 const sequelize = require("../config/database/sequelize");
-
+const Permission = require("./Permission");
+const rolePermission = require("./role-permission");
 const Role = sequelize.define("role", {
     id: {
         type: Sequelize.INTEGER,
@@ -25,4 +26,9 @@ const Role = sequelize.define("role", {
     },
 });
 
+Permission.belongsToMany(Role, {
+    through: rolePermission,
+});
+
+Role.belongsToMany(Permission, { through: rolePermission });
 module.exports = Role;

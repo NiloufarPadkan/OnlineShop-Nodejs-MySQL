@@ -27,6 +27,7 @@ exports.store = async (req, res, next) => {
         let cartItems = fetchedCart.toJSON().products;
         let totalQuantity = 0;
         let totalPrice = 0;
+        let totalTempPrice = 0;
         let outOfStockProducts = [];
         for (let i = 0; i < cartItems.length; i++) {
             if (
@@ -39,10 +40,12 @@ exports.store = async (req, res, next) => {
             let newOrderItem = new OrderItem({
                 orderId: order.id,
                 unit_price: cartItems[i].base_price,
+                temp_price: cartItems[i].temp_price,
                 quantity: cartItems[i].cartItem.quantity,
                 productId: cartItems[i].cartItem.productId,
             });
             totalPrice += newOrderItem.quantity * newOrderItem.unit_price;
+            totalTempPrice += newOrderItem.quantity * newOrderItem.temp_price;
             totalQuantity += newOrderItem.quantity;
             newOrderItem = await newOrderItem.save();
         }
@@ -50,6 +53,7 @@ exports.store = async (req, res, next) => {
             return "outofstockProducts";
         }
         order.totalPrice = totalPrice;
+        order.totalTempPrice = totalTempPrice;
         order.totalQuantity = totalQuantity;
         await order.save();
 

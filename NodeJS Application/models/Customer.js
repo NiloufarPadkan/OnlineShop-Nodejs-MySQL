@@ -1,7 +1,11 @@
 const Sequelize = require("sequelize");
 
 const sequelize = require("../config/database/sequelize");
-
+const Role = require("../models/Role");
+const Product = require("../models/Product");
+const Cart = require("../models/Cart");
+const Order = require("../models/Order");
+const Customer_ProductRating = require("../models/Customer_ProductRating");
 const Customer = sequelize.define("customer", {
     id: {
         type: Sequelize.INTEGER,
@@ -40,5 +44,11 @@ const Customer = sequelize.define("customer", {
     },
     activityStatus: { type: Sequelize.BOOLEAN, defaultValue: true },
 });
+Customer.belongsTo(Role);
+
+Customer.hasOne(Cart);
+Customer.hasMany(Order);
+Order.belongsTo(Customer);
+Cart.belongsTo(Customer);
 
 module.exports = Customer;

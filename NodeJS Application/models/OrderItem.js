@@ -15,6 +15,11 @@ const OrderItem = sequelize.define("orderItem", {
         allowNull: false,
         trim: true,
     },
+    temp_price: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        trim: true,
+    },
 });
 
 module.exports = OrderItem;

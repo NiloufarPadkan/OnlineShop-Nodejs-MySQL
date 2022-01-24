@@ -1,7 +1,8 @@
 const Sequelize = require("sequelize");
 
 const sequelize = require("../config/database/sequelize");
-
+const Customer = require("./Customer");
+const Product = require("./Product");
 const Comment = sequelize.define("comment", {
     id: {
         type: Sequelize.INTEGER,
@@ -22,5 +23,7 @@ const Comment = sequelize.define("comment", {
         },
     },
 });
+Comment.belongsTo(Customer);
+Comment.belongsTo(Product);
 
 module.exports = Comment;

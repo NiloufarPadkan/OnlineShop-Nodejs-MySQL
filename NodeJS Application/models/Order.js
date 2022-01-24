@@ -19,6 +19,12 @@ const Order = sequelize.define("order", {
         //    allowNull: false,
         trim: true,
     },
+    totalTempPrice: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+        allowNull: false,
+        trim: true,
+    },
     status: {
         type: Sequelize.STRING,
     },
