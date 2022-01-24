@@ -43,6 +43,7 @@ const Product = sequelize.define("product", {
     quantity: {
         type: Sequelize.INTEGER,
         allowNull: false,
+
         set: function (val) {
             if (val < 0) {
                 return this.setDataValue("quantity", 0);
@@ -50,7 +51,11 @@ const Product = sequelize.define("product", {
             return this.setDataValue("quantity", val);
         },
     },
-
+    quantity_sold: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        defaultValue: 0,
+    },
     description: {
         type: Sequelize.TEXT,
         // allowNull: false,

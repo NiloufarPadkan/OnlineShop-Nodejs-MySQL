@@ -30,6 +30,9 @@ exports.indexProducts = async (req) => {
             case "mostPopuler":
                 sortBy = [["AvgRating", "DESC"]];
                 break;
+            case "bestSeller":
+                sortBy = [["quantity_sold", "DESC"]];
+                break;
             case "mostExpensive":
                 sortBy = [["base_price", "DESC"]];
                 break;

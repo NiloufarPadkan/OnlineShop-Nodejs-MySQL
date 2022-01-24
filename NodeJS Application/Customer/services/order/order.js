@@ -94,6 +94,7 @@ exports.AddPaymentId = async (req, res, next) => {
         for (let i = 0; i < orderItems.length; i++) {
             const product = await Product.findByPk(orderItems[i].id);
             product.quantity -= orderItems[i].orderItem.quantity;
+            product.quantity_sold += orderItems[i].orderItem.quantity;
             await product.save();
         }
 

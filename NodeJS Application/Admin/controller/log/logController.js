@@ -1,20 +1,12 @@
 const logService = require("../../services/log/indexLog");
 const AdminRes = require("../../../services/responses/AdminCreated");
-const Can = require("../../../services/can/can");
+const Can = require("../../../services/can/can").can;
 var path = require("path");
-
-exports.canAdmin = async (roleId, permissionTitle) => {
-    const can = await Can.can(roleId, permissionTitle);
-    if (!can) {
-        return false;
-    }
-    return true;
-};
 
 exports.index = async (req, res, next) => {
     let response = new AdminRes();
     let permissionResult = false;
-    if (req.admin) permissionResult = await this.canAdmin(req.admin.roleId, "read log");
+    if (req.admin) permissionResult = await Can(req.admin.roleId, "read log");
     if (!permissionResult) {
         response.setStatus(403).setMessage("fail").setRes("notAllowed");
         return res.status(403).send(response.handler());
