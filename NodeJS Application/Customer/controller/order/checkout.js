@@ -8,7 +8,7 @@ exports.store = async (req, res, next) => {
         console.log(checkOutResponse);
 
         if (checkOutResponse === "outofstockProducts") {
-            response.setStatus(400).setRes(checkOutResponse);
+            response.setStatus(400).setMessage("fail").setRes(checkOutResponse);
             return res.status(400).send(response.handler());
         }
         response.setStatus(200).setRes(checkOutResponse);

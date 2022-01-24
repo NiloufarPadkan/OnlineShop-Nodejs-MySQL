@@ -69,6 +69,7 @@ exports.AddPaymentId = async (req, res, next) => {
         let order = await Order.findOne({
             where: {
                 id: id,
+                customerId: req.customer.id,
             },
             include: [
                 {
@@ -77,7 +78,10 @@ exports.AddPaymentId = async (req, res, next) => {
                 },
             ],
         });
-
+        if (!order) {
+            return "orderNotFound";
+        }
+        if (order.paymentId) return "paymentIdExists";
         order.paymentId = paymentId;
         order.status = "Processing";
 
@@ -134,6 +138,7 @@ exports.show = async (req, res, next) => {
 
 exports.index = async (req, res, next) => {
     try {
+        console.log(req.customer.id);
         let order = await Order.findAll({
             where: {
                 customerId: req.customer.id,

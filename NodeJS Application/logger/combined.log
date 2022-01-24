@@ -766,3 +766,29 @@
   label: '  label: `Label🏷️`',
   timestamp: '2022-01-24T09:26:17.118Z'
 }
+{
+  level: 'error',
+  message: Error: TypeError: Cannot set property 'status' of null
+      at Object.exports.cancel (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\order\order.js:111:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.cancel (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\order\cancel.js:7:32),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-24T11:15:39.131Z'
+}
+{
+  level: 'error',
+  message: Error: TypeError: Cannot read property 'paymentId' of null
+      at Object.exports.AddPaymentId (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\order\order.js:97:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.addPayment (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\order\AddPaymentId.js:7:38),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-24T11:27:59.023Z'
+}
+{
+  level: 'error',
+  message: TypeError: response.setStatus(...).setMessage(...).setmsetRes is not a function
+      at exports.addPayment (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\order\AddPaymentId.js:12:56)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-24T11:30:07.114Z'
+}
