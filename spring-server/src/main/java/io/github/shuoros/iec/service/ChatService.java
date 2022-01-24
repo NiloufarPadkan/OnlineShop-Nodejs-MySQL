@@ -1,10 +1,12 @@
 package io.github.shuoros.iec.service;
 
 import io.github.shuoros.iec.model.Chat;
+import io.github.shuoros.iec.model.User;
 import io.github.shuoros.iec.repository.ChatRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,6 +26,24 @@ public class ChatService {
 
     public boolean exist(String id) {
         return repo.existsById(id);
+    }
+
+    public List<Integer> getUniqueUsers(){
+            List<Integer> users = new ArrayList<>();
+        all().forEach(chat -> {
+            if(!users.contains(chat.getUser()))
+                users.add(chat.getUser());
+        });
+        return users;
+    }
+
+    public List<String> getUniqueChatsLastMessage(){
+        List<String> messages = new ArrayList<>();
+        all().forEach(chat -> {
+            if(messages.contains(chat.getMessage()))
+                messages.add(chat.getMessage());
+        });
+        return messages;
     }
 
     public List<Chat> all() {
