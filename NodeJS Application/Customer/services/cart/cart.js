@@ -60,7 +60,7 @@ exports.add = async (req, res, next) => {
 
         fetchedCart.totalPrice = totalPrice;
         fetchedCart.totalQuantity = totalQuantity;
-
+        fetchedCart.totalTempPrice = totalTempPrice;
         await fetchedCart.save();
         return fetchedCart;
     } catch (e) {

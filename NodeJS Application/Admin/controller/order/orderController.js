@@ -1,19 +1,11 @@
 const orderService = require("../../services/order/order");
 const Response = require("../../../services/response");
-const Can = require("../../../services/can/can");
-
-exports.canAdmin = async (roleId, permissionTitle) => {
-    const can = await Can.can(roleId, permissionTitle);
-    if (!can) {
-        return false;
-    }
-    return true;
-};
+const Can = require("../../../services/can/can").can;
 
 exports.show = async (req, res, next) => {
     let response = new Response();
     let permissionResult = false;
-    if (req.admin) permissionResult = await this.canAdmin(req.admin.roleId, "read Order");
+    if (req.admin) permissionResult = await Can(req.admin.roleId, "read Order");
     if (!permissionResult) {
         response.setStatus(403).setMessage("fail").setRes("notAllowed");
         return res.status(403).send(response.handler());
@@ -32,7 +24,7 @@ exports.show = async (req, res, next) => {
 exports.index = async (req, res, next) => {
     let response = new Response();
     let permissionResult = false;
-    if (req.admin) permissionResult = await this.canAdmin(req.admin.roleId, "read Order");
+    if (req.admin) permissionResult = await Can(req.admin.roleId, "read Order");
     if (!permissionResult) {
         response.setStatus(403).setMessage("fail").setRes("notAllowed");
         return res.status(403).send(response.handler());
@@ -51,8 +43,7 @@ exports.index = async (req, res, next) => {
 exports.update = async (req, res, next) => {
     let response = new Response();
     let permissionResult = false;
-    if (req.admin)
-        permissionResult = await this.canAdmin(req.admin.roleId, "update Order");
+    if (req.admin) permissionResult = await Can(req.admin.roleId, "update Order");
     if (!permissionResult) {
         response.setStatus(403).setMessage("fail").setRes("notAllowed");
         return res.status(403).send(response.handler());
