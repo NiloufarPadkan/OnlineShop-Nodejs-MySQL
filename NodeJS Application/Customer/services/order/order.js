@@ -8,13 +8,6 @@ const Sequelize = require("sequelize");
 
 const Op = Sequelize.Op;
 
-//todo
-// kam shodan quantity
-// check kardan quantity before order
-// agar status proceesing bud dige payment id nemikhaim
-// add error handling
-// ghable pardakht bayad quantity check she
-
 exports.store = async (req, res, next) => {
     try {
         let customerId = req.customer.id;
@@ -23,40 +16,51 @@ exports.store = async (req, res, next) => {
             where: {
                 customerId: customerId,
             },
-        });
-        let cartId = fetchedCart.id;
-
-        let cartItems = await CartItem.findAll({
-            where: {
-                cartId: cartId,
+            include: {
+                model: Product,
+                attributes: ["id", "name", "quantity", "base_price", "temp_price"],
             },
-            raw: true,
         });
+
         const order = new Order({
             customerId: customerId,
             status: "Pending",
             address: req.body.address,
-            totalPrice: fetchedCart.totalPrice,
-            totalQuantity: fetchedCart.totalQuantity,
         });
+        let cartItems = fetchedCart.toJSON().products;
+        let totalQuantity = 0;
+        let totalPrice = 0;
+        let outOfStockProducts = [];
+        for (let i = 0; i < cartItems.length; i++) {
+            if (
+                cartItems[i].quantity < 1 ||
+                cartItems[i].quantity < cartItems[i].cartItem.quantity
+            ) {
+                outOfStockProducts.push(cartItems[i]);
+                break;
+            }
+            let newOrderItem = new OrderItem({
+                orderId: order.id,
+                unit_price: cartItems[i].base_price,
+                quantity: cartItems[i].cartItem.quantity,
+                productId: cartItems[i].cartItem.productId,
+            });
+            totalPrice += newOrderItem.quantity * newOrderItem.unit_price;
+            totalQuantity += newOrderItem.quantity;
+            newOrderItem = await newOrderItem.save();
+        }
+        if (outOfStockProducts.length >= 1) {
+            return "outofstockProducts";
+        }
+        order.totalPrice = totalPrice;
+        order.totalQuantity = totalQuantity;
         await order.save();
-        const orderItemsIds = Promise.all(
-            cartItems.map(async (item) => {
-                let newOrderItem = new OrderItem({
-                    orderId: order.id,
-                    unit_price: item.unit_price,
-                    quantity: item.quantity,
-                    productId: item.productId,
-                });
 
-                newOrderItem = await newOrderItem.save();
+        let cartId = fetchedCart.id;
 
-                return newOrderItem;
-            })
-        );
         Cart.destroy({ where: { id: cartId } });
-        const orderItemsResolved = await orderItemsIds;
-        return orderItemsResolved;
+
+        return order;
     } catch (error) {
         throw new Error(error);
     }
@@ -69,9 +73,24 @@ exports.AddPaymentId = async (req, res, next) => {
             where: {
                 id: id,
             },
+            include: [
+                {
+                    model: Product,
+                    attributes: ["id", "name", "quantity", "base_price", "temp_price"],
+                },
+            ],
         });
+
         order.paymentId = paymentId;
         order.status = "Processing";
+
+        let orderItems = order.toJSON().products;
+
+        for (let i = 0; i < orderItems.length; i++) {
+            const product = await Product.findByPk(orderItems[i].id);
+            product.quantity -= orderItems[i].orderItem.quantity;
+            await product.save();
+        }
 
         await order.save();
         return order;
