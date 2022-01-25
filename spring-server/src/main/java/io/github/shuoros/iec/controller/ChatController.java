@@ -45,31 +45,23 @@ public class ChatController {
         log.info("<=== handleLogInCheckEvent: session=" + session + ", payload=" + payload);
         JSONObject data = new JSONObject(payload);
         JSONObject response = new JSONObject();
-        if (userService.existByJwt(data.getString("jwt"))) {
-            User user = userService.getByJwt(data.getString("jwt")).get();
-            adminService.all().forEach(admin -> {
-                response.put("status", 200);
-                response.put("destination", "notif");
-                response.put("data", new JSONObject()//
-                        .put("user", user.getUsername())//
-                        .put("message", data.getString("message")));
-                messagingTemplate.convertAndSendToUser(admin.getSession(),//
-                        Constants.SUBSCRIBE_USER_REPLY,//
-                        response.toString());
-            });
-            chatService.save(Chat.builder()//
-                    .message(data.getString("message"))//
-                    .admin(false)//
-                    .user(user.getUsername())//
-                    .date(new Date())//
-                    .build());
-        } else {
-            response.put("status", 403);
-            response.put("destination", "error");
-            messagingTemplate.convertAndSendToUser(session,//
+        User user = userService.getByJwt(data.getString("jwt")).get();
+        adminService.all().forEach(admin -> {
+            response.put("status", 200);
+            response.put("destination", "notif");
+            response.put("data", new JSONObject()//
+                    .put("user", user.getUsername())//
+                    .put("message", data.getString("message")));
+            messagingTemplate.convertAndSendToUser(admin.getSession(),//
                     Constants.SUBSCRIBE_USER_REPLY,//
                     response.toString());
-        }
+        });
+        chatService.save(Chat.builder()//
+                .message(data.getString("message"))//
+                .admin(false)//
+                .user(user.getUsername())//
+                .date(new Date())//
+                .build());
     }
 
     @MessageMapping(Constants.ENDPOINT_ADMIN + "/chat")
@@ -78,29 +70,21 @@ public class ChatController {
         log.info("<=== handleLogInCheckEvent: session=" + session + ", payload=" + payload);
         JSONObject data = new JSONObject(payload);
         JSONObject response = new JSONObject();
-        if (adminService.existByJwt(data.getString("jwt"))) {
-            if (userService.existByUserName(data.getInt("user"))) {
-                User user = userService.getByUsername(data.getInt("user")).get();
-                response.put("status", 200);
-                response.put("destination", "notif");
-                response.put("data", new JSONObject()//
-                        .put("message", data.getString("message")));
-                messagingTemplate.convertAndSendToUser(user.getSession(),//
-                        Constants.SUBSCRIBE_USER_REPLY,//
-                        response.toString());
-            }
-            chatService.save(Chat.builder()//
-                    .message(data.getString("message"))//
-                    .admin(true)//
-                    .user(data.getInt("user"))//
-                    .date(new Date())//
-                    .build());
-        } else {
-            response.put("status", 403);
-            response.put("destination", "error");
-            messagingTemplate.convertAndSendToUser(session,//
+        if (userService.existByUserName(data.getInt("user"))) {
+            User user = userService.getByUsername(data.getInt("user")).get();
+            response.put("status", 200);
+            response.put("destination", "notif");
+            response.put("data", new JSONObject()//
+                    .put("message", data.getString("message")));
+            messagingTemplate.convertAndSendToUser(user.getSession(),//
                     Constants.SUBSCRIBE_USER_REPLY,//
                     response.toString());
         }
+        chatService.save(Chat.builder()//
+                .message(data.getString("message"))//
+                .admin(true)//
+                .user(data.getInt("user"))//
+                .date(new Date())//
+                .build());
     }
 }
