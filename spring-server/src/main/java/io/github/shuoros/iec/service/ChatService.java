@@ -64,6 +64,18 @@ public class ChatService {
         return messages;
     }
 
+    public List<String> getAChatMessagesForAdmin(int user){
+        List<String> messages = new ArrayList<>();
+        all().forEach(chat -> {
+            if(chat.getUser() == user)
+                if(chat.isAdmin())
+                    messages.add("you: ".concat(chat.getMessage()));
+                else
+                    messages.add("user: ".concat(chat.getMessage()));
+        });
+        return messages;
+    }
+
     public List<Chat> all() {
         return repo.findAll();
     }
