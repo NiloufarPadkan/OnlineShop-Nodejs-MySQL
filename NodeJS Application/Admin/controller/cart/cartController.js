@@ -2,6 +2,7 @@ const cartService = require("../../services/cart/cart");
 const Response = require("../../../services/response");
 
 exports.store = async (req, res, next) => {
+    //to do add to cart permissions to be checked
     let response = new Response();
     try {
         const addToCartResponse = await cartService.add(req);

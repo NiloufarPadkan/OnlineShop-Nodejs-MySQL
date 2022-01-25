@@ -1,12 +1,11 @@
-const ratingService = require("../../services/product/ratingService");
-
+const orderService = require("../../services/order/order");
 const Response = require("../../../services/response");
 
-exports.addRating = async (req, res, next) => {
+exports.show = async (req, res, next) => {
+    let response = new Response();
     try {
-        const addRatingRes = await ratingService.add(req);
-
-        let response = new Response(200, "success", addRatingRes);
+        const showOrderResponse = await orderService.show(req);
+        response.setStatus(200).setRes(showOrderResponse);
         return res.status(200).send(response.handler());
     } catch (e) {
         if (e.statusCode) {
@@ -15,14 +14,11 @@ exports.addRating = async (req, res, next) => {
         next(e);
     }
 };
-
-exports.show = async (req, res, next) => {
+exports.index = async (req, res, next) => {
     let response = new Response();
-
     try {
-        const productRatingResponse = await ratingService.getProductRating(req);
-
-        response.setStatus(200).setRes(productRatingResponse);
+        const indexOrderResponse = await orderService.index(req);
+        response.setStatus(200).setRes(indexOrderResponse);
         return res.status(200).send(response.handler());
     } catch (e) {
         if (e.statusCode) {

@@ -1,20 +1,11 @@
 const editProfileService = require("../../services/customer/profile");
 const Response = require("../../../services/response");
-const Can = require("../../../services/can/can");
-
-exports.canAdmin = async (roleId, permissionTitle) => {
-    const can = await Can.can(roleId, permissionTitle);
-    if (!can) {
-        return false;
-    }
-    return true;
-};
+const Can = require("../../../services/can/can").can;
 
 exports.update = async (req, res, next) => {
     let response = new Response();
     let permissionResult = false;
-    if (req.admin)
-        permissionResult = await this.canAdmin(req.admin.roleId, "update customer");
+    if (req.admin) permissionResult = await Can(req.admin.roleId, "update customer");
     if (!permissionResult) {
         response.setStatus(404).setMessage("fail").setRes("notallowed");
         return res.status(404).send(response.handler());

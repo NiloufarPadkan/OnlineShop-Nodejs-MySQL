@@ -29,6 +29,8 @@ JWT_KEY="secretcode"
 EXPIRE_TIME="1w"
 SQL_PORT="3306"
 IMAGE_PREFIX="http://localhost:3001/"
+EMAIL= Your mail
+EMAIL_PASS= your mail pass"
 
 3-in config/database/sequlize.js set your database name,user,password,host and port
 
@@ -61,3 +63,6 @@ IMAGE_PREFIX="http://localhost:3001/"
 -   express-rate-limit 5.5.1
 -   multer 1.4.3
 -   redis 3.1.2
+-   winston 3.3.3
+-   sharp 0.29.3
+-   nodemailer 6.7.2

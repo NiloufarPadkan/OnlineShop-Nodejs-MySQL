@@ -24,11 +24,14 @@ exports.indexProducts = async (req) => {
         // let order = req.query.sortBy ? req.query.sortBy : "";
         let sortBy = [];
         switch (req.query.sortBy) {
-            case "mostViewd":
+            case "mostViewed":
                 sortBy = [[Product_views, "viewCount", "desc"]];
                 break;
-            case "mostPopuler":
+            case "mostPopular":
                 sortBy = [["AvgRating", "DESC"]];
+                break;
+            case "bestSeller":
+                sortBy = [["quantity_sold", "DESC"]];
                 break;
             case "mostExpensive":
                 sortBy = [["base_price", "DESC"]];
@@ -36,16 +39,37 @@ exports.indexProducts = async (req) => {
             case "cheapest":
                 sortBy = [["base_price", "ASC"]];
                 break;
+            case "newest":
+                sortBy = [["createdAt", "DESC"]];
+                break;
+            case "mostDiscounted":
+                sortBy = [[Sequelize.literal("base_price - temp_price"), "DESC"]];
+
+                break;
             default:
                 sortBy = [[Product_views, "viewCount", "desc"]];
         }
-
+        console.log(sortBy);
         const limit = req.query.size ? req.query.size : 3;
         const offset = req.query.page ? req.query.page * limit : 0;
         const products = await Product.findAll({
             limit: parseInt(limit),
             offset: parseInt(offset),
             subQuery: false,
+            attributes: [
+                "id",
+                "name",
+                "name_slug",
+                "base_price",
+                "temp_price",
+                "quantity",
+                "description",
+                "photo",
+                "coverthumb",
+                "smallCover",
+                "AvgRating",
+                [Sequelize.literal("base_price - temp_price"), "discount"],
+            ],
 
             include: [
                 { model: Category, where: { id: { [Op.or]: filter.category } } },
@@ -166,21 +190,27 @@ exports.searchProducts = async (req) => {
         // let order = req.query.sortBy ? req.query.sortBy : "";
         let sortBy = [];
         switch (req.query.sortBy) {
-            case "mostViewd":
+            case "mostViewed":
                 sortBy = [[Product_views, "viewCount", "desc"]];
                 break;
-            case "mostPopuler":
+            case "mostPopular":
                 sortBy = [["AvgRating", "DESC"]];
                 break;
             case "mostExpensive":
                 sortBy = [["base_price", "DESC"]];
                 break;
+            case "bestSeller":
+                sortBy = [["quantity_sold", "DESC"]];
+                break;
             case "cheapest":
                 sortBy = [["base_price", "ASC"]];
+            case "newest":
+                sortBy = [["CreatedAt", "DESC"]];
                 break;
             default:
                 sortBy = [[Product_views, "viewCount", "desc"]];
         }
+        console.log(sortBy);
         let searchString = req.query.search;
 
         const limit = req.query.size ? req.query.size : 3;

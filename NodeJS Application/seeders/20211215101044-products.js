@@ -1,5 +1,16 @@
 "use strict";
-
+function slug(titleStr) {
+    titleStr = titleStr.replace(/^\s+|\s+$/g, "");
+    titleStr = titleStr.toLowerCase();
+    //persian support
+    titleStr = titleStr
+        .replace(/[^a-z0-9_\s-ءاأإآؤئبتثجحخدذرزسشصضطظعغفقكلمنهويةى]#u/, "")
+        // Collapse whitespace and replace by -
+        .replace(/\s+/g, "-")
+        // Collapse dashes
+        .replace(/-+/g, "-");
+    return titleStr;
+}
 module.exports = {
     up: async (queryInterface, Sequelize) => {
         return queryInterface.bulkInsert("products", [
@@ -30,20 +41,41 @@ module.exports = {
                 activityStatus: true,
                 AvgRating: 0,
                 name: "دوچرخه کراسس سایز 26",
-                name_slug: "دوچرخه-کراسس-سایز-26",
+                name_slug: slug("دوچرخه کراسس سایز 26"),
 
                 base_price: "12000000",
                 temp_price: "12000000",
                 quantity: "3",
                 categoryId: "1",
                 brandId: "2",
-                brandId: "1",
                 photo: JSON.stringify(["http://localhost:3001/uploads\\cross-bike.jpg"]),
                 smallCover: "http://localhost:3001/uploads/small-cross-bike.jpg",
                 coverThumb: "http://localhost:3001/uploads/thumbnail-cross-bike.jpg",
                 description:
                     "    ست دنده : شیمانو ترنی تی زد کلاجدار       جنس بدنه: آلومینیوم 6061 سبک     ",
 
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                activityStatus: true,
+                AvgRating: 0,
+                name: "دوچرخه برقی تاشو fiifo 5000",
+                name_slug: slug("دوچرخه برقی تاشو fiifo 5000"),
+
+                base_price: "30000000",
+                temp_price: "30000000",
+                quantity: "3",
+                categoryId: "1",
+                brandId: "8",
+                photo: JSON.stringify([
+                    "http://localhost:3001/uploads\\fiido500.jpg",
+                    "http://localhost:3001/uploads\\fiido5002.jpg",
+                ]),
+                smallCover: "http://localhost:3001/uploads/small-fiido500.jpg",
+                coverThumb: "http://localhost:3001/uploads/thumbnail-fiido500.jpg",
+                description:
+                    "توان-موتور	500 واتباتری	لیتیوم یون 36 ولت 16 آمپر- ترمزبندی	دیسکی مکانیکی",
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },

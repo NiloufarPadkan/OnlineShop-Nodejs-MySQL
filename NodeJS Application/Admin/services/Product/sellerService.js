@@ -69,11 +69,14 @@ exports.indexProducts = async (req) => {
         // let order = req.query.sortBy ? req.query.sortBy : "";
         let sortBy = [];
         switch (req.query.sortBy) {
-            case "mostViewd":
+            case "mostViewed":
                 sortBy = [[Product_views, "viewCount", "desc"]];
                 break;
-            case "mostPopuler":
+            case "mostPopular":
                 sortBy = [["AvgRating", "DESC"]];
+                break;
+            case "bestSeller":
+                sortBy = [["quantity_sold", "DESC"]];
                 break;
             case "mostExpensive":
                 sortBy = [["base_price", "DESC"]];
@@ -180,14 +183,17 @@ exports.searchProducts = async (req) => {
         // let order = req.query.sortBy ? req.query.sortBy : "";
         let sortBy = [];
         switch (req.query.sortBy) {
-            case "mostViewd":
+            case "mostViewed":
                 sortBy = [[Product_views, "viewCount", "desc"]];
                 break;
-            case "mostPopuler":
+            case "mostPopular":
                 sortBy = [["AvgRating", "DESC"]];
                 break;
             case "mostExpensive":
                 sortBy = [["base_price", "DESC"]];
+                break;
+            case "bestSeller":
+                sortBy = [["quantity_sold", "DESC"]];
                 break;
             case "cheapest":
                 sortBy = [["base_price", "ASC"]];

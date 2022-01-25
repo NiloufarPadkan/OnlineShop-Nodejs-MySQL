@@ -55,6 +55,12 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                PersianName: "فیدو",
+                EnglishName: "Fiido",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ]);
     },
 

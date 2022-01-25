@@ -6,7 +6,6 @@ exports.add = async (req, res, next) => {
     try {
         let fetchedCart;
         let product = await Product.findByPk(req.params.id);
-
         let customerId = req.customer.id;
         let cartId;
         let item;
@@ -34,6 +33,7 @@ exports.add = async (req, res, next) => {
             item = new CartItem({
                 cartId: cartId,
                 unit_price: product.base_price,
+                temp_price: product.temp_price,
                 quantity: parseInt(req.body.quantity),
                 productId: product.id,
             });
@@ -48,17 +48,19 @@ exports.add = async (req, res, next) => {
         });
 
         let totalQuantity = 0;
+        let totalTempPrice = 0;
         let totalPrice = 0;
         cartItems.forEach(myFunction);
 
         function myFunction(x) {
             totalPrice += parseInt(x.quantity) * parseFloat(x.unit_price);
+            totalTempPrice += parseInt(x.quantity) * parseFloat(x.temp_price);
             totalQuantity += parseInt(x.quantity);
         }
 
         fetchedCart.totalPrice = totalPrice;
         fetchedCart.totalQuantity = totalQuantity;
-
+        fetchedCart.totalTempPrice = totalTempPrice;
         await fetchedCart.save();
         return fetchedCart;
     } catch (e) {
