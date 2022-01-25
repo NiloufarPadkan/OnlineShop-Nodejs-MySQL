@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,9 +40,14 @@ public class ChatService {
 
     public List<String> getUniqueChatsLastMessage(){
         List<String> messages = new ArrayList<>();
-        all().forEach(chat -> {
-            if(messages.contains(chat.getMessage()))
+        List<Integer> users = new ArrayList<>();
+        List<Chat> reversedChats = all();
+        Collections.reverse(reversedChats);
+        reversedChats.forEach(chat -> {
+            if(!users.contains(chat.getUser())) {
+                users.add(chat.getUser());
                 messages.add(chat.getMessage());
+            }
         });
         return messages;
     }
