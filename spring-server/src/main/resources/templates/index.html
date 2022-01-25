@@ -2,7 +2,15 @@
 <html lang="fa">
 <head>
     <title>chat</title>
-
+    <style>
+        .chat:hover{
+            background: #f7f5f5;
+        }
+        .chat{
+            padding: 10px;
+            margin: 10px 50px 10px;
+        }
+    </style>
     <script src="/lib/sockjs/sockjs.min.js"></script>
     <script src="/lib/stomp/lib/stomp.min.js"></script>
     <script>
@@ -35,10 +43,21 @@
             console.log(data);
             var obj = JSON.parse(data);
             if (obj.status == 200) {
-                if (obj.destination == "timer") {
-                    document.getElementById("timer").innerHTML = obj.data.time;
-                } else if(obj.destination == "chat"){
-                    document.getElementById("chatbox").innerHTML = document.getElementById("chatbox").innerHTML + "<li>" + obj.data.from + ": " + obj.data.message + "</li>"
+                if (obj.destination == "chats") {
+                    var tmp = "";
+                    for(i=0; i< obj.data.chats.length; i++){
+                        tmp += "<li>" + obj.data.chats[i] + "</li>"
+                    }
+                    document.getElementById("chatbox").innerHTML = tmp;
+                } else if(obj.destination == "usernotif"){
+                    document.getElementById("chatbox").innerHTML = document.getElementById("chatbox").innerHTML + "<li>admin: " + obj.data.message + "</li>"
+                }
+                else if(obj.destination == "adminnotif"){
+                    if(obj.data.user == selectedChat) {
+                        document.getElementById("chatbox").innerHTML = document.getElementById("chatbox").innerHTML + "<li>user: " + obj.data.message + "</li>"
+                    }else{
+                        alert("You have new Message please reload page")
+                    }
                 }
             }
         }
@@ -50,22 +69,30 @@
     <ul id="chatbox" style="border: solid 1px black; margin: 0 100px 15px;">
         <li th:each="chat : ${chats}" th:text="${chat}"></li>
     </ul>
-    <label for="message"></label>
-    <input id="message" placeholder="Type to send message...">
+    <input id="message" placeholder="Type to send message..." style="margin-left: 100px;">
     <button onclick="userMessage()">send</button>
 </div>
 <div th:if="${who} == 'admin'">
     <ul id="chatbox" style="border: solid 1px black; margin: 0 100px 15px;">
 
     </ul>
-    <label for="message"></label>
-    <input id="message" placeholder="Type to send message...">
+    <input id="message" placeholder="Type to send message..." style="margin-left: 100px;">
     <button onclick="adminMessage()">send</button>
-    <ul id="users" style="border: solid 1px black; margin: 0 100px 15px;">
-
+    <ul id="users" style="border: solid 1px black; margin: 15px 100px 15px; list-style-type: none; padding-left: 0px;">
+        <li class="chat" th:each="chat, iter : ${chats}" th:attr="onclick=|selchat('${users[iter.index]}')|">
+            <p th:text="${users[iter.index]}"></p>
+            <p th:text="${chats[iter.index]}"></p>
+        </li>
     </ul>
 </div>
 <script>
+    var selectedChat = -1;
+    function selchat(user){
+        selectedChat = user;
+        var obj = new Object();
+        obj.user = user;
+        stompClient.send("/admin/getchats", {}, JSON.stringify(obj));
+    }
     function userMessage(){
         var obj = new Object();
         obj.jwt = getParameterByName("jwt");
@@ -75,9 +102,9 @@
     }
     function adminMessage(){
         var obj = new Object();
-        obj.jwt = getParameterByName("jwt");
+        obj.user = selectedChat;
         obj.message = document.getElementById("message").value;
-        stompClient.send("/user/chat", {}, JSON.stringify(obj));
+        stompClient.send("/admin/chat", {}, JSON.stringify(obj));
         document.getElementById("chatbox").innerHTML = document.getElementById("chatbox").innerHTML + "<li>you: " + obj.message + "</li>"
     }
 </script>
