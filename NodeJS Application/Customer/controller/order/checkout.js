@@ -5,9 +5,11 @@ exports.store = async (req, res, next) => {
     let response = new Response();
     try {
         const checkOutResponse = await orderService.store(req);
-        console.log(checkOutResponse);
 
-        if (checkOutResponse === "outofstockProducts") {
+        if (
+            checkOutResponse === "outofstockProducts" ||
+            checkOutResponse === "CartNotFound"
+        ) {
             response.setStatus(400).setMessage("fail").setRes(checkOutResponse);
             return res.status(400).send(response.handler());
         }

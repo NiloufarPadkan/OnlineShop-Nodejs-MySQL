@@ -608,3 +608,63 @@
   label: '  label: `Label🏷️`',
   timestamp: '2022-01-24T20:23:28.455Z'
 }
+{
+  level: 'error',
+  message: Error: TypeError: Cannot read property 'toJSON' of null
+      at Object.exports.store (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\order\order.js:66:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.store (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\order\checkout.js:7:34),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-25T07:37:55.651Z'
+}
+{
+  level: 'error',
+  message: Error: TypeError: Cannot read property 'toJSON' of null
+      at Object.exports.store (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\order\order.js:66:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.store (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\order\checkout.js:7:34),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-25T07:42:25.395Z'
+}
+{
+  level: 'error',
+  message: Error: TypeError: Cannot read property 'toJSON' of null
+      at Object.exports.store (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\order\order.js:66:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.store (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\order\checkout.js:7:34),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-25T07:43:33.940Z'
+}
+{
+  level: 'error',
+  message: Error: TypeError: Cannot read property 'toJSON' of null
+      at Object.exports.store (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\order\order.js:66:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.store (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\order\checkout.js:7:34),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-25T07:44:09.593Z'
+}
+{
+  level: 'error',
+  message: Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+      at ServerResponse.setHeader (_http_outgoing.js:561:11)
+      at ServerResponse.header (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:776:10)
+      at ServerResponse.send (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:170:12)
+      at ServerResponse.json (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:267:15)
+      at ServerResponse.send (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\express\lib\response.js:158:21)
+      at exports.update (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\productController.js:48:32)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5) {
+    code: 'ERR_HTTP_HEADERS_SENT'
+  },
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-25T07:59:05.877Z'
+}
+{
+  level: 'error',
+  message: Error: ReferenceError: lname is not defined
+      at Object.exports.AddPaymentId (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\order\order.js:135:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.addPayment (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\order\AddPaymentId.js:7:38),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-25T09:20:50.632Z'
+}

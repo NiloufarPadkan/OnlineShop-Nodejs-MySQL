@@ -2,6 +2,8 @@ const express = require("express");
 const dotenv = require("dotenv");
 const rateLimit = require("express-rate-limit");
 const logger = require("./logger/logger");
+var nodemailer = require("nodemailer");
+
 const sequelize = require("./config/database/sequelize");
 const roleRoute = require("./Admin/routes/manage/role");
 const adminRoute = require("./Admin/routes/manage/admin");

@@ -8,7 +8,6 @@ exports.addRating = async (req, res, next) => {
 
         let response = new Response(200, "success", addRatingRes);
         return res.status(200).send(response.handler());
-        //res.status(200).send(res.locals.accessToken);
     } catch (e) {
         if (e.statusCode) {
             err.statusCode = 500;

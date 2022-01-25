@@ -44,7 +44,6 @@ exports.index = async (req, res, next) => {
                 },
             ],
         });
-        console.log(order);
         return order;
     } catch (error) {
         throw new Error(e);

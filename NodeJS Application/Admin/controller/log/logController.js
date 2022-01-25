@@ -13,7 +13,6 @@ exports.index = async (req, res, next) => {
     }
     try {
         const logIndexResponse = await logService.indexLog(req);
-        //let x = JSON.parse(logIndexResponse);
         if (logIndexResponse != "") response.setStatus(200).setRes(logIndexResponse);
         return res.status(200).send(response.handler());
     } catch (e) {

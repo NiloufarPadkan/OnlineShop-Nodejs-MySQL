@@ -3,6 +3,7 @@ const Product = require("../../../models/Product");
 const OrderItem = require("../../../models/OrderItem");
 const Order = require("../../../models/Order");
 const Sequelize = require("sequelize");
+var nodemailer = require("nodemailer");
 
 exports.store = async (req, res, next) => {
     try {
@@ -17,6 +18,9 @@ exports.store = async (req, res, next) => {
             },
         });
 
+        if (!fetchedCart) {
+            return "CartNotFound";
+        }
         let order = new Order({
             customerId: customerId,
             status: "Pending",
@@ -69,6 +73,10 @@ exports.store = async (req, res, next) => {
 exports.AddPaymentId = async (req, res, next) => {
     try {
         let id = req.params.id;
+
+        if (!req.body.paymentId) {
+            return "invalidPaymentId";
+        }
         let paymentId = req.body.paymentId;
         let order = await Order.findOne({
             where: {
@@ -85,9 +93,12 @@ exports.AddPaymentId = async (req, res, next) => {
         if (!order) {
             return "orderNotFound";
         }
-        if (order.paymentId) return "paymentIdExists";
+        if (order.paymentId !== null) return "paymentIdExists";
+
+        console.log("exit");
         order.paymentId = paymentId;
         order.status = "Processing";
+        await order.save();
 
         let orderItems = order.toJSON().products;
 
@@ -97,8 +108,28 @@ exports.AddPaymentId = async (req, res, next) => {
             product.quantity_sold += orderItems[i].orderItem.quantity;
             await product.save();
         }
+        var transporter = nodemailer.createTransport({
+            service: "gmail",
+            auth: {
+                user: process.env.EMAIL,
+                pass: process.env.EMAIL_PASS,
+            },
+        });
 
-        await order.save();
+        var mailOptions = {
+            from: process.env.EMAIL,
+            to: req.customer.email,
+            subject: "ثبت سفارش ✔", // Subject line
+            text: `${req.customer.fname + req.customer.lname} عزیز`, // plain text body
+            html: "<b>سفارش شما دریافت شد و در حال پردازش میباشد</b>", // html body
+        };
+        transporter.sendMail(mailOptions, function (error, info) {
+            if (error) {
+                console.log(error);
+            } else {
+                console.log("Email sent: " + info.response);
+            }
+        });
         return order;
     } catch (error) {
         throw new Error(error);

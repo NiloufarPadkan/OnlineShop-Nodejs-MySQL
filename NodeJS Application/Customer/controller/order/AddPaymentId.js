@@ -7,7 +7,8 @@ exports.addPayment = async (req, res, next) => {
         const AddPaymentIdResponse = await orderService.AddPaymentId(req);
         if (
             AddPaymentIdResponse === "paymentIdExists" ||
-            AddPaymentIdResponse === "orderNotFound"
+            AddPaymentIdResponse === "orderNotFound" ||
+            AddPaymentIdResponse === "invalidPaymentId"
         ) {
             response.setStatus(400).setMessage("fail").setRes(AddPaymentIdResponse);
             return res.status(400).send(response.handler());
