@@ -190,7 +190,7 @@ exports.searchProducts = async (req) => {
         // let order = req.query.sortBy ? req.query.sortBy : "";
         let sortBy = [];
         switch (req.query.sortBy) {
-            case "mostViewd":
+            case "mostViewed":
                 sortBy = [[Product_views, "viewCount", "desc"]];
                 break;
             case "mostPopular":
