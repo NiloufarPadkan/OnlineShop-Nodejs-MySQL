@@ -8,12 +8,4 @@ exports.indexLog = async (req) => {
     } catch (err) {
         console.error(err);
     }
-
-    // fs.readFile("./logger/error.log", "utf8", (err, data) => {
-    //     if (err) {
-    //         throw new Error(err);
-    //     }
-    //     console.log("salam");
-    //     return data;
-    // });
 };

@@ -154,6 +154,16 @@ module.exports = {
                 createdAt: new Date(),
                 updatedAt: new Date(),
             },
+            {
+                title: "read Order",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
+            {
+                title: "update Order",
+                createdAt: new Date(),
+                updatedAt: new Date(),
+            },
         ]);
     },
 
