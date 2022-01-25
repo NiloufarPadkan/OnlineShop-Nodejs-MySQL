@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -65,26 +66,23 @@ public class ThymleafController {
     }
 
     public boolean isAdminAuthorized(String jwt, String session) {
-//        JSONObject callback = new JSONObject(webClientBuilder.build()//
-//                .post() //
-//                .uri(nodeServer + "/admin/me")//
-//                .header("authorization", jwt)//
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .accept(MediaType.APPLICATION_JSON)//
-//                .body("", String.class)
-//                .retrieve().bodyToMono(String.class).block());
-        JSONObject callback = new JSONObject();
-        callback.put("id", 1);
-        if (callback.has("id")) {
+        JSONObject callback = new JSONObject(webClientBuilder.build()//
+                .get() //
+                .uri(nodeServer + "/admin/chat")//
+                .header("authorization", "barer ".concat(jwt))//
+                .retrieve().bodyToMono(String.class).block());
+//        JSONObject callback = new JSONObject();
+//        callback.put("id", 1);
+        if (callback.get("response").getClass() != String.class) {
             Admin admin;
-            if (adminService.existByUserName(callback.getInt("id"))) {
-                admin = adminService.getByUsername(callback.getInt("id")).get();
+            if (adminService.existByUserName(callback.getJSONObject("response").getInt("id"))) {
+                admin = adminService.getByUsername(callback.getJSONObject("response").getInt("id")).get();
                 admin.setJwt(jwt);
                 admin.setSession(session);
                 admin.setOnline(new Date());
             } else {
                 admin = Admin.builder()//
-                        .username(callback.getInt("id"))//
+                        .username(callback.getJSONObject("response").getInt("id"))//
                         .jwt(jwt)//
                         .session(session)//
                         .online(new Date())//
@@ -97,26 +95,24 @@ public class ThymleafController {
     }
 
     public boolean isUserAuthorized(String jwt, String session) {
-//        JSONObject callback = new JSONObject(webClientBuilder.build()//
-//                .post() //
-//                .uri(nodeServer + "/customer/me")//
-//                .header("authorization", jwt)//
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .accept(MediaType.APPLICATION_JSON)//
-//                .body("", String.class)
-//                .retrieve().bodyToMono(String.class).block());
-        JSONObject callback = new JSONObject();
-        callback.put("id", 2);
-        if (callback.has("id")) {
+        JSONObject callback = new JSONObject(webClientBuilder.build()//
+                .get() //
+                .uri(nodeServer + "/customer/chat")//
+                .header("authorization", "barer ".concat(jwt))//
+                .accept(MediaType.APPLICATION_JSON)//
+                .retrieve().bodyToMono(String.class).block());
+//        JSONObject callback = new JSONObject();
+//        callback.put("id", 2);
+        if (callback.get("response").getClass() != String.class) {
             User user;
-            if (userService.existByUserName(callback.getInt("id"))) {
-                user = userService.getByUsername(callback.getInt("id")).get();
+            if (userService.existByUserName(callback.getJSONObject("response").getInt("id"))) {
+                user = userService.getByUsername(callback.getJSONObject("response").getInt("id")).get();
                 user.setJwt(jwt);
                 user.setSession(session);
                 user.setOnline(new Date());
             } else {
                 user = User.builder()//
-                        .username(callback.getInt("id"))//
+                        .username(callback.getJSONObject("response").getInt("id"))//
                         .jwt(jwt)//
                         .session(session)//
                         .online(new Date())//
