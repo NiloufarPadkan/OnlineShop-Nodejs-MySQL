@@ -5,15 +5,11 @@ import io.github.shuoros.iec.model.User;
 import io.github.shuoros.iec.service.AdminService;
 import io.github.shuoros.iec.service.ChatService;
 import io.github.shuoros.iec.service.UserService;
-import io.github.shuoros.iec.util.Constants;
 import org.json.JSONObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.MediaType;
-import org.springframework.messaging.Message;
-import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CookieValue;
@@ -23,7 +19,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.invoke.MethodHandles;
-import java.security.Principal;
 import java.util.Date;
 import java.util.List;
 
@@ -85,14 +80,16 @@ public class ThymleafController {
             if (adminService.existByUserName(callback.getInt("id"))) {
                 admin = adminService.getByUsername(callback.getInt("id")).get();
                 admin.setJwt(jwt);
+                admin.setSession(session);
                 admin.setOnline(new Date());
+            } else {
+                admin = Admin.builder()//
+                        .username(callback.getInt("id"))//
+                        .jwt(jwt)//
+                        .session(session)//
+                        .online(new Date())//
+                        .build();
             }
-            admin = Admin.builder()//
-                    .username(callback.getInt("id"))//
-                    .jwt(jwt)//
-                    .session(session)//
-                    .online(new Date())//
-                    .build();
             adminService.save(admin);
             return true;
         }
@@ -115,6 +112,7 @@ public class ThymleafController {
             if (userService.existByUserName(callback.getInt("id"))) {
                 user = userService.getByUsername(callback.getInt("id")).get();
                 user.setJwt(jwt);
+                user.setSession(session);
                 user.setOnline(new Date());
             } else {
                 user = User.builder()//
