@@ -668,3 +668,111 @@
   label: '  label: `Label🏷️`',
   timestamp: '2022-01-25T09:20:50.632Z'
 }
+{
+  level: 'error',
+  message: Error: SequelizeDatabaseError: Unknown column 'product.discount' in 'order clause'
+      at Object.exports.indexProducts (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\product\userService.js:88:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\product\productController.js:24:38),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-25T11:02:20.228Z'
+}
+{
+  level: 'error',
+  message: Error: SequelizeDatabaseError: Unknown column 'product.discount' in 'field list'
+      at Object.exports.indexProducts (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\product\userService.js:89:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\product\productController.js:24:38),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-25T11:03:28.124Z'
+}
+{
+  level: 'error',
+  message: Error: SequelizeDatabaseError: Unknown column 'product.discount' in 'field list'
+      at Object.exports.indexProducts (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\product\userService.js:89:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\product\productController.js:24:38),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-25T11:03:50.772Z'
+}
+{
+  level: 'error',
+  message: Error: SequelizeDatabaseError: Unknown column 'product.discount' in 'field list'
+      at Object.exports.indexProducts (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\product\userService.js:89:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\product\productController.js:24:38),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-25T11:05:01.664Z'
+}
+{
+  level: 'error',
+  message: Error: SequelizeDatabaseError: Unknown column 'product.discount' in 'order clause'
+      at Object.exports.indexProducts (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\product\userService.js:102:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\product\productController.js:24:38),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-25T11:11:08.675Z'
+}
+{
+  level: 'error',
+  message: Error: SequelizeDatabaseError: Unknown column 'product.discount' in 'order clause'
+      at Object.exports.indexProducts (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\product\userService.js:102:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\product\productController.js:24:38),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-25T11:19:30.147Z'
+}
+{
+  level: 'error',
+  message: Error: TypeError: s.replace is not a function
+      at Object.exports.indexProducts (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\product\userService.js:102:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\product\productController.js:24:38),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-25T11:22:55.459Z'
+}
+{
+  level: 'error',
+  message: Error: Error: [[{"val":"base_price - temp_price"},"discount"]] is not a valid attribute definition. Please use the following format: ['attribute definition', 'alias']
+      at Object.exports.indexProducts (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\product\userService.js:102:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\product\productController.js:24:38),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-25T11:23:15.232Z'
+}
+{
+  level: 'error',
+  message: Error: Error: [[{"val":"base_price - temp_price"},"discount"]] is not a valid attribute definition. Please use the following format: ['attribute definition', 'alias']
+      at Object.exports.indexProducts (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\product\userService.js:102:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\product\productController.js:24:38),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-25T11:23:32.171Z'
+}
+{
+  level: 'error',
+  message: Error: SequelizeDatabaseError: Unknown column 'product.discount' in 'order clause'
+      at Object.exports.indexProducts (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\product\userService.js:102:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\product\productController.js:24:38),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-25T11:23:48.703Z'
+}
+{
+  level: 'error',
+  message: Error: SequelizeDatabaseError: Unknown column 'product.discount' in 'order clause'
+      at Object.exports.indexProducts (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\product\userService.js:102:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\product\productController.js:24:38),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-25T11:24:28.336Z'
+}
+{
+  level: 'error',
+  message: Error: SequelizeDatabaseError: Unknown column 'product.discount' in 'order clause'
+      at Object.exports.indexProducts (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\services\product\userService.js:102:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.index (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Customer\controller\product\productController.js:24:38),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-25T11:25:14.432Z'
+}
