@@ -6,6 +6,16 @@
     <script src="/lib/sockjs/sockjs.min.js"></script>
     <script src="/lib/stomp/lib/stomp.min.js"></script>
     <script>
+        function getParameterByName(name, url = window.location.href) {
+            name = name.replace(/[\[\]]/g, '\\$&');
+            var regex = new RegExp('[?&]' + name + '(=([^&#]*)|&|#|$)'),
+                results = regex.exec(url);
+            if (!results) return null;
+            if (!results[2]) return '';
+            return decodeURIComponent(results[2].replace(/\+/g, ' '));
+        }
+    </script>
+    <script>
         window.onload = function() {
             var socket = new SockJS(location.protocol + "//" + location.host
                 + "/connect");
@@ -38,11 +48,11 @@
 <h1>Hey <span id="name" th:text="${who}">Stranger</span></h1>
 <div th:if="${who} == 'user'">
     <ul id="chatbox" style="border: solid 1px black; margin: 0 100px 15px;">
-
+        <li th:each="chat : ${chats}" th:text="${chat}"></li>
     </ul>
     <label for="message"></label>
     <input id="message" placeholder="Type to send message...">
-    <button onclick="sendMessage()">send</button>
+    <button onclick="userMessage()">send</button>
 </div>
 <div th:if="${who} == 'admin'">
     <ul id="chatbox" style="border: solid 1px black; margin: 0 100px 15px;">
@@ -50,17 +60,25 @@
     </ul>
     <label for="message"></label>
     <input id="message" placeholder="Type to send message...">
-    <button onclick="sendMessage()">send</button>
+    <button onclick="adminMessage()">send</button>
     <ul id="users" style="border: solid 1px black; margin: 0 100px 15px;">
 
     </ul>
 </div>
 <script>
-    function sendMessage(){
+    function userMessage(){
         var obj = new Object();
-        obj.from = document.getElementById("name").innerHTML;
+        obj.jwt = getParameterByName("jwt");
         obj.message = document.getElementById("message").value;
         stompClient.send("/user/chat", {}, JSON.stringify(obj));
+        document.getElementById("chatbox").innerHTML = document.getElementById("chatbox").innerHTML + "<li>you: " + obj.message + "</li>"
+    }
+    function adminMessage(){
+        var obj = new Object();
+        obj.jwt = getParameterByName("jwt");
+        obj.message = document.getElementById("message").value;
+        stompClient.send("/user/chat", {}, JSON.stringify(obj));
+        document.getElementById("chatbox").innerHTML = document.getElementById("chatbox").innerHTML + "<li>you: " + obj.message + "</li>"
     }
 </script>
 </body>
