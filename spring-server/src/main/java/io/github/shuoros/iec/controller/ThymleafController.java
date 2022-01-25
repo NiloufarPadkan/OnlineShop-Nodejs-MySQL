@@ -20,6 +20,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 import javax.servlet.http.HttpServletRequest;
 import java.lang.invoke.MethodHandles;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -52,6 +53,7 @@ public class ThymleafController {
                 + request.getHeader("User-Agent"));
         if ("admin".equals(who) && isAdminAuthorized(jwt, session)) {
             List<Integer> users = chatService.getUniqueUsers();
+            Collections.reverse(users);
             List<String> chats = chatService.getUniqueChatsLastMessage();
             model.addAttribute("users", users);
             model.addAttribute("chats", chats);
