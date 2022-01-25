@@ -20,8 +20,6 @@ exports.indexProducts = async (req) => {
         filter.tag = req.query.tag ? req.query.tag.split(",") : {};
         filter.brand = req.query.brand ? req.query.brand.split(",") : {};
         filter.price = req.query.price ? req.query.price.split(",") : [0, 99990000];
-
-        // let order = req.query.sortBy ? req.query.sortBy : "";
         let sortBy = [];
         switch (req.query.sortBy) {
             case "mostViewed":
@@ -187,7 +185,6 @@ exports.searchProducts = async (req) => {
         filter.tag = req.query.tag ? req.query.tag.split(",") : {};
         filter.brand = req.query.brand ? req.query.brand.split(",") : {};
         filter.price = req.query.price ? req.query.price.split(",") : [0, 99990000];
-        // let order = req.query.sortBy ? req.query.sortBy : "";
         let sortBy = [];
         switch (req.query.sortBy) {
             case "mostViewed":
