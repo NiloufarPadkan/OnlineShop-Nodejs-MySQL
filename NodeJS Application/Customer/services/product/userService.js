@@ -27,7 +27,7 @@ exports.indexProducts = async (req) => {
             case "mostViewd":
                 sortBy = [[Product_views, "viewCount", "desc"]];
                 break;
-            case "mostPopuler":
+            case "mostPopular":
                 sortBy = [["AvgRating", "DESC"]];
                 break;
             case "bestSeller":
@@ -172,11 +172,14 @@ exports.searchProducts = async (req) => {
             case "mostViewd":
                 sortBy = [[Product_views, "viewCount", "desc"]];
                 break;
-            case "mostPopuler":
+            case "mostPopular":
                 sortBy = [["AvgRating", "DESC"]];
                 break;
             case "mostExpensive":
                 sortBy = [["base_price", "DESC"]];
+                break;
+            case "bestSeller":
+                sortBy = [["quantity_sold", "DESC"]];
                 break;
             case "cheapest":
                 sortBy = [["base_price", "ASC"]];
