@@ -121,7 +121,22 @@ exports.AddPaymentId = async (req, res, next) => {
             to: req.customer.email,
             subject: "ثبت سفارش ✔", // Subject line
             text: `${req.customer.fname + req.customer.lname} عزیز`, // plain text body
-            html: "<b>سفارش شما دریافت شد و در حال پردازش میباشد</b>", // html body
+            html:
+                "<!DOCTYPE html>" +
+                "<html><head><title>ثبت سفارش</title>" +
+                "<style>" +
+                "body {background-color:#ffdd00;background-repeat:no-repeat;background-position:top left;background-attachment:fixed;}" +
+                "h2{font-family:Arial, sans-serif;color:#000000;background-color:#ffdd00;text-align:center;}" +
+                "p {text-align:center;font-family:Georgia, serif;font-size:19px;font-style:normal;font-weight:bold;color:#000000}" +
+                "</style>" +
+                "</head><body><div>" +
+                " <h2>ثبت سفارش</h2>" +
+                "<p>از خرید شما متشکریم</p>" +
+                "<p> خلاصه سفارش </p>" +
+                `<p>نام :${req.customer.fname + " " + req.customer.lname}</p>` +
+                `<p>جمع فاکتور ‍‍: ${order.totalPrice} تومان</p>` +
+                `<p> جمع فاکتور با تخفیف:  ‍‍${order.totalTempPrice} تومان</p>` +
+                "</div></body></html>",
         };
         transporter.sendMail(mailOptions, function (error, info) {
             if (error) {

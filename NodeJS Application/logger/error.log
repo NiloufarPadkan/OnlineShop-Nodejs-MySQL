@@ -295,3 +295,12 @@
   label: '  label: `Label🏷️`',
   timestamp: '2022-01-25T11:25:14.432Z'
 }
+{
+  level: 'error',
+  message: Error: TypeError: Cannot read property 'path' of undefined
+      at Object.exports.insertCategory (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\services\Product\categoryService.js:40:15)
+      at processTicksAndRejections (internal/process/task_queues.js:95:5)
+      at async exports.store (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\Admin\controller\product\categoryController.js:15:40),
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-25T11:42:36.630Z'
+}
