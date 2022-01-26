@@ -1,4 +1,7 @@
 .env
 node_modules
 .vscode
-logger
+NodeJS Application/logger/combined.log
+.gitignore
+NodeJS Application/logger/combined.log
+NodeJS Application/logger/combined.log

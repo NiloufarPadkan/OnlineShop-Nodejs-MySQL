@@ -36,7 +36,7 @@ EMAIL_PASS= your mail pass"
 
 4-npm install
 
-5-run you redis server
+5-run you redis serverucle
 
 6-node index.js
 
@@ -45,6 +45,8 @@ EMAIL_PASS= your mail pass"
 -   npx sequelize-cli db:seed --seed 20211109091139-roles 20211109082457-permission 20211109090157-admins --seed 20211109091829-role-permission 20211214072252-tags 20220108134300-categories 20211214072157-brands 20211215101044-products 20220115205943-customer
 
 8-node index.js
+
+[![Run in Postman](https://run.pstmn.io/button.svg)](https://app.getpostman.com/run-collection/12694267-60d735da-0104-4cde-abde-11e2f313aefa?action=collection%2Ffork&collection-url=entityId%3D12694267-60d735da-0104-4cde-abde-11e2f313aefa%26entityType%3Dcollection%26workspaceId%3D3ede85df-1d39-4adc-a069-93165a9654db)
 
 ## Node modules
 

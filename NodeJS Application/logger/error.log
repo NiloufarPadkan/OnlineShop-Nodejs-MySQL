@@ -304,3 +304,27 @@
   label: '  label: `Label🏷️`',
   timestamp: '2022-01-25T11:42:36.630Z'
 }
+{
+  level: 'error',
+  message: SyntaxError: Unexpected token } in JSON at position 81
+      at JSON.parse (<anonymous>)
+      at parse (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\body-parser\lib\types\json.js:89:19)
+      at C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\body-parser\lib\read.js:121:18
+      at invokeCallback (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\raw-body\index.js:224:16)
+      at done (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\raw-body\index.js:213:7)
+      at IncomingMessage.onEnd (C:\Users\Niloufar\Documents\shop-project\NodeJS Application\node_modules\raw-body\index.js:273:7)
+      at IncomingMessage.emit (events.js:412:35)
+      at endReadableNT (internal/streams/readable.js:1317:12)
+      at processTicksAndRejections (internal/process/task_queues.js:82:21) {
+    expose: true,
+    statusCode: 400,
+    status: 400,
+    body: '{\r\n' +
+      '      "username": "fatemePddakgedkan",\r\n' +
+      '    "password": "123456789Fateme##",\r\n' +
+      '}',
+    type: 'entity.parse.failed'
+  },
+  label: '  label: `Label🏷️`',
+  timestamp: '2022-01-25T17:07:31.902Z'
+}
